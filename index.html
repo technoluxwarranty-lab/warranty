@@ -142,98 +142,239 @@ header {
 </head>
 <body>
 
-<header>Warranty Checklist System
-<img src="company-logo.png" alt="Company Logo" class="header-logo">
+<header>WARRANTY CHECKLIST SYSTEM<img src="company-logo.png" alt="Company Logo" class="header-logo">
 </header>
 <div class="toolbar-subtitle1">
   Select a brand or search for the required warranty checklist:
 </div>
 <div class="container">
-
   <div class="toolbar">
     <select id="brandFilter" onchange="filterBrand()">
-      <option value="all">All Brands</option>
-      <option value="Manitowoc">MANITOWOC</option>
-      <option value="Carpigiani">CARPIGIANI</option>
-      <option value="Frymaster">FRYMASTER</option>
-      <option value="Bunn">BUNN-O-MATIC</option>
-      <option value="Convotherm">CONVOTHERM</option>
+      <option value="all">Top 15 Brands</option>
       <option value="Amana">AMANA</option>
       <option value="Antunes">ANTUNES</option>
-      <option value="Vitamix">VITAMIX</option>
-      <option value="Schaerer">SCHAERER</option>
+      <option value="Bunn">BUNN-O-MATIC</option>
+      <option value="Carpigiani">CARPIGIANI</option>
+      <option value="Convotherm">CONVOTHERM</option>
+      <option value="Frymaster">FRYMASTER</option>
       <option value="Ipso">IPSO</option>
-      <option value="Merrychef">MERRYCHEF</option>
-      <option value="Server">SERVER</option>
-      <option value="Turboair">TURBO AIR</option>
       <option value="Kolb">KOLB</option>
+      <option value="Manitowoc">MANITOWOC</option>
+      <option value="Manitowoc">MASTRENA</option>
+      <option value="Merrychef">MERRYCHEF</option>
+      <option value="Schaerer">SCHAERER</option>
+      <option value="Server">SERVER</option>
+      <option value="Turboair">TURBO-AIR</option>
+      <option value="Vitamix">VITAMIX</option>
     </select>
-    <input type="search" id="searchPart" placeholder="Search part name..." onkeyup="searchPart()" />
+    <input type="search" id="searchPart" placeholder="Search part name..." onkeyup="searchPart()"/>
   </div>
-<div class="toolbar-subtitle2">
-  TOP 5 MOST COMMON PARTS REPLACEMENT PER BRAND</div>
+<div class="toolbar-subtitle2">TOP 5 MOST COMMON PARTS REPLACEMENT PER BRAND</div>
 
-  <!-- Manitowoc -->
-  <div class="brand" data-brand="Manitowoc">
-    <h2>MANITOWOC</h2>
+<!-- Amana -->
+  <div class="brand" data-brand="Amana">
+    <h2>AMANA</h2>
     <div class="parts">
-      <div class="part" data-part="Compressor">
-        <img src="compressor.png"text="Compressor"style="width:200px; height:150px; object-fit:contain;">
-        <h3>Compressor</h3>
-	<ul class="bullet-list">
-	<li>Photo of Service Report(not exceeds 2-days)</li>
-	<li>Photo of Serial plate</li>
-        <li>Photo of defective part</li>
-        <li><a href="https://docs.google.com/spreadsheets/d/1p76Mdn_OZI25ZCFs7lX0zW--1zjbenZs/edit?usp=sharing&ouid=112898339987182017837&rtpof=true&sd=true" target="_blank">Compressor checklist</a></li>
-        <li>Power supply reading</li>
-	<li><a href="https://drive.google.com/file/d/1Ev8pwmJk11etn0hLb3bHz8L5Unq0RxAh/view?usp=sharing" target="_blank">Compressor resistance check (i.e. grounded, open or shorted?)</a></li>
-    </ul>
-    </div>
-     <div class="part" data-part="icethicknessprobe">
-        <img src="icethicknessprobe.png"text="Ice Thickness Probe"style="width:200px; height:150px; object-fit:contain;">
-        <h3>Ice Thickness Probe</h3>
-	<ul class="bullet-list">
+      <div class="part" data-part="thermal">
+        <img src="thermal.png" text="thermal" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Thermal Cutout</h3>
+	<ul class=" bullet-list">
         <li>Photo of Service Report(not exceeds 2-days)</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
-        <li><a href="https://drive.google.com/file/d/1iA5i7Ad1GKc0W0LZ2TVOFUtsihhOfum6/view?usp=sharing" target="_blank">Scratch test</a></li>
         <li>Power supply reading</li>
-	<li><a href="https://drive.google.com/file/d/19A55ayE_xcsR4wCwTrSLRdXrevgDMUsq/view?usp=sharing" target="_blank">ITP voltage measurement</a></li>
-   	 </ul>
-        </div>
- <div class="part" data-part="controlboard">
-        <img src="controlboard.png"text="Control board"style="width:200px; height:150px; object-fit:contain;">
-        <h3>Control Board</h3>
-	<ul class="bullet-list">
-        <li>Photo of Service Report(not exceeds 2-days)</li>
-	<li>Photo of Serial plate</li>
-        <li>Photo of defective part</li>
-        <li>Photo/Video of the error</li>
-        <li>Power supply reading</li>
-   	</ul>
-        </div>
- <div class="part" data-part="hpr">
-        <img src="hpr.png"text="Harvest Pressure Regulator"style="width:200px; height:150px; object-fit:contain;">
-        <h3>Harvest Pressure Regulator</h3>
-	<ul class="bullet-list">
-        <li>Photo of Service Report(not exceeds 2-days)</li>
-	<li>Photo of Serial plate</li>
-        <li>Photo of defective part</li>
-        <li>Photo/Video of low and high side gauge</li>
-        <li>Photo/Video of ice build in the evaporator</li>
+	<li>Photo or Video of the issue/error</li>
    	</ul>
 	</div>
- <div class="part" data-part="wlp">
-        <img src="wlp.png"text="Water Level Probe"style="width:200px; height:150px; object-fit:contain;">
-        <h3>Water Level Probe</h3>
-        <ul class=" bullet-list">
+
+	<div class="part" data-part="diode">
+        <img src="diode.png" text="diode" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Diode</h3>
+	<ul class=" bullet-list">
         <li>Photo of Service Report(not exceeds 2-days)</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
-        <li>Photo/Video of WLP display text</li>
-        <li>Check continuity of WLP from connector to the three probes</li>
+        <li>Power supply reading</li>
+        <li>Conduct continuity test</li>
    	</ul>
-      </div>
+	</div>
+
+	<div class="part" data-part="magnetron">
+        <img src="magnetron.png" text="magnetron" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Magnetron</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Conduct continuity test</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="capacitor">
+        <img src="capacitor.png" text="capacitor" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Capacitor</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+	<li>Capacitor capacitance</li>
+        <li>Conduct continuity test</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="boardcontrol">
+        <img src="boardcontrol.png" text="boardcontrol" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+
+    </div>
+  </div>
+
+<!-- Antunes -->
+  <div class="brand" data-brand="Antunes">
+    <h2>ANTUNES</h2>
+    <div class="parts">
+      <div class="part" data-part="gearmotor">
+        <img src="gearmotor.png" text="gearmotor" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Gear Motor</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error(i.e. stuck-up, oil-leak, unusual sound)</li>
+	<li><u>Note:</u> Please ensure that 60Hz frequency setting now connected</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="thermostat">
+        <img src="thermostat.png" text="thermostat" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Thermostat</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+	<li>Conduct continuity test</li>
+	<li><u>Note:</u> Please try to calibrate first</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="cboard">
+        <img src="cboard.png" text="cboard" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Boards</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="switch">
+        <img src="switch.png" text="switch" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Power Switch</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Conduct continuity test</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="relay">
+        <img src="relay.png" text="relay" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solid State Relay</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+
+    </div>
+  </div>
+
+<!-- Bunn -->
+  <div class="brand" data-brand="Bunn">
+    <h2>BUNN-O MATIC</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
 
     </div>
   </div>
@@ -333,7 +474,74 @@ header {
   </div>
 
 
-  <!-- Frymaster -->
+<!-- Convotherm -->
+  <div class="brand" data-brand="Convotherm">
+    <h2>CONVOTHERM</h2>
+    <div class="parts">
+      <div class="part" data-part="ignition">
+        <img src="ignition.png" text="ignition" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Ignitier Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="firingdevice">
+        <img src="firingdevice.png" text="firingdevice" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Firing Device</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="extrafan">
+        <img src="extrafan.png" text="extrafan" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Extra Fan</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="easytouch">
+        <img src="easytouch.png" text="easytouch" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Easytouch 10"</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="svalve">
+        <img src="svalve.png" text="svalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
+<!-- Frymaster -->
   <div class="brand" data-brand="Frymaster">
     <h2>FRYMASTER</h2>
     <div class="parts">
@@ -388,7 +596,7 @@ header {
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
-        <li>Photo/Video of the hi-limit error</li>
+        <li>Photo/Video of the temperature failure error</li>
    	</ul>
 	</div>
 
@@ -402,17 +610,17 @@ header {
         <li>Power supply reading</li>
 	<li>Phot/Video of the error/issue encounter</li>
         <li>Get output supply of the heating plate</li>
-	<li>Photo if its not on demo mode</li>
+	<li>Photo shown unit not on demo mode</li>
    	</ul>
 	</div>
-
 
     </div>
   </div>
 
-<!-- Bunn -->
-  <div class="brand" data-brand="Bunn">
-    <h2>BUNN-O MATIC</h2>
+
+<!-- Ipso -->
+  <div class="brand" data-brand="Ipso">
+    <h2>IPSO</h2>
     <div class="parts">
       <div class="part" data-part="board">
         <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
@@ -477,6 +685,542 @@ header {
 
     </div>
   </div>
+
+<!-- Kolb -->
+  <div class="brand" data-brand="Kolb">
+    <h2>KOLB</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+
+    </div>
+  </div>
+
+ <!-- Manitowoc -->
+  <div class="brand" data-brand="Manitowoc">
+    <h2>MANITOWOC</h2>
+    <div class="parts">
+      <div class="part" data-part="Compressor">
+        <img src="compressor.png"text="Compressor"style="width:200px; height:150px; object-fit:contain;">
+        <h3>Compressor</h3>
+	<ul class="bullet-list">
+	<li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li><a href="https://docs.google.com/spreadsheets/d/1p76Mdn_OZI25ZCFs7lX0zW--1zjbenZs/edit?usp=sharing&ouid=112898339987182017837&rtpof=true&sd=true" target="_blank">Compressor checklist</a></li>
+        <li>Power supply reading</li>
+	<li><a href="https://drive.google.com/file/d/1Ev8pwmJk11etn0hLb3bHz8L5Unq0RxAh/view?usp=sharing" target="_blank">Compressor resistance check (i.e. grounded, open or shorted?)</a></li>
+    </ul>
+    </div>
+     <div class="part" data-part="icethicknessprobe">
+        <img src="icethicknessprobe.png"text="Ice Thickness Probe"style="width:200px; height:150px; object-fit:contain;">
+        <h3>Ice Thickness Probe</h3>
+	<ul class="bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li><a href="https://drive.google.com/file/d/1iA5i7Ad1GKc0W0LZ2TVOFUtsihhOfum6/view?usp=sharing" target="_blank">Scratch test</a></li>
+        <li>Power supply reading</li>
+	<li><a href="https://drive.google.com/file/d/19A55ayE_xcsR4wCwTrSLRdXrevgDMUsq/view?usp=sharing" target="_blank">ITP voltage measurement</a></li>
+   	 </ul>
+        </div>
+ <div class="part" data-part="controlboard">
+        <img src="controlboard.png"text="Control board"style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class="bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Photo/Video of the error</li>
+        <li>Power supply reading</li>
+   	</ul>
+        </div>
+ <div class="part" data-part="hpr">
+        <img src="hpr.png"text="Harvest Pressure Regulator"style="width:200px; height:150px; object-fit:contain;">
+        <h3>Harvest Pressure Regulator</h3>
+	<ul class="bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Photo/Video of low and high side gauge</li>
+        <li>Photo/Video of ice build in the evaporator</li>
+   	</ul>
+	</div>
+ <div class="part" data-part="wlp">
+        <img src="wlp.png"text="Water Level Probe"style="width:200px; height:150px; object-fit:contain;">
+        <h3>Water Level Probe</h3>
+        <ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Photo/Video of WLP display text</li>
+        <li>Check continuity of WLP from connector to the three probes</li>
+   	</ul>
+      </div>
+
+    </div>
+  </div>
+
+<!-- Mastrena -->
+  <div class="brand" data-brand="Mastrena">
+    <h2>MASTRENA</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
+<!-- Merrychef -->
+  <div class="brand" data-brand="Merrychef">
+    <h2>MERRYCHEF</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
+<!-- Schaerer -->
+  <div class="brand" data-brand="Schaerer">
+    <h2>SCHAERER</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
+<!-- Server -->
+  <div class="brand" data-brand="Server">
+    <h2>SERVER</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
+<!-- Turboair -->
+  <div class="brand" data-brand="Turboair">
+    <h2>TURBO-AIR</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
+<!-- Vitamix -->
+  <div class="brand" data-brand="Vitamix">
+    <h2>VITAMIX</h2>
+    <div class="parts">
+      <div class="part" data-part="board">
+        <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Control Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="valveassy">
+        <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Valve Assy</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="solenoidvalve">
+        <img src="csolenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Solenoid Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="sprayhead">
+        <img src="sprayhead.png" text="sprayhead" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Sprayhead Valve</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="probekit">
+        <img src="probekit.png" text="probekit" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Probe Replacement Kit</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report(not exceeds 2-days)</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+
+    </div>
+  </div>
+
 
 </div>
 

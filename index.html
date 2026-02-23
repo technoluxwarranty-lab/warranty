@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warranty Checklist System </title>
+  <title>Warranty Claim Requirements </title>
   <style>
 	  
 /* Header styling */
@@ -139,10 +139,18 @@ header {
       color: #6b7280;
     }
   </style>
+
+<script>
+function clearSearch() {
+    document.getElementById("searchPart").value = "";
+    searchPart(); // Optional: re-run search to refresh results
+}
+</script>
+
 </head>
 <body>
 
-<header>WARRANTY CHECKLIST SYSTEM<img src="company-logo.png" alt="Company Logo" class="header-logo">
+<header>WARRANTY CLAIM REQUIREMENTS<img src="company-logo.png" alt="Company Logo" class="header-logo">
 </header>
 <div class="toolbar-subtitle1">
   Select a brand or search for the required warranty checklist:
@@ -168,6 +176,8 @@ header {
       <option value="Vitamix">VITAMIX</option>
     </select>
     <input type="search" id="searchPart" placeholder="Search part name..." onkeyup="searchPart()"/>
+	<!-- Clear Button -->
+    <button type="button" onclick="clearSearch()">Clear</button>
   </div>
 <div class="toolbar-subtitle2">TOP 5 MOST COMMON PARTS REPLACEMENT PER BRAND</div>
 
@@ -195,7 +205,7 @@ header {
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
-        <li>Conduct continuity test</li>
+        <li>Conduct resistance test</li>
    	</ul>
 	</div>
 
@@ -207,7 +217,7 @@ header {
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
-        <li>Conduct continuity test</li>
+        <li>Conduct resistance test</li>
    	</ul>
 	</div>
 
@@ -220,7 +230,6 @@ header {
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
 	<li>Capacitor capacitance</li>
-        <li>Conduct continuity test</li>
    	</ul>
 	</div>
 
@@ -267,8 +276,9 @@ header {
         <li>Power supply reading</li>
         <li>Photo or Video of the issue/error</li>
 	<li>Conduct continuity test</li>
-	<li><u>Note:</u> Please try to calibrate first</li>
+	<li>Photo of burned buns</li>
    	</ul>
+	<ptext><u>Note:</u> Please try to calibrate first</ptext>
 	</div>
 
 	<div class="part" data-part="cboard">
@@ -480,7 +490,7 @@ header {
     <div class="parts">
       <div class="part" data-part="ignition">
         <img src="ignition.png" text="ignition" style="width:200px; height:150px; object-fit:contain;">
-        <h3>Ignitier Kit</h3>
+        <h3>Igniter Kit</h3>
 	<ul class=" bullet-list">
         <li>Photo of Service Report(not exceeds 2-days)</li>
 	<li>Photo of Serial plate</li>
@@ -561,6 +571,7 @@ header {
 	<div class="part" data-part="Burner">
         <img src="burner.png" text="burner" style="width:200px; height:150px; object-fit:contain;">
         <h3>Burner</h3>
+	<ptex><u>Note:</u> For gas-related concerns, we recommend obtaining the required gas specifications in working VAT to ensure accurate evaluation.</ptext>
 	<ul class=" bullet-list">
         <li>Photo of Service Report(not exceeds 2-days)</li>
 	<li>Photo of Serial plate</li>
@@ -811,8 +822,9 @@ header {
         <li>Photo of Service Report(not exceeds 2-days)</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
-        <li>Photo/Video of WLP display text</li>
-        <li>Check continuity of WLP from connector to the three probes</li>
+        <li><a href="https://drive.google.com/file/d/1SchhyKcvYO302XJvzB0RJPNa1DQG_ctL/view?usp=sharing" target="_blank">Disconnect WLP and take photo on the display</a></li>
+        <li><a href="https://drive.google.com/file/d/1ub8tn2pLzyLqvOZ0YXZmj3LwSd1uOutR/view?usp=sharing" target="_blank">Check continuity of WLP from connector to the three probes</a></li>
+	<li><a href="https://drive.google.com/file/d/1wB-VFtK4lktb2GmGzAFK4BtCLkmdEp8K/view?usp=sharing" target="_blank">Jumper WLP connection #2 and #3 at the control board and take a photo on the display</a></li>
    	</ul>
       </div>
 
@@ -922,7 +934,7 @@ header {
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
-        <li>Photo or Video of the issue/error</li>
+        <li>Conduct resistance test</li>
    	</ul>
 	</div>
 
@@ -956,6 +968,7 @@ header {
 <!-- Schaerer -->
   <div class="brand" data-brand="Schaerer">
     <h2>SCHAERER</h2>
+	<ptext><a href="https://drive.google.com/file/d/1MIODKXcE6ZnFOUStDRumV-ijuuCFEJvc/view?usp=sharing" target="_blank">PLEASE DOWNLOAD THE CLAIM FORM</a></ptext>
     <div class="parts">
       <div class="part" data-part="grindermotor">
         <img src="grindermotor.png" text="grindermotor" style="width:200px; height:150px; object-fit:contain;">
@@ -966,6 +979,7 @@ header {
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
         <li>Photo or Video of the issue/error</li>
+	<li>Photo of the total brew counts</li>
    	</ul>
 	</div>
 
@@ -1118,12 +1132,17 @@ header {
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
-        <li>Photo or Video of the issue/error</li>
+        <li>Photo or Video of the issue/error:
+	<ol type="a">
+	<li>Provide clear photos of the inside of the overlay.</li>
+	<li>Submit a video clearly demonstrating the buttons being pressed without the overlay in place.</li>
+	</ol>
+	</li>
    	</ul>
 	</div>
 
 	<div class="part" data-part="motorassy">
-        <img src="motorassy" text="motorassy" style="width:200px; height:150px; object-fit:contain;">
+        <img src="motorassy.png" text="motorassy" style="width:200px; height:150px; object-fit:contain;">
         <h3>Motor Assembly</h3>
 	<ul class=" bullet-list">
         <li>Photo of Service Report(not exceeds 2-days)</li>
@@ -1131,7 +1150,7 @@ header {
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
         <li>Photo or Video of the issue/error</li>
-   	</ul>
+	</ul>
 	</div>
 
     </div>

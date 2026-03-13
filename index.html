@@ -47,11 +47,15 @@ header {
   }
 }
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #f2f4f8;
-      margin: 0;
-      padding: 0;
-    }
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)),
+              url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
     header {
       background: #1f2937;
       color: #fff;
@@ -174,13 +178,14 @@ function clearSearch() {
       <option value="Server">SERVER</option>
       <option value="Turboair">TURBO-AIR</option>
       <option value="Vitamix">VITAMIX</option>
+      <option value="Vitamix">OTHER BRANDS</option>
     </select>
     <input type="search" id="searchPart" placeholder="Search part name..." onkeyup="searchPart()"/>
 	<!-- Clear Button -->
     <button type="button" onclick="clearSearch()">Clear</button>
   </div>	
 <div class="toolbar-subtitle2">TOP 5 MOST COMMON PARTS REPLACEMENT PER BRAND</div>
-<div class="toolbar-subtitle1"><B>REMINDER:</B> Please review and ensure that all instructions in the provided checklist or testing procedure are followed before submitting the claim. Failure to comply with the specified requirements will result in automatic rejection of the warranty.</div>
+<div class="toolbar-subtitle1"><B>REMINDER:</B> Review and ensure to follow the instructions provided in the listed checklist or testing procedure before submitting the claim. And double-check all documents to avoid delays or disapproval of the warranty.</div>
 
 <!-- Amana -->
   <div class="brand" data-brand="Amana">
@@ -192,7 +197,7 @@ function clearSearch() {
         <img src="thermal.png" text="thermal" style="width:200px; height:150px; object-fit:contain;">
         <h3>Thermal Cutout</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -204,7 +209,7 @@ function clearSearch() {
         <img src="diode.png" text="diode" style="width:200px; height:150px; object-fit:contain;">
         <h3>Diode</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -216,7 +221,7 @@ function clearSearch() {
         <img src="magnetron.png" text="magnetron" style="width:200px; height:150px; object-fit:contain;">
         <h3>Magnetron</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -228,7 +233,7 @@ function clearSearch() {
         <img src="capacitor.png" text="capacitor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Capacitor</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -240,7 +245,7 @@ function clearSearch() {
         <img src="boardcontrol.png" text="boardcontrol" style="width:200px; height:150px; object-fit:contain;">
         <h3>Control Assy</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -251,7 +256,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -274,7 +279,7 @@ function clearSearch() {
         <h3>Gear Motor</h3>
 	<ptext><u>Note:</u> Please ensure that 60Hz frequency setting now connected</ptext>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -288,7 +293,7 @@ function clearSearch() {
         <h3>Thermostat</h3>
 	<ptext><u>Note:</u> Please try to calibrate first</ptext>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -302,7 +307,7 @@ function clearSearch() {
         <img src="cboard.png" text="cboard" style="width:200px; height:150px; object-fit:contain;">
         <h3>Boards</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -314,7 +319,7 @@ function clearSearch() {
         <img src="switch.png" text="switch" style="width:200px; height:150px; object-fit:contain;">
         <h3>Power Switch</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -326,7 +331,7 @@ function clearSearch() {
         <img src="relay.png" text="relay" style="width:200px; height:150px; object-fit:contain;">
         <h3>Solid State Relay</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -337,7 +342,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -359,7 +364,7 @@ function clearSearch() {
         <img src="board.png" text="board" style="width:200px; height:150px; object-fit:contain;">
         <h3>Control Board</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -371,7 +376,7 @@ function clearSearch() {
         <img src="valveassy.png" text="valveassy" style="width:200px; height:150px; object-fit:contain;">
         <h3>Valve Assy</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -383,7 +388,7 @@ function clearSearch() {
         <img src="solenoidvalve.png" text="solenoidvalve" style="width:200px; height:150px; object-fit:contain;">
         <h3>Solenoid Valve</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -395,7 +400,7 @@ function clearSearch() {
         <img src="membrane.png" text="membrane" style="width:200px; height:150px; object-fit:contain;">
         <h3>Switch Membrane</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -407,7 +412,7 @@ function clearSearch() {
         <img src="heatertank.png" text="heatertank" style="width:200px; height:150px; object-fit:contain;">
         <h3>Heater Tank Kit</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -418,7 +423,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -441,7 +446,7 @@ function clearSearch() {
         <img src="ptcprobe.png" text="ptcprobe" style="width:200px; height:150px; object-fit:contain;">
         <h3>PTC Probe</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Probe resistance</li>
@@ -453,7 +458,7 @@ function clearSearch() {
         <img src="gearbox.png" text="gearbox" style="width:200px; height:150px; object-fit:contain;">
         <h3>Gearbox</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>AVR/Power supply</li>
@@ -469,9 +474,9 @@ function clearSearch() {
         <img src="boards.png" text="boards" style="width:200px; height:150px; object-fit:contain;">
         <h3>Electronic Boards</h3>
 	<ul class=" bullet-list">
-	<li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+	<li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
-    <li>Photo of defective part</li>
+        <li>Photo of defective part</li>
 	<h4>Main Board</h4>
 	<ul class=" bullet-list">
         <li>Transformer output (24V & 8.0.8V)</li>
@@ -484,9 +489,8 @@ function clearSearch() {
 	<li>Transformer output (24V & 8.0.8V)</li>
 	<li>Cable ribbon status</li>
 	</ul>
-	<h4>Teorema Board</h4>
+	<h4>Display Board</h4>
 	<ul class=" bullet-list">
-		<li>Proof/Evidence of defect (Video/Pictures)</li>
        	<li>Transformer output (24V & 8.0.8V)</li>
         <li>AVR/Power Supply</li>
 	</ul>
@@ -497,7 +501,7 @@ function clearSearch() {
         <img src="motor.png" text="motor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Motor (Beater/Pump/Agitator)</h3>
 	<ul class=" bullet-list">
-       <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+       <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Display Error (if applicable)</li>
@@ -516,7 +520,7 @@ function clearSearch() {
         <img src="capacitors.png" text="capacitor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Capacitors</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>AVR / Power Supply</li>
@@ -527,7 +531,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -551,7 +555,7 @@ function clearSearch() {
         <img src="ignition.png" text="ignition" style="width:200px; height:150px; object-fit:contain;">
         <h3>Igniter Kit</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -563,7 +567,7 @@ function clearSearch() {
         <img src="firingdevice.png" text="firingdevice" style="width:200px; height:150px; object-fit:contain;">
         <h3>Firing Device</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -576,7 +580,7 @@ function clearSearch() {
         <img src="extrafan.png" text="extrafan" style="width:200px; height:150px; object-fit:contain;">
         <h3>Extra Fan</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -588,7 +592,7 @@ function clearSearch() {
         <img src="easytouch.png" text="easytouch" style="width:200px; height:150px; object-fit:contain;">
         <h3>Easytouch 10"</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -603,7 +607,7 @@ function clearSearch() {
         <img src="coboard.png" text="coboard" style="width:200px; height:150px; object-fit:contain;">
         <h3>Control Board</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -614,7 +618,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -638,7 +642,7 @@ function clearSearch() {
         <img src="transformer.png" text="transformer" style="width:200px; height:150px; object-fit:contain;">
         <h3>Transformer</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -652,7 +656,7 @@ function clearSearch() {
         <h3>Burner</h3>
 	<ptex><u>Note:</u> For gas-related concerns, we recommend obtaining the required gas specifications in working VAT to ensure accurate evaluation.</ptext>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
 	<li>WAP Checklist</li>
@@ -670,7 +674,7 @@ function clearSearch() {
         <img src="controller.png" text="controller" style="width:200px; height:150px; object-fit:contain;">
         <h3>Controller</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -683,7 +687,7 @@ function clearSearch() {
         <img src="temprobe.png" text="temprobe" style="width:200px; height:150px; object-fit:contain;">
         <h3>Temperature Probe</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -695,7 +699,7 @@ function clearSearch() {
         <img src="heaterboard.png" text="heaterboard" style="width:200px; height:150px; object-fit:contain;">
         <h3>I/O Heater Board</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -708,7 +712,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -730,7 +734,7 @@ function clearSearch() {
         <img src="valve.png" text="valve" style="width:200px; height:150px; object-fit:contain;">
         <h3>Valve, 3/4</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -742,7 +746,7 @@ function clearSearch() {
         <img src="powerinverter.png" text="powerinverter" style="width:200px; height:150px; object-fit:contain;">
         <h3>Power Inverter</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -754,7 +758,7 @@ function clearSearch() {
         <img src="assyigniter.png" text="assyigniter" style="width:200px; height:150px; object-fit:contain;">
         <h3>Assy Igniter & Bracket</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -766,7 +770,7 @@ function clearSearch() {
         <img src="flowinpt.png" text="flowinpt" style="width:200px; height:150px; object-fit:contain;">
         <h3>Flow Output Control</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -778,7 +782,7 @@ function clearSearch() {
         <img src="keypad.png" text="keypad" style="width:200px; height:150px; object-fit:contain;">
         <h3>Keypad</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -789,7 +793,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -811,7 +815,7 @@ function clearSearch() {
         <img src="pcbtouch.png" text="pcbtouch" style="width:200px; height:150px; object-fit:contain;">
         <h3>PCB Touch Screen</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -823,7 +827,7 @@ function clearSearch() {
         <img src="heating.png" text="heating" style="width:200px; height:150px; object-fit:contain;">
         <h3>Heating Element</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -835,7 +839,7 @@ function clearSearch() {
         <img src="sensor.png" text="sensor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Sensor</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -847,7 +851,7 @@ function clearSearch() {
         <img src="fanmotor.png" text="fanmotor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Fan Motor Assy</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -859,7 +863,7 @@ function clearSearch() {
         <img src="exhaustfan.png" text="exhaustfan" style="width:200px; height:150px; object-fit:contain;">
         <h3>Exhaust Fan</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -870,7 +874,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -891,7 +895,7 @@ function clearSearch() {
         <img src="compressor.png"text="Compressor"style="width:200px; height:150px; object-fit:contain;">
         <h3>Compressor</h3>
 	<ul class="bullet-list">
-	<li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+	<li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
 	<li>Photo of compressor sticker plate</li>
@@ -907,7 +911,7 @@ function clearSearch() {
         <img src="icethicknessprobe.png"text="Ice Thickness Probe"style="width:200px; height:150px; object-fit:contain;">
         <h3>Ice Thickness Probe</h3>
 	<ul class="bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li><a href="https://drive.google.com/file/d/1iA5i7Ad1GKc0W0LZ2TVOFUtsihhOfum6/view?usp=sharing" target="_blank">Scratch test</a></li>
@@ -919,7 +923,7 @@ function clearSearch() {
         <img src="controlboard.png"text="Control board"style="width:200px; height:150px; object-fit:contain;">
         <h3>Control Board</h3>
 	<ul class="bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Photo/Video of the error</li>
@@ -930,7 +934,7 @@ function clearSearch() {
         <img src="hpr.png"text="Harvest Pressure Regulator"style="width:200px; height:150px; object-fit:contain;">
         <h3>Harvest Pressure Regulator</h3>
 	<ul class="bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Photo/Video of low and high side gauge</li>
@@ -941,7 +945,7 @@ function clearSearch() {
         <img src="wlp.png"text="Water Level Probe"style="width:200px; height:150px; object-fit:contain;">
         <h3>Water Level Probe</h3>
         <ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li><a href="https://drive.google.com/file/d/1SchhyKcvYO302XJvzB0RJPNa1DQG_ctL/view?usp=sharing" target="_blank">Disconnect WLP and take photo on the display</a></li>
@@ -953,7 +957,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -974,7 +978,7 @@ function clearSearch() {
         <img src="steamwand.png" text="steamwand" style="width:200px; height:150px; object-fit:contain;">
         <h3>Temperature Sensor</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -986,7 +990,7 @@ function clearSearch() {
         <img src="magnetvalve.png" text="magnetvalve" style="width:200px; height:150px; object-fit:contain;">
         <h3>2-Way Magnet Valve</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -998,7 +1002,7 @@ function clearSearch() {
         <img src="drawer.png" text="drawer" style="width:200px; height:150px; object-fit:contain;">
         <h3>Ground Drawer</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1010,7 +1014,7 @@ function clearSearch() {
         <img src="conboard.png" text="conboard" style="width:200px; height:150px; object-fit:contain;">
         <h3>Control Board</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1022,7 +1026,7 @@ function clearSearch() {
         <img src="photoelectric.png" text="photoelectric" style="width:200px; height:150px; object-fit:contain;">
         <h3>Photoelectric Sensors</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1033,7 +1037,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1055,7 +1059,7 @@ function clearSearch() {
         <img src="magnetron1.png" text="magnetron1" style="width:200px; height:150px; object-fit:contain;">
         <h3>Magnetron</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1068,7 +1072,7 @@ function clearSearch() {
         <img src="cooling.png" text="cooling" style="width:200px; height:150px; object-fit:contain;">
         <h3>Cooling Tower</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1080,7 +1084,7 @@ function clearSearch() {
         <img src="fuse.png" text="fuse" style="width:200px; height:150px; object-fit:contain;">
         <h3>Fuse</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1092,7 +1096,7 @@ function clearSearch() {
         <img src="microswitch.png" text="microswitch" style="width:200px; height:150px; object-fit:contain;">
         <h3>Interlock Assembly</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1104,7 +1108,7 @@ function clearSearch() {
         <img src="speed.png" text="speed" style="width:200px; height:150px; object-fit:contain;">
         <h3>Topband Speed Controller</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1116,7 +1120,7 @@ function clearSearch() {
         <img src="transformer2.png" text="transformer2" style="width:200px; height:150px; object-fit:contain;">
         <h3>Transformer</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1129,7 +1133,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1152,7 +1156,7 @@ function clearSearch() {
         <img src="grindermotor.png" text="grindermotor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Grinder Motor</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1165,7 +1169,7 @@ function clearSearch() {
         <img src="pressurevalve.png" text="pressurevalve" style="width:200px; height:150px; object-fit:contain;">
         <h3>Pressure Valve</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1177,7 +1181,7 @@ function clearSearch() {
         <img src="manometer.png" text="manometer" style="width:200px; height:150px; object-fit:contain;">
         <h3>Manometer</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1189,7 +1193,7 @@ function clearSearch() {
         <img src="powersupply.png" text="powersupply" style="width:200px; height:150px; object-fit:contain;">
         <h3>Power Supply</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1201,7 +1205,7 @@ function clearSearch() {
         <img src="portafilter.png" text="portafilter" style="width:200px; height:150px; object-fit:contain;">
         <h3>Lock Portafilter</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1212,7 +1216,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1234,7 +1238,7 @@ function clearSearch() {
         <img src="controller1.png" text="controller1" style="width:200px; height:150px; object-fit:contain;">
         <h3>Temperature Controller</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1246,7 +1250,7 @@ function clearSearch() {
         <img src="element.png" text="element" style="width:200px; height:150px; object-fit:contain;">
         <h3>Heating Element</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1258,7 +1262,7 @@ function clearSearch() {
         <img src="cutout.png" text="cutout" style="width:200px; height:150px; object-fit:contain;">
         <h3>Thermal Cut-out</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1270,7 +1274,7 @@ function clearSearch() {
         <img src="thermosistor.png" text="thermosistor" style="width:200px; height:150px; object-fit:contain;">
         <h3>Thermosistor</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1282,7 +1286,7 @@ function clearSearch() {
         <img src="rocker.png" text="rocker" style="width:200px; height:150px; object-fit:contain;">
         <h3>Rocker Switch</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1293,7 +1297,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1315,7 +1319,7 @@ function clearSearch() {
         <img src="compressor1.png" text="compressor1" style="width:200px; height:150px; object-fit:contain;">
         <h3>Compressor</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1327,7 +1331,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1350,7 +1354,7 @@ function clearSearch() {
         <img src="dpboard.png" text="dpboard" style="width:200px; height:150px; object-fit:contain;">
         <h3>Display Board</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1367,7 +1371,7 @@ function clearSearch() {
         <img src="motorassy.png" text="motorassy" style="width:200px; height:150px; object-fit:contain;">
         <h3>Motor Assembly</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1378,7 +1382,7 @@ function clearSearch() {
 	<div class="part" data-part="defpart">
         <h3>Other Parts</h3>
 	<ul class=" bullet-list">
-        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is readable(BOLD/CAPS font) not folded, crumpled, or distorted.</li>
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
 	<li>Photo of Serial plate</li>
         <li>Photo of defective part</li>
         <li>Power supply reading</li>
@@ -1387,6 +1391,55 @@ function clearSearch() {
 	</div>
     </div>
   </div>
+
+<!-- Other Parts -->
+  <div class="brand" data-brand="OtherParts">
+    <h2>OTHER PARTS</h2>
+	<h3>STANDARD WARRANTY COVERAGE:</h3>
+	<p><ptext>1-YEAR - ALL ACCOUNTS</ptext></p>
+	<div class="parts">
+      <div class="part" data-part="dpboard">
+        <img src="dpboard.png" text="dpboard" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Display Board</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error:
+	<ol type="a">
+	<li>Provide clear photos of the inside of the overlay.</li>
+	<li>Submit a video clearly demonstrating the buttons being pressed without the overlay in place.</li>
+	</ol>
+	</li>
+   	</ul>
+	</div>
+
+	<div class="part" data-part="motorassy">
+        <img src="motorassy.png" text="motorassy" style="width:200px; height:150px; object-fit:contain;">
+        <h3>Motor Assembly</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+	</ul>
+	</div>
+
+	<div class="part" data-part="defpart">
+        <h3>Other Parts</h3>
+	<ul class=" bullet-list">
+        <li>Photo of Service Report (not exceeds 2-days) ensuring that it is not folded, crumpled, or distorted.</li>
+	<li>Photo of Serial plate</li>
+        <li>Photo of defective part</li>
+        <li>Power supply reading</li>
+        <li>Photo or Video of the issue/error</li>
+   	</ul>
+	</div>
+    </div>
+  </div>
+
 </div>
 
 <footer>© 2026 Warranty Section</footer>

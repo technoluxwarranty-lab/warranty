@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warranty Coverage</title>
+<style>
+
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ===== BODY ===== */
+body{
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+    background:
+        linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
+        url("background.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* ===== HEADER ===== */
+header{
+    background:rgba(15,23,42,0.95);
+    backdrop-filter:blur(10px);
+    padding:5px 30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+header {
+    padding: 12px 16px;
+  }
+  .header-title {
+    font-size: 16px;
+  }
+  .header-logo {
+    height: 30px;   /* smaller logo on mobile */
+  }
+
+header h1{
+    font-size:1.6rem;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+header img{
+    height:45px;
+    width:auto;
+    object-fit:contain;
+}
+
+/* ===== MAIN ===== */
+main{
+    max-width:1400px;
+    margin:auto;
+    padding:50px 25px;
+}
+
+main h2{
+    text-align:center;
+    font-size:2rem;
+    margin-bottom:30px;
+}
+
+/* ===== SEARCH ===== */
+.controls{
+    display:flex;
+    justify-content:center;
+    margin-bottom:40px;
+}
+
+.controls input{
+    width:450px;
+    max-width:95%;
+    padding:14px 20px;
+    border:none;
+    border-radius:50px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
+    color:#111827;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+/* ===== GRID ===== */
+.brands{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* ===== CARD ===== */
+.brand-card{
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:18px;
+    padding:25px;
+    transition:all .3s ease;
+    min-height:220px;
+}
+
+.brand-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.30);
+}
+
+/* ===== BRAND TITLE ===== */
+.brand-card h3{
+    font-size:1.5rem;
+    margin-bottom:15px;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,.2);
+}
+
+/* ===== WARRANTY HEADER ===== */
+.brand-card h4{
+    color:#dbeafe;
+    font-size:14px;
+    margin-bottom:12px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+/* ===== BADGE ===== */
+.badge{
+    display:inline-block;
+    background:#2563eb;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+/* ===== LIST ===== */
+.warranty-list{
+    margin-left:20px;
+    padding-left:10px;
+}
+
+.warranty-list li{
+    margin-bottom:10px;
+    line-height:1.5;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+
+    header{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:1rem;
+    }
+
+    header img{
+        height:35px;
+    }
+
+    main h2{
+        font-size:1.5rem;
+    }
+
+    .brand-card{
+        min-height:auto;
+    }
+
+    .controls input{
+        width:100%;
+    }
+}
+
+</style>
+
+<script>
+function clearSearch() {
+    document.getElementById("searchPart").value = "";
+    searchPart(); // Optional: re-run search to refresh results
+}
+</script>
+
+</head>
+
+<body>
+<header><h3>WARRANTY MANAGEMENT SYSTEM</h3><img src="company-logo.png" alt="Company Logo" class="header-logo">
+</header>
+
+<main>
+    <h2>WARRANTY COVERAGE PER BRAND</h2>
+
+    <!-- 🔍 Search -->
+    <div class="controls">
+       <input type="text" id="searchInput" placeholder="🔍 Search brand name...">
+    </div>
+
+    <div class="brands" id="brandContainer">
+
+    <div class="brand-card">
+    <h3>AMANA</h3>
+	<h4>STANDARD WARRANTY</h4>
+    <span class="badge">1 YEAR - ALL Accounts</span>  
+</div>
+
+    <div class="brand-card">
+    <h3>ANTUNES</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - General Market and JB</span></div>
+<div><span class="badge">2 YEARS - MCDO & BK</span></div>
+</div>
+
+   <div class="brand-card">
+    <h3>BUNN-O-MATIC</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">2 YEARS - ALL Accounts</span></div>
+</div>
+
+   <div class="brand-card">
+    <h3>CARPIGIANI</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - MCDO, BK, KFC, and General Markets</span></div>
+<div><span class="badge">2 YEARS - JB</span></div>
+</div>
+
+   <div class="brand-card">
+    <h3>FRYMASTER</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - General Market and JB</span></div>
+<div><span class="badge">2 YEARS - MCDO</span></div>
+<div>Note: STANDARD WARRANTY for MCDO may change depends on model. Please email/message <u>warranty@technolux.net</u> for verification.</div>
+</div>
+
+   <div class="brand-card">
+    <h3>IPSO</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">3 YEARS - ALL Accounts</span></div>
+</div>
+
+<div class="brand-card">
+    <h3>KOLB</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+</div>
+
+
+<div class="brand-card">
+    <h3>MANITOWOC</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">3 YEARS - ALL Accounts</span></div>
+</div>
+
+
+<div class="brand-card">
+    <h3>MASTRENA</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">3 YEARS - ALL Accounts</span></div>
+</div>
+
+
+<div class="brand-card">
+    <h3>MERRYCHEF</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+</div>
+
+<div class="brand-card">
+    <h3>SCHAERER</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+</div>
+
+<div class="brand-card">
+    <h3>SERVER</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+</div>
+
+<div class="brand-card">
+    <h3>TURBO-AIR</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+</div>
+
+<div class="brand-card">
+    <h3>VITAMIX</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - OTHER Accounts</span></div>
+ <div><span class="badge">3 YEARS - STARBUCKS</span></div>
+</div>
+
+<div class="brand-card">
+    <h3>OTHER BRANDS</h3>
+<h4>STANDARD WARRANTY</h4>
+   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+ </div>
+
+
+    </div>
+</main>
+
+<script>
+    const searchInput = document.getElementById("searchInput");
+    const brandCards = document.querySelectorAll(".brand-card");
+
+    searchInput.addEventListener("keyup", function () {
+        const filter = searchInput.value.toLowerCase();
+
+        brandCards.forEach(card => {
+            const brandName = card.querySelector("h3").textContent.toLowerCase();
+
+            card.style.display = brandName.includes(filter) ? "" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>

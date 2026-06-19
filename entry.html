@@ -1,340 +1,685 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warranty Coverage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Warranty Management System</title>
+
 <style>
 
-/* ===== RESET ===== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-/* ===== BODY ===== */
-body{
-    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
-    background:
-        linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
-        url("background.jpg");
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-    color:#fff;
-    min-height:100vh;
-}
-
-/* ===== HEADER ===== */
-header{
-    background:rgba(15,23,42,0.95);
-    backdrop-filter:blur(10px);
-    padding:5px 30px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 4px 15px rgba(0,0,0,.25);
-}
+/* ==========================
+   HEADER
+========================== */
 
 header {
-    padding: 12px 16px;
-  }
-  .header-title {
-    font-size: 16px;
-  }
-  .header-logo {
-    height: 30px;   /* smaller logo on mobile */
-  }
+    background: #1f2937;
+    color: #fff;
 
-header h1{
-    font-size:1.6rem;
-    font-weight:700;
-    letter-spacing:.5px;
+    padding: 10px 24px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-sizing: border-box;
 }
 
-header img{
-    height:45px;
-    width:auto;
-    object-fit:contain;
+
+.header-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
 }
 
-/* ===== MAIN ===== */
-main{
-    max-width:1400px;
-    margin:auto;
-    padding:50px 25px;
+
+.header-logo {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
 }
 
-main h2{
-    text-align:center;
-    font-size:2rem;
-    margin-bottom:30px;
+
+
+@media(max-width:600px){
+
+header{
+    height:40px;
+    padding:8px 14px;
 }
 
-/* ===== SEARCH ===== */
-.controls{
-    display:flex;
-    justify-content:center;
-    margin-bottom:40px;
-}
-
-.controls input{
-    width:450px;
-    max-width:95%;
-    padding:14px 20px;
-    border:none;
-    border-radius:50px;
+.header-title{
     font-size:15px;
-    outline:none;
-    background:#fff;
-    color:#111827;
-    box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
 
-/* ===== GRID ===== */
+.header-logo{
+    height:24px;
+}
+
+}
+
+
+
+/* ==========================
+   BODY
+========================== */
+
+
+body {
+
+font-family:
+"Segoe UI",
+Tahoma,
+Geneva,
+Verdana,
+sans-serif;
+
+background:
+linear-gradient(
+rgba(255,255,255,0.90),
+rgba(255,255,255,0.90)
+),
+url("background.jpg");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+margin:0;
+padding:0;
+
+}
+
+
+
+/* ==========================
+   CONTENT
+========================== */
+
+
+main{
+
+padding:25px;
+max-width:1200px;
+margin:auto;
+
+}
+
+
+h2{
+
+color:#1f2937;
+ text-align:center;
+ margin-bottom:25px;
+
+}
+
+
+
+.controls {
+    width:100%;
+    max-width:700px;
+    margin:0 auto 20px auto;
+}
+
+
+#searchInput {
+
+    width:100%;
+    box-sizing:border-box;
+
+    padding:12px 14px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    font-size:14px;
+
+}
+
+
+/* ==========================
+   BRAND CARD
+========================== */
+
+
 .brands{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:25px;
+
+display:flex;
+    flex-direction:column;
+
+    gap:20px;
+
+    width:100%;
+    max-width:700px;
+
+    margin:0 auto;
 }
 
-/* ===== CARD ===== */
+
+
 .brand-card{
-    background:rgba(255,255,255,0.12);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:18px;
-    padding:25px;
-    transition:all .3s ease;
-    min-height:220px;
+
+
+    background:#fff;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:
+    0 6px 16px rgba(0,0,0,0.08);
+
+    text-align:left;
+
+    transition:.2s;
 }
+
+
 
 .brand-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 30px rgba(0,0,0,.30);
+
+transform:translateY(-4px);
+
 }
 
-/* ===== BRAND TITLE ===== */
+
+
 .brand-card h3{
-    font-size:1.5rem;
-    margin-bottom:15px;
-    padding-bottom:10px;
-    border-bottom:1px solid rgba(255,255,255,.2);
+
+margin-top:0;
+
+color:#1f2937;
+
 }
 
-/* ===== WARRANTY HEADER ===== */
+
+
 .brand-card h4{
-    color:#dbeafe;
-    font-size:14px;
-    margin-bottom:12px;
-    text-transform:uppercase;
-    letter-spacing:.5px;
+
+margin-bottom:12px;
+
+color:#6b7280;
+
 }
 
-/* ===== BADGE ===== */
+
+
 .badge{
-    display:inline-block;
-    background:#2563eb;
-    color:#fff;
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:600;
-    margin-bottom:12px;
+
+display:inline-block;
+
+background:#e5eefc;
+
+color:#1e40af;
+
+padding:6px 10px;
+
+border-radius:20px;
+
+font-size:13px;
+
+margin-bottom:8px;
+
 }
 
-/* ===== LIST ===== */
-.warranty-list{
-    margin-left:20px;
-    padding-left:10px;
+
+
+footer{
+
+text-align:center;
+
+padding:20px;
+
+color:#6b7280;
+
+font-size:13px;
+
 }
 
-.warranty-list li{
-    margin-bottom:10px;
-    line-height:1.5;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-
-    header{
-        padding:15px;
-    }
-
-    header h1{
-        font-size:1rem;
-    }
-
-    header img{
-        height:35px;
-    }
-
-    main h2{
-        font-size:1.5rem;
-    }
-
-    .brand-card{
-        min-height:auto;
-    }
-
-    .controls input{
-        width:100%;
-    }
-}
 
 </style>
 
-<script>
-function clearSearch() {
-    document.getElementById("searchPart").value = "";
-    searchPart(); // Optional: re-run search to refresh results
-}
-</script>
-
 </head>
 
+
 <body>
-<header><h3>WARRANTY MANAGEMENT SYSTEM</h3><img src="company-logo.png" alt="Company Logo" class="header-logo">
+
+
+
+<header>
+
+<h3 class="header-title">
+WARRANTY MANAGEMENT SYSTEM
+</h3>
+
+
+<img 
+src="company-logo.png"
+alt="Company Logo"
+class="header-logo">
+
 </header>
 
 <main>
-    <h2>WARRANTY COVERAGE PER BRAND</h2>
 
-    <!-- 🔍 Search -->
-    <div class="controls">
-       <input type="text" id="searchInput" placeholder="🔍 Search brand name...">
-    </div>
+<h2>
+WARRANTY COVERAGE</h2>
 
-    <div class="brands" id="brandContainer">
+<div class="controls">
 
-    <div class="brand-card">
-    <h3>AMANA</h3>
-	<h4>STANDARD WARRANTY</h4>
-    <span class="badge">1 YEAR - ALL Accounts</span>  
+<input 
+type="text"
+id="searchInput"
+placeholder="🔍 Search brand name...">
+
 </div>
-
-    <div class="brand-card">
-    <h3>ANTUNES</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - General Market and JB</span></div>
-<div><span class="badge">2 YEARS - MCDO & BK</span></div>
-</div>
-
-   <div class="brand-card">
-    <h3>BUNN-O-MATIC</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">2 YEARS - ALL Accounts</span></div>
-</div>
-
-   <div class="brand-card">
-    <h3>CARPIGIANI</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - MCDO, BK, KFC, and General Markets</span></div>
-<div><span class="badge">3 YEARS - JB</span></div>
-</div>
-
-	 <div class="brand-card">
-    <h3>CONVOTHERM</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - GENERAL MARKETS AND STARBUCKS</span></div>
-<div><span class="badge">2 YEARS - PERI-PERI, CHILI'S AND KENNY ROGERS</span></div>
-</div>
-	
-
-   <div class="brand-card">
-    <h3>FRYMASTER</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - General Market and JB</span></div>
-<div><span class="badge">2 YEARS - MCDO</span></div>
-<div>Note: STANDARD WARRANTY for MCDO may change depends on model. Please email/message <u>warranty@technolux.net</u> for verification.</div>
-</div>
-
-   <div class="brand-card">
-    <h3>IPSO</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">3 YEARS - ALL Accounts</span></div>
-</div>
+<div class="brands" id="brandContainer">
 
 <div class="brand-card">
-    <h3>KOLB</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+<h3>AMANA/MENUMASTER</h3>
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
 </div>
+
+
 
 
 <div class="brand-card">
-    <h3>MANITOWOC</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">3 YEARS - ALL Accounts</span></div>
+
+<h3>ANTUNES</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+BURGER KING & MCDO - 2 years
+</span>
+<br>
+</span>
+<span class="badge">
+JOLLIBEE & GENERAL MARKET - 1 year
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>BUNN-O-MATIC</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+ALL ACCOUNTS - 2 years
+</span>
+<br>
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>ALL ACCOUNTS</h5>
+<span class="badge">
+BOARD - 3 years</span>
+</div>
+
+
+
+<div class="brand-card">
+
+<h3>CARPIGIANI</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+MCDO, BURGER KING, KFC, AND GENERAL MARKETS - 1 year
+</span>
+<br>
+<span class="badge">
+JOLLIBEE - 3 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>MCDO AND KFC</h5>
+<span class="badge">
+BEATER MOTOR - 2 years</span>
+<br>
+<span class="badge">
+COMPRESSOR - 3 years</span>
+<br>
+<span class="badge">
+HOPPER ASSY - 5 years</span>
+<h5>JOLLIBEE</h5>
+<span class="badge">
+COMPRESSOR AND SHELL INSULATED - 5 years
+</span>
+
+</div>
+
+<div class="brand-card">
+
+<h3>CHOICE</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+CHAGEE - 2 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<span class="badge">
+COMPRESSOR AND EVAPORATOR - 2 years
+</span>
+
 </div>
 
 
 <div class="brand-card">
-    <h3>MASTRENA</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">3 YEARS - ALL Accounts</span></div>
+
+<h3>CONVOTHERM</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+GENERAL MARKET AND STARBUCKS - 1 year
+</span>
+<br>
+<span class="badge">
+KENNY ROGERS, CHILI'S AND PERI-PERI - 2 years
+</span>
+</div>
+
+<div class="brand-card">
+
+<h3>FRYMASTER</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+JOLLIBEE AND GENERAL MARKET - 1 year
+</span>
+
+
+<h5>MCDO</h5>
+
+<span class="badge">
+MODEL: BIPH, MIH, BID260 - 1 year
+</span>
+
+<br>
+
+<span class="badge">
+MODEL: BIGLA, BIELA, UHC - 2 years
+</span>
+
+<br>
+
+<span class="badge">
+MODEL: UHCTHD - 3 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>MCDO</h5>
+<h6>MODEL: BIGLA, BIELA</h6>
+<span class="badge">
+ BURNER - 2 years
+</span>
+
+<br>
+
+<span class="badge">
+FRYPOT - 15 years
+</span>
+
+
+<h6>MODEL: BIPH, MIH</h6>
+<span class="badge">
+COMPUTER BOARD - 2 years
+</span>
+
+
+</div> 
+
+<div class="brand-card">
+
+<h3>IPSO</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 3 years
+</span>
+
 </div>
 
 
 <div class="brand-card">
-    <h3>MERRYCHEF</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+
+<h3>KOLB</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
 </div>
 
+
+
+
+
 <div class="brand-card">
-    <h3>SCHAERER</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+
+<h3>MANITOWOC</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 3 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<span class="badge">
+COMPRESSOR AND EVAPORATOR - 5 years
+</span>
+
 </div>
 
+
+
+
+
 <div class="brand-card">
-    <h3>SERVER</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+
+<h3>MASTRENA</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 18 months
+</span>
+
 </div>
 
+
+
+
+
 <div class="brand-card">
-    <h3>TURBO-AIR</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
+
+<h3>MERRYCHEF</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<span class="badge">
+MAGNETRON, HEATER ELEMENT, COOLING FAN, AIR FILTER, POWER CONTROL SWITCH - 3 years
+</span>
+
 </div>
 
+
+
+
+
 <div class="brand-card">
-    <h3>VITAMIX</h3>
-<h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - OTHER Accounts</span></div>
- <div><span class="badge">3 YEARS - STARBUCKS</span></div>
+
+<h3>SCHAERER</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
 </div>
 
+
+
+
+
 <div class="brand-card">
-    <h3>OTHER BRANDS</h3>
+
+<h3>SERVER</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>TURBO-AIR</h3>
+
 <h4>STANDARD WARRANTY</h4>
-   <div><span class="badge">1 YEAR - ALL Accounts</span></div>
- </div>
+
+<span class="badge">
+BURGER KING AND CHATIME - 1 year
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+
+<span class="badge">
+COMPRESSOR - 2 years
+</span>
+
+</div>
 
 
-    </div>
+
+
+
+<div class="brand-card">
+
+<h3>VITAMIX</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+STARBUCKS - 3 years
+</span>
+
+<br>
+
+<span class="badge">
+GENERAL MARKET - 1 year
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>STARBUCKS</h5>
+<span class="badge">
+BOARD - 3 years
+</span>
+
+
+</div>
+
+
+<div class="brand-card">
+
+<h3>OTHER BRANDS</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+</div>
+
+</div>
+
+
 </main>
 
+
+
+
+
 <script>
-    const searchInput = document.getElementById("searchInput");
-    const brandCards = document.querySelectorAll(".brand-card");
 
-    searchInput.addEventListener("keyup", function () {
-        const filter = searchInput.value.toLowerCase();
 
-        brandCards.forEach(card => {
-            const brandName = card.querySelector("h3").textContent.toLowerCase();
+const searchInput =
+document.getElementById("searchInput");
 
-            card.style.display = brandName.includes(filter) ? "" : "none";
-        });
-    });
+
+const cards =
+document.querySelectorAll(".brand-card");
+
+
+
+searchInput.addEventListener(
+"keyup",
+function(){
+
+
+let filter =
+searchInput.value.toLowerCase();
+
+
+
+cards.forEach(card=>{
+
+
+let brand =
+card.querySelector("h3")
+.textContent
+.toLowerCase();
+
+
+
+card.style.display =
+brand.includes(filter)
+? ""
+: "none";
+
+});
+
+
+});
+
+
 </script>
 
+<footer>© 2026 Warranty Section</footer>
+
 </body>
+
 </html>

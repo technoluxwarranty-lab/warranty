@@ -8,30 +8,34 @@
 	  
 /* Header styling */
 header {
-  background: #1f2937;
-  color: #fff;
-  padding: 16px 24px;
+    background: #1f2937;
+    color: #fff;
 
-  display: flex;
-  align-items: center;         /* vertically center logo and title */
-  justify-content: space-between; /* title left, logo right */
+    padding: 10px 24px;
+    height: 45px;
 
- position: sticky;   /* makes header stick to top */
-  top: 0;             /* position at top */
-  z-index: 1000;      /* ensures it stays above other content */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-sizing: border-box;
 }
 
-/* Title styling */
 .header-title {
-  font-size: 20px;
-  font-weight: 600;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
 }
 
-/* Logo styling */
+
 .header-logo {
-  height: 30px;      /* desktop logo height */
-  width: auto;       /* maintain aspect ratio */
-  object-fit: contain;
+    height: 28px;
+    width: auto;
+    object-fit: contain;
 }
 
 /* Responsive adjustments for smaller screens */
@@ -56,6 +60,8 @@ header {
   margin: 0;
   padding: 0;
 }
+
+
     header {
       background: #1f2937;
       color: #fff;
@@ -63,6 +69,15 @@ header {
       font-size: 20px;
       font-weight: 600;
     }
+
+h2{
+
+color:#1f2937;
+ text-align:center;
+ margin-bottom:25px;
+
+}
+
     .container {
       padding: 24px;
       max-width: 1200px;
@@ -156,10 +171,14 @@ function clearSearch() {
 
 <header>WARRANTY MANAGEMENT SYSTEM<img src="company-logo.png" alt="Company Logo" class="header-logo"</H3>
 </header>
-<div class="toolbar-subtitle1">
-  Select a brand or search for the required warranty checklist:
-</div>
+<h2>
+WARRANTY REQUIREMENTS
+</h2>
 <div class="container">
+<div class="toolbar-subtitle1">
+  Select a brand or search for the required part warranty replacement:
+</div>
+
   <div class="toolbar">
     <select id="brandFilter" onchange="filterBrand()">
       <option value="all">TOP 15 BRANDS</option>
@@ -180,12 +199,12 @@ function clearSearch() {
       <option value="Vitamix">VITAMIX</option>
       <option value="Otherbrands">OTHER BRANDS</option>
     </select>
-    <input type="search" id="searchPart" placeholder="Search part name..." onkeyup="searchPart()"/>
+    <input type="search" id="searchPart" placeholder="🔍 Search part name..." onkeyup="searchPart()"/>
 	<!-- Clear Button -->
     <button type="button" onclick="clearSearch()">Clear</button>
   </div>	
 <div class="toolbar-subtitle2">TOP 5 MOST COMMON PARTS REPLACEMENT PER BRAND</div>
-<div class="toolbar-subtitle1"><B>REMINDER:</B> Review and ensure to follow the instructions provided in the listed checklist or testing procedure before submitting the claim. And double-check all documents to avoid delays or disapproval of the warranty.</div>
+<div class="toolbar-subtitle1"><B>REMINDER:</B> Review and ensure to follow the instructions provided in the listed checklist or testing procedure before submitting the claim. And kindly double-check all documents to avoid delays or disapproval of the warranty claim.</div>
 
 <!-- Amana -->
   <div class="brand" data-brand="Amana">
@@ -935,7 +954,7 @@ function clearSearch() {
         <li>Photo of defective part</li>
         <li>Photo/Video of low and high side gauge during freezing and harvesting cycle</li>
         <li>Photo/Video of ice build in the evaporator</li>
-	<li>Photo/Video of air temperature reading</li>
+	<li>Photo/Video of temperature reading</li>
 
    	</ul>
 	</div>

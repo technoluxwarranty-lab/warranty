@@ -733,6 +733,31 @@ if(!user){
 
 }
 
+setInterval(() => {
+
+    const user = localStorage.getItem("warrantyUser");
+
+    if(!user) return;
+
+    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.status === "Approved") {
+
+            console.log("Access approved");
+
+        } else {
+
+            localStorage.removeItem("warrantyUser");
+            window.location = "index.html";
+
+        }
+
+    });
+
+}, 5000);
+
 
 </script>
 

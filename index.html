@@ -225,10 +225,12 @@ Request Access
 
 </div>
 
-    <script>
+<script>
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
+
+let approvalInterval;
 
 
 // ----------------------
@@ -270,13 +272,12 @@ function submitRequest() {
 
         alert("Request submitted. Waiting for admin approval...");
 
-        // Save email locally for auto-checking status
+        // Save email for auto-check
         localStorage.setItem("userEmail", email);
 
         document.getElementById("accessModal").style.display = "none";
         document.getElementById("gmail").value = "";
 
-        // Start auto-checking approval status
         startApprovalCheck();
 
     })
@@ -291,7 +292,7 @@ function submitRequest() {
 
 
 // ----------------------
-// CHECK APPROVAL STATUS
+// CHECK STATUS
 // ----------------------
 function checkApprovalStatus(email) {
 
@@ -301,19 +302,37 @@ function checkApprovalStatus(email) {
 
         console.log("STATUS RESPONSE:", data);
 
-        if (data.status === "Approved") {
+        const statusBox = document.getElementById("statusBox");
 
-            document.getElementById("statusBox").innerHTML =
-                "✅ APPROVED - Access Granted";
+        if (!statusBox) return;
 
-            document.getElementById("statusBox").style.color = "green";
+        if (data.status === "approved") {
 
-        } else {
+            // SAVE LOGIN SESSION
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("userEmail", email);
 
-            document.getElementById("statusBox").innerHTML =
-                "⏳ Pending Admin Approval...";
+            statusBox.innerHTML = "✅ Approved - Logging you in...";
+            statusBox.style.color = "green";
 
-            document.getElementById("statusBox").style.color = "orange";
+            stopApprovalCheck();
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html"; 
+                // change if needed
+            }, 1200);
+
+        } 
+        else if (data.status === "pending") {
+
+            statusBox.innerHTML = "⏳ Pending Admin Approval...";
+            statusBox.style.color = "orange";
+
+        } 
+        else {
+
+            statusBox.innerHTML = "⚠️ No request found";
+            statusBox.style.color = "red";
         }
 
     })
@@ -325,30 +344,44 @@ function checkApprovalStatus(email) {
 
 
 // ----------------------
-// AUTO POLLING (REAL-TIME)
+// START AUTO CHECK
 // ----------------------
 function startApprovalCheck() {
 
     const email = localStorage.getItem("userEmail");
-
     if (!email) return;
 
-    // check immediately
     checkApprovalStatus(email);
 
-    // then repeat every 3 seconds
-    setInterval(() => {
+    approvalInterval = setInterval(() => {
         checkApprovalStatus(email);
     }, 3000);
 }
 
 
 // ----------------------
-// AUTO RUN ON PAGE LOAD
+// STOP AUTO CHECK
+// ----------------------
+function stopApprovalCheck() {
+    clearInterval(approvalInterval);
+}
+
+
+// ----------------------
+// AUTO LOGIN ON PAGE LOAD
 // ----------------------
 window.onload = function () {
+
+    const loggedIn = localStorage.getItem("loggedIn");
     const email = localStorage.getItem("userEmail");
 
+    // If already approved before → go straight to dashboard
+    if (loggedIn === "true") {
+        window.location.href = "index.html";
+        return;
+    }
+
+    // If waiting approval → continue checking
     if (email) {
         startApprovalCheck();
     }
@@ -356,7 +389,7 @@ window.onload = function () {
 
 
 // ----------------------
-// CLOSE MODAL WHEN CLICK OUTSIDE
+// CLOSE MODAL
 // ----------------------
 window.onclick = function(event) {
     let modal = document.getElementById("accessModal");

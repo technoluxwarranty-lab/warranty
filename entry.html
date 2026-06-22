@@ -629,135 +629,88 @@ ALL ACCOUNTS - 1 year
 
 </main>
 
-
-
-
-
 <script>
-
-
-const searchInput =
-document.getElementById("searchInput");
-
-
-const cards =
-document.querySelectorAll(".brand-card");
-
-
-
-searchInput.addEventListener(
-"keyup",
-function(){
-
-
-let filter =
-searchInput.value.toLowerCase();
-
-
-
-cards.forEach(card=>{
-
-
-let brand =
-card.querySelector("h3")
-.textContent
-.toLowerCase();
-
-
-
-card.style.display =
-brand.includes(filter)
-? ""
-: "none";
-
-});
-
-
-});
-
-const user =
-localStorage.getItem("warrantyUser");
-
-
-if(!user){
-
-alert(
-"Access denied. Please request permission first."
-);
-
-window.location="index.html";
-
-}
-else{
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
 
+// SEARCH FILTER
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".brand-card");
+
+searchInput.addEventListener("keyup", function () {
+
+    let filter = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+
+        let brand = card.querySelector("h3").textContent.toLowerCase();
+
+        card.style.display = brand.includes(filter) ? "" : "none";
+
+    });
+
+});
+
+
+// GET USER
 const user = localStorage.getItem("warrantyUser");
 
+if (!user) {
 
-if(!user){
-
-    alert("Access denied. Please request access first.");
+    alert("Access denied. Please request permission first.");
     window.location = "index.html";
 
 } else {
 
+    // CHECK APPROVAL STATUS
     fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
+        .then(res => res.json())
+        .then(data => {
 
-    .then(res => res.json())
-    .then(data => {
+            console.log("STATUS:", data);
 
-        console.log("STATUS:", data);
+            if (data.status !== "Approved") {
 
-        if(data.status !== "Approved") {
+                alert("Your access is still: " + data.status);
+                window.location = "index.html";
 
-            alert("Your access is still: " + data.status);
+            }
 
-            window.location = "index.html";
+        })
+        .catch(err => {
 
-        }
+            console.log(err);
+            alert("Unable to verify access.");
 
-    })
-    .catch(err => {
-
-        console.log(err);
-
-        alert("Unable to verify access.");
-
-    });
+        });
 
 }
 
 
-}
-
+// AUTO CHECK EVERY 5 SECONDS
 setInterval(() => {
 
     const user = localStorage.getItem("warrantyUser");
 
-    if(!user) return;
+    if (!user) return;
 
     fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
-    .then(res => res.json())
-    .then(data => {
+        .then(res => res.json())
+        .then(data => {
 
-        if(data.status === "Approved") {
+            if (data.status !== "Approved") {
 
-            console.log("Access approved");
+                localStorage.removeItem("warrantyUser");
+                window.location = "index.html";
 
-        } else {
+            }
 
-            localStorage.removeItem("warrantyUser");
-            window.location = "index.html";
-
-        }
-
-    });
+        })
+        .catch(err => console.log(err));
 
 }, 5000);
-
 
 </script>
 

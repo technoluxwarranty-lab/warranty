@@ -225,50 +225,137 @@ Request Access
 
 </div>
 
-<script>
+    <script>
 
-    const WEB_APP_URL =
+const WEB_APP_URL = 
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
 
-fetch(WEB_APP_URL, {
 
-method:"POST",
+function requestAccess() {
 
-body:new URLSearchParams({
+    document.getElementById("accessModal").style.display = "flex";
 
-email: email
-
-})
-
-})
-.then(()=>{
+}
 
 
-alert(
-"Access request submitted. Please wait for Admin approval."
-);
+
+function submitRequest() {
 
 
-document.getElementById("accessModal").style.display="none";
+    let email = document.getElementById("gmail").value.trim();
 
 
-})
-.catch(error=>{
 
-console.log(error);
+    if(email === "") {
 
-alert("Failed to send request");
+        alert("Please enter Gmail account.");
 
-});
+        return;
+
+    }
 
 
-window.onclick=function(event){
 
-    let modal=document.getElementById("accessModal");
+    if(!email.endsWith("@gmail.com")) {
 
-    if(event.target===modal){
+        alert("Only Gmail account is allowed.");
+
+        return;
+
+    }
+
+
+
+    fetch(WEB_APP_URL, {
+
+
+        method: "POST",
+
+
+        body: new URLSearchParams({
+
+            email: email
+
+        })
+
+
+    })
+
+
+
+    .then(response => response.text())
+
+
+    .then(result => {
+
+
+        console.log("Server Response:", result);
+
+
+
+        if(result.includes("SUCCESS")) {
+
+
+            alert(
+            "Access request submitted. Please wait for Admin approval."
+            );
+
+
+            document.getElementById("accessModal")
+            .style.display="none";
+
+
+            document.getElementById("gmail").value="";
+
+
+
+        } else {
+
+
+            alert(
+            "Request failed: " + result
+            );
+
+
+        }
+
+
+    })
+
+
+
+    .catch(error => {
+
+
+        console.error(error);
+
+
+        alert(
+        "Failed to send request. Please try again."
+        );
+
+
+    });
+
+
+
+}
+
+
+
+
+window.onclick = function(event) {
+
+
+    let modal =
+    document.getElementById("accessModal");
+
+
+    if(event.target === modal) {
+
         modal.style.display="none";
+
     }
 
 };

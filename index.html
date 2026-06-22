@@ -238,9 +238,9 @@ function requestAccess() {
 
 function submitRequest() {
 
-    let email = document.getElementById("gmail").value.trim();
+    const email = document.getElementById("gmail").value.trim();
 
-    if (email === "") {
+    if (!email) {
         alert("Please enter Gmail account.");
         return;
     }
@@ -250,21 +250,18 @@ function submitRequest() {
         return;
     }
 
-
     fetch(WEB_APP_URL, {
         method: "POST",
         body: new URLSearchParams({
             email: email
         })
     })
-
     .then(res => res.text())
     .then(text => {
 
-        console.log("Server response:", text);
+        console.log("RAW RESPONSE:", text);
 
-        // Apps Script usually returns "SUCCESS"
-        if (text.includes("SUCCESS")) {
+        if (text && text.toUpperCase().includes("SUCCESS")) {
 
             alert("Access request submitted. Please wait for Admin approval.");
 
@@ -273,32 +270,27 @@ function submitRequest() {
 
         } else {
 
-            alert("Request sent but response unclear: " + text);
+            alert("Request sent but not confirmed. Response: " + text);
 
         }
 
     })
-
     .catch(err => {
 
-        console.error(err);
+        console.error("ERROR:", err);
 
-        alert("Failed to send request. Please try again.");
+        alert("Failed to send request. Check Apps Script deployment.");
 
     });
 
 }
 
 
-// close modal when clicking outside
 window.onclick = function(event) {
-
     let modal = document.getElementById("accessModal");
-
     if (event.target === modal) {
         modal.style.display = "none";
     }
-
 };
 
 </script>

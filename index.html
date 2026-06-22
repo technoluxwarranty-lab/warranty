@@ -251,25 +251,24 @@ function submitRequest() {
     request: "Warranty Coverage Access"
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbyPmBQk1d5qKShyQp6Ew1UEyG5tTjIZeh6KRTOGPoYASZWXoBMKODkDQY7LxcVxXJeo/exec", {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      "Content-Type": "application/json"
-    }
+fetch("https://script.google.com/macros/s/AKfycbyPmBQk1d5qKShyQp6Ew1UEyG5tTjIZeh6KRTOGPoYASZWXoBMKODkDQY7LxcVxXJeo/exec", {
+  method: "POST",
+  body: new URLSearchParams({
+    email: email,
+    request: "Warranty Coverage Access"
   })
-  .then(response => response.text())
-  .then(data => {
-    console.log(data);
-
-    alert("Access request submitted. Please wait for Admin approval.");
-
-    document.getElementById("accessModal").style.display = "none";
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    alert("Failed to send request");
-  });
+})
+.then(res => res.text())
+.then(data => {
+  console.log(data);
+  alert("Access request submitted. Please wait for Admin approval.");
+  document.getElementById("accessModal").style.display = "none";
+})
+.catch(err => {
+  console.error(err);
+  alert("Failed to send request");
+});
+    
 }
 
 window.onclick = function(event) {

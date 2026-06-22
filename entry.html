@@ -667,6 +667,12 @@ if (!user) {
     checkAccess(user);
 
 }
+function normalizeStatus(text) {
+    return (text || "")
+        .toString()
+        .trim()
+        .toLowerCase();
+}
 
 
 // SAFE ACCESS CHECK FUNCTION
@@ -682,14 +688,16 @@ function checkAccess(email) {
 
             try {
                 let json = JSON.parse(text);
-                status = json.status;
+                status = json.status || text;
             } catch (e) {
                 status = text;
             }
 
-            console.log("STATUS:", status);
+            status = normalizeStatus(status);
 
-            if (status !== "Approved") {
+            console.log("NORMALIZED STATUS:", status);
+
+            if (status !== "approved") {
 
                 alert("Access status: " + status);
                 window.location = "index.html";
@@ -708,7 +716,7 @@ function checkAccess(email) {
 }
 
 
-// AUTO CHECK EVERY 5 SECONDS
+// AUTO CHECK
 setInterval(() => {
 
     const user = localStorage.getItem("warrantyUser");
@@ -723,12 +731,14 @@ setInterval(() => {
 
             try {
                 let json = JSON.parse(text);
-                status = json.status;
+                status = json.status || text;
             } catch (e) {
                 status = text;
             }
 
-            if (status !== "Approved") {
+            status = normalizeStatus(status);
+
+            if (status !== "approved") {
 
                 localStorage.removeItem("warrantyUser");
                 window.location = "index.html";
@@ -739,7 +749,7 @@ setInterval(() => {
         .catch(err => console.log(err));
 
 }, 5000);
-
+   
 </script>
 
 <footer>© 2026 Warranty Section</footer>

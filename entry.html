@@ -675,6 +675,51 @@ brand.includes(filter)
 
 });
 
+const user =
+localStorage.getItem("warrantyUser");
+
+
+if(!user){
+
+alert(
+"Access denied. Please request permission first."
+);
+
+window.location="index.html";
+
+}
+else{
+
+
+fetch(
+"https://script.google.com/macros/s/AKfycbxl_JCrde5EUwKyrL24-doHBV01w6o9v08SSEhD2YgB9WcpVY6HbheWRvCHECLAGJdw/exec"
++user
+)
+
+.then(res=>res.text())
+
+.then(result=>{
+
+
+if(result!="APPROVED"){
+
+
+alert(
+"Your access is still pending approval."
+);
+
+
+window.location="index.html";
+
+
+}
+
+
+});
+
+
+}
+
 
 </script>
 

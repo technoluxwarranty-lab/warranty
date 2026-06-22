@@ -690,32 +690,45 @@ window.location="index.html";
 }
 else{
 
-
-fetch(
-"https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec?email="
-+user
-)
-
-.then(res=>res.text())
-
-.then(result=>{
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
 
-if(result!="APPROVED"){
+const user = localStorage.getItem("warrantyUser");
 
 
-alert(
-"Your access is still pending approval."
-);
+if(!user){
 
+    alert("Access denied. Please request access first.");
+    window.location = "index.html";
 
-window.location="index.html";
+} else {
 
+    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
+
+    .then(res => res.json())
+    .then(data => {
+
+        console.log("STATUS:", data);
+
+        if(data.status !== "Approved") {
+
+            alert("Your access is still: " + data.status);
+
+            window.location = "index.html";
+
+        }
+
+    })
+    .catch(err => {
+
+        console.log(err);
+
+        alert("Unable to verify access.");
+
+    });
 
 }
-
-
-});
 
 
 }

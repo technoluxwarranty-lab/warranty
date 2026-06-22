@@ -230,7 +230,7 @@ Request Access
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
-let approvalInterval;
+let interval;
 
 
 // ----------------------
@@ -248,15 +248,8 @@ function submitRequest() {
 
     const email = document.getElementById("gmail").value.trim();
 
-    if (!email) {
-        alert("Please enter Gmail account.");
-        return;
-    }
-
-    if (!email.endsWith("@gmail.com")) {
-        alert("Only Gmail account is allowed.");
-        return;
-    }
+    if (!email) return alert("Enter Gmail");
+    if (!email.endsWith("@gmail.com")) return alert("Only Gmail allowed");
 
     fetch(WEB_APP_URL, {
         method: "POST",
@@ -264,106 +257,65 @@ function submitRequest() {
             email: email,
             action: "request"
         })
-    })
-    .then(res => res.text())
-    .then(text => {
-
-        console.log("RAW RESPONSE:", text);
-
-        alert("Request submitted. Waiting for admin approval...");
-
-        // Save email for auto-check
-        localStorage.setItem("userEmail", email);
-
-        document.getElementById("accessModal").style.display = "none";
-        document.getElementById("gmail").value = "";
-
-        startApprovalCheck();
-
-    })
-    .catch(err => {
-
-        console.error("ERROR:", err);
-        alert("Failed to send request. Check Apps Script deployment.");
-
     });
 
+    localStorage.setItem("userEmail", email);
+
+    document.getElementById("accessModal").style.display = "none";
+
+    startChecking();
 }
 
 
 // ----------------------
 // CHECK STATUS
 // ----------------------
-function checkApprovalStatus(email) {
+function checkStatus(email) {
 
     fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email))
     .then(res => res.json())
     .then(data => {
 
-        console.log("STATUS RESPONSE:", data);
-
-        const statusBox = document.getElementById("statusBox");
-
-        if (!statusBox) return;
+        const box = document.getElementById("statusBox");
 
         if (data.status === "approved") {
 
             // SAVE LOGIN SESSION
             localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("userEmail", email);
 
-            statusBox.innerHTML = "✅ Approved - Logging you in...";
-            statusBox.style.color = "green";
+            box.innerHTML = "✅ Approved! Logging in...";
+            box.style.color = "green";
 
-            stopApprovalCheck();
+            clearInterval(interval);
 
             setTimeout(() => {
-                window.location.href = "dashboard.html"; 
-                // change if needed
-            }, 1200);
+                window.location.href = "index.html";
+            }, 1000);
 
-        } 
-        else if (data.status === "pending") {
+        } else {
 
-            statusBox.innerHTML = "⏳ Pending Admin Approval...";
-            statusBox.style.color = "orange";
-
-        } 
-        else {
-
-            statusBox.innerHTML = "⚠️ No request found";
-            statusBox.style.color = "red";
+            box.innerHTML = "⏳ Waiting for approval...";
+            box.style.color = "orange";
         }
 
     })
-    .catch(err => {
-        console.error("STATUS CHECK ERROR:", err);
-    });
-
+    .catch(err => console.log(err));
 }
 
 
 // ----------------------
 // START AUTO CHECK
 // ----------------------
-function startApprovalCheck() {
+function startChecking() {
 
     const email = localStorage.getItem("userEmail");
     if (!email) return;
 
-    checkApprovalStatus(email);
+    checkStatus(email);
 
-    approvalInterval = setInterval(() => {
-        checkApprovalStatus(email);
+    interval = setInterval(() => {
+        checkStatus(email);
     }, 3000);
-}
-
-
-// ----------------------
-// STOP AUTO CHECK
-// ----------------------
-function stopApprovalCheck() {
-    clearInterval(approvalInterval);
 }
 
 
@@ -372,29 +324,13 @@ function stopApprovalCheck() {
 // ----------------------
 window.onload = function () {
 
-    const loggedIn = localStorage.getItem("loggedIn");
-    const email = localStorage.getItem("userEmail");
-
-    // If already approved before → go straight to dashboard
-    if (loggedIn === "true") {
+    if (localStorage.getItem("loggedIn") === "true") {
         window.location.href = "index.html";
         return;
     }
 
-    // If waiting approval → continue checking
-    if (email) {
-        startApprovalCheck();
-    }
-};
-
-
-// ----------------------
-// CLOSE MODAL
-// ----------------------
-window.onclick = function(event) {
-    let modal = document.getElementById("accessModal");
-    if (event.target === modal) {
-        modal.style.display = "none";
+    if (localStorage.getItem("userEmail")) {
+        startChecking();
     }
 };
 

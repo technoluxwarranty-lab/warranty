@@ -225,17 +225,23 @@ Request Access
 
 </div>
 
-<script>
+    <script>
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
 
+// ----------------------
+// OPEN MODAL
+// ----------------------
 function requestAccess() {
     document.getElementById("accessModal").style.display = "flex";
 }
 
 
+// ----------------------
+// SUBMIT REQUEST
+// ----------------------
 function submitRequest() {
 
     const email = document.getElementById("gmail").value.trim();
@@ -253,7 +259,8 @@ function submitRequest() {
     fetch(WEB_APP_URL, {
         method: "POST",
         body: new URLSearchParams({
-            email: email
+            email: email,
+            action: "request"
         })
     })
     .then(res => res.text())
@@ -261,24 +268,21 @@ function submitRequest() {
 
         console.log("RAW RESPONSE:", text);
 
-        if (text && text.toUpperCase().includes("SUCCESS")) {
+        alert("Request submitted. Waiting for admin approval...");
 
-            alert("Access request submitted. Please wait for Admin approval.");
+        // Save email locally for auto-checking status
+        localStorage.setItem("userEmail", email);
 
-            document.getElementById("accessModal").style.display = "none";
-            document.getElementById("gmail").value = "";
+        document.getElementById("accessModal").style.display = "none";
+        document.getElementById("gmail").value = "";
 
-        } else {
-
-            alert("Request sent but not confirmed. Response: " + text);
-
-        }
+        // Start auto-checking approval status
+        startApprovalCheck();
 
     })
     .catch(err => {
 
         console.error("ERROR:", err);
-
         alert("Failed to send request. Check Apps Script deployment.");
 
     });
@@ -286,6 +290,74 @@ function submitRequest() {
 }
 
 
+// ----------------------
+// CHECK APPROVAL STATUS
+// ----------------------
+function checkApprovalStatus(email) {
+
+    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email))
+    .then(res => res.json())
+    .then(data => {
+
+        console.log("STATUS RESPONSE:", data);
+
+        if (data.status === "Approved") {
+
+            document.getElementById("statusBox").innerHTML =
+                "✅ APPROVED - Access Granted";
+
+            document.getElementById("statusBox").style.color = "green";
+
+        } else {
+
+            document.getElementById("statusBox").innerHTML =
+                "⏳ Pending Admin Approval...";
+
+            document.getElementById("statusBox").style.color = "orange";
+        }
+
+    })
+    .catch(err => {
+        console.error("STATUS CHECK ERROR:", err);
+    });
+
+}
+
+
+// ----------------------
+// AUTO POLLING (REAL-TIME)
+// ----------------------
+function startApprovalCheck() {
+
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) return;
+
+    // check immediately
+    checkApprovalStatus(email);
+
+    // then repeat every 3 seconds
+    setInterval(() => {
+        checkApprovalStatus(email);
+    }, 3000);
+}
+
+
+// ----------------------
+// AUTO RUN ON PAGE LOAD
+// ----------------------
+window.onload = function () {
+    const email = localStorage.getItem("userEmail");
+
+    if (email) {
+        startApprovalCheck();
+    }
+};
+
+
+// ----------------------
+// CLOSE MODAL WHEN CLICK OUTSIDE
+// ----------------------
 window.onclick = function(event) {
     let modal = document.getElementById("accessModal");
     if (event.target === modal) {

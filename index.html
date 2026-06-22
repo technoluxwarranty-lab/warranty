@@ -225,105 +225,135 @@ Request Access
 
 </div>
 
-
 <script>
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwl58L8njaTvv5Ocn972dptcx6s2N31V1weXj9elVCHFL7R2S7NL2oUWuhV4YS3Woxi/exec";
 
 
 function requestAccess() {
-  document.getElementById("accessModal").style.display = "flex";
+    document.getElementById("accessModal").style.display = "flex";
 }
+
 
 
 function submitRequest() {
 
-  let email = document.getElementById("gmail").value.trim();
+    let email = document.getElementById("gmail").value.trim();
 
 
-  if (email === "") {
-    alert("Please enter Gmail account.");
-    return;
-  }
-
-
-  if (!email.endsWith("@gmail.com")) {
-    alert("Only Gmail account is allowed.");
-    return;
-  }
-
-
-  let payload = {
-    email: email,
-    request: "Warranty Coverage Access"
-  };
-
-
-  fetch(WEB_APP_URL, {
-
-    method: "POST",
-
-    headers: {
-      "Content-Type": "application/json"
-    },
-
-    body: JSON.stringify(payload)
-
-  })
-
-  .then(response => response.json())
-
-  .then(result => {
-
-    console.log(result);
-
-
-    if(result.status === "success") {
-
-      alert(
-        "Access request submitted. Please wait for Admin approval."
-      );
-
-      document.getElementById("accessModal").style.display = "none";
-      document.getElementById("gmail").value = "";
-
-    } else {
-
-      alert(
-        "Request failed: " + result.message
-      );
-
+    if(email === ""){
+        alert("Please enter Gmail account.");
+        return;
     }
 
-  })
+
+    if(!email.endsWith("@gmail.com")){
+        alert("Only Gmail account is allowed.");
+        return;
+    }
 
 
-  .catch(error => {
 
-    console.error(error);
+    fetch(WEB_APP_URL, {
 
-    alert(
-      "Failed to send request. Please try again."
-    );
+        method:"POST",
 
-  });
+        headers:{
+            "Content-Type":"text/plain;charset=utf-8"
+        },
+
+
+        body: JSON.stringify({
+            email: email
+        })
+
+    })
+
+
+    .then(response => response.text())
+
+
+    .then(result => {
+
+
+        console.log("SERVER:", result);
+
+
+        let data;
+
+
+        try {
+
+            data = JSON.parse(result);
+
+        } catch(e){
+
+            alert("Server response error");
+            return;
+
+        }
+
+
+
+        if(data.status === "success"){
+
+
+            alert(
+             "Access request submitted. Please wait for Admin approval."
+            );
+
+
+            document.getElementById("accessModal").style.display="none";
+
+            document.getElementById("gmail").value="";
+
+
+        } else {
+
+
+            alert(
+             "Failed: " + data.message
+            );
+
+        }
+
+
+    })
+
+
+    .catch(error=>{
+
+
+        console.error(error);
+
+
+        alert(
+        "Failed to send request. Please try again."
+        );
+
+
+    });
+
 
 }
 
 
 
-window.onclick = function(event) {
+window.onclick=function(event){
 
-  let modal = document.getElementById("accessModal");
+    let modal =
+    document.getElementById("accessModal");
 
-  if (event.target === modal) {
 
-    modal.style.display = "none";
+    if(event.target === modal){
 
-  }
+        modal.style.display="none";
+
+    }
 
 };
-    
+
+
 </script>
 
 

@@ -226,59 +226,104 @@ Request Access
 </div>
 
 
-
 <script>
+
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwl58L8njaTvv5Ocn972dptcx6s2N31V1weXj9elVCHFL7R2S7NL2oUWuhV4YS3Woxi/exec";
+
 
 function requestAccess() {
   document.getElementById("accessModal").style.display = "flex";
 }
 
+
 function submitRequest() {
+
   let email = document.getElementById("gmail").value.trim();
+
 
   if (email === "") {
     alert("Please enter Gmail account.");
     return;
   }
 
+
   if (!email.endsWith("@gmail.com")) {
     alert("Only Gmail account is allowed.");
     return;
   }
 
-  const payload = {
+
+  let payload = {
     email: email,
     request: "Warranty Coverage Access"
   };
 
-fetch("https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec", {
-  method: "POST",
-  body: new URLSearchParams({
-    email: email,
-    request: "Warranty Coverage Access"
+
+  fetch(WEB_APP_URL, {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify(payload)
+
   })
-})
-.then(res => res.text())
-.then(data => {
-  console.log(data);
-  alert("Access request submitted. Please wait for Admin approval.");
-  document.getElementById("accessModal").style.display = "none";
-})
-.catch(err => {
-  console.error(err);
-  alert("Failed to send request");
-});
-    
+
+  .then(response => response.json())
+
+  .then(result => {
+
+    console.log(result);
+
+
+    if(result.status === "success") {
+
+      alert(
+        "Access request submitted. Please wait for Admin approval."
+      );
+
+      document.getElementById("accessModal").style.display = "none";
+      document.getElementById("gmail").value = "";
+
+    } else {
+
+      alert(
+        "Request failed: " + result.message
+      );
+
+    }
+
+  })
+
+
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "Failed to send request. Please try again."
+    );
+
+  });
+
 }
 
+
+
 window.onclick = function(event) {
+
   let modal = document.getElementById("accessModal");
 
   if (event.target === modal) {
-    modal.style.display = "none";
-  }
-};
 
+    modal.style.display = "none";
+
+  }
+
+};
+    
 </script>
 
 

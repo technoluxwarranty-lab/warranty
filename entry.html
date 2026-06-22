@@ -9,28 +9,20 @@
 
 <style>
 
-/* ==========================
-   HEADER
-========================== */
-
+/* HEADER */
 header {
     background: #1f2937;
     color: #fff;
-
     padding: 10px 24px;
     height: 45px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     position: sticky;
     top: 0;
     z-index: 1000;
-
     box-sizing: border-box;
 }
-
 
 .header-title {
     font-size: 18px;
@@ -38,722 +30,212 @@ header {
     margin: 0;
 }
 
-
 .header-logo {
     height: 28px;
-    width: auto;
-    object-fit: contain;
 }
 
-
-
-@media(max-width:600px){
-
-header{
-    height:40px;
-    padding:8px 14px;
-}
-
-.header-title{
-    font-size:15px;
-}
-
-.header-logo{
-    height:24px;
-}
-
-}
-
-
-
-/* ==========================
-   BODY
-========================== */
-
-
+/* BODY */
 body {
-
-font-family:
-"Segoe UI",
-Tahoma,
-Geneva,
-Verdana,
-sans-serif;
-
-background:
-linear-gradient(
-rgba(255,255,255,0.90),
-rgba(255,255,255,0.90)
-),
-url("background.jpg");
-
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-
-margin:0;
-padding:0;
-
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(255,255,255,0.90),rgba(255,255,255,0.90)),
+    url("background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
 }
 
-
-
-/* ==========================
-   CONTENT
-========================== */
-
-
-main{
-
-padding:25px;
-max-width:1200px;
-margin:auto;
-
+/* CONTENT */
+main {
+    padding: 25px;
+    max-width: 1200px;
+    margin: auto;
 }
 
-
-h2{
-
-color:#1f2937;
- text-align:center;
- margin-bottom:25px;
-
+h2 {
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 25px;
 }
-
-
 
 .controls {
-    width:100%;
-    max-width:700px;
-    margin:0 auto 20px auto;
+    max-width: 700px;
+    margin: 0 auto 20px;
 }
-
 
 #searchInput {
-
-    width:100%;
-    box-sizing:border-box;
-
-    padding:12px 14px;
-
-    border-radius:8px;
-
-    border:1px solid #ccc;
-
-    font-size:14px;
-
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
-
-/* ==========================
-   BRAND CARD
-========================== */
-
-
-.brands{
-
-display:flex;
-    flex-direction:column;
-
-    gap:20px;
-
-    width:100%;
-    max-width:700px;
-
-    margin:0 auto;
+/* CARDS */
+.brands {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 700px;
+    margin: auto;
 }
 
-
-
-.brand-card{
-
-
-    background:#fff;
-
-    border-radius:12px;
-
-    padding:20px;
-
-    box-shadow:
-    0 6px 16px rgba(0,0,0,0.08);
-
-    text-align:left;
-
-    transition:.2s;
+.brand-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-
-
-.brand-card:hover{
-
-transform:translateY(-4px);
-
+.brand-card h3 {
+    margin: 0;
 }
 
-
-
-.brand-card h3{
-
-margin-top:0;
-
-color:#1f2937;
-
+.badge {
+    display: inline-block;
+    background: #e5eefc;
+    color: #1e40af;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 6px;
 }
 
-
-
-.brand-card h4{
-
-margin-bottom:12px;
-
-color:#6b7280;
-
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #6b7280;
 }
-
-
-
-.badge{
-
-display:inline-block;
-
-background:#e5eefc;
-
-color:#1e40af;
-
-padding:6px 10px;
-
-border-radius:20px;
-
-font-size:13px;
-
-margin-bottom:8px;
-
-}
-
-
-
-footer{
-
-text-align:center;
-
-padding:20px;
-
-color:#6b7280;
-
-font-size:13px;
-
-}
-
 
 </style>
 
 </head>
 
-
 <body>
 
-
-
 <header>
-
-<h3 class="header-title">
-WARRANTY MANAGEMENT SYSTEM
-</h3>
-
-
-<img 
-src="company-logo.png"
-alt="Company Logo"
-class="header-logo">
-
+    <h3 class="header-title">WARRANTY MANAGEMENT SYSTEM</h3>
+    <img src="company-logo.png" class="header-logo">
 </header>
 
 <main>
 
-<h2>
-WARRANTY COVERAGE</h2>
+<h2>WARRANTY COVERAGE</h2>
 
 <div class="controls">
-
-<input 
-type="text"
-id="searchInput"
-placeholder="🔍 Search brand name...">
-
+    <input type="text" id="searchInput" placeholder="🔍 Search brand name...">
 </div>
+
 <div class="brands" id="brandContainer">
 
-<div class="brand-card">
-<h3>AMANA/MENUMASTER</h3>
-<h4>STANDARD PART WARRANTY</h4>
-<span class="badge">
-ALL ACCOUNTS - 1 year
-</span>
-</div>
+    <!-- SAMPLE CARD -->
+    <div class="brand-card">
+        <h3>AMANA/MENUMASTER</h3>
+        <span class="badge">ALL ACCOUNTS - 1 year</span>
+    </div>
 
+    <div class="brand-card">
+        <h3>ANTUNES</h3>
+        <span class="badge">BURGER KING & MCDO - 2 years</span><br>
+        <span class="badge">JOLLIBEE & GENERAL MARKET - 1 year</span>
+    </div>
 
-
-
-<div class="brand-card">
-
-<h3>ANTUNES</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-<span class="badge">
-BURGER KING & MCDO - 2 years
-</span>
-<br>
-</span>
-<span class="badge">
-JOLLIBEE & GENERAL MARKET - 1 year
-</span>
+    <div class="brand-card">
+        <h3>CARPIGIANI</h3>
+        <span class="badge">MCDO, BK, KFC - 1 year</span><br>
+        <span class="badge">JOLLIBEE - 3 years</span>
+    </div>
 
 </div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>BUNN-O-MATIC</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-<span class="badge">
-ALL ACCOUNTS - 2 years
-</span>
-<br>
-<h4>EXTENDED PART WARRANTY</h4>
-<h5>ALL ACCOUNTS</h5>
-<span class="badge">
-BOARD - 3 years</span>
-</div>
-
-
-
-<div class="brand-card">
-
-<h3>CARPIGIANI</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-MCDO, BURGER KING, KFC, AND GENERAL MARKETS - 1 year
-</span>
-<br>
-<span class="badge">
-JOLLIBEE - 3 years
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-<h5>MCDO AND KFC</h5>
-<span class="badge">
-BEATER MOTOR - 2 years</span>
-<br>
-<span class="badge">
-COMPRESSOR - 3 years</span>
-<br>
-<span class="badge">
-HOPPER ASSY - 5 years</span>
-<h5>JOLLIBEE</h5>
-<span class="badge">
-COMPRESSOR AND SHELL INSULATED - 5 years
-</span>
-
-</div>
-
-<div class="brand-card">
-
-<h3>CHOICE</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-CHAGEE - 2 years
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-<span class="badge">
-COMPRESSOR AND EVAPORATOR - 2 years
-</span>
-
-</div>
-
-
-<div class="brand-card">
-
-<h3>CONVOTHERM</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-<span class="badge">
-GENERAL MARKET AND STARBUCKS - 1 year
-</span>
-<br>
-<span class="badge">
-KENNY ROGERS, CHILI'S AND PERI-PERI - 2 years
-</span>
-</div>
-
-<div class="brand-card">
-
-<h3>FRYMASTER</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-JOLLIBEE AND GENERAL MARKET - 1 year
-</span>
-
-
-<h5>MCDO</h5>
-
-<span class="badge">
-MODEL: BIPH, MIH, BID260 - 1 year
-</span>
-
-<br>
-
-<span class="badge">
-MODEL: BIGLA, BIELA, UHC - 2 years
-</span>
-
-<br>
-
-<span class="badge">
-MODEL: UHCTHD - 3 years
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-<h5>MCDO</h5>
-<h6>MODEL: BIGLA, BIELA</h6>
-<span class="badge">
- BURNER - 2 years
-</span>
-
-<br>
-
-<span class="badge">
-FRYPOT - 15 years
-</span>
-
-
-<h6>MODEL: BIPH, MIH</h6>
-<span class="badge">
-COMPUTER BOARD - 2 years
-</span>
-
-
-</div> 
-
-<div class="brand-card">
-
-<h3>IPSO</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 3 years
-</span>
-
-</div>
-
-
-<div class="brand-card">
-
-<h3>KOLB</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 1 year
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>MANITOWOC</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 3 years
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-<span class="badge">
-COMPRESSOR AND EVAPORATOR - 5 years
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>MASTRENA</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 18 months
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>MERRYCHEF</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 1 year
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-<span class="badge">
-MAGNETRON, HEATER ELEMENT, COOLING FAN, AIR FILTER, POWER CONTROL SWITCH - 3 years
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>SCHAERER</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 1 year
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>SERVER</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 1 year
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>TURBO-AIR</h3>
-
-<h4>STANDARD WARRANTY</h4>
-
-<span class="badge">
-BURGER KING AND CHATIME - 1 year
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-
-<span class="badge">
-COMPRESSOR - 2 years
-</span>
-
-</div>
-
-
-
-
-
-<div class="brand-card">
-
-<h3>VITAMIX</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-STARBUCKS - 3 years
-</span>
-
-<br>
-
-<span class="badge">
-GENERAL MARKET - 1 year
-</span>
-
-<h4>EXTENDED PART WARRANTY</h4>
-<h5>STARBUCKS</h5>
-<span class="badge">
-BOARD - 3 years
-</span>
-
-
-</div>
-
-
-<div class="brand-card">
-
-<h3>OTHER BRANDS</h3>
-
-<h4>STANDARD PART WARRANTY</h4>
-
-<span class="badge">
-ALL ACCOUNTS - 1 year
-</span>
-
-</div>
-
-</div>
-
 
 </main>
 
+<footer>© 2026 Warranty Section</footer>
+
 <script>
 
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
-
-// SEARCH FILTER
+/* =========================
+   SEARCH FILTER
+========================= */
 const searchInput = document.getElementById("searchInput");
 const cards = document.querySelectorAll(".brand-card");
 
-searchInput.addEventListener("keyup", function () {
-
+searchInput.addEventListener("keyup", () => {
     let filter = searchInput.value.toLowerCase();
 
     cards.forEach(card => {
-
         let brand = card.querySelector("h3").textContent.toLowerCase();
-
         card.style.display = brand.includes(filter) ? "" : "none";
-
     });
-
 });
 
+/* =========================
+   ACCESS CONTROL CORE
+========================= */
 
-// GET USER
+function normalize(text) {
+    return (text || "").toString().trim().toLowerCase();
+}
+
+async function checkAccess(email, onDenied) {
+    try {
+        const res = await fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email));
+        const json = await res.json();
+
+        console.log("ACCESS RESPONSE:", json);
+
+        const status = normalize(json.status);
+
+        if (status !== "approved") {
+            onDenied(status);
+        }
+
+    } catch (err) {
+        console.log(err);
+        alert("Unable to verify access.");
+        window.location = "index.html";
+    }
+}
+
+/* =========================
+   STARTUP CHECK
+========================= */
+
 const user = localStorage.getItem("warrantyUser");
 
 if (!user) {
-
     alert("Access denied. Please request permission first.");
     window.location = "index.html";
-
 } else {
 
-    checkAccess(user);
-
-}
-function normalizeStatus(text) {
-    return (text || "")
-        .toString()
-        .trim()
-        .toLowerCase();
-}
-
-
-// SAFE ACCESS CHECK FUNCTION
-function checkAccess(email) {
-
-    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email))
-        .then(res => res.text())
-        .then(text => {
-
-            console.log("RAW RESPONSE:", text);
-
-            let status = "";
-
-            try {
-                let json = JSON.parse(text);
-                status = json.status || text;
-            } catch (e) {
-                status = text;
-            }
-
-            status = normalizeStatus(status);
-
-            console.log("NORMALIZED STATUS:", status);
-
-            if (status !== "approved") {
-
-                alert("Access status: " + status);
-                window.location = "index.html";
-
-            }
-
-        })
-        .catch(err => {
-
-            console.log(err);
-            alert("Unable to verify access.");
-            window.location = "index.html";
-
-        });
+    checkAccess(user, (status) => {
+        alert("Access status: " + status);
+        localStorage.removeItem("warrantyUser");
+        window.location = "index.html";
+    });
 
 }
 
+/* =========================
+   AUTO RECHECK (LIVE SESSION)
+========================= */
 
-// AUTO CHECK
 setInterval(() => {
 
     const user = localStorage.getItem("warrantyUser");
-
     if (!user) return;
 
-    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
-        .then(res => res.text())
-        .then(text => {
-
-            let status = "";
-
-            try {
-                let json = JSON.parse(text);
-                status = json.status || text;
-            } catch (e) {
-                status = text;
-            }
-
-            status = normalizeStatus(status);
-
-            if (status !== "approved") {
-
-                localStorage.removeItem("warrantyUser");
-                window.location = "index.html";
-
-            }
-
-        })
-        .catch(err => console.log(err));
+    checkAccess(user, () => {
+        localStorage.removeItem("warrantyUser");
+        window.location = "index.html";
+    });
 
 }, 5000);
-   
+
 </script>
 
-<footer>© 2026 Warranty Section</footer>
-
 </body>
-
 </html>

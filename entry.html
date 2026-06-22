@@ -664,16 +664,34 @@ if (!user) {
 
 } else {
 
-    // CHECK APPROVAL STATUS
-    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
-        .then(res => res.json())
-        .then(data => {
+    checkAccess(user);
 
-            console.log("STATUS:", data);
+}
 
-            if (data.status !== "Approved") {
 
-                alert("Your access is still: " + data.status);
+// SAFE ACCESS CHECK FUNCTION
+function checkAccess(email) {
+
+    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email))
+        .then(res => res.text())
+        .then(text => {
+
+            console.log("RAW RESPONSE:", text);
+
+            let status = "";
+
+            try {
+                let json = JSON.parse(text);
+                status = json.status;
+            } catch (e) {
+                status = text;
+            }
+
+            console.log("STATUS:", status);
+
+            if (status !== "Approved") {
+
+                alert("Access status: " + status);
                 window.location = "index.html";
 
             }
@@ -683,6 +701,7 @@ if (!user) {
 
             console.log(err);
             alert("Unable to verify access.");
+            window.location = "index.html";
 
         });
 
@@ -697,10 +716,19 @@ setInterval(() => {
     if (!user) return;
 
     fetch(WEB_APP_URL + "?email=" + encodeURIComponent(user))
-        .then(res => res.json())
-        .then(data => {
+        .then(res => res.text())
+        .then(text => {
 
-            if (data.status !== "Approved") {
+            let status = "";
+
+            try {
+                let json = JSON.parse(text);
+                status = json.status;
+            } catch (e) {
+                status = text;
+            }
+
+            if (status !== "Approved") {
 
                 localStorage.removeItem("warrantyUser");
                 window.location = "index.html";

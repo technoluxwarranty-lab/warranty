@@ -257,30 +257,32 @@ return;
 
 
 fetch(
-"https://script.google.com/macros/s/AKfycbzKs1w-oV06rY2vbnxQZj5EHZ-UpLNV7sBk7c2baSx-d16TMN2xHrgQdD_mp76frcSD/exec",
+"https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec",
 {
 method:"POST",
 
-mode:"no-cors",
+mode:"cors",
 
 headers:{
-"Content-Type":"text/plain"
+"Content-Type":"text/plain;charset=utf-8"
 },
 
 body:JSON.stringify({
 
-email:email
+email:email,
+request:"Warranty Coverage Access"
 
 })
 
-}
+})
+.then(response=>response.text())
+.then(data=>{
 
-)
-.then(()=>{
 
 alert(
 "Access request submitted. Please wait for Admin approval."
 );
+
 
 document.getElementById("accessModal").style.display="none";
 
@@ -288,9 +290,11 @@ document.getElementById("accessModal").style.display="none";
 })
 .catch(error=>{
 
-alert("Failed to send request");
-
 console.log(error);
+
+alert(
+"Failed to send request"
+);
 
 });
 

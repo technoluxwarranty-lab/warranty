@@ -4,133 +4,323 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Warranty Management System</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        background: url('background.jpg') no-repeat center center fixed;
-        background-size: cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
 
-    /* Dashboard title */
-    .dashboard-title {
-        font-size: 42px;
-        font-weight: 900;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 50px;
-        padding: 20px 30px;
-        border-radius: 15px;
-        background: rgba(0,0,0,0.5); /* solid background for visibility */
-        box-shadow: 0 0 20px rgba(0,0,0,0.7);
-        letter-spacing: 2px;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:url('background.jpg') no-repeat center center fixed;
+    background-size:cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-    .dashboard-title i {
-        display: block;
-        font-size: 60px;
-        margin-bottom: 15px;
-        color: #ffd700; /* gold icon for emphasis */
-        text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-    }
+.overlay{
+    width:90%;
+    max-width:1000px;
+}
 
-    /* Dashboard cards */
-    .dashboard {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 25px;
-        width: 100%;
-    }
 
-    .card {
-        border-radius: 15px;
-        text-align: center;
-        padding: 40px 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        text-decoration: none;
-        color: #fff;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    }
+.dashboard-title {
+    font-size:42px;
+    font-weight:900;
+    text-align:center;
+    color:white;
+    margin-bottom:50px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(0,0,0,.5);
+}
 
-    .card:nth-child(2) {
-        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
-    }
 
-    .card:nth-child(3) {
-        background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-    }
+.dashboard {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
 
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-    }
 
-    .card i {
-        font-size: 50px;
-        margin-bottom: 15px;
-    }
+.card {
+    border-radius:15px;
+    text-align:center;
+    padding:40px 20px;
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+    box-shadow:0 8px 25px rgba(0,0,0,.5);
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+}
 
-    .card h2 {
-        font-size: 20px;
-        margin: 0;
-        font-weight: bold;
-    }
 
-    /* Mobile adjustments */
-    @media(max-width:500px){
-        .dashboard-title {
-            font-size: 28px;
-            padding: 15px 20px;
-            margin-bottom: 30px;
-        }
-        .dashboard-title i {
-            font-size: 45px;
-        }
-        .card {
-            padding: 25px 10px;
-        }
-        .card i {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-        .card h2 {
-            font-size: 16px;
-        }
-    }
+.card:nth-child(2){
+    background:linear-gradient(135deg,#ff7e5f,#feb47b);
+}
+
+
+.card:nth-child(3){
+    background:linear-gradient(135deg,#43cea2,#185a9d);
+}
+
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+
+.card i{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+
+/* LOGIN POPUP */
+
+#accessModal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+justify-content:center;
+align-items:center;
+}
+
+
+.modal-box{
+
+background:white;
+padding:30px;
+width:350px;
+border-radius:15px;
+text-align:center;
+
+}
+
+
+.modal-box input{
+
+width:90%;
+padding:12px;
+margin:15px;
+
+}
+
+
+.modal-box button{
+
+padding:12px 25px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2575fc;
+color:white;
+
+}
+
+
 </style>
+
+
 </head>
+
+
 <body>
 
-<div class="overlay">
-    <!-- Centered Dashboard Title -->
-    <div class="dashboard-title">WARRANTY MANAGEMENT SYSTEM
-    </div>
 
-    <!-- Dashboard cards -->
-    <div class="dashboard">
-        <a href="warranty.html" class="card">
-            <i class="fas fa-file-alt"></i>
-            <h2>Warranty Requirements</h2>
-        </a>
-        <a href="entry.html" class="card">
-            <i class="fas fa-shield-alt"></i>
-            <h2>Warranty Coverage</h2>
-        </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" class="card">
-            <i class="fas fa-clipboard-check"></i>
-            <h2>Warranty Sales Order Registration</h2>
-        </a>
-    </div>
+<div class="overlay">
+
+
+<div class="dashboard-title">
+WARRANTY MANAGEMENT SYSTEM
 </div>
+
+
+<div class="dashboard">
+
+
+<a href="warranty.html" class="card">
+
+<i class="fas fa-file-alt"></i>
+<h2>Warranty Requirements</h2>
+
+</a>
+
+
+
+<!-- SECURITY CHECK -->
+
+<div class="card" onclick="requestAccess()">
+
+<i class="fas fa-shield-alt"></i>
+
+<h2>
+Warranty Coverage
+</h2>
+
+</div>
+
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" 
+class="card">
+
+
+<i class="fas fa-clipboard-check"></i>
+
+<h2>
+Warranty Claim Entry
+</h2>
+
+
+</a>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ACCESS REQUEST -->
+
+<div id="accessModal">
+
+
+<div class="modal-box">
+
+
+<h3>
+Warranty Coverage Access
+</h3>
+
+
+<p>
+Enter your Gmail account.
+Admin approval is required before access.
+</p>
+
+
+<input 
+type="email" 
+id="gmail"
+placeholder="example@gmail.com">
+
+
+
+<button onclick="submitRequest()">
+Request Access
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+
+function requestAccess(){
+
+document.getElementById("accessModal").style.display="flex";
+
+}
+
+
+
+function submitRequest(){
+
+let email = document.getElementById("gmail").value.trim();
+
+
+if(email==""){
+alert("Please enter Gmail account.");
+return;
+}
+
+
+if(!email.endsWith("@gmail.com")){
+alert("Only Gmail account is allowed.");
+return;
+}
+
+
+
+fetch(
+"https://script.google.com/macros/s/AKfycbxl_JCrde5EUwKyrL24-doHBV01w6o9v08SSEhD2YgB9WcpVY6HbheWRvCHECLAGJdw/exec",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+
+body: JSON.stringify({
+
+email:email,
+request:"Warranty Coverage Access"
+
+})
+
+}
+
+)
+.then(response=>response.text())
+.then(result=>{
+
+
+alert(
+"Access request submitted. Please wait for Admin approval."
+);
+
+
+document.getElementById("accessModal").style.display="none";
+
+
+})
+.catch(error=>{
+
+alert(
+"Failed to send request."
+);
+
+console.log(error);
+
+});
+
+
+}
+
+
+
+window.onclick=function(event){
+
+let modal=document.getElementById("accessModal");
+
+if(event.target==modal){
+
+modal.style.display="none";
+
+}
+
+}
+
+
+</script>
+
+
 
 </body>
 </html>

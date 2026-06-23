@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warranty Management System</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:url('background.jpg') no-repeat center center fixed;
+    background-size:cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.overlay{
+    width:90%;
+    max-width:1000px;
+}
+
+
+.dashboard-title {
+    font-size:42px;
+    font-weight:900;
+    text-align:center;
+    color:white;
+    margin-bottom:50px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(0,0,0,.5);
+}
+
+
+.dashboard {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+
+.card {
+    border-radius:15px;
+    text-align:center;
+    padding:40px 20px;
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+    box-shadow:0 8px 25px rgba(0,0,0,.5);
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+}
+
+
+.card:nth-child(2){
+    background:linear-gradient(135deg,#ff7e5f,#feb47b);
+}
+
+
+.card:nth-child(3){
+    background:linear-gradient(135deg,#43cea2,#185a9d);
+}
+
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+
+.card i{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+
+/* LOGIN POPUP */
+
+#accessModal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+justify-content:center;
+align-items:center;
+}
+
+
+.modal-box{
+
+background:white;
+padding:30px;
+width:350px;
+border-radius:15px;
+text-align:center;
+
+}
+
+
+.modal-box input{
+
+width:90%;
+padding:12px;
+margin:15px;
+
+}
+
+
+.modal-box button{
+
+padding:12px 25px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2575fc;
+color:white;
+
+}
+
+
+</style>
+
+
+</head>
+
+<script>
+
+function logout(){
+
+    sessionStorage.clear();
+
+    window.location.href="login.html";
+
+}
+
+</script>
+
+<body>
+
+<button onclick="logout()"
+style="
+position:absolute;
+top:20px;
+right:20px;
+padding:10px 20px;
+background:red;
+color:white;
+border:none;
+border-radius:8px;">
+Logout
+</button>
+
+<div class="overlay">
+
+
+<div class="dashboard-title">
+WARRANTY MANAGEMENT SYSTEM
+</div>
+
+
+<div class="dashboard">
+
+
+<a href="warranty.html" class="card">
+
+<i class="fas fa-file-alt"></i>
+<h2>Warranty Requirements</h2>
+
+</a>
+
+
+<a href="coverage.html" class="card">
+
+<i class="fas fa-file-alt"></i>
+<h2>Warranty Requirements</h2>
+
+</a>
+
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" 
+class="card">
+
+
+<i class="fas fa-clipboard-check"></i>
+
+<h2>
+Warranty Claim Entry
+</h2>
+
+
+</a>
+
+
+</div>
+
+</div>
+
+<script>
+
+if(sessionStorage.getItem("loggedIn") !== "true"){
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+
+</body>
+</html>

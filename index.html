@@ -131,32 +131,7 @@ color:white;
 
 </head>
 
-<script>
-
-function logout(){
-
-    sessionStorage.clear();
-
-    window.location.href="login.html";
-
-}
-
-</script>
-
 <body>
-
-<button onclick="logout()"
-style="
-position:absolute;
-top:20px;
-right:20px;
-padding:10px 20px;
-background:red;
-color:white;
-border:none;
-border-radius:8px;">
-Logout
-</button>
 
 <div class="overlay">
 
@@ -180,7 +155,7 @@ WARRANTY MANAGEMENT SYSTEM
 <a href="coverage.html" class="card">
 
 <i class="fas fa-file-alt"></i>
-<h2>Warranty Requirements</h2>
+<h2>Warranty Coverage</h2>
 
 </a>
 
@@ -192,7 +167,7 @@ class="card">
 <i class="fas fa-clipboard-check"></i>
 
 <h2>
-Warranty Claim Entry
+Warranty Sales Order Registration
 </h2>
 
 
@@ -202,16 +177,6 @@ Warranty Claim Entry
 </div>
 
 </div>
-
-<script>
-
-if(sessionStorage.getItem("loggedIn") !== "true"){
-
-    window.location.href = "login.html";
-
-}
-
-</script>
 
 
 </body>

@@ -3,182 +3,329 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Warranty Management System</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-body {
-    font-family: Arial, sans-serif;
+*{
     margin:0;
     padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
     min-height:100vh;
-    background:url('background.jpg') no-repeat center center fixed;
-    background-size:cover;
     display:flex;
     justify-content:center;
     align-items:center;
+    background:linear-gradient(
+        135deg,
+        #1e3c72,
+        #2a5298
+    );
 }
 
-.overlay{
-    width:90%;
-    max-width:1000px;
-}
-
-
-.dashboard-title {
-    font-size:42px;
-    font-weight:900;
+.login-box{
+    width:420px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
     text-align:center;
-    color:white;
-    margin-bottom:50px;
-    padding:20px;
-    border-radius:15px;
-    background:rgba(0,0,0,.5);
+    animation:fadeIn .5s ease;
 }
 
-
-.dashboard {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-
-.card {
-    border-radius:15px;
-    text-align:center;
-    padding:40px 20px;
-    color:white;
-    cursor:pointer;
-    text-decoration:none;
-    box-shadow:0 8px 25px rgba(0,0,0,.5);
-    background:linear-gradient(135deg,#6a11cb,#2575fc);
-}
-
-
-.card:nth-child(2){
-    background:linear-gradient(135deg,#ff7e5f,#feb47b);
-}
-
-
-.card:nth-child(3){
-    background:linear-gradient(135deg,#43cea2,#185a9d);
-}
-
-
-.card:hover{
-    transform:translateY(-10px);
-}
-
-
-.card i{
-    font-size:50px;
+.logo{
+    font-size:55px;
+    color:#2575fc;
     margin-bottom:15px;
 }
 
-
-/* LOGIN POPUP */
-
-#accessModal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.7);
-justify-content:center;
-align-items:center;
+h2{
+    color:#222;
+    margin-bottom:10px;
 }
 
-
-.modal-box{
-
-background:white;
-padding:30px;
-width:350px;
-border-radius:15px;
-text-align:center;
-
+.subtitle{
+    color:#666;
+    font-size:14px;
+    margin-bottom:25px;
 }
 
-
-.modal-box input{
-
-width:90%;
-padding:12px;
-margin:15px;
-
+.input-group{
+    position:relative;
 }
 
-
-.modal-box button{
-
-padding:12px 25px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#2575fc;
-color:white;
-
+.input-group i{
+    position:absolute;
+    left:15px;
+    top:15px;
+    color:#777;
 }
 
+input{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#2575fc;
+    box-shadow:0 0 5px rgba(37,117,252,.3);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    background:#2575fc;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d5fe0;
+}
+
+button:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+.message{
+    margin-top:15px;
+    padding:12px;
+    border-radius:8px;
+    display:none;
+    font-size:14px;
+}
+
+.success{
+    background:#d4edda;
+    color:#155724;
+}
+
+.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.error{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.spinner{
+    display:none;
+    margin-top:15px;
+}
+
+.spinner i{
+    color:#2575fc;
+    font-size:24px;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:12px;
+    color:#888;
+}
 
 </style>
-
-
 </head>
 
 <body>
 
-<div class="overlay">
+<div class="login-box">
 
-
-<div class="dashboard-title">
-WARRANTY MANAGEMENT SYSTEM
+<div class="logo">
+    <i class="fas fa-shield-alt"></i>
 </div>
 
+<h2>Warranty Management System</h2>
 
-<div class="dashboard">
+<p class="subtitle">
+Enter your company email to request access.
+</p>
 
+<div class="input-group">
+    <i class="fas fa-envelope"></i>
+    <input
+        type="email"
+        id="email"
+        placeholder="Enter your email">
+</div>
 
-<a href="warranty.html" class="card">
+<button id="loginBtn" onclick="login()">
+    <i class="fas fa-sign-in-alt"></i>
+    Login
+</button>
 
-<i class="fas fa-file-alt"></i>
-<h2>Warranty Requirements</h2>
+<div class="spinner" id="spinner">
+    <i class="fas fa-spinner fa-spin"></i>
+</div>
 
-</a>
+<div id="msg" class="message"></div>
 
-
-<a href="entry.html" class="card">
-
-<i class="fas fa-file-alt"></i>
-<h2>Warranty Coverage</h2>
-
-</a>
-
-
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" 
-class="card">
-
-
-<i class="fas fa-clipboard-check"></i>
-
-<h2>
-Warranty Sales Order Registration
-</h2>
-
-
-</a>
-
-
+<div class="footer">
+    Access is subject to administrator approval.
 </div>
 
 </div>
 
+<script>
 
+const WEBAPP_URL =
+"https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
+
+document
+.getElementById("email")
+.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+        login();
+    }
+
+});
+
+function showMessage(type,text){
+
+    const msg =
+    document.getElementById("msg");
+
+    msg.className =
+    "message " + type;
+
+    msg.style.display =
+    "block";
+
+    msg.innerHTML =
+    text;
+}
+
+function login(){
+
+    const email =
+    document.getElementById("email")
+    .value
+    .trim();
+
+    if(!email){
+
+        showMessage(
+            "error",
+            "Please enter your email address."
+        );
+
+        return;
+    }
+
+    document.getElementById("spinner")
+    .style.display = "block";
+
+    document.getElementById("loginBtn")
+    .disabled = true;
+
+    fetch(
+        `${WEBAPP_URL}?email=${encodeURIComponent(email)}`
+    )
+
+    .then(r => r.json())
+
+    .then(data => {
+
+        if(data.approved){
+
+            showMessage(
+                "success",
+                "Access approved. Redirecting..."
+            );
+
+            sessionStorage.setItem(
+                "loggedIn",
+                "true"
+            );
+
+            sessionStorage.setItem(
+                "userEmail",
+                email
+            );
+
+            setTimeout(() => {
+
+                window.location.href =
+                "home.html";
+
+            }, 1200);
+
+        }else{
+
+            if(data.status === "Pending"){
+
+                showMessage(
+                    "pending",
+                    "Your access request is currently pending approval."
+                );
+
+            }else{
+
+                showMessage(
+                    "pending",
+                    "Access request submitted successfully. Please wait for administrator approval."
+                );
+
+            }
+
+        }
+
+    })
+
+    .catch(() => {
+
+        showMessage(
+            "error",
+            "Unable to connect to server. Please try again."
+        );
+
+    })
+
+    .finally(() => {
+
+        document.getElementById("spinner")
+        .style.display = "none";
+
+        document.getElementById("loginBtn")
+        .disabled = false;
+
+    });
+
+}
+
+</script>
 
 </body>
 </html>

@@ -108,6 +108,32 @@ footer {
     color: #6b7280;
 }
 
+ .home-btn{
+
+display:block;
+margin:0 auto 25px;
+
+padding:12px 25px;
+
+border:none;
+border-radius:8px;
+
+background:#1f2937;
+color:white;
+
+font-size:15px;
+
+cursor:pointer;
+
+}
+
+
+.home-btn:hover{
+
+background:#374151;
+
+}
+
 </style>
 
 </head>
@@ -122,30 +148,360 @@ footer {
 <main>
 
 <h2>WARRANTY COVERAGE</h2>
+<button onclick="goHome()" class="home-btn">
+    ⬅ Back to Homepage
+</button>
 
 <div class="controls">
-    <input type="text" id="searchInput" placeholder="🔍 Search brand name...">
-</div>
 
+<input 
+type="text"
+id="searchInput"
+placeholder="🔍 Search brand name...">
+
+</div>
 <div class="brands" id="brandContainer">
 
-    <!-- SAMPLE CARD -->
-    <div class="brand-card">
-        <h3>AMANA/MENUMASTER</h3>
-        <span class="badge">ALL ACCOUNTS - 1 year</span>
-    </div>
+<div class="brand-card">
+<h3>AMANA/MENUMASTER</h3>
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+</div>
 
-    <div class="brand-card">
-        <h3>ANTUNES</h3>
-        <span class="badge">BURGER KING & MCDO - 2 years</span><br>
-        <span class="badge">JOLLIBEE & GENERAL MARKET - 1 year</span>
-    </div>
 
-    <div class="brand-card">
-        <h3>CARPIGIANI</h3>
-        <span class="badge">MCDO, BK, KFC - 1 year</span><br>
-        <span class="badge">JOLLIBEE - 3 years</span>
-    </div>
+
+
+<div class="brand-card">
+
+<h3>ANTUNES</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+BURGER KING & MCDO - 2 years
+</span>
+<br>
+</span>
+<span class="badge">
+JOLLIBEE & GENERAL MARKET - 1 year
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>BUNN-O-MATIC</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+ALL ACCOUNTS - 2 years
+</span>
+<br>
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>ALL ACCOUNTS</h5>
+<span class="badge">
+BOARD - 3 years</span>
+</div>
+
+
+
+<div class="brand-card">
+
+<h3>CARPIGIANI</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+MCDO, BURGER KING, KFC, AND GENERAL MARKETS - 1 year
+</span>
+<br>
+<span class="badge">
+JOLLIBEE - 3 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>MCDO AND KFC</h5>
+<span class="badge">
+BEATER MOTOR - 2 years</span>
+<br>
+<span class="badge">
+COMPRESSOR - 3 years</span>
+<br>
+<span class="badge">
+HOPPER ASSY - 5 years</span>
+<h5>JOLLIBEE</h5>
+<span class="badge">
+COMPRESSOR AND SHELL INSULATED - 5 years
+</span>
+
+</div>
+
+<div class="brand-card">
+
+<h3>CHOICE</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+CHAGEE - 2 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<span class="badge">
+COMPRESSOR AND EVAPORATOR - 2 years
+</span>
+
+</div>
+
+
+<div class="brand-card">
+
+<h3>CONVOTHERM</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+<span class="badge">
+GENERAL MARKET AND STARBUCKS - 1 year
+</span>
+<br>
+<span class="badge">
+KENNY ROGERS, CHILI'S AND PERI-PERI - 2 years
+</span>
+</div>
+
+<div class="brand-card">
+
+<h3>FRYMASTER</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+JOLLIBEE AND GENERAL MARKET - 1 year
+</span>
+
+
+<h5>MCDO</h5>
+
+<span class="badge">
+MODEL: BIPH, MIH, BID260 - 1 year
+</span>
+
+<br>
+
+<span class="badge">
+MODEL: BIGLA, BIELA, UHC - 2 years
+</span>
+
+<br>
+
+<span class="badge">
+MODEL: UHCTHD - 3 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>MCDO</h5>
+<h6>MODEL: BIGLA, BIELA</h6>
+<span class="badge">
+ BURNER - 2 years
+</span>
+
+<br>
+
+<span class="badge">
+FRYPOT - 15 years
+</span>
+
+
+<h6>MODEL: BIPH, MIH</h6>
+<span class="badge">
+COMPUTER BOARD - 2 years
+</span>
+
+
+</div> 
+
+<div class="brand-card">
+
+<h3>IPSO</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 3 years
+</span>
+
+</div>
+
+
+<div class="brand-card">
+
+<h3>KOLB</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>MANITOWOC</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 3 years
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<span class="badge">
+COMPRESSOR AND EVAPORATOR - 5 years
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>MASTRENA</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 18 months
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>MERRYCHEF</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<span class="badge">
+MAGNETRON, HEATER ELEMENT, COOLING FAN, AIR FILTER, POWER CONTROL SWITCH - 3 years
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>SCHAERER</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>SERVER</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>TURBO-AIR</h3>
+
+<h4>STANDARD WARRANTY</h4>
+
+<span class="badge">
+BURGER KING AND CHATIME - 1 year
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+
+<span class="badge">
+COMPRESSOR - 2 years
+</span>
+
+</div>
+
+
+
+
+
+<div class="brand-card">
+
+<h3>VITAMIX</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+STARBUCKS - 3 years
+</span>
+
+<br>
+
+<span class="badge">
+GENERAL MARKET - 1 year
+</span>
+
+<h4>EXTENDED PART WARRANTY</h4>
+<h5>STARBUCKS</h5>
+<span class="badge">
+BOARD - 3 years
+</span>
+
+
+</div>
+
+
+<div class="brand-card">
+
+<h3>OTHER BRANDS</h3>
+
+<h4>STANDARD PART WARRANTY</h4>
+
+<span class="badge">
+ALL ACCOUNTS - 1 year
+</span>
+
+</div>
 
 </div>
 
@@ -234,6 +590,27 @@ setInterval(() => {
     });
 
 }, 5000);
+
+function goHome(){
+
+    // keep approved access
+    const user =
+    localStorage.getItem("warrantyUser");
+
+
+    if(user){
+
+        localStorage.setItem(
+            "warrantyUser",
+            user
+        );
+
+    }
+
+
+    window.location.href="index.html";
+
+}
 
 </script>
 

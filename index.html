@@ -1,125 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warranty Management System</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-body{
-    font-family:Arial;
+body {
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:url('background.jpg') no-repeat center center fixed;
+    background-size:cover;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    background:#f0f2f5;
 }
 
-.login-box{
-    background:white;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,.2);
-    width:350px;
+.overlay{
+    width:90%;
+    max-width:1000px;
+}
+
+
+.dashboard-title {
+    font-size:42px;
+    font-weight:900;
     text-align:center;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:#2575fc;
     color:white;
-    border:none;
-    cursor:pointer;
+    margin-bottom:50px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(0,0,0,.5);
 }
 
-.error{
-    color:red;
-    margin-top:10px;
+
+.dashboard {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
 }
+
+
+.card {
+    border-radius:15px;
+    text-align:center;
+    padding:40px 20px;
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+    box-shadow:0 8px 25px rgba(0,0,0,.5);
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+}
+
+
+.card:nth-child(2){
+    background:linear-gradient(135deg,#ff7e5f,#feb47b);
+}
+
+
+.card:nth-child(3){
+    background:linear-gradient(135deg,#43cea2,#185a9d);
+}
+
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+
+.card i{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+
+/* LOGIN POPUP */
+
+#accessModal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+justify-content:center;
+align-items:center;
+}
+
+
+.modal-box{
+
+background:white;
+padding:30px;
+width:350px;
+border-radius:15px;
+text-align:center;
+
+}
+
+
+.modal-box input{
+
+width:90%;
+padding:12px;
+margin:15px;
+
+}
+
+
+.modal-box button{
+
+padding:12px 25px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#2575fc;
+color:white;
+
+}
+
 
 </style>
 
+
 </head>
+
+<script>
+
+function logout(){
+
+    sessionStorage.clear();
+
+    window.location.href="login.html";
+
+}
+
+</script>
 
 <body>
 
-<div class="login-box">
-
-<h2>User Login</h2>
-
-<input type="email"
-       id="email"
-       placeholder="Enter Email">
-
-<button onclick="login()">
-Login
+<button onclick="logout()"
+style="
+position:absolute;
+top:20px;
+right:20px;
+padding:10px 20px;
+background:red;
+color:white;
+border:none;
+border-radius:8px;">
+Logout
 </button>
 
-<div id="msg" class="error"></div>
+<div class="overlay">
+
+
+<div class="dashboard-title">
+WARRANTY MANAGEMENT SYSTEM
+</div>
+
+
+<div class="dashboard">
+
+
+<a href="warranty.html" class="card">
+
+<i class="fas fa-file-alt"></i>
+<h2>Warranty Requirements</h2>
+
+</a>
+
+
+<a href="coverage.html" class="card">
+
+<i class="fas fa-file-alt"></i>
+<h2>Warranty Requirements</h2>
+
+</a>
+
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" 
+class="card">
+
+
+<i class="fas fa-clipboard-check"></i>
+
+<h2>
+Warranty Claim Entry
+</h2>
+
+
+</a>
+
+
+</div>
 
 </div>
 
 <script>
 
-const WEBAPP_URL =
-"https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
+if(sessionStorage.getItem("loggedIn") !== "true"){
 
-function login(){
-
-    const email =
-        document.getElementById("email").value.trim();
-
-    if(!email){
-        document.getElementById("msg").innerHTML =
-            "Please enter email";
-        return;
-    }
-
-    fetch(
-      `${WEBAPP_URL}?email=${encodeURIComponent(email)}`
-    )
-    .then(r=>r.json())
-    .then(data=>{
-
-        if(data.approved){
-
-            sessionStorage.setItem(
-                "loggedIn",
-                "true"
-            );
-
-            sessionStorage.setItem(
-                "userEmail",
-                email
-            );
-
-            window.location.href="home.html";
-
-        }else{
-
-            document.getElementById("msg").innerHTML =
-                "Access denied. Email not approved.";
-
-        }
-
-    })
-    .catch(err=>{
-
-        document.getElementById("msg").innerHTML =
-            "Connection error";
-
-    });
+    window.location.href = "login.html";
 
 }
 
 </script>
+
 
 </body>
 </html>

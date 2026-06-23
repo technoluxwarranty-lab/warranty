@@ -617,17 +617,9 @@ const user =
 localStorage.getItem("warrantyUser");
 
 
-
 if(!user){
 
-
-    alert(
-    "Access denied. Please request permission first."
-    );
-
-
-    window.location="index.html";
-
+    window.location.replace("index.html");
 
 }
 else{
@@ -638,14 +630,94 @@ else{
         function(status){
 
 
-            if(leavingPage)return;
+            // DO NOT REMOVE SESSION HERE
+            // Only deny if explicitly rejected
+
+
+            if(status === "rejected"){
+
+
+                localStorage.removeItem(
+                "warrantyUser"
+                );
+
+
+                alert(
+                "Access rejected"
+                );
+
+
+                window.location.replace(
+                "index.html"
+                );
+
+
+            }
+
+
+        }
+    );
+
+}
+
+
+/* =========================
+   AUTO RECHECK
+========================= */
+
+let accessTimer = setInterval(async function(){
+
+
+    if(leavingPage){
+        return;
+    }
+
+
+    const currentUser =
+    localStorage.getItem("warrantyUser");
+
+
+    if(!currentUser){
+        return;
+    }
+
+
+    try {
+
+
+        const res =
+        await fetch(
+        WEB_APP_URL +
+        "?email=" +
+        encodeURIComponent(currentUser)
+        );
+
+
+        const data =
+        await res.json();
 
 
 
-            alert(
-            "Access status: "+status
-            );
+        const status =
+        normalize(data.status);
 
+
+
+        console.log(
+        "Live check:",
+        status
+        );
+
+
+
+        // Only logout if rejected
+        if(status === "rejected"){
+
+
+            leavingPage=true;
+
+
+            clearInterval(accessTimer);
 
 
             localStorage.removeItem(
@@ -653,68 +725,28 @@ else{
             );
 
 
-            window.location="index.html";
+            window.location.replace(
+            "index.html"
+            );
 
 
         }
-    );
-
-
-}
 
 
 
-/* =========================
-   AUTO RECHECK
-========================= */
+    }
+    catch(err){
 
-
-let accessTimer =
-setInterval(function(){
-
-
-
-    if(leavingPage)return;
-
-
-
-    const currentUser =
-    localStorage.getItem(
-    "warrantyUser"
-    );
-
-
-
-    if(!currentUser)return;
-
-
-
-
-    checkAccess(
-    currentUser,
-    function(){
-
-
-
-        if(leavingPage)return;
-
-
-
-        localStorage.removeItem(
-        "warrantyUser"
+        console.log(
+        "Check error",
+        err
         );
 
-
-
-        window.location="index.html";
-
-
-    });
+    }
 
 
 
 },5000);
-
 
 
 
@@ -727,40 +759,18 @@ setInterval(function(){
 function goHome(){
 
 
-
-    leavingPage=true;
-
+    leavingPage = true;
 
 
-    clearInterval(
-    accessTimer
+    clearInterval(accessTimer);
+
+
+
+    // keep approved login
+
+    window.location.replace(
+    "index.html"
     );
-
-
-
-    const user =
-    localStorage.getItem(
-    "warrantyUser"
-    );
-
-
-
-    if(user){
-
-
-        localStorage.setItem(
-        "warrantyUser",
-        user
-        );
-
-
-    }
-
-
-
-    window.location.href =
-    "index.html";
-
 
 
 }

@@ -582,7 +582,7 @@ if (!user) {
    AUTO RECHECK (LIVE SESSION)
 ========================= */
 
-setInterval(() => {
+let accessTimer = setInterval(() => {
 
     const user =
     localStorage.getItem("warrantyUser");

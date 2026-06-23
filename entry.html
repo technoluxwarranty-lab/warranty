@@ -9,20 +9,28 @@
 
 <style>
 
-/* HEADER */
+/* ==========================
+   HEADER
+========================== */
+
 header {
     background: #1f2937;
     color: #fff;
+
     padding: 10px 24px;
     height: 45px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     position: sticky;
     top: 0;
     z-index: 1000;
+
     box-sizing: border-box;
 }
+
 
 .header-title {
     font-size: 18px;
@@ -30,139 +38,241 @@ header {
     margin: 0;
 }
 
+
 .header-logo {
     height: 28px;
+    width: auto;
+    object-fit: contain;
 }
 
-/* BODY */
+
+
+@media(max-width:600px){
+
+header{
+    height:40px;
+    padding:8px 14px;
+}
+
+.header-title{
+    font-size:15px;
+}
+
+.header-logo{
+    height:24px;
+}
+
+}
+
+
+
+/* ==========================
+   BODY
+========================== */
+
+
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(rgba(255,255,255,0.90),rgba(255,255,255,0.90)),
-    url("background.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
+
+font-family:
+"Segoe UI",
+Tahoma,
+Geneva,
+Verdana,
+sans-serif;
+
+background:
+linear-gradient(
+rgba(255,255,255,0.90),
+rgba(255,255,255,0.90)
+),
+url("background.jpg");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+margin:0;
+padding:0;
+
 }
 
-/* CONTENT */
-main {
-    padding: 25px;
-    max-width: 1200px;
-    margin: auto;
+
+
+/* ==========================
+   CONTENT
+========================== */
+
+
+main{
+
+padding:25px;
+max-width:1200px;
+margin:auto;
+
 }
 
-h2 {
-    text-align: center;
-    color: #1f2937;
-    margin-bottom: 25px;
+
+h2{
+
+color:#1f2937;
+ text-align:center;
+ margin-bottom:25px;
+
 }
+
+
 
 .controls {
-    max-width: 700px;
-    margin: 0 auto 20px;
+    width:100%;
+    max-width:700px;
+    margin:0 auto 20px auto;
 }
+
 
 #searchInput {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+
+    width:100%;
+    box-sizing:border-box;
+
+    padding:12px 14px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    font-size:14px;
+
 }
 
-/* CARDS */
-.brands {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 700px;
-    margin: auto;
+
+/* ==========================
+   BRAND CARD
+========================== */
+
+
+.brands{
+
+display:flex;
+    flex-direction:column;
+
+    gap:20px;
+
+    width:100%;
+    max-width:700px;
+
+    margin:0 auto;
 }
 
-.brand-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+
+
+.brand-card{
+
+
+    background:#fff;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:
+    0 6px 16px rgba(0,0,0,0.08);
+
+    text-align:left;
+
+    transition:.2s;
 }
 
-.brand-card h3 {
-    margin: 0;
+
+
+.brand-card:hover{
+
+transform:translateY(-4px);
+
 }
 
-.badge {
-    display: inline-block;
-    background: #e5eefc;
-    color: #1e40af;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-top: 6px;
+
+
+.brand-card h3{
+
+margin-top:0;
+
+color:#1f2937;
+
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-    color: #6b7280;
+
+
+.brand-card h4{
+
+margin-bottom:12px;
+
+color:#6b7280;
+
 }
 
-.home-btn {
 
-display:block;
 
-width:220px;
+.badge{
 
-margin:20px auto;
+display:inline-block;
 
-padding:12px;
+background:#e5eefc;
+
+color:#1e40af;
+
+padding:6px 10px;
+
+border-radius:20px;
+
+font-size:13px;
+
+margin-bottom:8px;
+
+}
+
+
+
+footer{
 
 text-align:center;
 
-background:#1f2937;
+padding:20px;
 
-color:white;
+color:#6b7280;
 
-border:none;
-
-border-radius:8px;
-
-font-size:15px;
-
-cursor:pointer;
-
-position:relative;
-
-z-index:999999;
+font-size:13px;
 
 }
 
-.home-btn:hover {
 
-background:#374151;
-
-}
-    
 </style>
 
 </head>
 
+
 <body>
 
+
+
 <header>
-    <h3 class="header-title">WARRANTY MANAGEMENT SYSTEM</h3>
-    <img src="company-logo.png" class="header-logo">
+
+<h3 class="header-title">
+WARRANTY MANAGEMENT SYSTEM
+</h3>
+
+
+<img 
+src="company-logo.png"
+alt="Company Logo"
+class="header-logo">
+
 </header>
 
 <main>
 
-<h2>WARRANTY COVERAGE</h2>
-    
-<button onclick="goHome()" class="home-btn">
-⬅ Back to Homepage
-</button>
-    
+<h2>
+WARRANTY COVERAGE</h2>
+
 <div class="controls">
 
 <input 
@@ -193,6 +303,7 @@ ALL ACCOUNTS - 1 year
 BURGER KING & MCDO - 2 years
 </span>
 <br>
+</span>
 <span class="badge">
 JOLLIBEE & GENERAL MARKET - 1 year
 </span>
@@ -515,243 +626,13 @@ ALL ACCOUNTS - 1 year
 
 </div>
 
+
 </main>
+
+
 
 <footer>© 2026 Warranty Section</footer>
 
-<script>
-
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
-
-/* =========================
-   SEARCH FILTER
-========================= */
-const searchInput = document.getElementById("searchInput");
-const cards = document.querySelectorAll(".brand-card");
-
-searchInput.addEventListener("keyup", () => {
-    let filter = searchInput.value.toLowerCase();
-
-    cards.forEach(card => {
-        let brand = card.querySelector("h3").textContent.toLowerCase();
-        card.style.display = brand.includes(filter) ? "" : "none";
-    });
-});
-
-/* =========================
-   ACCESS CONTROL CORE
-========================= */
-
-let leavingPage = false;
-
-
-function normalize(text) {
-    return (text || "").toString().trim().toLowerCase();
-}
-
-
-
-async function checkAccess(email, onDenied) {
-
-
-    if(leavingPage) return;
-
-
-    try {
-
-
-        const res =
-        await fetch(
-        WEB_APP_URL +
-        "?email=" +
-        encodeURIComponent(email)
-        );
-
-
-        const json =
-        await res.json();
-
-
-
-        const status =
-        normalize(json.status);
-
-
-
-        console.log(
-        "ACCESS RESPONSE:",
-        status
-        );
-
-
-
-  if (status !== "approved") {
-    onDenied(status);
-}
-
-
-
-    } catch(err){
-
-
-        console.log(err);
-
-
-    }
-
-}
-
-
-
-/* =========================
-   STARTUP CHECK
-========================= */
-
-
-const user = localStorage.getItem("warrantyUser");
-
-if (!user) {
-    window.location.replace("index.html");
-}
-else{
-
-
-    checkAccess(
-        user,
-        function(status){
-
-
-            // DO NOT REMOVE SESSION HERE
-            // Only deny if explicitly rejected
-
-
-            if(status === "rejected"){
-
-
-                localStorage.removeItem(
-                "warrantyUser"
-                );
-
-
-                alert(
-                "Access rejected"
-                );
-
-
-                window.location.replace(
-                "index.html"
-                );
-
-
-            }
-
-
-        }
-    );
-
-}
-
-
-/* =========================
-   AUTO RECHECK
-========================= */
-
-let accessTimer = setInterval(async function(){
-
-
-    if(leavingPage){
-        return;
-    }
-
-
-    const currentUser =
-    localStorage.getItem("warrantyUser");
-
-
-    if(!currentUser){
-        return;
-    }
-
-
-    try {
-
-
-        const res =
-        await fetch(
-        WEB_APP_URL +
-        "?email=" +
-        encodeURIComponent(currentUser)
-        );
-
-
-        const data =
-        await res.json();
-
-
-
-        const status =
-        normalize(data.status);
-
-
-
-        console.log(
-        "Live check:",
-        status
-        );
-
-
-
-        // Only logout if rejected
-        if(status === "rejected"){
-
-
-            leavingPage=true;
-
-
-            clearInterval(accessTimer);
-
-
-            localStorage.removeItem(
-            "warrantyUser"
-            );
-
-
-            window.location.replace(
-            "index.html"
-            );
-
-
-        }
-
-
-
-    }
-    catch(err){
-
-        console.log(
-        "Check error",
-        err
-        );
-
-    }
-
-
-
-},5000);
-
-
-
-
-/* =========================
-   BACK TO HOME
-========================= */
-
-function goHome() {
-    console.log("GOING HOME");
-    window.location.href = "index.html";
-}
-    
-</script>
-
 </body>
+
 </html>

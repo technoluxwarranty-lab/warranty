@@ -225,114 +225,202 @@ Request Access
 
 </div>
 
+
 <script>
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
+
 let interval;
 
 
-// ----------------------
-// OPEN MODAL
-// ----------------------
+/* OPEN MODAL */
 function requestAccess() {
     document.getElementById("accessModal").style.display = "flex";
 }
 
 
-// ----------------------
-// SUBMIT REQUEST
-// ----------------------
-function submitRequest() {
+/* SEND REQUEST */
+function submitRequest(){
 
-    const email = document.getElementById("gmail").value.trim();
-
-    if (!email) return alert("Enter Gmail");
-    if (!email.endsWith("@gmail.com")) return alert("Only Gmail allowed");
-
-    fetch(WEB_APP_URL, {
-        method: "POST",
-        body: new URLSearchParams({
-            email: email,
-            action: "request"
-        })
-    });
-
-    localStorage.setItem("userEmail", email);
-
-    document.getElementById("accessModal").style.display = "none";
-
-    startChecking();
-}
+    const email =
+    document.getElementById("gmail").value.trim().toLowerCase();
 
 
-// ----------------------
-// CHECK STATUS
-// ----------------------
-function checkStatus(email) {
-
-    fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email))
-    .then(res => res.json())
-    .then(data => {
-
-        const box = document.getElementById("statusBox");
-
-        if (data.status === "approved") {
-
-            // SAVE LOGIN SESSION
-            localStorage.setItem("loggedIn", "true");
-
-            box.innerHTML = "✅ Approved! Logging in...";
-            box.style.color = "green";
-
-            clearInterval(interval);
-
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 1000);
-
-        } else {
-
-            box.innerHTML = "⏳ Waiting for approval...";
-            box.style.color = "orange";
-        }
-
-    })
-    .catch(err => console.log(err));
-}
-
-
-// ----------------------
-// START AUTO CHECK
-// ----------------------
-function startChecking() {
-
-    const email = localStorage.getItem("userEmail");
-    if (!email) return;
-
-    checkStatus(email);
-
-    interval = setInterval(() => {
-        checkStatus(email);
-    }, 3000);
-}
-
-
-// ----------------------
-// AUTO LOGIN ON PAGE LOAD
-// ----------------------
-window.onload = function () {
-
-    if (localStorage.getItem("loggedIn") === "true") {
-        window.location.href = "index.html";
+    if(!email){
+        alert("Enter Gmail");
         return;
     }
 
-    if (localStorage.getItem("userEmail")) {
-        startChecking();
+
+    if(!email.endsWith("@gmail.com")){
+        alert("Only Gmail allowed");
+        return;
     }
+
+
+    fetch(WEB_APP_URL,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:
+        "email="+encodeURIComponent(email)+
+        "&action=request"
+    })
+    .then(()=>{
+
+        localStorage.setItem("userEmail",email);
+
+        document.getElementById("accessModal")
+        .style.display="none";
+
+
+        alert(
+        "Request submitted. Waiting for admin approval."
+        );
+
+
+        startChecking();
+
+    })
+    .catch(()=>{
+        alert("Failed to send request");
+    });
+
+}
+
+
+
+/* CHECK APPROVAL */
+
+function checkStatus(){
+
+
+const email =
+localStorage.getItem("userEmail");
+
+
+if(!email)return;
+
+
+fetch(
+WEB_APP_URL+
+"?email="+encodeURIComponent(email)
+)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+
+console.log(data);
+
+
+if(
+data.status &&
+data.status.toLowerCase()=="approved"
+){
+
+
+clearInterval(interval);
+
+
+
+localStorage.setItem(
+"warrantyUser",
+email
+);
+
+
+
+localStorage.removeItem(
+"userEmail"
+);
+
+
+
+alert(
+"Access Approved!"
+);
+
+
+
+window.location.href=
+"entry.html";
+
+
+
+}
+
+
+
+else{
+
+
+console.log(
+"Waiting approval..."
+);
+
+
+}
+
+
+})
+
+.catch(err=>{
+console.log(err);
+});
+
+
+}
+
+
+
+/* AUTO CHECK */
+
+function startChecking(){
+
+checkStatus();
+
+
+interval=setInterval(
+checkStatus,
+3000
+);
+
+
+}
+
+
+
+/* PAGE LOAD */
+
+window.onload=function(){
+
+
+if(
+localStorage.getItem("warrantyUser")
+){
+
+window.location.href="entry.html";
+return;
+
+}
+
+
+if(
+localStorage.getItem("userEmail")
+){
+
+startChecking();
+
+}
+
+
 };
+
 
 </script>
 

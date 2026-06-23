@@ -755,25 +755,23 @@ let accessTimer = setInterval(async function(){
    BACK TO HOME
 ========================= */
 
-
-function goHome(){
-
+function goHome() {
 
     leavingPage = true;
-
-
     clearInterval(accessTimer);
 
-
-
-    // keep approved login
-
-    window.location.replace(
-    "index.html"
-    );
-
-
+    // IMPORTANT: go back WITHOUT breaking session
+    window.location.href = "index.html";
 }
+
+    function isLoggedIn() {
+    return !!localStorage.getItem("warrantyUser");
+}
+
+    if (!isLoggedIn()) {
+    window.location.replace("index.html");
+}
+    
 </script>
 
 </body>

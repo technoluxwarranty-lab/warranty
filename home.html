@@ -125,38 +125,31 @@ color:white;
 
 }
 
+.logout-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#dc3545;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,.3);
+}
+
+.logout-btn:hover{
+    background:#c82333;
+}
 
 </style>
 
 
 </head>
 
-<script>
-
-function logout(){
-
-    sessionStorage.clear();
-
-    window.location.href="login.html";
-
-}
-
-</script>
-
 <body>
-
-<button onclick="logout()"
-style="
-position:absolute;
-top:20px;
-right:20px;
-padding:10px 20px;
-background:red;
-color:white;
-border:none;
-border-radius:8px;">
-Logout
-</button>
 
 <div class="overlay">
 
@@ -165,6 +158,9 @@ Logout
 WARRANTY MANAGEMENT SYSTEM
 </div>
 
+<button class="logout-btn" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i> Logout
+</button>
 
 <div class="dashboard">
 
@@ -177,10 +173,10 @@ WARRANTY MANAGEMENT SYSTEM
 </a>
 
 
-<a href="coverage.html" class="card">
+<a href="entry.html" class="card">
 
 <i class="fas fa-file-alt"></i>
-<h2>Warranty Requirements</h2>
+<h2>Warranty Coverage</h2>
 
 </a>
 
@@ -192,7 +188,7 @@ class="card">
 <i class="fas fa-clipboard-check"></i>
 
 <h2>
-Warranty Claim Entry
+Warranty Sales Order Registration
 </h2>
 
 
@@ -205,10 +201,20 @@ Warranty Claim Entry
 
 <script>
 
+// Prevent direct access if not logged in
 if(sessionStorage.getItem("loggedIn") !== "true"){
+    window.location.href = "index.html";
+}
 
-    window.location.href = "login.html";
+function logout(){
 
+    if(confirm("Are you sure you want to logout?")){
+
+        sessionStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("userEmail");
+
+        window.location.href = "index.html";
+    }
 }
 
 </script>

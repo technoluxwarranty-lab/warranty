@@ -193,7 +193,6 @@ ALL ACCOUNTS - 1 year
 BURGER KING & MCDO - 2 years
 </span>
 <br>
-</span>
 <span class="badge">
 JOLLIBEE & GENERAL MARKET - 1 year
 </span>
@@ -586,13 +585,9 @@ async function checkAccess(email, onDenied) {
 
 
 
-        if(status !== "approved"){
-
-
-            onDenied(status);
-
-
-        }
+  if (status !== "approved") {
+    onDenied(status);
+}
 
 
 
@@ -613,14 +608,10 @@ async function checkAccess(email, onDenied) {
 ========================= */
 
 
-const user =
-localStorage.getItem("warrantyUser");
+const user = localStorage.getItem("warrantyUser");
 
-
-if(!user){
-
+if (!user) {
     window.location.replace("index.html");
-
 }
 else{
 
@@ -756,20 +747,11 @@ let accessTimer = setInterval(async function(){
 ========================= */
 
 function goHome() {
-
     leavingPage = true;
     clearInterval(accessTimer);
 
-    // IMPORTANT: go back WITHOUT breaking session
-    window.location.href = "index.html";
-}
-
-    function isLoggedIn() {
-    return !!localStorage.getItem("warrantyUser");
-}
-
-    if (!isLoggedIn()) {
-    window.location.replace("index.html");
+    // clean navigation back
+   window.location.href = "index.html";
 }
     
 </script>

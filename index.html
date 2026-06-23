@@ -1,421 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warranty Management System</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Login</title>
 
 <style>
 
-body {
-    font-family: Arial, sans-serif;
-    margin:0;
-    padding:0;
-    min-height:100vh;
-    background:url('background.jpg') no-repeat center center fixed;
-    background-size:cover;
+body{
+    font-family:Arial;
     display:flex;
     justify-content:center;
     align-items:center;
+    height:100vh;
+    background:#f0f2f5;
 }
 
-.overlay{
-    width:90%;
-    max-width:1000px;
-}
-
-
-.dashboard-title {
-    font-size:42px;
-    font-weight:900;
+.login-box{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+    width:350px;
     text-align:center;
-    color:white;
-    margin-bottom:50px;
-    padding:20px;
-    border-radius:15px;
-    background:rgba(0,0,0,.5);
 }
 
-
-.dashboard {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
 }
 
-
-.card {
-    border-radius:15px;
-    text-align:center;
-    padding:40px 20px;
+button{
+    width:100%;
+    padding:12px;
+    background:#2575fc;
     color:white;
+    border:none;
     cursor:pointer;
-    text-decoration:none;
-    box-shadow:0 8px 25px rgba(0,0,0,.5);
-    background:linear-gradient(135deg,#6a11cb,#2575fc);
 }
 
-
-.card:nth-child(2){
-    background:linear-gradient(135deg,#ff7e5f,#feb47b);
+.error{
+    color:red;
+    margin-top:10px;
 }
-
-
-.card:nth-child(3){
-    background:linear-gradient(135deg,#43cea2,#185a9d);
-}
-
-
-.card:hover{
-    transform:translateY(-10px);
-}
-
-
-.card i{
-    font-size:50px;
-    margin-bottom:15px;
-}
-
-
-/* LOGIN POPUP */
-
-#accessModal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.7);
-justify-content:center;
-align-items:center;
-}
-
-
-.modal-box{
-
-background:white;
-padding:30px;
-width:350px;
-border-radius:15px;
-text-align:center;
-
-}
-
-
-.modal-box input{
-
-width:90%;
-padding:12px;
-margin:15px;
-
-}
-
-
-.modal-box button{
-
-padding:12px 25px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#2575fc;
-color:white;
-
-}
-
 
 </style>
 
-
 </head>
-
 
 <body>
 
+<div class="login-box">
 
-<div class="overlay">
+<h2>User Login</h2>
 
+<input type="email"
+       id="email"
+       placeholder="Enter Email">
 
-<div class="dashboard-title">
-WARRANTY MANAGEMENT SYSTEM
-</div>
-
-
-<div class="dashboard">
-
-
-<a href="warranty.html" class="card">
-
-<i class="fas fa-file-alt"></i>
-<h2>Warranty Requirements</h2>
-
-</a>
-
-
-
-<!-- SECURITY CHECK -->
-
-<div class="card" onclick="requestAccess()">
-
-<i class="fas fa-shield-alt"></i>
-
-<h2>
-Warranty Coverage
-</h2>
-
-</div>
-
-
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" 
-class="card">
-
-
-<i class="fas fa-clipboard-check"></i>
-
-<h2>
-Warranty Sales Order Registration
-</h2>
-
-
-</a>
-
-
-</div>
-
-</div>
-
-
-
-<!-- ACCESS REQUEST -->
-
-<div id="accessModal">
-
-
-<div class="modal-box">
-
-
-<h3>
-Warranty Coverage Access
-</h3>
-
-
-<p>
-Enter your Gmail account.
-Admin approval is required before access.
-</p>
-
-
-<input 
-type="email" 
-id="gmail"
-placeholder="example@gmail.com">
-
-
-
-<button onclick="submitRequest()">
-Request Access
+<button onclick="login()">
+Login
 </button>
 
-
-
-</div>
-
+<div id="msg" class="error"></div>
 
 </div>
-
 
 <script>
 
-console.log("INDEX LOADED");
-
-const WEB_APP_URL =
+const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
-
-let interval;
-
-
-/* OPEN MODAL */
-function requestAccess() {
-    document.getElementById("accessModal").style.display = "flex";
-}
-
-
-/* SEND REQUEST */
-function submitRequest(){
+function login(){
 
     const email =
-    document.getElementById("gmail").value.trim().toLowerCase();
-
+        document.getElementById("email").value.trim();
 
     if(!email){
-        alert("Enter Gmail");
+        document.getElementById("msg").innerHTML =
+            "Please enter email";
         return;
     }
 
+    fetch(
+      `${WEBAPP_URL}?email=${encodeURIComponent(email)}`
+    )
+    .then(r=>r.json())
+    .then(data=>{
 
-    if(!email.endsWith("@gmail.com")){
-        alert("Only Gmail allowed");
-        return;
-    }
+        if(data.approved){
 
+            sessionStorage.setItem(
+                "loggedIn",
+                "true"
+            );
 
-    fetch(WEB_APP_URL,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/x-www-form-urlencoded"
-        },
-        body:
-        "email="+encodeURIComponent(email)+
-        "&action=request"
-    })
-    .then(()=>{
+            sessionStorage.setItem(
+                "userEmail",
+                email
+            );
 
-        localStorage.setItem("userEmail",email);
+            window.location.href="home.html";
 
-        document.getElementById("accessModal")
-        .style.display="none";
+        }else{
 
+            document.getElementById("msg").innerHTML =
+                "Access denied. Email not approved.";
 
-        alert(
-        "Request submitted. Waiting for admin approval."
-        );
-
-
-        startChecking();
+        }
 
     })
-    .catch(()=>{
-        alert("Failed to send request");
+    .catch(err=>{
+
+        document.getElementById("msg").innerHTML =
+            "Connection error";
+
     });
 
 }
-
-
-
-/* CHECK APPROVAL */
-
-function checkStatus(){
-
-
-const email =
-localStorage.getItem("userEmail");
-
-
-if(!email)return;
-
-
-fetch(
-WEB_APP_URL+
-"?email="+encodeURIComponent(email)
-)
-
-.then(res=>res.json())
-
-.then(data=>{
-
-
-console.log(data);
-
-
-if(
-data.status &&
-data.status.toLowerCase()=="approved"
-){
-
-
-clearInterval(interval);
-
-
-
-localStorage.setItem(
-"warrantyUser",
-email
-);
-
-
-localStorage.removeItem(
-"userEmail"
-);
-
-function isLoggedIn() {
-    return !!localStorage.getItem("warrantyUser");
-}
-
-alert(
-"Access Approved!"
-);
-
-
-
-window.location.href=
-"entry.html";
-
-
-
-}
-
-
-
-else{
-
-
-console.log(
-"Waiting approval..."
-);
-
-
-}
-
-
-})
-
-.catch(err=>{
-console.log(err);
-});
-
-
-}
-
-
-
-/* AUTO CHECK */
-
-function startChecking(){
-
-checkStatus();
-
-
-interval=setInterval(
-checkStatus,
-3000
-);
-
-
-}
-
-
-
-/* PAGE LOAD */
-
-window.onload = function () {
-
-    const approvedUser = localStorage.getItem("warrantyUser");
-    const pendingUser = localStorage.getItem("userEmail");
-
-    // If already approved → go entry page
-    if (approvedUser) {
-        window.location.replace("entry.html");
-        return;
-    }
-
-    // If still waiting approval → continue checking
-    if (pendingUser) {
-        startChecking();
-    }
-};
 
 </script>
 

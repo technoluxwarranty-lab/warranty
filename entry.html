@@ -160,7 +160,7 @@ background:#374151;
 <h2>WARRANTY COVERAGE</h2>
     
 <button onclick="goHome()" class="home-btn">
-    ⬅ Back to Homepage
+⬅ Back to Homepage
 </button>
     
 <div class="controls">
@@ -543,72 +543,167 @@ searchInput.addEventListener("keyup", () => {
    ACCESS CONTROL CORE
 ========================= */
 
+let leavingPage = false;
+
+
 function normalize(text) {
     return (text || "").toString().trim().toLowerCase();
 }
 
+
+
 async function checkAccess(email, onDenied) {
+
+
+    if(leavingPage) return;
+
+
     try {
-        const res = await fetch(WEB_APP_URL + "?email=" + encodeURIComponent(email));
-        const json = await res.json();
 
-        console.log("ACCESS RESPONSE:", json);
 
-        const status = normalize(json.status);
+        const res =
+        await fetch(
+        WEB_APP_URL +
+        "?email=" +
+        encodeURIComponent(email)
+        );
 
-        if (status !== "approved") {
+
+        const json =
+        await res.json();
+
+
+
+        const status =
+        normalize(json.status);
+
+
+
+        console.log(
+        "ACCESS RESPONSE:",
+        status
+        );
+
+
+
+        if(status !== "approved"){
+
+
             onDenied(status);
+
+
         }
 
-    } catch (err) {
+
+
+    } catch(err){
+
+
         console.log(err);
-        alert("Unable to verify access.");
-        window.location = "index.html";
+
+
     }
+
 }
+
+
 
 /* =========================
    STARTUP CHECK
 ========================= */
 
-const user = localStorage.getItem("warrantyUser");
 
-if (!user) {
-    alert("Access denied. Please request permission first.");
-    window.location = "index.html";
-} else {
+const user =
+localStorage.getItem("warrantyUser");
 
-    checkAccess(user, (status) => {
-        alert("Access status: " + status);
-        localStorage.removeItem("warrantyUser");
-        window.location = "index.html";
-    });
+
+
+if(!user){
+
+
+    alert(
+    "Access denied. Please request permission first."
+    );
+
+
+    window.location="index.html";
+
+
+}
+else{
+
+
+    checkAccess(
+        user,
+        function(status){
+
+
+            if(leavingPage)return;
+
+
+
+            alert(
+            "Access status: "+status
+            );
+
+
+
+            localStorage.removeItem(
+            "warrantyUser"
+            );
+
+
+            window.location="index.html";
+
+
+        }
+    );
+
 
 }
 
+
+
 /* =========================
-   AUTO RECHECK (LIVE SESSION)
+   AUTO RECHECK
 ========================= */
 
-let accessTimer;
+
+let accessTimer =
+setInterval(function(){
 
 
-function startAccessTimer(){
 
-accessTimer = setInterval(() => {
-
-
-    const user =
-    localStorage.getItem("warrantyUser");
+    if(leavingPage)return;
 
 
-    if (!user) return;
+
+    const currentUser =
+    localStorage.getItem(
+    "warrantyUser"
+    );
 
 
-    checkAccess(user, () => {
+
+    if(!currentUser)return;
 
 
-        localStorage.removeItem("warrantyUser");
+
+
+    checkAccess(
+    currentUser,
+    function(){
+
+
+
+        if(leavingPage)return;
+
+
+
+        localStorage.removeItem(
+        "warrantyUser"
+        );
+
 
 
         window.location="index.html";
@@ -617,43 +712,58 @@ accessTimer = setInterval(() => {
     });
 
 
+
 },5000);
 
 
-}
 
 
-startAccessTimer();
+
+/* =========================
+   BACK TO HOME
+========================= */
+
 
 function goHome(){
 
 
-    // stop access checker
-    clearInterval(accessTimer);
+
+    leavingPage=true;
+
+
+
+    clearInterval(
+    accessTimer
+    );
 
 
 
     const user =
-    localStorage.getItem("warrantyUser");
+    localStorage.getItem(
+    "warrantyUser"
+    );
 
 
 
     if(user){
 
+
         localStorage.setItem(
-            "warrantyUser",
-            user
+        "warrantyUser",
+        user
         );
+
 
     }
 
 
 
-    window.location.replace("index.html");
+    window.location.href =
+    "index.html";
+
 
 
 }
-
 </script>
 
 </body>

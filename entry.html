@@ -108,11 +108,11 @@ footer {
     color: #6b7280;
 }
 
- .home-btn {
+.home-btn {
 
 display:block;
 
-width:200px;
+width:220px;
 
 margin:20px auto;
 
@@ -120,11 +120,11 @@ padding:12px;
 
 text-align:center;
 
-text-decoration:none;
-
 background:#1f2937;
 
 color:white;
+
+border:none;
 
 border-radius:8px;
 
@@ -158,9 +158,11 @@ background:#374151;
 <main>
 
 <h2>WARRANTY COVERAGE</h2>
-<a href="index.html" class="home-btn">
+    
+<button onclick="goHome()" class="home-btn">
     ⬅ Back to Homepage
-</a>
+</button>
+    
 <div class="controls">
 
 <input 
@@ -588,7 +590,13 @@ if (!user) {
    AUTO RECHECK (LIVE SESSION)
 ========================= */
 
-let accessTimer = setInterval(() => {
+let accessTimer;
+
+
+function startAccessTimer(){
+
+accessTimer = setInterval(() => {
+
 
     const user =
     localStorage.getItem("warrantyUser");
@@ -599,20 +607,35 @@ let accessTimer = setInterval(() => {
 
     checkAccess(user, () => {
 
+
         localStorage.removeItem("warrantyUser");
 
+
         window.location="index.html";
+
 
     });
 
 
 },5000);
 
+
+}
+
+
+startAccessTimer();
+
 function goHome(){
 
-    // keep approved access
+
+    // stop access checker
+    clearInterval(accessTimer);
+
+
+
     const user =
     localStorage.getItem("warrantyUser");
+
 
 
     if(user){
@@ -625,7 +648,9 @@ function goHome(){
     }
 
 
-    window.location.href="index.html";
+
+    window.location.replace("index.html");
+
 
 }
 

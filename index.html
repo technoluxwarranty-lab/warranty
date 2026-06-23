@@ -334,12 +334,13 @@ email
 );
 
 
-
 localStorage.removeItem(
 "userEmail"
 );
 
-
+function isLoggedIn() {
+    return !!localStorage.getItem("warrantyUser");
+}
 
 alert(
 "Access Approved!"
@@ -397,30 +398,22 @@ checkStatus,
 
 /* PAGE LOAD */
 
-window.onload=function(){
+window.onload = function () {
 
+    const approvedUser = localStorage.getItem("warrantyUser");
+    const pendingUser = localStorage.getItem("userEmail");
 
-if(
-localStorage.getItem("warrantyUser")
-){
+    // If already approved → go entry page
+    if (approvedUser) {
+        window.location.replace("entry.html");
+        return;
+    }
 
-window.location.href="entry.html";
-return;
-
-}
-
-
-if(
-localStorage.getItem("userEmail")
-){
-
-startChecking();
-
-}
-
-
+    // If still waiting approval → continue checking
+    if (pendingUser) {
+        startChecking();
+    }
 };
-
 
 </script>
 

@@ -9,64 +9,129 @@
 <title>Warranty Claim Tracker</title>
 
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 <style>
+
+
+*{
+    box-sizing:border-box;
+}
+
 
 body{
 
-font-family:Arial,sans-serif;
-background:#f4f7fb;
-margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    margin:0;
 
 }
+
 
 
 /* HEADER */
 
-.header{
+.topbar{
 
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-color:white;
-padding:20px 30px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+    background:#0f172a;
+
+    height:75px;
+
+    padding:0 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 
 }
 
 
-.header h1{
 
-margin:0;
-font-size:24px;
+.logo-section{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
 
 }
+
+
+
+.header-logo{
+
+    height:42px;
+
+}
+
+
+
+.logo-section h1{
+
+    color:white;
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+
+
+.logo-section p{
+
+    color:#cbd5e1;
+
+    font-size:13px;
+
+    margin:3px 0;
+
+}
+
+
 
 
 .home-btn{
 
-background:white;
-color:#2563eb;
-border:none;
-padding:10px 18px;
-border-radius:8px;
-cursor:pointer;
-font-weight:600;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:600;
 
 }
+
 
 
 .home-btn:hover{
 
-transform:translateY(-2px);
+    background:#1d4ed8;
 
 }
+
 
 
 
 
 .container{
 
-padding:30px;
+    padding:30px;
 
 }
 
@@ -75,11 +140,16 @@ padding:30px;
 
 .summary{
 
-background:white;
-border-radius:12px;
-padding:20px;
-margin-bottom:20px;
-box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 
 }
 
@@ -87,11 +157,11 @@ box-shadow:0 3px 12px rgba(0,0,0,.08);
 
 .summary h2{
 
-margin-top:0;
-color:#1e3a8a;
+    color:#1e3a8a;
+
+    margin-top:0;
 
 }
-
 
 
 
@@ -101,13 +171,20 @@ color:#1e3a8a;
 
 .search-box{
 
-background:white;
-padding:15px;
-margin-bottom:20px;
-border-radius:12px;
-display:flex;
-gap:10px;
-box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    gap:10px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 
 }
 
@@ -115,26 +192,35 @@ box-shadow:0 3px 12px rgba(0,0,0,.08);
 
 .search-box input{
 
-flex:1;
-padding:12px 15px;
-border:1px solid #d1d5db;
-border-radius:8px;
-font-size:14px;
+
+    flex:1;
+
+    padding:12px 15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:8px;
 
 }
 
 
 
-
 .search-box button{
 
-background:#2563eb;
-color:white;
-border:none;
-padding:12px 22px;
-border-radius:8px;
-cursor:pointer;
-font-weight:600;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:600;
 
 }
 
@@ -143,9 +229,11 @@ font-weight:600;
 
 .search-box button:hover{
 
-background:#1d4ed8;
+    background:#1d4ed8;
 
 }
+
+
 
 
 
@@ -156,13 +244,77 @@ background:#1d4ed8;
 
 table{
 
-width:100%;
-table-layout:fixed;
-border-collapse:collapse;
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+    width:100%;
+
+    table-layout:fixed;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+}
+
+
+
+
+/* COLUMN WIDTH */
+
+th:nth-child(1),
+td:nth-child(1){
+
+    width:12%;
+
+}
+
+
+
+th:nth-child(2),
+td:nth-child(2){
+
+    width:12%;
+
+}
+
+
+
+th:nth-child(3),
+td:nth-child(3){
+
+    width:22%;
+
+}
+
+
+
+th:nth-child(4),
+td:nth-child(4){
+
+    width:15%;
+
+}
+
+
+
+th:nth-child(5),
+td:nth-child(5){
+
+    width:17%;
+
+}
+
+
+
+th:nth-child(6),
+td:nth-child(6){
+
+    width:22%;
 
 }
 
@@ -170,10 +322,16 @@ box-shadow:0 3px 12px rgba(0,0,0,.08);
 
 th{
 
-background:#2563eb;
-color:white;
-padding:14px;
-text-align:left;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px;
+
+    text-align:left;
+
+    font-size:14px;
 
 }
 
@@ -181,61 +339,18 @@ text-align:left;
 
 td{
 
-padding:12px;
-border-bottom:1px solid #e5e7eb;
-word-wrap:break-word;
-vertical-align:top;
+
+    padding:12px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    vertical-align:top;
+
+    word-wrap:break-word;
+
+    font-size:14px;
 
 }
-
-
-
-/* COLUMN WIDTH */
-
-
-.date{
-
-width:14%;
-
-}
-
-
-.so{
-
-width:14%;
-
-}
-
-
-.customer{
-
-width:20%;
-
-}
-
-
-.brand{
-
-width:15%;
-
-}
-
-
-.claim-status{
-
-width:17%;
-
-}
-
-
-.coo-status{
-
-width:20%;
-
-}
-
-
-
 
 
 
@@ -245,20 +360,27 @@ width:20%;
 
 .status{
 
-padding:6px 12px;
-border-radius:20px;
-font-size:12px;
-font-weight:bold;
-display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    display:inline-block;
 
 }
 
 
 
+
 .approved{
 
-background:#dcfce7;
-color:#166534;
+    background:#dcfce7;
+
+    color:#166534;
 
 }
 
@@ -266,8 +388,9 @@ color:#166534;
 
 .rejected{
 
-background:#fee2e2;
-color:#b91c1c;
+    background:#fee2e2;
+
+    color:#b91c1c;
 
 }
 
@@ -275,8 +398,9 @@ color:#b91c1c;
 
 .pending{
 
-background:#fef3c7;
-color:#92400e;
+    background:#fef3c7;
+
+    color:#92400e;
 
 }
 
@@ -284,58 +408,10 @@ color:#92400e;
 
 .for-approval{
 
-background:#dbeafe;
-color:#1e40af;
+    background:#dbeafe;
 
-}
+    color:#1e40af;
 
-
-.topbar{
-    background:#0f172a;
-    height:75px;
-    padding:0 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-
-.logo-section{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.logo-section h1{
-    color:white;
-    font-size:22px;
-    margin:0;
-}
-
-.logo-section p{
-    color:#cbd5e1;
-    font-size:13px;
-    margin-top:2px;
-}
-
-.header-logo{
-    height:42px;
-    width:auto;
-}
-
-.home-btn{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
-}
-
-.home-btn:hover{
-    background:#1d4ed8;
 }
 
 
@@ -347,31 +423,45 @@ color:#1e40af;
 
 
 
+
 <body>
 
 
 
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <header class="topbar">
 
-    <div class="logo-section">
-        <img src="company-logo.png" alt="Company Logo" class="header-logo">
 
-        <div>
-            <h1>Warranty Management System</h1>
-            <p>Warranty Tracker Portal</p>
-        </div>
-    </div>
+<div class="logo-section">
 
-    <button class="home-btn" onclick="goHome()">
-        <i class="fas fa-home"></i>
-        Home
-    </button>
+
+<img src="company-logo.png"
+class="header-logo">
+
+
+<div>
+
+<h1>Warranty Management System</h1>
+
+<p>Warranty Tracker Portal</p>
+
+</div>
+
+
+</div>
+
+
+
+<button class="home-btn" onclick="goHome()">
+
+<i class="fas fa-home"></i>
+
+Home
+
+</button>
+
 
 </header>
+
 
 
 
@@ -381,15 +471,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 
 
-
 <div class="summary">
 
 
-<h2>
-
-Warranty Claim Monitoring Dashboard
-
-</h2>
+<h2>Warranty Claim Monitoring Dashboard</h2>
 
 
 <p>
@@ -408,19 +493,24 @@ Monitor warranty claim SO approval status.
 <div class="search-box">
 
 
-<input 
+<input
+
 type="text"
+
 id="soSearch"
+
 placeholder="Search SO No..."
+
 onkeyup="filterSO()">
 
 
 
-<button onclick="clearSearch">
+<button onclick="clearSearch()">
 
 Clear
 
 </button>
+
 
 
 </div>
@@ -430,36 +520,13 @@ Clear
 
 
 
-
 <table>
-
-
-<colgroup>
-
-<col class="date">
-
-<col class="so">
-
-<col class="customer">
-
-<col class="brand">
-
-<col class="claim-status">
-
-<col class="coo-status">
-
-
-</colgroup>
-
-
-
 
 
 <thead>
 
 
 <tr>
-
 
 <th>Date Submitted</th>
 
@@ -481,8 +548,6 @@ Clear
 
 
 
-
-
 <tbody id="approvalTable">
 
 
@@ -494,12 +559,10 @@ Loading approval records...
 
 </td>
 
-
 </tr>
 
 
 </tbody>
-
 
 
 </table>
@@ -523,12 +586,15 @@ const SHEET_ID =
 "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
 
 
+
 const SHEET_NAME =
 "Form Responses 1";
 
 
 
 let approvalData=[];
+
+
 
 
 
@@ -552,7 +618,15 @@ approvalData = await response.json();
 
 
 
-console.log(approvalData);
+// NEWEST TO OLDEST
+
+approvalData.sort((a,b)=>{
+
+
+return new Date(b.Timestamp)-new Date(a.Timestamp);
+
+
+});
 
 
 
@@ -563,23 +637,18 @@ displayApproval(approvalData);
 }
 
 
+
 catch(error){
 
 
-console.error(error);
 
-
-
-document.getElementById("approvalTable").innerHTML=
-
-
-`
+document.getElementById("approvalTable").innerHTML=`
 
 <tr>
 
-<td colspan="6" style="color:red;text-align:center">
+<td colspan="6">
 
-Failed to load COO approval data.
+Failed to load records.
 
 </td>
 
@@ -587,12 +656,11 @@ Failed to load COO approval data.
 
 `;
 
-
-
 }
 
 
 }
+
 
 
 
@@ -610,33 +678,26 @@ let html="";
 data.forEach(row=>{
 
 
-const claimStatus =
-
-(row["Warranty SO Claim Status"] || "")
-
-.trim();
+let claimStatus =
+row["Warranty SO Claim Status"] || "Pending";
 
 
 
+let cooStatus =
 
-const cooStatus =
+row["Warranty SO Approval by COO"]
 
-(row["Warranty SO Approval by COO"] ||
+||
 
-row["Warranty SO Approval by Ms. Carina"] ||
+row["Warranty SO Approval by Ms. Carina"]
 
-""
+||
 
-)
-
-.trim();
-
+"Pending";
 
 
 
-
-
-let cooClass="pending";
+let css="pending";
 
 
 
@@ -646,7 +707,7 @@ switch(cooStatus.toLowerCase()){
 
 case "approved":
 
-cooClass="approved";
+css="approved";
 
 break;
 
@@ -654,7 +715,7 @@ break;
 
 case "rejected":
 
-cooClass="rejected";
+css="rejected";
 
 break;
 
@@ -664,10 +725,9 @@ case "for approval":
 
 case "awaiting approval":
 
-cooClass="for-approval";
+css="for-approval";
 
 break;
-
 
 
 }
@@ -675,10 +735,9 @@ break;
 
 
 
-html +=
 
+html+=`
 
-`
 
 <tr>
 
@@ -696,7 +755,6 @@ ${row["Timestamp"] || "-"}
 ${row["SO No"] || "-"}
 
 </td>
-
 
 
 
@@ -720,7 +778,7 @@ ${row["Brand Name:"] || row["Brand Name"] || "-"}
 
 <span class="status pending">
 
-${claimStatus || "Pending"}
+${claimStatus}
 
 </span>
 
@@ -728,12 +786,11 @@ ${claimStatus || "Pending"}
 
 
 
-
 <td>
 
-<span class="status ${cooClass}">
+<span class="status ${css}">
 
-${cooStatus || "Pending"}
+${cooStatus}
 
 </span>
 
@@ -752,7 +809,9 @@ ${cooStatus || "Pending"}
 
 
 
+
 document.getElementById("approvalTable").innerHTML=html;
+
 
 
 }
@@ -766,7 +825,7 @@ document.getElementById("approvalTable").innerHTML=html;
 function filterSO(){
 
 
-const search =
+let search =
 
 document.getElementById("soSearch")
 .value
@@ -774,8 +833,7 @@ document.getElementById("soSearch")
 
 
 
-
-const filtered = approvalData.filter(row=>{
+let filtered = approvalData.filter(row=>{
 
 
 return (
@@ -805,6 +863,7 @@ displayApproval(filtered);
 
 
 
+
 function clearSearch(){
 
 
@@ -814,19 +873,26 @@ document.getElementById("soSearch").value="";
 displayApproval(approvalData);
 
 
-
 }
 
+
+
+
+
+
+function goHome(){
+
+
+window.location.href="home.html";
+
+
+}
 
 
 
 
 loadApproval();
 
-
-function goHome(){
-    window.location.href = "home.html";
-}
 
 
 </script>

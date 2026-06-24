@@ -567,338 +567,203 @@ Loading approval records...
 
 </table>
 
-
-
 </div>
-
-
-
-
-
-
-
-
 
 <script>
 
+const SHEET_ID = "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
+const SHEET_NAME = "Form Responses 1";
 
-const SHEET_ID =
-"1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
+let approvalData = [];
+let lastDataHash = "";
 
+// LOAD DATA FROM GOOGLE SHEET
+async function loadApproval() {
 
+    try {
 
-const SHEET_NAME =
-"Form Responses 1";
+        const response = await fetch(
+            `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}?t=${Date.now()}`
+        );
 
+        const data = await response.json();
 
+        // CHECK IF DATA CHANGED
+        const currentHash = JSON.stringify(data);
 
-let approvalData=[];
+        if (currentHash === lastDataHash) {
+            return;
+        }
 
+        lastDataHash = currentHash;
 
+        approvalData = data;
 
+        // SORT NEWEST TO OLDEST
+        approvalData.sort((a, b) => {
+            return new Date(b.Timestamp) - new Date(a.Timestamp);
+        });
 
+        filterSO();
 
+    } catch (error) {
 
+        console.error("Error loading data:", error);
 
-async function loadApproval(){
-
-
-try{
-
-
-const response = await fetch(
-
-`https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`
-
-);
-
-
-
-approvalData = await response.json();
-
-
-
-// NEWEST TO OLDEST
-
-approvalData.sort((a,b)=>{
-
-
-return new Date(b.Timestamp)-new Date(a.Timestamp);
-
-
-});
-
-
-
-displayApproval(approvalData);
-
-
-
+        document.getElementById("approvalTable").innerHTML = `
+        <tr>
+            <td colspan="6" align="center">
+                Failed to load records.
+            </td>
+        </tr>
+        `;
+    }
 }
 
+// DISPLAY TABLE
+function displayApproval(data) {
 
+    let html = "";
 
-catch(error){
+    if (!data.length) {
 
+        html = `
+        <tr>
+            <td colspan="6" align="center">
+                No records found
+            </td>
+        </tr>
+        `;
 
+        document.getElementById("approvalTable").innerHTML = html;
+        return;
+    }
 
-document.getElementById("approvalTable").innerHTML=`
+    data.forEach(row => {
 
-<tr>
+        const dateSubmitted = row["Timestamp"] || "-";
+        const soNo = row["SO No"] || "-";
+        const customerName = row["Customer Name"] || "-";
+        const brandName = row["Brand Name:"] || row["Brand Name"] || "-";
 
-<td colspan="6">
+        const claimStatus =
+            row["Warranty SO Claim Status"] || "Pending";
 
-Failed to load records.
+        const cooStatus =
+            row["Warranty SO Approval by COO"] ||
+            row["Warranty SO Approval by Ms. Carina"] ||
+            "Pending";
 
-</td>
+        let claimCss = "pending";
+        let cooCss = "pending";
 
-</tr>
+        switch (claimStatus.toLowerCase()) {
 
-`;
+            case "approved":
+                claimCss = "approved";
+                break;
 
+            case "rejected":
+                claimCss = "rejected";
+                break;
+
+            case "under evaluation":
+                claimCss = "for-approval";
+                break;
+
+            case "for approval":
+                claimCss = "for-approval";
+                break;
+        }
+
+        switch (cooStatus.toLowerCase()) {
+
+            case "approved":
+                cooCss = "approved";
+                break;
+
+            case "rejected":
+                cooCss = "rejected";
+                break;
+
+            case "for approval":
+            case "awaiting approval":
+                cooCss = "for-approval";
+                break;
+        }
+
+        html += `
+        <tr>
+
+            <td>${dateSubmitted}</td>
+
+            <td>${soNo}</td>
+
+            <td>${customerName}</td>
+
+            <td>${brandName}</td>
+
+            <td>
+                <span class="status ${claimCss}">
+                    ${claimStatus}
+                </span>
+            </td>
+
+            <td>
+                <span class="status ${cooCss}">
+                    ${cooStatus}
+                </span>
+            </td>
+
+        </tr>
+        `;
+    });
+
+    document.getElementById("approvalTable").innerHTML = html;
 }
 
+// SEARCH FILTER
+function filterSO() {
 
+    const searchText = document
+        .getElementById("soSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const filtered = approvalData.filter(row => {
+
+        const soNo = (row["SO No"] || "").toLowerCase();
+
+        return soNo.includes(searchText);
+    });
+
+    displayApproval(filtered);
 }
 
+// CLEAR SEARCH
+function clearSearch() {
 
+    document.getElementById("soSearch").value = "";
 
-
-
-
-
-
-function displayApproval(data){
-
-
-let html="";
-
-
-
-data.forEach(row=>{
-
-
-let claimStatus =
-row["Warranty SO Claim Status"] || "Pending";
-
-
-
-let cooStatus =
-
-row["Warranty SO Approval by COO"]
-
-||
-
-row["Warranty SO Approval by Ms. Carina"]
-
-||
-
-"Pending";
-
-
-
-let css="pending";
-
-
-
-switch(cooStatus.toLowerCase()){
-
-
-
-case "approved":
-
-css="approved";
-
-break;
-
-
-
-case "rejected":
-
-css="rejected";
-
-break;
-
-
-
-case "for approval":
-
-case "awaiting approval":
-
-css="for-approval";
-
-break;
-
-
+    displayApproval(approvalData);
 }
 
+// HOME BUTTON
+function goHome() {
 
-
-
-
-html+=`
-
-
-<tr>
-
-
-<td>
-
-${row["Timestamp"] || "-"}
-
-</td>
-
-
-
-<td>
-
-${row["SO No"] || "-"}
-
-</td>
-
-
-
-<td>
-
-${row["Customer Name"] || "-"}
-
-</td>
-
-
-
-<td>
-
-${row["Brand Name:"] || row["Brand Name"] || "-"}
-
-</td>
-
-
-
-<td>
-
-<span class="status pending">
-
-${claimStatus}
-
-</span>
-
-</td>
-
-
-
-<td>
-
-<span class="status ${css}">
-
-${cooStatus}
-
-</span>
-
-</td>
-
-
-
-</tr>
-
-
-`;
-
-
-
-});
-
-
-
-
-document.getElementById("approvalTable").innerHTML=html;
-
-
-
+    window.location.href = "home.html";
 }
 
-
-
-
-
-
-
-function filterSO(){
-
-
-let search =
-
-document.getElementById("soSearch")
-.value
-.toLowerCase();
-
-
-
-let filtered = approvalData.filter(row=>{
-
-
-return (
-
-row["SO No"] || ""
-
-)
-
-.toLowerCase()
-
-.includes(search);
-
-
-
-});
-
-
-
-displayApproval(filtered);
-
-
-
-}
-
-
-
-
-
-
-
-function clearSearch(){
-
-
-document.getElementById("soSearch").value="";
-
-
-displayApproval(approvalData);
-
-
-}
-
-
-
-
-
-
-function goHome(){
-
-
-window.location.href="home.html";
-
-
-}
-
-
-
-
+// INITIAL LOAD
 loadApproval();
 
-
+// AUTO UPDATE EVERY 5 SECONDS
+setInterval(() => {
+    loadApproval();
+}, 5000);
 
 </script>
-
-
-
 
 </body>
 

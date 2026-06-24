@@ -264,17 +264,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </header>
 
+
 <div class="filter-panel">
 <h2>Warranty Requirements</h2>
-    <div class="filter-title">
-        Search by brand or warranty replacement part
-    </div>
+
+  <div class="filter-title" id="filterTitle">
+    Search by brand or warranty replacement part
+</div>
 
     <div class="toolbar">
 
-        <select id="brandFilter" onchange="filterBrand()">
-            <option value="all">All Brands</option>
-            <option value="all">TOP 15 BRANDS</option>
+       <select id="brandFilter" onchange="filterBrand()">
+
+    	<option value="all">TOP 15 BRANDS</option>
       	<option value="Amana">AMANA</option>
       <option value="Antunes">ANTUNES</option>
       <option value="Bunn">BUNN-O-MATIC</option>
@@ -306,14 +308,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
         </div>
 
-        <button
-            class="clear-btn"
-            onclick="clearSearch()">
+        <button type="button" class="clear-btn" onclick="clearSearch()">
+    <i class="fas fa-times"></i>
+    Clear
+</button>
 
-            <i class="fas fa-times"></i>
-            Clear
-
-        </button>
 
     </div>
 
@@ -1566,11 +1565,51 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   }
 
   function searchPart() {
-    const keyword = document.getElementById('searchPart').value.toLowerCase();
-    document.querySelectorAll('.part').forEach(p => {
-      p.style.display = p.dataset.part.toLowerCase().includes(keyword) ? 'block' : 'none';
+
+    const filter =
+        document.getElementById("searchPart")
+        .value
+        .toLowerCase();
+
+    const brands =
+        document.querySelectorAll(".brand");
+
+    brands.forEach(brand => {
+
+        const parts =
+            brand.querySelectorAll(".part");
+
+        let brandHasMatch = false;
+
+        parts.forEach(part => {
+
+            const partName =
+                part.querySelector("h3")
+                .textContent
+                .toLowerCase();
+
+            if(partName.includes(filter)){
+
+                part.style.display = "";
+                brandHasMatch = true;
+
+            }else{
+
+                part.style.display = "none";
+
+            }
+
+        });
+
+        brand.style.display =
+            brandHasMatch || filter === ""
+            ? ""
+            : "none";
+
     });
-  }
+
+}
+
 
 function goHome(){
     window.location.href = "home.html";
@@ -1578,11 +1617,8 @@ function goHome(){
 
 
 function clearSearch() {
-    document.getElementById("searchPart").value = "";
-    searchPart(); // Optional: re-run search to refresh results
+    location.reload();
 }
-
-
 
 </script>
 

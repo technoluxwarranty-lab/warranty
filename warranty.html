@@ -6,183 +6,276 @@
   <title>Warranty Claim Requirements </title>
   <style>
 	  
-/* Header styling */
-header {
-    background: #1f2937;
-    color: #fff;
-
-    padding: 10px 24px;
-    height: 45px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    box-sizing: border-box;
+:root{
+    --primary:#0f172a;
+    --secondary:#2563eb;
+    --success:#059669;
+    --background:#f4f6f9;
+    --border:#e2e8f0;
+    --text:#334155;
 }
 
-.header-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:var(--background);
 }
 
+/* TOPBAR */
 
-.header-logo {
-    height: 28px;
-    width: auto;
-    object-fit: contain;
+.topbar{
+    background:var(--primary);
+    height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
-  header {
-    padding: 12px 16px;
-  }
-  .header-title {
-    font-size: 16px;
-  }
-  .header-logo {
-    height: 30px;   /* smaller logo on mobile */
-  }
-}
-    body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)),
-              url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-
-    header {
-      background: #1f2937;
-      color: #fff;
-      padding: 16px 24px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-h2{
-
-color:#1f2937;
- text-align:center;
- margin-bottom:25px;
-
+.logo-section h1{
+    color:white;
+    margin:0;
+    font-size:22px;
 }
 
-    .container {
-      padding: 24px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .toolbar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    select, input[type="search"] {
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      min-width: 220px;
-    }
-.toolbar-subtitle1 {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #6b7280; /* soft gray */
-}
-.toolbar-subtitle2 {
-  margin-top: 8px;
-  font-size: 20px;
-  color: #6b7280; /* soft gray */
+.logo-section p{
+    color:#cbd5e1;
+    margin:2px 0 0;
+    font-size:13px;
 }
 
-    .brand {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 24px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    }
-    .brand h2 {
-      margin-top: 0;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 8px;
-    }
-    .parts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 16px;
-    }
-    .part {
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 16px;
-      background: #fafafa;
-      transition: transform 0.2s ease;
-    }
-    .part:hover {
-      transform: translateY(-4px);
-    }
-    .part img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .part h3 {
-      margin: 8px 0 12px;
-    }
-    label {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
-    footer {
-      text-align: center;
-      padding: 16px;
-      font-size: 13px;
-      color: #6b7280;
-    }
+.header-logo{
+    height:42px;
+}
+
+/* PAGE */
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:35px 25px;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h2{
+    margin:0;
+    color:#0f172a;
+    font-size:32px;
+}
+
+.page-header p{
+    color:#64748b;
+}
+
+/* STATS */
+
+.stats-card{
+    background:white;
+    padding:15px 25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.stats-number{
+    display:block;
+    font-size:28px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.stats-label{
+    font-size:12px;
+    color:#64748b;
+}
+
+/* FILTER PANEL */
+
+.filter-panel{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.filter-title{
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.toolbar{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+select{
+    min-width:250px;
+}
+
+select,
+.search-box input{
+    padding:12px;
+    border:1px solid #dbe2ea;
+    border-radius:10px;
+    font-size:14px;
+}
+
+/* SEARCH */
+
+.search-box{
+    position:relative;
+    flex:1;
+    min-width:250px;
+}
+
+.search-box i{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#94a3b8;
+}
+
+.search-box input{
+    width:100%;
+    padding-left:42px;
+}
+
+/* BUTTONS */
+
+.home-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.clear-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* ALERT */
+
+.alert-box{
+    display:flex;
+    gap:15px;
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:25px;
+}
+
+.alert-box i{
+    font-size:22px;
+    color:#2563eb;
+}
+
+.alert-box p{
+    margin:5px 0 0;
+    color:#475569;
+}
+
+/* BRAND CARDS */
+
+.brand{
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+    border-left:5px solid #2563eb;
+}
+
+.brand h2{
+    text-align:left;
+    margin:0;
+    color:#0f172a;
+}
+
+.parts{
+    margin-top:20px;
+}
+
+.part{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.part:hover{
+    transform:translateY(-4px);
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
   </style>
 
-<script>
-function clearSearch() {
-    document.getElementById("searchPart").value = "";
-    searchPart(); // Optional: re-run search to refresh results
-}
-</script>
 
 </head>
+
+
 <body>
 
-<header>WARRANTY MANAGEMENT SYSTEM<img src="company-logo.png" alt="Company Logo" class="header-logo"</H3>
-</header>
-<h2>
-WARRANTY REQUIREMENTS
-</h2>
-<div class="container">
-<div class="toolbar-subtitle1">
-  Select a brand or search for the required part warranty replacement:
-</div>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <div class="toolbar">
-    <select id="brandFilter" onchange="filterBrand()">
-      <option value="all">TOP 15 BRANDS</option>
-      <option value="Amana">AMANA</option>
+<header class="topbar">
+
+    <div class="logo-section">
+
+        <img src="company-logo.png"
+             alt="Company Logo"
+             class="header-logo">
+
+        <div>
+            <h1>Warranty Management System</h1>
+            <p>Warranty Requirements Portal</p>
+        </div>
+
+    </div>
+
+    <button class="home-btn" onclick="goHome()">
+        <i class="fas fa-home"></i>
+        Home
+    </button>
+
+</header>
+
+<div class="filter-panel">
+
+    <div class="filter-title">
+        Search by brand or warranty replacement part
+    </div>
+
+    <div class="toolbar">
+
+        <select id="brandFilter" onchange="filterBrand()">
+            <option value="all">All Brands</option>
+            <option value="all">TOP 15 BRANDS</option>
+      	<option value="Amana">AMANA</option>
       <option value="Antunes">ANTUNES</option>
       <option value="Bunn">BUNN-O-MATIC</option>
       <option value="Carpigiani">CARPIGIANI</option>
@@ -198,13 +291,52 @@ WARRANTY REQUIREMENTS
       <option value="Turboair">TURBO-AIR</option>
       <option value="Vitamix">VITAMIX</option>
       <option value="Otherbrands">OTHER BRANDS</option>
-    </select>
-    <input type="search" id="searchPart" placeholder="🔍 Search part name..." onkeyup="searchPart()"/>
-	<!-- Clear Button -->
-    <button type="button" onclick="clearSearch()">Clear</button>
-  </div>	
-<div class="toolbar-subtitle2">TOP 5 MOST COMMON PARTS REPLACEMENT PER BRAND</div>
-<div class="toolbar-subtitle1"><B>REMINDER:</B> Review and ensure to follow the instructions provided in the listed checklist or testing procedure before submitting the claim. And kindly double-check all documents to avoid delays or disapproval of the warranty claim.</div>
+
+        </select>
+
+        <div class="search-box">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="search"
+                id="searchPart"
+                placeholder="Search part name..."
+                onkeyup="searchPart()">
+
+        </div>
+
+        <button
+            class="clear-btn"
+            onclick="clearSearch()">
+
+            <i class="fas fa-times"></i>
+            Clear
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="alert-box">
+
+    <i class="fas fa-circle-info"></i>
+
+    <div>
+
+        <strong>Important Reminder</strong>
+
+        <p>
+            Review and complete all required testing procedures,
+            checklists, and supporting documents before submitting
+            a warranty claim. Incomplete submissions may result in
+            delays or claim rejection.
+        </p>
+
+    </div>
+
+</div>
 
 <!-- Amana -->
   <div class="brand" data-brand="Amana">
@@ -481,7 +613,6 @@ WARRANTY REQUIREMENTS
 	<li>Video of pump flow</li>
 	<li>Total Cones</li>
 	<li>Event Memory for 2-weeks</li>
-	<li>Proof of stuck-up</li>
    	</ul>
 	</div>
 
@@ -509,8 +640,6 @@ WARRANTY REQUIREMENTS
 	<ul class=" bullet-list">
        	<li>Transformer output (24V & 8.0.8V)</li>
         <li>AVR/Power Supply</li>
-		<li>Teorema Serial</li>
-		<li>Simcard Serial</li>
 	</ul>
 	</ul>
 	</div>
@@ -531,9 +660,7 @@ WARRANTY REQUIREMENTS
 	<li>Video of pump flow (if defective parts is beater/agitator)</li>
 	<li>Event Memory for 2-weeks</li>
 	<li>AVR / Power Supply </li>
-	<li>Suction and Discharge gauge pressure(applicable for beater motor only)</li>
-	<li>Video of motor without gearbox</li>
-	<li>Fuse status</li>
+	<li>Suction and Discharge gauge pressure</li>
    	</ul>
 	</div>
 
@@ -1085,7 +1212,6 @@ WARRANTY REQUIREMENTS
         <li>Power supply reading</li>
         <li>Photo or Video of the issue/error</li>
 	<li><a href="https://drive.google.com/file/d/1CYTuhboi2tmP5HdwSH1FiTi2JbgGJJBK/view?usp=sharing" target="_blank">Conduct continuity test</a></li>
-		<li>Magnetron display error</li>
    	</ul>
 	</div>
 
@@ -1445,6 +1571,19 @@ WARRANTY REQUIREMENTS
       p.style.display = p.dataset.part.toLowerCase().includes(keyword) ? 'block' : 'none';
     });
   }
+
+function goHome(){
+    window.location.href = "home.html";
+}
+
+
+function clearSearch() {
+    document.getElementById("searchPart").value = "";
+    searchPart(); // Optional: re-run search to refresh results
+}
+
+
+
 </script>
 
 </body>

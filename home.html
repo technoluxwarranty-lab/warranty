@@ -9,140 +9,150 @@
 
 <style>
 
-body {
-    font-family: Arial, sans-serif;
+*{
     margin:0;
     padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI', Tahoma, sans-serif;
+    background:#f4f6f9;
     min-height:100vh;
-    background:url('background.jpg') no-repeat center center fixed;
-    background-size:cover;
+    color:#333;
+}
+
+/* HEADER */
+
+.topbar{
+    background:#0f172a;
+    height:75px;
+    padding:0 30px;
     display:flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
-.overlay{
-    width:90%;
-    max-width:1000px;
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-
-.dashboard-title {
-    font-size:42px;
-    font-weight:900;
-    text-align:center;
+.logo-section h1{
     color:white;
-    margin-bottom:50px;
-    padding:20px;
-    border-radius:15px;
-    background:rgba(0,0,0,.5);
+    font-size:22px;
+    margin:0;
 }
 
-
-.dashboard {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+.logo-section p{
+    color:#cbd5e1;
+    font-size:13px;
+    margin-top:2px;
 }
 
-
-.card {
-    border-radius:15px;
-    text-align:center;
-    padding:40px 20px;
-    color:white;
-    cursor:pointer;
-    text-decoration:none;
-    box-shadow:0 8px 25px rgba(0,0,0,.5);
-    background:linear-gradient(135deg,#6a11cb,#2575fc);
-}
-
-
-.card:nth-child(2){
-    background:linear-gradient(135deg,#ff7e5f,#feb47b);
-}
-
-
-.card:nth-child(3){
-    background:linear-gradient(135deg,#43cea2,#185a9d);
-}
-
-
-.card:hover{
-    transform:translateY(-10px);
-}
-
-
-.card i{
-    font-size:50px;
-    margin-bottom:15px;
-}
-
-
-/* LOGIN POPUP */
-
-#accessModal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.7);
-justify-content:center;
-align-items:center;
-}
-
-
-.modal-box{
-
-background:white;
-padding:30px;
-width:350px;
-border-radius:15px;
-text-align:center;
-
-}
-
-
-.modal-box input{
-
-width:90%;
-padding:12px;
-margin:15px;
-
-}
-
-
-.modal-box button{
-
-padding:12px 25px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#2575fc;
-color:white;
-
+.header-logo{
+    height:42px;
+    width:auto;
 }
 
 .logout-btn{
-    position:fixed;
-    top:20px;
-    right:20px;
-    padding:12px 20px;
-    border:none;
-    border-radius:8px;
-    background:#dc3545;
+    background:#dc2626;
     color:white;
-    font-size:14px;
-    font-weight:bold;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
     cursor:pointer;
-    box-shadow:0 4px 10px rgba(0,0,0,.3);
+    font-weight:600;
+    transition:.3s;
 }
 
 .logout-btn:hover{
-    background:#c82333;
+    background:#b91c1c;
 }
+
+/* DASHBOARD */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.page-title{
+    margin-bottom:30px;
+}
+
+.page-title h2{
+    font-size:32px;
+    color:#0f172a;
+}
+
+.page-title p{
+    color:#64748b;
+    margin-top:5px;
+}
+
+/* CARDS */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:30px;
+    text-decoration:none;
+    color:#1e293b;
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+    transition:.3s;
+    border-left:5px solid #2563eb;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.card i{
+    font-size:42px;
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.card h2{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#64748b;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* DIFFERENT MODULE COLORS */
+
+.card.coverage{
+    border-left-color:#059669;
+}
+
+.card.claim{
+    border-left-color:#ea580c;
+}
+
+.card.coverage i{
+    color:#059669;
+}
+
+.card.claim i{
+    color:#ea580c;
+}
+
 
 </style>
 
@@ -151,59 +161,76 @@ color:white;
 
 <body>
 
-<div class="overlay">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<header class="topbar">
+
+    <div class="logo-section">
+        <img src="company-logo.png" alt="Company Logo" class="header-logo">
+
+        <div>
+            <h1>Warranty Management System</h1>
+            <p>Coverage Reference Portal</p>
+        </div>
+    </div>
+
+     <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
 
 
-<div class="dashboard-title">
-WARRANTY MANAGEMENT SYSTEM
+</header>
+
+<div class="container">
+
+    <div class="page-title">
+        <h2>Dashboard</h2>
+        <p>Select a module to continue.</p>
+    </div>
+
+    <div class="dashboard">
+
+        <a href="warranty.html" class="card">
+            <i class="fas fa-file-contract"></i>
+            <h2>Warranty Requirements</h2>
+            <p>
+                View warranty submission requirements,
+                supporting documents and process guidelines.
+            </p>
+        </a>
+
+        <a href="coverage.html" class="card coverage">
+            <i class="fas fa-shield-alt"></i>
+            <h2>Warranty Coverage</h2>
+            <p>
+                Check warranty coverage details per brand, equipment, and applicable warranty terms.
+            </p>
+        </a>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform"
+           class="card claim">
+
+            <i class="fas fa-clipboard-check"></i>
+
+            <h2>Warranty Claim Registration</h2>
+
+            <p>
+                Submit a new warranty claim.
+            </p>
+
+        </a>
+
+    </div>
+
 </div>
 
-<button class="logout-btn" onclick="logout()">
-    <i class="fas fa-sign-out-alt"></i> Logout
-</button>
-
-<div class="dashboard">
-
-
-<a href="warranty.html" class="card">
-
-<i class="fas fa-file-alt"></i>
-<h2>Warranty Requirements</h2>
-
-</a>
-
-
-<a href="entry.html" class="card">
-
-<i class="fas fa-file-alt"></i>
-<h2>Warranty Coverage</h2>
-
-</a>
-
-
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform" 
-class="card">
-
-
-<i class="fas fa-clipboard-check"></i>
-
-<h2>
-Warranty Sales Order Registration
-</h2>
-
-
-</a>
-
-
-</div>
-
-</div>
 
 <script>
 
 // Prevent direct access if not logged in
 if(sessionStorage.getItem("loggedIn") !== "true"){
-    window.location.href = "index.html";
+    window.location.href = "login.html";
 }
 
 function logout(){
@@ -213,7 +240,7 @@ function logout(){
         sessionStorage.removeItem("loggedIn");
         sessionStorage.removeItem("userEmail");
 
-        window.location.href = "index.html";
+        window.location.href = "login.html";
     }
 }
 

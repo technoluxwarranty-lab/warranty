@@ -483,6 +483,15 @@ Monitor warranty claim SO approval status.
 
 </p>
 
+<p id="lastUpdated"
+style="
+margin-top:10px;
+font-size:13px;
+color:#64748b;
+font-weight:600;
+">
+Last Updated: --
+</p>
 
 </div>
 
@@ -513,9 +522,8 @@ Clear
 
 
 
+
 </div>
-
-
 
 
 
@@ -567,6 +575,8 @@ Loading approval records...
 
 </table>
 
+
+
 </div>
 
 <script>
@@ -577,63 +587,112 @@ const SHEET_NAME = "Form Responses 1";
 let approvalData = [];
 let lastDataHash = "";
 
-// LOAD DATA FROM GOOGLE SHEET
+/* ==========================
+   FETCH GOOGLE SHEET
+========================== */
+
+async function fetchSheetData() {
+
+    const url =
+        `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
+
+    console.log("Fetching:", url);
+
+    const response = await fetch(url, {
+        cache: "no-store"
+    });
+
+    const text = await response.text();
+
+    console.log("Response Status:", response.status);
+    console.log("Response Body:", text);
+
+    if (!response.ok) {
+        throw new Error(
+            `HTTP ${response.status} - ${text}`
+        );
+    }
+
+    let data;
+
+    try {
+        data = JSON.parse(text);
+    } catch (err) {
+        throw new Error("Invalid JSON response");
+    }
+
+    if (!Array.isArray(data)) {
+        throw new Error("Invalid sheet response");
+    }
+
+    console.log("Records Found:", data.length);
+
+    data.sort((a, b) => {
+        return (
+            new Date(b["Timestamp"] || 0) -
+            new Date(a["Timestamp"] || 0)
+        );
+    });
+
+    return data;
+}
+
+/* ==========================
+   LOAD DATA
+========================== */
+
 async function loadApproval() {
 
     try {
 
-        const response = await fetch(
-            `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}?t=${Date.now()}`
-        );
+        const newData = await fetchSheetData();
 
-        const data = await response.json();
+        const newHash = JSON.stringify(newData);
 
-        // CHECK IF DATA CHANGED
-        const currentHash = JSON.stringify(data);
+        if (newHash !== lastDataHash) {
 
-        if (currentHash === lastDataHash) {
-            return;
+            approvalData = newData;
+            lastDataHash = newHash;
+
+            applyCurrentFilter();
+
+            console.log("Sheet Updated");
         }
 
-        lastDataHash = currentHash;
-
-        approvalData = data;
-
-        // SORT NEWEST TO OLDEST
-        approvalData.sort((a, b) => {
-            return new Date(b.Timestamp) - new Date(a.Timestamp);
-        });
-
-        filterSO();
+        updateLastRefresh();
 
     } catch (error) {
 
-        console.error("Error loading data:", error);
+        console.error("LOAD ERROR:", error);
 
         document.getElementById("approvalTable").innerHTML = `
         <tr>
-            <td colspan="6" align="center">
-                Failed to load records.
+            <td colspan="6" style="padding:20px;text-align:center;color:red;">
+                Failed to load records.<br>
+                ${error.message}
             </td>
-        </tr>
-        `;
+        </tr>`;
+
+        updateLastRefresh();
     }
 }
 
-// DISPLAY TABLE
+/* ==========================
+   DISPLAY TABLE
+========================== */
+
 function displayApproval(data) {
 
     let html = "";
 
-    if (!data.length) {
+    if (!data || data.length === 0) {
 
         html = `
         <tr>
-            <td colspan="6" align="center">
-                No records found
+            <td colspan="6" style="text-align:center;padding:20px;">
+                No records found.
             </td>
-        </tr>
-        `;
+        </tr>`;
 
         document.getElementById("approvalTable").innerHTML = html;
         return;
@@ -641,13 +700,10 @@ function displayApproval(data) {
 
     data.forEach(row => {
 
-        const dateSubmitted = row["Timestamp"] || "-";
-        const soNo = row["SO No"] || "-";
-        const customerName = row["Customer Name"] || "-";
-        const brandName = row["Brand Name:"] || row["Brand Name"] || "-";
-
         const claimStatus =
-            row["Warranty SO Claim Status"] || "Pending";
+            row["Warranty SO Claim Status"] ||
+            row["Warranty Claim Status"] ||
+            "Pending";
 
         const cooStatus =
             row["Warranty SO Approval by COO"] ||
@@ -655,7 +711,6 @@ function displayApproval(data) {
             "Pending";
 
         let claimCss = "pending";
-        let cooCss = "pending";
 
         switch (claimStatus.toLowerCase()) {
 
@@ -670,11 +725,9 @@ function displayApproval(data) {
             case "under evaluation":
                 claimCss = "for-approval";
                 break;
-
-            case "for approval":
-                claimCss = "for-approval";
-                break;
         }
+
+        let cooCss = "pending";
 
         switch (cooStatus.toLowerCase()) {
 
@@ -695,13 +748,22 @@ function displayApproval(data) {
         html += `
         <tr>
 
-            <td>${dateSubmitted}</td>
+            <td>${row["Timestamp"] || "-"}</td>
 
-            <td>${soNo}</td>
+            <td>
+                ${row["SO No"] ||
+                  row["SO No."] ||
+                  row["SO Number"] ||
+                  "-"}
+            </td>
 
-            <td>${customerName}</td>
+            <td>${row["Customer Name"] || "-"}</td>
 
-            <td>${brandName}</td>
+            <td>
+                ${row["Brand Name"] ||
+                  row["Brand Name:"] ||
+                  "-"}
+            </td>
 
             <td>
                 <span class="status ${claimCss}">
@@ -715,33 +777,50 @@ function displayApproval(data) {
                 </span>
             </td>
 
-        </tr>
-        `;
+        </tr>`;
     });
 
     document.getElementById("approvalTable").innerHTML = html;
 }
 
-// SEARCH FILTER
-function filterSO() {
+/* ==========================
+   SEARCH
+========================== */
 
-    const searchText = document
-        .getElementById("soSearch")
+function filterSO() {
+    applyCurrentFilter();
+}
+
+function applyCurrentFilter() {
+
+    const search =
+        document.getElementById("soSearch")
         .value
-        .toLowerCase()
-        .trim();
+        .trim()
+        .toLowerCase();
+
+    if (!search) {
+        displayApproval(approvalData);
+        return;
+    }
 
     const filtered = approvalData.filter(row => {
 
-        const soNo = (row["SO No"] || "").toLowerCase();
+        const soNumber =
+            row["SO No"] ||
+            row["SO No."] ||
+            row["SO Number"] ||
+            "";
 
-        return soNo.includes(searchText);
+        return soNumber
+            .toString()
+            .toLowerCase()
+            .includes(search);
     });
 
     displayApproval(filtered);
 }
 
-// CLEAR SEARCH
 function clearSearch() {
 
     document.getElementById("soSearch").value = "";
@@ -749,19 +828,42 @@ function clearSearch() {
     displayApproval(approvalData);
 }
 
-// HOME BUTTON
-function goHome() {
+/* ==========================
+   LAST UPDATED
+========================== */
 
+function updateLastRefresh() {
+
+    const el =
+        document.getElementById("lastUpdated");
+
+    if (!el) return;
+
+    el.innerHTML =
+        "Last Updated: " +
+        new Date().toLocaleString();
+}
+
+/* ==========================
+   HOME
+========================== */
+
+function goHome() {
     window.location.href = "home.html";
 }
 
-// INITIAL LOAD
-loadApproval();
+/* ==========================
+   INITIAL LOAD
+========================== */
 
-// AUTO UPDATE EVERY 5 SECONDS
-setInterval(() => {
+document.addEventListener("DOMContentLoaded", () => {
+
     loadApproval();
-}, 5000);
+
+    // Auto refresh every 10 seconds
+    setInterval(loadApproval, 10000);
+
+});
 
 </script>
 

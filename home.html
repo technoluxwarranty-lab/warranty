@@ -71,6 +71,49 @@ body{
 
 }
 
+/* USER INFO */
+
+.user-info{
+
+    margin-left:auto;
+    margin-right:20px;
+
+    display:flex;
+    align-items:center;
+
+}
+
+.welcome-text{
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+
+    color:white;
+
+}
+
+.welcome-text span{
+
+    font-size:14px;
+    color:#cbd5e1;
+
+}
+
+.welcome-text strong{
+
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+
+}
+
+.welcome-text small{
+
+    font-size:12px;
+    color:#94a3b8;
+
+}
 
 .header-logo{
 
@@ -303,45 +346,34 @@ body{
 
 <header class="topbar">
 
+    <div class="logo-section">
 
-<div class="logo-section">
+        <img src="company-logo.png" class="header-logo">
 
+        <div>
 
-<img src="company-logo.png" 
-class="header-logo">
+            <h1>Warranty Management System</h1>
 
+            <p>Warranty Claims, Coverage, Requirements & Tracker Portal</p>
 
-<div>
+        </div>
 
-<h1>
-Warranty Management System
-</h1>
+    </div>
 
+    <!-- User Information -->
+    <div class="user-info">
+        <div class="welcome-text">
+            <span>👋 Hi, Welcome</span>
+            <small id="userEmail"></small>
+        </div>
+    </div>
 
-<p>
-Warranty Claims, Coverage, Requirements & Tracker Portal
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-<button class="logout-btn" onclick="logout()">
-
-<i class="fas fa-sign-out-alt"></i>
-Logout
-
-</button>
-
-
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        Logout
+    </button>
 
 </header>
-
-
 
 
 
@@ -440,7 +472,7 @@ class="card claim">
 
 
 <h2>
-Warranty Claim SO Registration
+Warranty SO Registration
 </h2>
 
 
@@ -499,39 +531,31 @@ approval status, and claim progress.
 
 <script>
 
-
 // Login protection
-
 if(sessionStorage.getItem("loggedIn") !== "true"){
-
     window.location.href="index.html";
-
 }
 
+// Get stored user details
+const userEmail = sessionStorage.getItem("userEmail") || "";
 
+// Display them
+document.getElementById("userEmail").textContent = userEmail;
 
 function logout(){
 
-
     if(confirm("Are you sure you want to logout?")){
 
-
         sessionStorage.removeItem("loggedIn");
-
         sessionStorage.removeItem("userEmail");
-
 
         window.location.href="index.html";
 
-
     }
-
 
 }
 
-
 </script>
-
 
 
 </body>

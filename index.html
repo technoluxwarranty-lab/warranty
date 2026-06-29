@@ -212,41 +212,53 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function showMessage(type,text){
 
-    const msg =
-    document.getElementById("msg");
+    const msg = document.getElementById("msg");
 
-    msg.className =
-    "message " + type;
+    msg.className = "message " + type;
+    msg.style.display = "block";
+    msg.innerHTML = text;
 
-    msg.style.display =
-    "block";
-
-    msg.innerHTML =
-    text;
 }
 
 
 
 function checkUser(){
 
-
     document.getElementById("spinner")
     .style.display = "block";
 
 
-    fetch(WEBAPP_URL)
+    fetch(WEBAPP_URL, {
+        method: "GET",
+        credentials: "include",
+        redirect: "follow"
+    })
 
-    .then(r => r.json())
+
+    .then(response => {
+
+        if(!response.ok){
+            throw new Error(
+                "Server error: " + response.status
+            );
+        }
+
+        return response.json();
+
+    })
 
 
     .then(data => {
+
+
+        console.log(data);
 
 
         if(!data.success){
 
             showMessage(
                 "error",
-                data.message
+                data.message || "Unable to detect user."
             );
 
             return;
@@ -282,6 +294,7 @@ function checkUser(){
             },1200);
 
 
+
         }else{
 
 
@@ -297,7 +310,10 @@ function checkUser(){
     })
 
 
-    .catch(()=>{
+    .catch(error => {
+
+
+        console.error(error);
 
 
         showMessage(
@@ -322,6 +338,6 @@ function checkUser(){
 }
 
 </script>
-
+    
 </body>
 </html>

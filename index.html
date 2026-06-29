@@ -202,15 +202,13 @@ Enter your company email to request access.
 const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
-document
-.getElementById("email")
-.addEventListener("keypress", function(e){
 
-    if(e.key === "Enter"){
-        login();
-    }
+document.addEventListener("DOMContentLoaded", function(){
+
+    checkUser();
 
 });
+
 
 function showMessage(type,text){
 
@@ -227,101 +225,99 @@ function showMessage(type,text){
     text;
 }
 
-function login(){
 
-    const email =
-    document.getElementById("email")
-    .value
-    .trim();
 
-    if(!email){
+function checkUser(){
 
-        showMessage(
-            "error",
-            "Please enter your email address."
-        );
-
-        return;
-    }
 
     document.getElementById("spinner")
     .style.display = "block";
 
-    document.getElementById("loginBtn")
-    .disabled = true;
 
-    fetch(
-        `${WEBAPP_URL}?email=${encodeURIComponent(email)}`
-    )
+    fetch(WEBAPP_URL)
 
     .then(r => r.json())
 
+
     .then(data => {
 
+
+        if(!data.success){
+
+            showMessage(
+                "error",
+                data.message
+            );
+
+            return;
+        }
+
+
+        sessionStorage.setItem(
+            "userEmail",
+            data.email
+        );
+
+
         if(data.approved){
+
 
             showMessage(
                 "success",
                 "Access approved. Redirecting..."
             );
 
+
             sessionStorage.setItem(
                 "loggedIn",
                 "true"
             );
 
-            sessionStorage.setItem(
-                "userEmail",
-                email
-            );
 
-            setTimeout(() => {
+            setTimeout(()=>{
 
                 window.location.href =
                 "home.html";
 
-            }, 1200);
+            },1200);
+
 
         }else{
 
-            if(data.status === "Pending"){
 
-                showMessage(
-                    "pending",
-                    "Your access request is currently pending approval."
-                );
+            showMessage(
+                "pending",
+                "Your access request is currently pending approval."
+            );
 
-            }else{
-
-                showMessage(
-                    "pending",
-                    "Access request submitted successfully. Please wait for administrator approval."
-                );
-
-            }
 
         }
 
+
     })
 
-    .catch(() => {
+
+    .catch(()=>{
+
 
         showMessage(
             "error",
             "Unable to connect to server. Please try again."
         );
 
+
     })
 
-    .finally(() => {
+
+    .finally(()=>{
+
 
         document.getElementById("spinner")
         .style.display = "none";
 
-        document.getElementById("loginBtn")
-        .disabled = false;
 
     });
+
 
 }
 

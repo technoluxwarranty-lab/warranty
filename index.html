@@ -313,15 +313,9 @@ document.getElementById("spinner")
 
 
 fetch(
-WEBAPP_URL +
-"?email=" +
-encodeURIComponent(email),
+`${WEBAPP_URL}?email=${encodeURIComponent(email)}&t=${Date.now()}`,
 {
-
-method:"GET",
-mode:"cors",
-cache:"no-cache"
-
+    method:"GET"
 })
 
 

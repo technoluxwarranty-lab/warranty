@@ -485,9 +485,12 @@ Last Updated: --
         onkeyup="applyCurrentFilter()">
 
     <select id="statusFilter" onchange="applyCurrentFilter()">
-        <option value="all">All Status</option>
-        <option value="pending">Pending</option>
-    </select>
+    <option value="all">All</option>
+    <option value="pending">Pending</option>
+    <option value="on-process so approval">On-Process SO Approval</option>
+    <option value="approved">Approved</option>
+    <option value="rejected">Rejected</option>
+	</select>
 
     <button onclick="clearSearch()">
         Clear
@@ -679,8 +682,8 @@ function displayApproval(data) {
             "Pending";
 
         const cooStatus =
-            row["Warranty SO Approval by COO"] ||
             row["Warranty SO Approval by Ms. Carina"] ||
+            row["Warranty SO Approval by COO"] ||
             "Pending";
 
         let claimCss = "pending";
@@ -718,35 +721,18 @@ function displayApproval(data) {
                 break;
         }
 
+html += `
 <tr>
 
     <td>${row["Timestamp"] || "-"}</td>
 
-    <td>
-        ${
-            row["SO No"] ||
-            row["SO No."] ||
-            "-"
-        }
-    </td>
+    <td>${row["SO No"] || row["SO No."] || "-"}</td>
 
-    <td>
-        ${
-            row["Area/SP"] ||
-            row["Area / SP"] ||
-            "-"
-        }
-    </td>
+    <td>${row["Area/SP"] || row["Area / SP"] || "-"}</td>
 
     <td>${row["Customer Name"] || "-"}</td>
 
-    <td>
-        ${
-            row["Brand Name"] ||
-            row["Brand Name:"] ||
-            "-"
-        }
-    </td>
+    <td>${row["Brand Name"] || row["Brand Name:"] || "-"}</td>
 
     <td>
         <span class="status ${claimCss}">
@@ -755,11 +741,7 @@ function displayApproval(data) {
     </td>
 
     <td>
-        ${
-            row["Warranty Approval Date"] ||
-            row["Warranty Approval Date"] ||
-            "-"
-        }
+        ${row["Warranty Approval Date"] || "-"}
     </td>
 
     <td>
@@ -768,15 +750,12 @@ function displayApproval(data) {
         </span>
     </td>
 
-     <td>
-        ${
-            row["COO Approval Date"] ||
-            row["COO Approval Date"] ||
-            "-"
-        }
-    </td>
+    <td>
+    ${row["Mam Carina Approval Date"] || "-"}
+</td>
 
-</tr>;
+</tr>
+`;
 
     });
 
@@ -789,51 +768,70 @@ function displayApproval(data) {
 
 function applyCurrentFilter() {
 
-    const search =
-        document.getElementById("soSearch")
+    const search = document.getElementById("soSearch")
         .value
         .trim()
         .toLowerCase();
 
-    const status =
-        document.getElementById("statusFilter")
+    const status = document.getElementById("statusFilter")
         .value
+        .trim()
         .toLowerCase();
 
     const filtered = approvalData.filter(row => {
 
-        const soNumber =
-            (
-                row["SO No"] ||
-                row["SO No."] ||
-                row["SO Number"] ||
-                ""
-            ).toString().toLowerCase();
+        const soNumber = (
+            row["SO No"] ||
+            row["SO No."] ||
+            row["SO Number"] ||
+            ""
+        ).toString().toLowerCase();
 
-        const claimStatus =
-            (
-                row["Warranty SO Claim Status"] ||
-                row["Warranty Claim Status"] ||
-                "Pending"
-            ).toLowerCase();
+        const claimStatus = (
+            row["Warranty SO Claim Status"] ||
+            row["Warranty Claim Status"] ||
+            "Pending"
+        ).trim().toLowerCase();
 
-        const cooStatus =
-            (
-                row["Warranty SO Approval by COO"] ||
-                row["Warranty SO Approval by Ms. Carina"] ||
-                "Pending"
-            ).toLowerCase();
+        const cooStatus = (
+            row["Warranty SO Approval by COO"] ||
+            row["Warranty SO Approval by Ms. Carina"] ||
+            "On-Process SO Approval"
+        ).trim().toLowerCase();
 
-        const matchSearch =
-            soNumber.includes(search);
+        const matchSearch = soNumber.includes(search);
 
         let matchStatus = true;
 
-        if (status === "pending") {
+        switch (status) {
 
-            matchStatus =
-                claimStatus === "pending" ||
-                cooStatus === "pending";
+            case "pending":
+                matchStatus =
+                    claimStatus === "pending" ||
+                    cooStatus === "on-process so approval";
+                break;
+
+            case "on-process so approval":
+                matchStatus =
+                    cooStatus === "on-process so approval";
+                break;
+
+            case "approved":
+                matchStatus =
+                    claimStatus === "approved" ||
+                    cooStatus === "approved";
+                break;
+
+            case "rejected":
+                matchStatus =
+                    claimStatus === "rejected" ||
+                    cooStatus === "rejected";
+                break;
+
+            case "":
+            case "all":
+            default:
+                matchStatus = true;
         }
 
         return matchSearch && matchStatus;
@@ -843,12 +841,6 @@ function applyCurrentFilter() {
     displayApproval(filtered);
 }
 
-function clearSearch() {
-
-    document.getElementById("soSearch").value = "";
-
-    displayApproval(approvalData);
-}
 
 /* ==========================
    LAST UPDATED

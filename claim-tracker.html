@@ -234,7 +234,12 @@ body{
 }
 
 
-
+.search-box select{
+    padding:12px 15px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    background:white;
+}
 
 
 
@@ -267,57 +272,31 @@ table{
 /* COLUMN WIDTH */
 
 th:nth-child(1),
-td:nth-child(1){
-
-    width:12%;
-
-}
-
-
+td:nth-child(1){width:11%;}
 
 th:nth-child(2),
-td:nth-child(2){
-
-    width:12%;
-
-}
-
-
+td:nth-child(2){width:10%;}
 
 th:nth-child(3),
-td:nth-child(3){
-
-    width:22%;
-
-}
-
-
+td:nth-child(3){width:12%;}
 
 th:nth-child(4),
-td:nth-child(4){
-
-    width:15%;
-
-}
-
-
+td:nth-child(4){width:20%;}
 
 th:nth-child(5),
-td:nth-child(5){
-
-    width:17%;
-
-}
-
-
+td:nth-child(5){width:13%;}
 
 th:nth-child(6),
-td:nth-child(6){
+td:nth-child(6){width:16%;}
 
-    width:22%;
+th:nth-child(7),
+td:nth-child(7){width:16%;}
 
-}
+th:nth-child(8),
+td:nth-child(8){width:18%;}
 
+th:nth-child(9),
+td:nth-child(9){width:16%;}
 
 
 th{
@@ -497,35 +476,24 @@ Last Updated: --
 
 
 
-
-
 <div class="search-box">
 
+    <input
+        type="text"
+        id="soSearch"
+        placeholder="Search SO No..."
+        onkeyup="applyCurrentFilter()">
 
-<input
+    <select id="statusFilter" onchange="applyCurrentFilter()">
+        <option value="all">All Status</option>
+        <option value="pending">Pending</option>
+    </select>
 
-type="text"
-
-id="soSearch"
-
-placeholder="Search SO No..."
-
-onkeyup="filterSO()">
-
-
-
-<button onclick="clearSearch()">
-
-Clear
-
-</button>
-
-
-
+    <button onclick="clearSearch()">
+        Clear
+    </button>
 
 </div>
-
-
 
 
 <table>
@@ -540,14 +508,19 @@ Clear
 
 <th>SO No.</th>
 
+<th>Area/SP</th>
+
 <th>Customer Name</th>
 
 <th>Brand Name</th>
 
 <th>Warranty Claim Status</th>
 
+<th>Warranty Approval Date</th>
+
 <th>Warranty SO Approval by COO</th>
 
+<th>COO Approval Date</th>
 
 </tr>
 
@@ -561,7 +534,7 @@ Clear
 
 <tr>
 
-<td colspan="6" align="center">
+<td colspan="9" align="center">
 
 Loading approval records...
 
@@ -745,39 +718,66 @@ function displayApproval(data) {
                 break;
         }
 
-        html += `
-        <tr>
+<tr>
 
-            <td>${row["Timestamp"] || "-"}</td>
+    <td>${row["Timestamp"] || "-"}</td>
 
-            <td>
-                ${row["SO No"] ||
-                  row["SO No."] ||
-                  row["SO Number"] ||
-                  "-"}
-            </td>
+    <td>
+        ${
+            row["SO No"] ||
+            row["SO No."] ||
+            "-"
+        }
+    </td>
 
-            <td>${row["Customer Name"] || "-"}</td>
+    <td>
+        ${
+            row["Area/SP"] ||
+            row["Area / SP"] ||
+            "-"
+        }
+    </td>
 
-            <td>
-                ${row["Brand Name"] ||
-                  row["Brand Name:"] ||
-                  "-"}
-            </td>
+    <td>${row["Customer Name"] || "-"}</td>
 
-            <td>
-                <span class="status ${claimCss}">
-                    ${claimStatus}
-                </span>
-            </td>
+    <td>
+        ${
+            row["Brand Name"] ||
+            row["Brand Name:"] ||
+            "-"
+        }
+    </td>
 
-            <td>
-                <span class="status ${cooCss}">
-                    ${cooStatus}
-                </span>
-            </td>
+    <td>
+        <span class="status ${claimCss}">
+            ${claimStatus}
+        </span>
+    </td>
 
-        </tr>`;
+    <td>
+        ${
+            row["Warranty Approval Date"] ||
+            row["Warranty Approval Date"] ||
+            "-"
+        }
+    </td>
+
+    <td>
+        <span class="status ${cooCss}">
+            ${cooStatus}
+        </span>
+    </td>
+
+     <td>
+        ${
+            row["COO Approval Date"] ||
+            row["COO Approval Date"] ||
+            "-"
+        }
+    </td>
+
+</tr>;
+
     });
 
     document.getElementById("approvalTable").innerHTML = html;
@@ -787,10 +787,6 @@ function displayApproval(data) {
    SEARCH
 ========================== */
 
-function filterSO() {
-    applyCurrentFilter();
-}
-
 function applyCurrentFilter() {
 
     const search =
@@ -799,23 +795,49 @@ function applyCurrentFilter() {
         .trim()
         .toLowerCase();
 
-    if (!search) {
-        displayApproval(approvalData);
-        return;
-    }
+    const status =
+        document.getElementById("statusFilter")
+        .value
+        .toLowerCase();
 
     const filtered = approvalData.filter(row => {
 
         const soNumber =
-            row["SO No"] ||
-            row["SO No."] ||
-            row["SO Number"] ||
-            "";
+            (
+                row["SO No"] ||
+                row["SO No."] ||
+                row["SO Number"] ||
+                ""
+            ).toString().toLowerCase();
 
-        return soNumber
-            .toString()
-            .toLowerCase()
-            .includes(search);
+        const claimStatus =
+            (
+                row["Warranty SO Claim Status"] ||
+                row["Warranty Claim Status"] ||
+                "Pending"
+            ).toLowerCase();
+
+        const cooStatus =
+            (
+                row["Warranty SO Approval by COO"] ||
+                row["Warranty SO Approval by Ms. Carina"] ||
+                "Pending"
+            ).toLowerCase();
+
+        const matchSearch =
+            soNumber.includes(search);
+
+        let matchStatus = true;
+
+        if (status === "pending") {
+
+            matchStatus =
+                claimStatus === "pending" ||
+                cooStatus === "pending";
+        }
+
+        return matchSearch && matchStatus;
+
     });
 
     displayApproval(filtered);

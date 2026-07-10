@@ -193,7 +193,7 @@ Warranty Management System
 
 
 <p class="subtitle">
-Enter your company email to request access.
+Enter provided details below to request access.
 </p>
 
 
@@ -206,6 +206,17 @@ Enter your company email to request access.
 id="email"
 type="email"
 placeholder="Enter your email">
+
+</div>
+
+<div class="input-group" style="margin-top:15px;">
+
+    <i class="fas fa-map-marker-alt"></i>
+
+    <input
+        id="area"
+        type="text"
+        placeholder="Enter your Area/SP/Head Office">
 
 </div>
 
@@ -237,12 +248,6 @@ Login
 <div class="footer">
 
 Access is subject to administrator approval.
-
-</div>
-
-<div class="footer">
-
-Version 1.3
 
 </div>
 
@@ -283,15 +288,13 @@ function showMessage(type,text){
 
 function login(){
 
-
-
 const email =
 document.getElementById("email").value.trim();
 
-
+const area =
+document.getElementById("area").value.trim();
 
 if(email===""){
-
 
     showMessage(
         "error",
@@ -302,6 +305,16 @@ if(email===""){
 
 }
 
+if(area===""){
+
+    showMessage(
+        "error",
+        "Please enter your Area/SP."
+    );
+
+    return;
+
+}
 
 
 const btn =
@@ -319,7 +332,7 @@ document.getElementById("spinner")
 
 
 fetch(
-`${WEBAPP_URL}?email=${encodeURIComponent(email)}&t=${Date.now()}`,
+`${WEBAPP_URL}?email=${encodeURIComponent(email)}&area=${encodeURIComponent(area)}&t=${Date.now()}`,
 {
     method:"GET"
 })
@@ -406,8 +419,6 @@ showMessage(
 
 })
 
-
-
 .catch(error=>{
 
 
@@ -436,14 +447,9 @@ document.getElementById("spinner")
 
 });
 
-
-
 }
 
-
 </script>
-
-
 
 </body>
 </html>

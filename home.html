@@ -332,7 +332,154 @@ body{
 
 }
 
+/* ===========================
+   Confidential Modal
+=========================== */
 
+.modal-overlay{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(15,23,42,.65);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+
+    animation:fadeIn .25s ease;
+
+}
+
+.modal-box{
+
+    width:520px;
+    max-width:90%;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+    animation:popup .25s ease;
+
+}
+
+.modal-icon{
+
+    width:70px;
+    height:70px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#fef2f2;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.modal-icon i{
+
+    font-size:34px;
+    color:#dc2626;
+
+}
+
+.modal-box h2{
+
+    margin-top:20px;
+    color:#0f172a;
+
+}
+
+.modal-box p{
+
+    margin:18px 0;
+    color:#475569;
+    line-height:1.7;
+
+}
+
+.modal-box ul{
+
+    text-align:left;
+
+    margin:20px 0;
+
+    color:#475569;
+
+    line-height:1.8;
+
+    padding-left:20px;
+
+}
+
+.modal-box button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.modal-box button:hover{
+
+    background:#1d4ed8;
+
+}
+
+@keyframes fadeIn{
+
+    from{opacity:0;}
+    to{opacity:1;}
+
+}
+
+@keyframes popup{
+
+    from{
+
+        transform:scale(.9);
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+        opacity:1;
+
+    }
+
+}
 
 </style>
 
@@ -374,7 +521,6 @@ body{
     </button>
 
 </header>
-
 
 
 <div class="container">
@@ -532,31 +678,88 @@ approval status, and claim progress.
 <script>
 
 // Login protection
-if(sessionStorage.getItem("loggedIn") !== "true"){
-    window.location.href="index.html";
+if (sessionStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "index.html";
 }
 
-// Get stored user details
-const userEmail = sessionStorage.getItem("userEmail") || "";
+// Display user email
+document.getElementById("userEmail").textContent =
+    sessionStorage.getItem("userEmail") || "";
 
-// Display them
-document.getElementById("userEmail").textContent = userEmail;
+// Wait until page is fully loaded
+window.onload = function () {
 
-function logout(){
+    const modal = document.getElementById("confidentialModal");
+    const agreeBtn = document.getElementById("agreeBtn");
 
-    if(confirm("Are you sure you want to logout?")){
+    // Show modal once per login
+    if (!sessionStorage.getItem("confidentialAccepted")) {
+
+        modal.style.display = "flex";
+
+        agreeBtn.onclick = function () {
+
+            sessionStorage.setItem("confidentialAccepted", "true");
+
+            // Hide modal
+            modal.style.display = "none";
+
+            // Proceed to home page
+            window.location.href = "home.html";
+
+        };
+
+    }
+
+};
+
+function logout() {
+
+    if (confirm("Are you sure you want to logout?")) {
 
         sessionStorage.removeItem("loggedIn");
         sessionStorage.removeItem("userEmail");
+        sessionStorage.removeItem("confidentialAccepted");
 
-        window.location.href="index.html";
-
+        window.location.href = "index.html";
     }
 
 }
 
+
 </script>
 
+<!-- Confidentiality Modal -->
+<div id="confidentialModal" class="modal-overlay">
+
+    <div class="modal-box">
+
+        <div class="modal-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+
+        <h2>Confidentiality Notice</h2>
+
+        <p>
+            This <strong>Warranty Management System</strong> contains confidential and
+            proprietary information of <strong>Technolux Equipment and Supply Corp.</strong>
+        </p>
+
+        <ul>
+            <li>Authorized employees only.</li>
+            <li>Do not share this website or login credentials.</li>
+            <li>Do not send screenshots or warranty information to customers or external parties.</li>
+            <li>Unauthorized disclosure may result in disciplinary action.</li>
+        </ul>
+
+        <button id="agreeBtn">
+            <i class="fas fa-check-circle"></i>
+            I Understand
+        </button>
+
+    </div>
+
+</div>
 
 </body>
 </html>

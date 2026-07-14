@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Warranty Management System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    background:#f4f6f9;
+    color:#1e293b;
+}
+
+/* ======================
+   TOP BAR
+====================== */
+
+.topbar{
+    background:#0f172a;
+    height:75px;
+    padding:0 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo-section h1{
+    color:white;
+    font-size:22px;
+    margin:0;
+}
+
+.logo-section p{
+    color:#cbd5e1;
+    font-size:13px;
+    margin-top:2px;
+}
+
+.header-logo{
+    height:42px;
+    width:auto;
+}
+
+.home-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.home-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ======================
+   FOOTER
+====================== */
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+    font-size:13px;
+}
+
+.search-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+    margin-bottom:35px;
+
+}
+
+.search-box{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    padding:15px;
+
+    border:1px solid #dbe4ef;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+}
+
+.search-box button{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:0 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.result-card{
+
+    display:none;
+
+    max-width:1100px;
+
+    margin:30px auto;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.result-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    padding-bottom:15px;
+
+}
+
+.result-header h3{
+
+    font-size:24px;
+
+    color:#0f172a;
+
+}
+
+.status-badge{
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:#16a34a;
+
+}
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:18px;
+
+}
+
+.info-item{
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+    padding:18px;
+
+}
+
+.info-item label{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#64748b;
+
+    margin-bottom:8px;
+
+}
+
+.info-item span{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    color:#0f172a;
+
+    word-break:break-word;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo-section">
+        <img src="company-logo.png" alt="Company Logo" class="header-logo">
+
+        <div>
+            <h1>Warranty Management System</h1>
+            <p>Warranty Checker Portal</p>
+        </div>
+    </div>
+
+    <button class="home-btn" onclick="goHome()">
+        <i class="fas fa-home"></i>
+        Home
+    </button>
+
+
+</header>
+
+<div class="search-card">
+
+    <h2>
+        <i class="fas fa-magnifying-glass"></i>
+        Warranty Checker
+    </h2>
+
+    <p>
+        Search equipment warranty using the serial number.
+    </p>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="serialInput"
+            placeholder="Enter Equipment Serial Number">
+
+        <button id="searchBtn" onclick="searchWarranty()">
+    <i class="fas fa-search"></i> Search
+	</button>
+
+    </div>
+
+</div>
+
+<div class="result-card" id="resultCard" style="display:none;">
+
+    <div class="result-header">
+        <h3>Warranty Information</h3>
+        <span id="statusBadge" class="status-badge">ACTIVE</span>
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-item">
+            <label>Serial Number</label>
+            <span id="serial"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Model</label>
+            <span id="model"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Store Name</label>
+            <span id="store"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Brand Name</label>
+            <span id="brand"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Warranty Started</label>
+            <span id="start"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Warranty Period (Months)</label>
+            <span id="period"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Warranty End</label>
+            <span id="end"></span>
+        </div>
+
+        <div class="info-item">
+            <label>Status</label>
+            <span id="status"></span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbzgSoe-k6ccFPokRXHg9V3e1VR5oIf1zfUBUh2YzsZbppPX7SibGl9A6b5FgEjZW2HW/exec";
+
+// Allow Enter key to search
+document.getElementById("serialInput").addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+        searchWarranty();
+    }
+
+});
+
+async function searchWarranty(){
+
+    const btn = document.getElementById("searchBtn");
+    const serial = document.getElementById("serialInput").value.trim();
+
+    if(serial === ""){
+
+        alert("Please enter a Serial Number.");
+        document.getElementById("serialInput").focus();
+        return;
+
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+
+    try{
+
+        const response = await fetch(
+            WEB_APP_URL + "?serial=" + encodeURIComponent(serial)
+        );
+
+        if(!response.ok){
+            throw new Error("Unable to connect to the server.");
+        }
+
+        const data = await response.json();
+
+        if(!data.found){
+
+            alert("Serial Number not found.");
+
+            document.getElementById("resultCard").style.display = "none";
+
+            return;
+
+        }
+
+        // Display Result Card
+        document.getElementById("resultCard").style.display = "block";
+
+        // Populate Data
+        document.getElementById("serial").textContent = data.serial;
+        document.getElementById("model").textContent = data.model;
+        document.getElementById("store").textContent = data.store;
+        document.getElementById("brand").textContent = data.brand;
+        document.getElementById("start").textContent = data.start;
+        document.getElementById("period").textContent = data.period;
+        document.getElementById("end").textContent = data.end;
+        document.getElementById("status").textContent = data.status;
+
+        // Status Badge
+        const badge = document.getElementById("statusBadge");
+
+	badge.textContent = data.status;
+
+	switch (data.status) {
+
+    	case "Active":
+        badge.style.background = "#16a34a";   // Green
+        break;
+
+    	case "Expiring Soon":
+        badge.style.background = "#f59e0b";   // Orange
+        break;
+
+   	 case "Expired":
+        badge.style.background = "#dc2626";   // Red
+        break;
+
+    	default:
+        badge.style.background = "#64748b";   // Gray
+}
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("An error occurred while retrieving the warranty information.");
+
+    }finally{
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-search"></i> Search';
+
+    }
+
+}
+
+function goHome(){
+
+    window.location.href = "home.html";
+
+}
+
+</script>
+
+<footer>© 2026 Warranty Section</footer>
+
+</body>
+
+</html>

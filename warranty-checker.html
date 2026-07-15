@@ -187,18 +187,52 @@ footer{
 }
 
 .status-badge{
-
     padding:8px 18px;
-
     border-radius:30px;
-
     font-weight:600;
-
     color:white;
-
-    background:#16a34a;
-
+    transition:.3s;
 }
+
+/* Active */
+.status-badge.active{
+    background:#16a34a;
+    animation: pulse 1.5s infinite;
+}
+
+/* Expiring Soon */
+.status-badge.expiring{
+    background:#f59e0b;
+}
+
+/* Expired */
+.status-badge.expired{
+    background:#dc2626;
+}
+
+/* Default */
+.status-badge.default{
+    background:#64748b;
+}
+
+/* Pulse Animation */
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+        box-shadow:0 0 0 0 rgba(22,163,74,.7);
+    }
+
+    70%{
+        transform:scale(1.08);
+        box-shadow:0 0 0 15px rgba(22,163,74,0);
+    }
+
+    100%{
+        transform:scale(1);
+        box-shadow:0 0 0 0 rgba(22,163,74,0);
+    }
+}
+
 
 .info-grid{
 
@@ -332,7 +366,7 @@ footer{
             <span id="start"></span>
         </div>
 
-		<div class="info-item">
+	<div class="info-item">
             <label>Warranty End</label>
             <span id="end"></span>
         </div>
@@ -340,7 +374,7 @@ footer{
         <div class="info-item">
             <label>Warranty Period (Months)</label>
             <span id="period"></span>
-        </div>
+        </div>  
 
         <div class="info-item">
             <label>Status</label>
@@ -415,29 +449,42 @@ async function searchWarranty(){
         document.getElementById("start").textContent = data.start;
         document.getElementById("period").textContent = data.period;
         document.getElementById("end").textContent = data.end;
-        document.getElementById("status").textContent = data.status;
+        const statusText = document.getElementById("status");
 
-        // Status Badge
+	if (data.status === "Expired") {
+    	statusText.textContent = "Out of Warranty";
+	} else {
+    statusText.textContent = "Under Warranty";
+	}
+
+      
         const badge = document.getElementById("statusBadge");
 
 	badge.textContent = data.status;
 
-	switch (data.status) {
+	badge.classList.remove(
+  	  "active",
+   	"expiring",
+   	 "expired",
+    	"default"
+);
 
-    	case "Active":
-        badge.style.background = "#16a34a";   // Green
+switch(data.status){
+
+    case "Active":
+        badge.classList.add("active");
         break;
 
-    	case "Expiring Soon":
-        badge.style.background = "#f59e0b";   // Orange
+    case "Expiring Soon":
+        badge.classList.add("expiring");
         break;
 
-   	 case "Expired":
-        badge.style.background = "#dc2626";   // Red
+    case "Expired":
+        badge.classList.add("expired");
         break;
 
-    	default:
-        badge.style.background = "#64748b";   // Gray
+    default:
+        badge.classList.add("default");
 }
 
     }catch(error){

@@ -332,6 +332,14 @@ body{
 
 }
 
+.card.checker{
+    border-left:5px solid #2563eb;
+}
+
+.card.checker i{
+    color:#2563eb;
+}
+
 /* ===========================
    Confidential Modal
 =========================== */
@@ -686,67 +694,66 @@ approval status, and claim progress.
 
 </div>
 
-
-
-
-
+    
 <script>
 
-// Login protection
-if (sessionStorage.getItem("loggedIn") !== "true") {
-    window.location.href = "index.html";
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-// Display user email
-document.getElementById("userEmail").textContent =
-    sessionStorage.getItem("userEmail") || "";
+    // ==========================
+    // Login Protection
+    // ==========================
+    if (localStorage.getItem("loggedIn") !== "true") {
+        window.location.href = "index.html";
+        return;
+    }
 
-// Wait until page is fully loaded
-window.onload = function () {
+    // ==========================
+    // Display User Email
+    // ==========================
+    document.getElementById("userEmail").textContent =
+        localStorage.getItem("userEmail") || "";
 
+    // ==========================
+    // Show Confidentiality Modal
+    // (Shows EVERY TIME home.html is opened)
+    // ==========================
     const modal = document.getElementById("confidentialModal");
     const agreeBtn = document.getElementById("agreeBtn");
 
-    // Show modal once per login
-    if (!sessionStorage.getItem("confidentialAccepted")) {
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
 
-        modal.style.display = "flex";
+    agreeBtn.addEventListener("click", function () {
 
-        agreeBtn.onclick = function () {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
 
-            sessionStorage.setItem("confidentialAccepted", "true");
+    });
 
-            // Hide modal
-            modal.style.display = "none";
+});
 
-            // Proceed to home page
-            window.location.href = "home.html";
 
-        };
-
-    }
-
-};
-
+// ==========================
+// Logout
+// ==========================
 function logout(){
 
     localStorage.removeItem("loggedIn");
 
-    // Keep email and area so the user doesn't have to type them again
-    // Remove these two lines if you want to forget them
+    // Keep email & area
+    // Uncomment these if you want to clear them too.
+
     // localStorage.removeItem("userEmail");
     // localStorage.removeItem("userArea");
 
-    window.location.href="index.html";
+    window.location.href = "index.html";
 
 }
-
-
 
 </script>
 
 <!-- Confidentiality Modal -->
-<div id="confidentialModal" class="modal-overlay">
+<div id="confidentialModal" class="modal-overlay" style="display:none;">
 
     <div class="modal-box">
 

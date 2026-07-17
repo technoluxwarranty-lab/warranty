@@ -738,6 +738,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // ==========================
 function logout(){
 
+const confirmLogout = confirm(
+    "Are you sure you want to log out?."
+    );
+
+    if (!confirmLogout) {
+        return;
+    }
+
     localStorage.removeItem("loggedIn");
 
     // Keep email & area

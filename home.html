@@ -728,18 +728,19 @@ window.onload = function () {
 
 };
 
-function logout() {
+function logout(){
 
-    if (confirm("Are you sure you want to logout?")) {
+    localStorage.removeItem("loggedIn");
 
-        sessionStorage.removeItem("loggedIn");
-        sessionStorage.removeItem("userEmail");
-        sessionStorage.removeItem("confidentialAccepted");
+    // Keep email and area so the user doesn't have to type them again
+    // Remove these two lines if you want to forget them
+    // localStorage.removeItem("userEmail");
+    // localStorage.removeItem("userArea");
 
-        window.location.href = "index.html";
-    }
+    window.location.href="login.html";
 
 }
+
 
 
 </script>

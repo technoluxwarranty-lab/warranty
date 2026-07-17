@@ -260,9 +260,6 @@ Version 1.4
 
 </div>
 
-
-
-
 <script>
 
 
@@ -290,6 +287,26 @@ function showMessage(type,text){
 }
 
 
+// Auto-fill saved information
+window.onload = function () {
+
+    const savedEmail = localStorage.getItem("userEmail");
+    const savedArea = localStorage.getItem("userArea");
+
+    if (savedEmail) {
+        document.getElementById("email").value = savedEmail;
+    }
+
+    if (savedArea) {
+        document.getElementById("area").value = savedArea;
+    }
+
+    // Already logged in
+    if (localStorage.getItem("loggedIn") === "true") {
+        window.location.href = "home.html";
+    }
+
+};
 
 
 function login(){
@@ -315,7 +332,7 @@ if(area===""){
 
     showMessage(
         "error",
-        "Please enter your Area/SP/Head Office."
+        "Please enter your Area/SP."
     );
 
     return;
@@ -372,11 +389,8 @@ return;
 
 
 
-sessionStorage.setItem(
-"userEmail",
-data.email
-);
-
+localStorage.setItem("userEmail", data.email);
+localStorage.setItem("userArea", area);
 
 
 
@@ -384,10 +398,7 @@ if(data.approved){
 
 
 
-sessionStorage.setItem(
-"loggedIn",
-"true"
-);
+localStorage.setItem("loggedIn", "true");
 
 
 
@@ -425,6 +436,8 @@ showMessage(
 
 })
 
+
+
 .catch(error=>{
 
 
@@ -453,7 +466,10 @@ document.getElementById("spinner")
 
 });
 
+
+
 }
+
 
 </script>
 

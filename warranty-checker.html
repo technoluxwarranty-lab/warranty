@@ -12,7 +12,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <title>Warranty Management System</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -46,9 +45,8 @@ body{
 }
 
 .logo-section h1{
-    color:white;
+    color:#fff;
     font-size:22px;
-    margin:0;
 }
 
 .logo-section p{
@@ -64,7 +62,7 @@ body{
 
 .home-btn{
     background:#2563eb;
-    color:white;
+    color:#fff;
     border:none;
     padding:10px 18px;
     border-radius:8px;
@@ -78,6 +76,222 @@ body{
 }
 
 /* ======================
+   SEARCH CARD
+====================== */
+
+.search-card{
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    margin-bottom:35px;
+}
+
+.search-box{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.search-box input{
+    flex:1;
+    padding:15px;
+    border:1px solid #dbe4ef;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.search-box button{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:0 30px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.search-box button:hover{
+    background:#1d4ed8;
+}
+
+/* ======================
+   RESULT CARD
+====================== */
+
+.result-card{
+    display:none;
+    max-width:1100px;
+    margin:30px auto;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* ======================
+   HEADER
+====================== */
+
+.result-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:20px;
+    margin-bottom:30px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.result-header h3{
+    font-size:30px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+/* ======================
+   STATUS
+====================== */
+
+.status-badge{
+    padding:10px 20px;
+    border-radius:50px;
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+}
+
+.status-badge.active{
+    background:#16a34a;
+    animation:pulse 1.5s infinite;
+}
+
+.status-badge.expiring{
+    background:#f59e0b;
+}
+
+.status-badge.expired{
+    background:#dc2626;
+}
+
+.status-badge.default{
+    background:#64748b;
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+        box-shadow:0 0 0 0 rgba(22,163,74,.7);
+    }
+
+    70%{
+        transform:scale(1.05);
+        box-shadow:0 0 0 15px rgba(22,163,74,0);
+    }
+
+    100%{
+        transform:scale(1);
+        box-shadow:0 0 0 0 rgba(22,163,74,0);
+    }
+}
+
+/* ======================
+   WARRANTY SECTION
+====================== */
+
+.warranty-section{
+    padding:10px 0;
+}
+
+.section-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:700;
+    color:#1e293b;
+    margin-bottom:20px;
+}
+
+.section-divider{
+    border:none;
+    border-top:1px solid #e5e7eb;
+    margin:35px 0;
+}
+
+/* ======================
+   INFO GRID
+====================== */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:18px;
+}
+
+.info-item{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:18px;
+    transition:.3s;
+}
+
+.info-item:hover{
+    border-color:#2563eb;
+    transform:translateY(-2px);
+}
+
+.info-item label{
+    display:block;
+    font-size:13px;
+    color:#64748b;
+    margin-bottom:8px;
+}
+
+.info-item span{
+    font-size:18px;
+    font-weight:600;
+    color:#0f172a;
+    word-break:break-word;
+}
+
+/* ======================
+   TABLE
+====================== */
+
+.table-responsive{
+    width:100%;
+    overflow-x:auto;
+}
+
+.extended-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.extended-table thead th{
+    background:#5b5ce8;
+    color:#fff;
+    padding:16px;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+}
+
+.extended-table tbody td{
+    padding:16px;
+    border-bottom:1px solid #e5e7eb;
+    background:#fff;
+    font-size:15px;
+}
+
+.extended-table tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* ======================
    FOOTER
 ====================== */
 
@@ -88,233 +302,7 @@ footer{
     font-size:13px;
 }
 
-.search-card{
-
-    background:white;
-
-    padding:35px;
-
-    border-radius:18px;
-
-    box-shadow:0 5px 18px rgba(0,0,0,.08);
-
-    margin-bottom:35px;
-
-}
-
-.search-box{
-
-    display:flex;
-
-    gap:15px;
-
-    margin-top:25px;
-
-}
-
-.search-box input{
-
-    flex:1;
-
-    padding:15px;
-
-    border:1px solid #dbe4ef;
-
-    border-radius:10px;
-
-    font-size:16px;
-
-}
-
-.search-box button{
-
-    background:#2563eb;
-
-    color:white;
-
-    border:none;
-
-    padding:0 30px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-}
-
-.result-card{
-
-    display:none;
-
-    max-width:1100px;
-
-    margin:30px auto;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:30px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-}
-
-.result-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-    padding-bottom:15px;
-    border-bottom:1px solid #e5e7eb;
-}
-
-.result-header h3{
-    margin:0;
-    font-size:24px;
-    color:#0f172a;
-}
-
-.section-header{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin:20px 0;
-    font-size:20px;
-    font-weight:700;
-    color:#1e293b;
-}
-
-.status-badge{
-    padding:8px 18px;
-    border-radius:30px;
-    font-weight:600;
-    color:white;
-    transition:.3s;
-}
-
-/* Active */
-.status-badge.active{
-    background:#16a34a;
-    animation: pulse 1.5s infinite;
-}
-
-/* Expiring Soon */
-.status-badge.expiring{
-    background:#f59e0b;
-}
-
-/* Expired */
-.status-badge.expired{
-    background:#dc2626;
-}
-
-/* Default */
-.status-badge.default{
-    background:#64748b;
-}
-
-/* Pulse Animation */
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-        box-shadow:0 0 0 0 rgba(22,163,74,.7);
-    }
-
-    70%{
-        transform:scale(1.08);
-        box-shadow:0 0 0 15px rgba(22,163,74,0);
-    }
-
-    100%{
-        transform:scale(1);
-        box-shadow:0 0 0 0 rgba(22,163,74,0);
-    }
-}
-
-
-.info-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-
-    gap:18px;
-
-}
-
-.info-item{
-
-    background:#f8fafc;
-
-    border:1px solid #e2e8f0;
-
-    border-radius:12px;
-
-    padding:18px;
-
-}
-
-.info-item label{
-
-    display:block;
-
-    font-size:13px;
-
-    color:#64748b;
-
-    margin-bottom:8px;
-
-}
-
-.info-item span{
-
-    font-size:17px;
-
-    font-weight:600;
-
-    color:#0f172a;
-
-    word-break:break-word;
-
-}
-
-.table-responsive{
-    width:100%;
-    overflow-x:auto;
-}
-
-.extended-table{
-    width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
-}
-
-.extended-table thead th{
-    background:#4f5be3;
-    color:#fff;
-    padding:14px 16px;
-    text-align:left;
-    font-size:16px;
-    font-weight:600;
-    border-right:2px solid #fff;
-}
-
-.extended-table thead th:last-child{
-    border-right:none;
-}
-
-.extended-table tbody td{
-    padding:14px 16px;
-    border-bottom:1px solid #e5e7eb;
-    font-size:16px;
-    color:#1e293b;
-}
-
 </style>
-
 </head>
 
 
@@ -367,89 +355,95 @@ footer{
 
 <div class="result-card" id="resultCard" style="display:none;">
 
-    <!-- Warranty Information -->
+    <!-- Header -->
     <div class="result-header">
         <h3>Warranty Information</h3>
         <span id="statusBadge" class="status-badge"></span>
     </div>
 
-    <!-- Standard Parts Warranty -->
-    <div class="section-header">
-        <i class="fas fa-toolbox"></i>
-        <span>Standard Parts Warranty</span>
+    <!-- ================= Standard Warranty ================= -->
+    <div class="warranty-section">
+
+        <div class="section-header">
+            <i class="fas fa-toolbox"></i>
+            <span>Standard Parts Warranty</span>
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-item">
+                <label>Brand Name</label>
+                <span id="brand"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Model</label>
+                <span id="model"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Serial Number</label>
+                <span id="serial"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Store Name</label>
+                <span id="store"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Warranty Started</label>
+                <span id="start"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Warranty End</label>
+                <span id="end"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Warranty Period (Months)</label>
+                <span id="period"></span>
+            </div>
+
+            <div class="info-item">
+                <label>Warranty Status</label>
+                <span id="status"></span>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="info-grid">
+    <!-- Divider -->
+    <hr class="section-divider">
 
-        <div class="info-item">
-            <label>Brand Name</label>
-            <span id="brand"></span>
+    <!-- ================= Extended Warranty ================= -->
+    <div class="warranty-section" id="extendedCard" style="display:none;">
+
+        <div class="section-header">
+            <i class="fas fa-shield-alt"></i>
+            <span>Extended Parts Warranty</span>
         </div>
 
-        <div class="info-item">
-            <label>Model</label>
-            <span id="model"></span>
+        <div class="table-responsive">
+
+            <table class="extended-table">
+
+                <thead>
+                    <tr>
+                        <th>Part Name</th>
+                        <th>Warranty Period (Years)</th>
+                        <th>Warranty End</th>
+                    </tr>
+                </thead>
+
+                <tbody id="extendedBody">
+                </tbody>
+
+            </table>
+
         </div>
-
-        <div class="info-item">
-            <label>Serial Number</label>
-            <span id="serial"></span>
-        </div>
-
-        <div class="info-item">
-            <label>Store Name</label>
-            <span id="store"></span>
-        </div>
-
-        <div class="info-item">
-            <label>Warranty Started</label>
-            <span id="start"></span>
-        </div>
-
-        <div class="info-item">
-            <label>Warranty End</label>
-            <span id="end"></span>
-        </div>
-
-        <div class="info-item">
-            <label>Warranty Period (Months)</label>
-            <span id="period"></span>
-        </div>
-
-        <div class="info-item">
-            <label>Warranty Status</label>
-            <span id="status"></span>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Extended Parts Warranty -->
-<div class="result-card" id="extendedCard" style="display:none;">
-
-    <div class="section-header">
-        <i class="fas fa-shield-alt"></i>
-        <span>Extended Parts Warranty</span>
-    </div>
-
-    <div class="table-responsive">
-
-        <table class="extended-table">
-
-            <thead>
-
-                <tr>
-                    <th>Part Name</th>
-                    <th>Warranty Period (Years)</th>
-                    <th>Warranty End</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="extendedBody"></tbody>
-
-        </table>
 
     </div>
 

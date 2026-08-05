@@ -237,6 +237,83 @@ select,
     font-size:13px;
 }
 
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.45);
+}
+
+.modal-content{
+    background:#fff;
+    width:420px;
+    max-width:90%;
+    margin:8% auto;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.modal-content h3{
+    margin-top:0;
+}
+
+.modal-content select{
+    width:100%;
+    margin-top:6px;
+}
+
+.modal-content button{
+    margin-top:20px;
+    margin-right:10px;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+/* PRINT SETTINGS */
+@media print {
+
+    .topbar,
+    .filter-panel,
+    .alert-box,
+    #printModal,
+    footer{
+        display:none !important;
+    }
+
+    body{
+        background:#fff !important;
+        margin:0;
+    }
+
+    /* DON'T force display:block */
+    .brand{
+        margin:0;
+        padding:0;
+        border:none;
+        box-shadow:none;
+        page-break-inside:avoid;
+    }
+
+    .part{
+        border:none;
+        box-shadow:none;
+        page-break-inside:avoid;
+    }
+
+    img{
+        max-width:180px;
+        height:auto;
+    }
+
+    @page{
+        margin:12mm;
+    }
+}
 
   </style>
 
@@ -249,6 +326,7 @@ select,
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<div class="no-print">
 <header class="topbar">
 
     <div class="logo-section">
@@ -320,6 +398,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     Clear
 </button>
 
+<button class="home-btn" onclick="openPrintModal()">
+    <i class="fas fa-print"></i> Print
+</button>
 
     </div>
 
@@ -341,6 +422,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </p>
 
     </div>
+
+</div>
 
 </div>
 
@@ -2323,7 +2406,29 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
   </div>
 
+<div id="printModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h3>Print Warranty Requirements</h3>
+
+        <label>Brand</label>
+        <select id="printBrand" onchange="loadPrintParts()">
+            <option value="">--Select Brand--</option>
+        </select>
+
+        <br><br>
+
+        <label>Part Description</label>
+        <select id="printPart">
+            <option value="">--Select Part--</option>
+        </select>
+
+        <br><br>
+
+        <button onclick="startPrint()">Print</button>
+        <button onclick="closePrint()">Cancel</button>
+    </div>
 </div>
+
 
 <script>
   function filterBrand() {
@@ -2387,6 +2492,100 @@ function goHome(){
 
 function clearSearch() {
     location.reload();
+}
+
+function openPrintModal(){
+
+    const brandSelect = document.getElementById("printBrand");
+    brandSelect.innerHTML='<option value="">--Select Brand--</option>';
+
+    document.querySelectorAll(".brand").forEach(brand=>{
+
+        let opt=document.createElement("option");
+        opt.value=brand.dataset.brand;
+        opt.text=brand.querySelector("h2").innerText;
+        brandSelect.appendChild(opt);
+
+    });
+
+    document.getElementById("printModal").style.display="block";
+
+}
+
+function closePrint(){
+
+    document.getElementById("printModal").style.display="none";
+
+}
+
+function loadPrintParts(){
+
+    const brand=document.getElementById("printBrand").value;
+
+    const partSelect=document.getElementById("printPart");
+
+    partSelect.innerHTML='<option value="">--Select Part--</option>';
+
+    const brandDiv=document.querySelector(
+        '.brand[data-brand="'+brand+'"]'
+    );
+
+    if(!brandDiv) return;
+
+    brandDiv.querySelectorAll(".part").forEach(part=>{
+
+        let opt=document.createElement("option");
+
+        opt.value=part.dataset.part;
+        opt.text=part.querySelector("h3").innerText;
+
+        partSelect.appendChild(opt);
+
+    });
+
+}
+
+function startPrint(){
+
+    const brand=document.getElementById("printBrand").value;
+    const part=document.getElementById("printPart").value;
+
+    if(brand==""){
+        alert("Please select a Brand.");
+        return;
+    }
+
+    if(part==""){
+        alert("Please select a Part Description.");
+        return;
+    }
+
+    document.querySelectorAll(".brand").forEach(b=>{
+
+        if(b.dataset.brand===brand){
+
+            b.style.display="block";
+
+            b.querySelectorAll(".part").forEach(p=>{
+
+                p.style.display=(p.dataset.part===part)?"block":"none";
+
+            });
+
+        }else{
+
+            b.style.display="none";
+
+        }
+
+    });
+
+    document.getElementById("printModal").style.display="none";
+
+    window.print();
+
+    location.reload();
+
 }
 
 </script>

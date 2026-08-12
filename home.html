@@ -1946,12 +1946,25 @@ async function loadClaimsSummary() {
            UPDATE STATUS
         ===================================================== */
 
-        statusEl.textContent =
-            "Live from Warranty SO Monitoring";
+       function updateStatusDateTime() {
+    const now = new Date();
 
-        statusEl.className =
-            "summary-status success";
+    const formattedDateTime = now.toLocaleString("en-PH", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+    });
 
+    statusEl.textContent = `Last Updated: ${formattedDateTime}`;
+    statusEl.className = "summary-status success";
+}
+
+updateStatusDateTime();
+setInterval(updateStatusDateTime, 1000);
 
         /* =====================================================
            CONSOLE SUMMARY

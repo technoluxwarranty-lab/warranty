@@ -1487,7 +1487,6 @@ body{
 
 </main>
 
-
 <script>
 /* =========================================================
    CLAIM SUMMARY - GOOGLE SHEETS CONNECTION
@@ -1771,8 +1770,21 @@ async function loadClaimsSummary() {
            TOTAL CLAIMS
         ===================================================== */
 
-        const totalClaims =
-            validClaims.length;
+      const uniqueSONumbers = new Set();
+
+	validClaims.forEach(row => {
+    	const soNumber = getSONumber(row);
+
+    	if (soNumber) {
+        const normalizedSO = normalizeText(soNumber);
+
+        if (normalizedSO) {
+            uniqueSONumbers.add(normalizedSO);
+        }
+    }
+});
+
+const totalClaims = uniqueSONumbers.size;
 
 
         /* =====================================================
@@ -2621,8 +2633,6 @@ function logout() {
 
 }
 </script>
-
-
 
 <!-- CONFIDENTIALITY MODAL -->
 <div id="confidentialModal" class="modal-overlay">

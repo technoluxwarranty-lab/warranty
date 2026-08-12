@@ -1489,10 +1489,9 @@ body{
 
 <script>
 /* =========================================================
-   CLAIM SUMMARY - GOOGLE SHEETS CONNECTION
-   FIXED STATUS COLUMN:
-   "Warranty SO Claim Status"
-========================================================= */
+   WARRANTY MANAGEMENT SYSTEM
+   CLAIM SUMMARY - UNIQUE SO NUMBER
+   ========================================================= */
 
 const SHEET_ID = "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
 const SHEET_NAME = "Form Responses 1";
@@ -1500,9 +1499,9 @@ const SHEET_NAME = "Form Responses 1";
 
 /* =========================================================
    HELPER FUNCTIONS
-========================================================= */
+   ========================================================= */
 
-/* Normalize text */
+/* Normalize general text */
 function normalizeText(value) {
     return String(value ?? "")
         .trim()
@@ -1523,9 +1522,21 @@ function normalizeHeader(value) {
 }
 
 
+/* Normalize SO Number
+   This prevents duplicate SO values caused by
+   uppercase/lowercase or extra spaces.
+*/
+function normalizeSO(value) {
+    return String(value ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+}
+
+
 /* =========================================================
    GET SO NUMBER
-========================================================= */
+   ========================================================= */
 
 function getSONumber(row) {
 
@@ -1548,7 +1559,8 @@ function getSONumber(row) {
         }
     }
 
-    /* Fallback - find column even if spacing differs */
+
+    /* Robust fallback */
     const foundKey = Object.keys(row).find(key => {
 
         const normalized = normalizeHeader(key);
@@ -1561,9 +1573,11 @@ function getSONumber(row) {
 
     });
 
+
     if (foundKey) {
         return String(row[foundKey] ?? "").trim();
     }
+
 
     return "";
 }
@@ -1571,14 +1585,10 @@ function getSONumber(row) {
 
 /* =========================================================
    GET CLAIM STATUS
-   IMPORTANT:
-   Actual Google Sheet column:
-   "Warranty SO Claim Status"
-========================================================= */
+   ========================================================= */
 
 function getClaimStatus(row) {
 
-    /* EXACT COLUMN FROM YOUR GOOGLE SHEET */
     const possibleKeys = [
         "Warranty SO Claim Status",
         "Warranty SO Claim Status ",
@@ -1588,6 +1598,7 @@ function getClaimStatus(row) {
         "SO Status",
         "Status"
     ];
+
 
     for (const key of possibleKeys) {
 
@@ -1603,10 +1614,7 @@ function getClaimStatus(row) {
     }
 
 
-    /* =====================================================
-       ROBUST FALLBACK
-       Finds the column by normalized header
-    ===================================================== */
+    /* Robust fallback */
 
     const foundKey = Object.keys(row).find(key => {
 
@@ -1615,16 +1623,73 @@ function getClaimStatus(row) {
         return (
             normalized === "warranty so claim status" ||
             normalized === "warranty claim so status" ||
-            normalized === "so status"
+            normalized === "so status" ||
+            normalized === "status"
         );
 
     });
 
 
     if (foundKey) {
-
         return normalizeText(row[foundKey]);
+    }
 
+
+    return "";
+}
+
+
+/* =========================================================
+   GET AREA / SERVICE PROVIDER
+   ========================================================= */
+
+function getClaimArea(row) {
+
+    const possibleKeys = [
+        "Area / SP",
+        "Area/SP",
+        "Area / SP ",
+        "Area",
+        "Service Provider Territory",
+        "Service Provider",
+        "Territory"
+    ];
+
+
+    for (const key of possibleKeys) {
+
+        if (
+            row[key] !== undefined &&
+            row[key] !== null &&
+            String(row[key]).trim() !== ""
+        ) {
+
+            return String(row[key]).trim();
+
+        }
+    }
+
+
+    /* Robust fallback */
+
+    const foundKey = Object.keys(row).find(key => {
+
+        const normalized = normalizeHeader(key);
+
+        return (
+            normalized === "area / sp" ||
+            normalized === "area/sp" ||
+            normalized === "area" ||
+            normalized === "service provider territory" ||
+            normalized === "service provider" ||
+            normalized === "territory"
+        );
+
+    });
+
+
+    if (foundKey) {
+        return String(row[foundKey] ?? "").trim();
     }
 
 
@@ -1634,7 +1699,7 @@ function getClaimStatus(row) {
 
 /* =========================================================
    STATUS CLASSIFICATION
-========================================================= */
+   ========================================================= */
 
 function isApprovedStatus(status) {
 
@@ -1676,13 +1741,70 @@ function isPendingStatus(status) {
 
 
 /* =========================================================
+   BUILD UNIQUE CLAIMS
+   IMPORTANT:
+   ONE SO NUMBER = ONE CLAIM
+   ========================================================= */
+
+function buildUniqueClaims(data) {
+
+    const uniqueClaimsMap = new Map();
+
+
+    data.forEach(row => {
+
+        const soNumber = getSONumber(row);
+
+        if (!soNumber) {
+            return;
+        }
+
+
+        const normalizedSO = normalizeSO(soNumber);
+
+        if (!normalizedSO) {
+            return;
+        }
+
+
+        /*
+         * IMPORTANT:
+         * If duplicate SO No. exists,
+         * the latest/last row in Google Sheet
+         * becomes the active record.
+         *
+         * This prevents duplicate line items
+         * from being counted as separate claims.
+         */
+        uniqueClaimsMap.set(normalizedSO, {
+
+            soNumber: soNumber,
+
+            status: getClaimStatus(row),
+
+            area: getClaimArea(row),
+
+            originalRow: row
+
+        });
+
+    });
+
+
+    return Array.from(uniqueClaimsMap.values());
+
+}
+
+
+/* =========================================================
    LOAD CLAIM SUMMARY
-========================================================= */
+   ========================================================= */
 
 async function loadClaimsSummary() {
 
     const statusEl =
         document.getElementById("summaryStatus");
+
 
     try {
 
@@ -1692,18 +1814,24 @@ async function loadClaimsSummary() {
 
         /* =====================================================
            GOOGLE SHEETS URL
-        ===================================================== */
+           ===================================================== */
 
         const url =
             `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
 
 
-        console.log("Loading Google Sheet:", url);
+        console.log(
+            "Loading Google Sheet:",
+            url
+        );
 
 
         const response = await fetch(url, {
+
             method: "GET",
+
             cache: "no-store"
+
         });
 
 
@@ -1734,16 +1862,6 @@ async function loadClaimsSummary() {
         );
 
 
-        console.log(
-            "First Row:",
-            data[0]
-        );
-
-
-        /* =====================================================
-           CHECK ACTUAL COLUMN NAMES
-        ===================================================== */
-
         if (data.length > 0) {
 
             console.log(
@@ -1755,41 +1873,37 @@ async function loadClaimsSummary() {
 
 
         /* =====================================================
-           VALID CLAIM RECORDS
-           Only records with SO No. are counted.
-        ===================================================== */
+           BUILD UNIQUE CLAIM LIST
+           ===================================================== */
 
-        const validClaims = data.filter(row => {
+        const uniqueClaims =
+            buildUniqueClaims(data);
 
-            return getSONumber(row) !== "";
 
-        });
+        console.log(
+            "Unique SO Claims:",
+            uniqueClaims.length
+        );
+
+
+        console.log(
+            "Unique Claims Data:",
+            uniqueClaims
+        );
 
 
         /* =====================================================
            TOTAL CLAIMS
-        ===================================================== */
+           ===================================================== */
 
-      const uniqueSONumbers = new Set();
-
-	validClaims.forEach(row => {
-    	const soNumber = getSONumber(row);
-
-    	if (soNumber) {
-        const normalizedSO = normalizeText(soNumber);
-
-        if (normalizedSO) {
-            uniqueSONumbers.add(normalizedSO);
-        }
-    }
-});
-
-const totalClaims = uniqueSONumbers.size;
+        const totalClaims =
+            uniqueClaims.length;
 
 
         /* =====================================================
            STATUS COUNTS
-        ===================================================== */
+           UNIQUE SO ONLY
+           ===================================================== */
 
         let approvedClaims = 0;
         let pendingClaims = 0;
@@ -1797,24 +1911,19 @@ const totalClaims = uniqueSONumbers.size;
         let cancelledClaims = 0;
 
 
-        /* =====================================================
-           COUNT EACH STATUS
-        ===================================================== */
-
-        validClaims.forEach(row => {
-
-            const soNumber =
-                getSONumber(row);
+        uniqueClaims.forEach(claim => {
 
             const status =
-                getClaimStatus(row);
+                claim.status;
 
 
             console.log(
-                "SO:",
-                soNumber,
+                "Unique SO:",
+                claim.soNumber,
                 "| Status:",
-                status
+                status,
+                "| Area:",
+                claim.area
             );
 
 
@@ -1858,25 +1967,21 @@ const totalClaims = uniqueSONumbers.size;
 
         /* =====================================================
            CLAIMS PER AREA / SP
-        ===================================================== */
+           UNIQUE SO ONLY
+           ===================================================== */
 
         const areaCounts = {};
 
 
-        validClaims.forEach(row => {
+        uniqueClaims.forEach(claim => {
 
-            const area = (
-                row["Area / SP"] ??
-                row["Area/SP"] ??
-                row["Area / SP "] ??
-                row["Area"] ??
-                ""
-            )
-            .toString()
-            .trim();
+            const area =
+                String(claim.area || "").trim();
 
 
-            if (!area) return;
+            if (!area) {
+                return;
+            }
 
 
             areaCounts[area] =
@@ -1887,7 +1992,7 @@ const totalClaims = uniqueSONumbers.size;
 
         /* =====================================================
            UPDATE DASHBOARD CARDS
-        ===================================================== */
+           ===================================================== */
 
         const totalEl =
             document.getElementById("totalClaims");
@@ -1946,86 +2051,144 @@ const totalClaims = uniqueSONumbers.size;
 
 
         /* =====================================================
-           UPDATE CHARTS
-        ===================================================== */
+           UPDATE AREA CHART
+           ===================================================== */
 
         renderAreaChart(areaCounts);
+
+
+        /* =====================================================
+           UPDATE TOP 3
+           ===================================================== */
 
         renderTop3Areas(areaCounts);
 
 
         /* =====================================================
-           UPDATE STATUS
-        ===================================================== */
+           LAST UPDATED DATE / TIME
+           ===================================================== */
 
         function updateStatusDateTime() {
-    const now = new Date();
 
-    const formattedDateTime = now.toLocaleString("en-PH", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-    });
+            const now = new Date();
 
-    statusEl.textContent = `Last Updated: ${formattedDateTime}`;
-    statusEl.className = "summary-status success";
-}
 
-updateStatusDateTime();
-setInterval(updateStatusDateTime, 1000);
+            const formattedDateTime =
+                now.toLocaleString("en-PH", {
+
+                    year: "numeric",
+
+                    month: "long",
+
+                    day: "numeric",
+
+                    hour: "2-digit",
+
+                    minute: "2-digit",
+
+                    second: "2-digit",
+
+                    hour12: true
+
+                });
+
+
+            statusEl.textContent =
+                `Last Updated: ${formattedDateTime}`;
+
+
+            statusEl.className =
+                "summary-status success";
+
+        }
+
+
+        updateStatusDateTime();
+
+
+        /* =====================================================
+           CLEAR PREVIOUS TIMER BEFORE CREATING NEW ONE
+           ===================================================== */
+
+        if (window.claimDateTimeInterval) {
+
+            clearInterval(
+                window.claimDateTimeInterval
+            );
+
+        }
+
+
+        window.claimDateTimeInterval =
+            setInterval(
+                updateStatusDateTime,
+                1000
+            );
+
 
         /* =====================================================
            CONSOLE SUMMARY
-        ===================================================== */
+           ===================================================== */
 
         console.log(
             "======================================"
         );
 
-        console.log(
-            "CLAIM SUMMARY"
-        );
 
         console.log(
-            "Total Claims:",
+            "UNIQUE CLAIM SUMMARY"
+        );
+
+
+        console.log(
+            "Raw Google Sheet Rows:",
+            data.length
+        );
+
+
+        console.log(
+            "Unique SO Claims:",
             totalClaims
         );
+
 
         console.log(
             "Approved:",
             approvedClaims
         );
 
+
         console.log(
             "Pending:",
             pendingClaims
         );
+
 
         console.log(
             "Rejected:",
             rejectedClaims
         );
 
+
         console.log(
             "Cancelled:",
             cancelledClaims
         );
 
+
         console.log(
-            "Area Counts:",
+            "Claims Per Area:",
             areaCounts
         );
+
 
         console.log(
             "======================================"
         );
 
-
     }
+
+
     catch (error) {
 
         console.error(
@@ -2046,6 +2209,7 @@ setInterval(updateStatusDateTime, 1000);
             const el =
                 document.getElementById(id);
 
+
             if (el) {
 
                 el.textContent = "—";
@@ -2058,11 +2222,13 @@ setInterval(updateStatusDateTime, 1000);
         statusEl.textContent =
             "Unable to load";
 
+
         statusEl.className =
             "summary-status error";
 
 
         renderAreaChart({});
+
 
         renderTop3Areas({});
 
@@ -2073,7 +2239,8 @@ setInterval(updateStatusDateTime, 1000);
 
 /* =========================================================
    CLAIMS PER AREA / SP BAR CHART
-========================================================= */
+   UNIQUE SO COUNTS
+   ========================================================= */
 
 function renderAreaChart(areaCounts) {
 
@@ -2084,7 +2251,9 @@ function renderAreaChart(areaCounts) {
         document.getElementById("yLabels");
 
 
-    if (!bars || !yLabels) return;
+    if (!bars || !yLabels) {
+        return;
+    }
 
 
     bars.innerHTML = "";
@@ -2093,10 +2262,15 @@ function renderAreaChart(areaCounts) {
 
     const entries =
         Object.entries(areaCounts)
+
             .filter(([area, value]) =>
+
                 String(area).trim() !== "" &&
+
                 Number(value) > 0
+
             )
+
             .sort(
                 (a, b) =>
                     Number(b[1]) - Number(a[1])
@@ -2125,7 +2299,9 @@ function renderAreaChart(areaCounts) {
             const label =
                 document.createElement("span");
 
+
             label.textContent = "0";
+
 
             yLabels.appendChild(label);
 
@@ -2138,21 +2314,30 @@ function renderAreaChart(areaCounts) {
 
     const maxValue =
         Math.max(
+
             ...entries.map(
                 entry => Number(entry[1])
             ),
+
             1
+
         );
 
 
     function getChartMax(value) {
 
         if (value <= 10) return 10;
+
         if (value <= 20) return 20;
+
         if (value <= 30) return 30;
+
         if (value <= 40) return 40;
+
         if (value <= 50) return 50;
+
         if (value <= 75) return 75;
+
         if (value <= 100) return 100;
 
 
@@ -2176,7 +2361,9 @@ function renderAreaChart(areaCounts) {
         getChartMax(maxValue);
 
 
-    /* Y AXIS */
+    /* =====================================================
+       Y AXIS
+       ===================================================== */
 
     const steps = 5;
 
@@ -2206,7 +2393,9 @@ function renderAreaChart(areaCounts) {
     }
 
 
-    /* BARS */
+    /* =====================================================
+       BARS
+       ===================================================== */
 
     entries.forEach(
         ([area, value]) => {
@@ -2217,13 +2406,17 @@ function renderAreaChart(areaCounts) {
 
             const height =
                 Math.max(
+
                     (numericValue / chartMax) * 100,
+
                     2
+
                 );
 
 
             const group =
                 document.createElement("div");
+
 
             group.className =
                 "bar-group";
@@ -2233,6 +2426,7 @@ function renderAreaChart(areaCounts) {
 
             const valueLabel =
                 document.createElement("span");
+
 
             valueLabel.className =
                 "bar-value";
@@ -2253,6 +2447,7 @@ function renderAreaChart(areaCounts) {
             const bar =
                 document.createElement("div");
 
+
             bar.className =
                 "bar";
 
@@ -2264,13 +2459,14 @@ function renderAreaChart(areaCounts) {
 
 
             bar.title =
-                `${area}: ${numericValue} claims`;
+                `${area}: ${numericValue} unique claims`;
 
 
             /* AREA / SP */
 
             const xLabel =
                 document.createElement("span");
+
 
             xLabel.className =
                 "x-label";
@@ -2281,16 +2477,18 @@ function renderAreaChart(areaCounts) {
 
 
             xLabel.title =
-                `${area} - ${numericValue} Claims`;
+                `${area} - ${numericValue} Unique Claims`;
 
 
             group.appendChild(
                 valueLabel
             );
 
+
             group.appendChild(
                 bar
             );
+
 
             group.appendChild(
                 xLabel
@@ -2306,7 +2504,7 @@ function renderAreaChart(areaCounts) {
 
 
     console.log(
-        "Claims per Area / Service Provider Territory Chart:",
+        "Unique Claims per Area:",
         {
             entries,
             maxValue,
@@ -2319,7 +2517,8 @@ function renderAreaChart(areaCounts) {
 
 /* =========================================================
    TOP 3 MOST CLAIM AREA / SP
-========================================================= */
+   UNIQUE SO COUNTS
+   ========================================================= */
 
 function renderTop3Areas(areaCounts) {
 
@@ -2327,7 +2526,9 @@ function renderTop3Areas(areaCounts) {
         document.getElementById("top3Grid");
 
 
-    if (!container) return;
+    if (!container) {
+        return;
+    }
 
 
     container.innerHTML = "";
@@ -2335,14 +2536,20 @@ function renderTop3Areas(areaCounts) {
 
     const entries =
         Object.entries(areaCounts)
+
             .filter(([area, value]) =>
+
                 String(area).trim() !== "" &&
+
                 Number(value) > 0
+
             )
+
             .sort(
                 (a, b) =>
                     Number(b[1]) - Number(a[1])
             )
+
             .slice(0, 3);
 
 
@@ -2353,6 +2560,7 @@ function renderTop3Areas(areaCounts) {
                 No claim data available
             </div>
         `;
+
 
         return;
     }
@@ -2375,13 +2583,17 @@ function renderTop3Areas(areaCounts) {
 
             const miniHeight =
                 Math.max(
+
                     (numericValue / highestValue) * 100,
+
                     5
+
                 );
 
 
             const card =
                 document.createElement("div");
+
 
             card.className =
                 "top3-card";
@@ -2392,12 +2604,14 @@ function renderTop3Areas(areaCounts) {
             const rankBadge =
                 document.createElement("div");
 
+
             rankBadge.className =
                 `top3-rank rank-${rank}`;
 
 
             const rankNumber =
                 document.createElement("span");
+
 
             rankNumber.textContent =
                 rank;
@@ -2413,6 +2627,7 @@ function renderTop3Areas(areaCounts) {
             const info =
                 document.createElement("div");
 
+
             info.className =
                 "top3-info";
 
@@ -2420,8 +2635,10 @@ function renderTop3Areas(areaCounts) {
             const areaName =
                 document.createElement("div");
 
+
             areaName.className =
                 "top3-area";
+
 
             areaName.textContent =
                 area;
@@ -2430,8 +2647,10 @@ function renderTop3Areas(areaCounts) {
             const count =
                 document.createElement("div");
 
+
             count.className =
                 "top3-count";
+
 
             count.textContent =
                 numericValue.toLocaleString();
@@ -2440,20 +2659,24 @@ function renderTop3Areas(areaCounts) {
             const label =
                 document.createElement("div");
 
+
             label.className =
                 "top3-label";
 
+
             label.textContent =
-                "Total Claims";
+                "Unique Claims";
 
 
             info.appendChild(
                 areaName
             );
 
+
             info.appendChild(
                 count
             );
+
 
             info.appendChild(
                 label
@@ -2465,12 +2688,14 @@ function renderTop3Areas(areaCounts) {
             const miniChart =
                 document.createElement("div");
 
+
             miniChart.className =
                 "top3-mini-chart";
 
 
             const miniBar =
                 document.createElement("div");
+
 
             miniBar.className =
                 "top3-mini-bar";
@@ -2483,7 +2708,7 @@ function renderTop3Areas(areaCounts) {
 
 
             miniBar.title =
-                `${area}: ${numericValue} claims`;
+                `${area}: ${numericValue} unique claims`;
 
 
             miniChart.appendChild(
@@ -2497,9 +2722,11 @@ function renderTop3Areas(areaCounts) {
                 rankBadge
             );
 
+
             card.appendChild(
                 info
             );
+
 
             card.appendChild(
                 miniChart
@@ -2515,7 +2742,7 @@ function renderTop3Areas(areaCounts) {
 
 
     console.log(
-        "Top 3 Most Claim Area / SP:",
+        "Top 3 Unique Claim Areas:",
         entries
     );
 
@@ -2524,7 +2751,7 @@ function renderTop3Areas(areaCounts) {
 
 /* =========================================================
    PAGE INITIALIZATION
-========================================================= */
+   ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -2538,6 +2765,7 @@ document.addEventListener(
 
             window.location.href =
                 "home.html";
+
 
             return;
 
@@ -2581,7 +2809,9 @@ document.addEventListener(
 
         if (modal && agreeBtn) {
 
-            modal.style.display = "flex";
+            modal.style.display =
+                "flex";
+
 
             document.body.style.overflow =
                 "hidden";
@@ -2593,6 +2823,7 @@ document.addEventListener(
 
                     modal.style.display =
                         "none";
+
 
                     document.body.style.overflow =
                         "auto";
@@ -2608,7 +2839,7 @@ document.addEventListener(
 
 /* =========================================================
    LOGOUT
-========================================================= */
+   ========================================================= */
 
 function logout() {
 
@@ -2633,7 +2864,7 @@ function logout() {
 
 }
 </script>
-
+	
 <!-- CONFIDENTIALITY MODAL -->
 <div id="confidentialModal" class="modal-overlay">
 

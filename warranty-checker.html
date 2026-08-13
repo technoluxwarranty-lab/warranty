@@ -452,181 +452,466 @@ footer{
 <script>
 
 const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzgSoe-k6ccFPokRXHg9V3e1VR5oIf1zfUBUh2YzsZbppPX7SibGl9A6b5FgEjZW2HW/exec";
+"https://script.google.com/macros/s/AKfycbzYeE9nUk2jD1uwl37gooqN5LIjyBZWl-HCFiojSihvncGNONZi8sh5vG-BRKkVqAid/exec";
 
-// Helper function
-function setText(id, value){
+// =========================================================
+// GLOBAL SEARCH CONTROL
+// =========================================================
+
+let searchController = null;
+let lastSerial = "";
+let searchInProgress = false;
+
+
+// =========================================================
+// HELPER FUNCTION
+// =========================================================
+
+function setText(id, value) {
 
     const el = document.getElementById(id);
 
-    if(!el){
+    if (!el) {
         console.warn("Missing HTML element:", id);
         return;
     }
 
-    el.textContent = value || "";
+    el.textContent = value ?? "";
 
 }
 
-// Enter key
-document.getElementById("serialInput").addEventListener("keypress", function(e){
 
-    if(e.key === "Enter"){
-        searchWarranty();
+// =========================================================
+// HIDE RESULTS
+// =========================================================
+
+function hideResults() {
+
+    const resultCard = document.getElementById("resultCard");
+    const extendedCard = document.getElementById("extendedCard");
+
+    if (resultCard) {
+        resultCard.style.display = "none";
     }
 
-});
+    if (extendedCard) {
+        extendedCard.style.display = "none";
+    }
 
-async function searchWarranty(){
+}
+
+
+// =========================================================
+// SERIAL INPUT
+// =========================================================
+
+const serialInput = document.getElementById("serialInput");
+
+if (serialInput) {
+
+    serialInput.addEventListener("keydown", function(e) {
+
+        if (e.key === "Enter") {
+
+            e.preventDefault();
+
+            searchWarranty();
+
+        }
+
+    });
+
+}
+
+
+// =========================================================
+// MAIN SEARCH
+// =========================================================
+
+async function searchWarranty() {
 
     const btn = document.getElementById("searchBtn");
-    const serial = document.getElementById("serialInput").value.trim();
+    const input = document.getElementById("serialInput");
 
-    if(serial === ""){
-        alert("Please enter a Serial Number.");
+    if (!input) {
+        console.error("serialInput not found.");
         return;
     }
 
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+    // Normalize serial
+    const serial = input.value
+        .trim()
+        .replace(/\s+/g, "")
+        .toUpperCase();
 
-    try{
+    // Empty serial
+    if (!serial) {
 
-        const response = await fetch(
-            WEB_APP_URL + "?serial=" + encodeURIComponent(serial)
-        );
+        alert("Please enter a Serial Number.");
 
-        if(!response.ok){
-            throw new Error("Unable to connect to the server.");
+        input.focus();
+
+        return;
+    }
+
+
+    // Prevent duplicate search
+    if (searchInProgress) {
+        return;
+    }
+
+
+    // Prevent searching the exact same serial again
+    if (serial === lastSerial) {
+
+        console.log("Same serial already searched.");
+
+        return;
+    }
+
+
+    searchInProgress = true;
+    lastSerial = serial;
+
+
+    // Cancel previous request if still running
+    if (searchController) {
+        searchController.abort();
+    }
+
+    searchController = new AbortController();
+
+
+    // =====================================================
+    // BUTTON LOADING STATE
+    // =====================================================
+
+    if (btn) {
+
+        btn.disabled = true;
+
+        btn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Searching...';
+
+    }
+
+
+    try {
+
+        // =================================================
+        // FAST REQUEST
+        // =================================================
+
+        const url =
+            WEB_APP_URL +
+            "?serial=" +
+            encodeURIComponent(serial) +
+            "&t=" +
+            Date.now();
+
+
+        const response = await fetch(url, {
+
+            method: "GET",
+
+            cache: "no-store",
+
+            signal: searchController.signal
+
+        });
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to connect to the server."
+            );
+
         }
+
+
+        // =================================================
+        // READ JSON
+        // =================================================
 
         const data = await response.json();
 
-        console.log(data);
+        console.log("Warranty Search:", data);
 
-        if(!data.found){
+
+        // =================================================
+        // NOT FOUND
+        // =================================================
+
+        if (!data.found) {
+
+            hideResults();
 
             alert("Serial Number not found.");
-
-            const resultCard=document.getElementById("resultCard");
-            if(resultCard) resultCard.style.display="none";
-
-            const extendedCard=document.getElementById("extendedCard");
-            if(extendedCard) extendedCard.style.display="none";
 
             return;
 
         }
 
-        const resultCard=document.getElementById("resultCard");
-        if(resultCard) resultCard.style.display="block";
 
-        // Equipment Information
-        setText("brand",data.brand);
-        setText("model",data.model);
-        setText("serial",data.serial);
-        setText("store",data.store);
-        setText("start",data.start);
-        setText("end",data.end);
-        setText("period",data.period);
+        // =================================================
+        // SHOW RESULT CARD
+        // =================================================
 
-        // Warranty Status
-        if(data.status==="Expired"){
-            setText("status","Out of Warranty");
-        }else{
-            setText("status","Under Warranty");
+        const resultCard =
+            document.getElementById("resultCard");
+
+        if (resultCard) {
+
+            resultCard.style.display = "block";
+
         }
 
-        // Badge
-        const badge=document.getElementById("statusBadge");
 
-        if(badge){
+        // =================================================
+        // EQUIPMENT INFORMATION
+        // =================================================
 
-            badge.textContent=data.status;
+        setText("brand", data.brand);
+        setText("model", data.model);
+        setText("serial", data.serial);
+        setText("store", data.store);
+        setText("start", data.start);
+        setText("end", data.end);
+        setText("period", data.period);
 
-            badge.className="status-badge";
 
-            switch(data.status){
+        // =================================================
+        // WARRANTY STATUS
+        // =================================================
+
+        const statusText =
+            data.status === "Expired"
+                ? "Out of Warranty"
+                : "Under Warranty";
+
+        setText("status", statusText);
+
+
+        // =================================================
+        // STATUS BADGE
+        // =================================================
+
+        const badge =
+            document.getElementById("statusBadge");
+
+        if (badge) {
+
+            badge.textContent =
+                data.status || "Unknown";
+
+            badge.className = "status-badge";
+
+
+            switch (data.status) {
 
                 case "Active":
+
                     badge.classList.add("active");
+
                     break;
+
 
                 case "Expiring Soon":
+
                     badge.classList.add("expiring");
+
                     break;
+
 
                 case "Expired":
+
                     badge.classList.add("expired");
+
                     break;
 
+
                 default:
+
                     badge.classList.add("default");
 
             }
 
         }
 
-        // Extended Warranty
-        const extendedCard=document.getElementById("extendedCard");
-        const extendedBody=document.getElementById("extendedBody");
 
-        if(extendedBody){
+        // =================================================
+        // EXTENDED WARRANTY
+        // =================================================
 
-            extendedBody.innerHTML="";
+        const extendedCard =
+            document.getElementById("extendedCard");
 
-            if(
-                data.extendWarranty==="Yes" &&
-                Array.isArray(data.extendedParts) &&
-                data.extendedParts.length>0
-            ){
+        const extendedBody =
+            document.getElementById("extendedBody");
 
-                data.extendedParts.forEach(item=>{
 
-                    const row=document.createElement("tr");
+        if (!extendedBody) {
+            return;
+        }
 
-                    row.innerHTML=`
-                        <td>${item.part || ""}</td>
-                        <td>${item.period || ""}</td>
-                        <td>${item.end || ""}</td>
-                    `;
 
-                    extendedBody.appendChild(row);
+        // Clear previous results
+        extendedBody.replaceChildren();
 
-                });
 
-                if(extendedCard){
-                    extendedCard.style.display="block";
-                }
+        const hasExtendedWarranty =
+            data.extendWarranty === "Yes" &&
+            Array.isArray(data.extendedParts) &&
+            data.extendedParts.length > 0;
 
-            }else{
 
-                if(extendedCard){
-                    extendedCard.style.display="none";
-                }
+        if (!hasExtendedWarranty) {
 
+            if (extendedCard) {
+                extendedCard.style.display = "none";
             }
+
+            return;
 
         }
 
-    }catch(error){
 
-        console.error(error);
+        // =================================================
+        // BUILD EXTENDED WARRANTY ROWS
+        // =================================================
 
-        alert(error.message);
+        const fragment =
+            document.createDocumentFragment();
 
-    }finally{
 
-        btn.disabled=false;
-        btn.innerHTML='<i class="fas fa-search"></i> Search';
+        data.extendedParts.forEach(item => {
+
+            const row =
+                document.createElement("tr");
+
+
+            const partCell =
+                document.createElement("td");
+
+            partCell.textContent =
+                item.part || "";
+
+
+            const periodCell =
+                document.createElement("td");
+
+            periodCell.textContent =
+                item.period || "";
+
+
+            const endCell =
+                document.createElement("td");
+
+            endCell.textContent =
+                item.end || "";
+
+
+            row.appendChild(partCell);
+            row.appendChild(periodCell);
+            row.appendChild(endCell);
+
+
+            fragment.appendChild(row);
+
+        });
+
+
+        extendedBody.appendChild(fragment);
+
+
+        if (extendedCard) {
+
+            extendedCard.style.display = "block";
+
+        }
+
+
+    }
+    catch (error) {
+
+        // Ignore cancelled requests
+        if (error.name === "AbortError") {
+
+            console.log("Previous search cancelled.");
+
+            return;
+
+        }
+
+
+        console.error(
+            "Warranty search error:",
+            error
+        );
+
+
+        alert(
+            "Unable to search the Serial Number. Please try again."
+        );
+
+
+        // Allow retry
+        lastSerial = "";
+
+
+    }
+    finally {
+
+        searchInProgress = false;
+
+
+        if (btn) {
+
+            btn.disabled = false;
+
+            btn.innerHTML =
+                '<i class="fas fa-search"></i> Search';
+
+        }
 
     }
 
 }
 
-function goHome(){
 
-    window.location.href="home.html";
+// =========================================================
+// CLEAR SEARCH
+// =========================================================
+
+function clearSearch() {
+
+    const input =
+        document.getElementById("serialInput");
+
+    if (input) {
+
+        input.value = "";
+
+        input.focus();
+
+    }
+
+
+    lastSerial = "";
+
+    hideResults();
+
+}
+
+
+// =========================================================
+// HOME
+// =========================================================
+
+function goHome() {
+
+    window.location.href = "home.html";
 
 }
 

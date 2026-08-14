@@ -1902,6 +1902,103 @@ a{
         box-shadow:none;
     }
 }
+
+/* =========================================================
+   WARRANTY TEAM SUPPORT NOTICE
+========================================================= */
+
+.support-notice{
+    width:100%;
+    margin-top:18px;
+    padding:16px 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+
+    background:var(--purple-soft);
+    border:1px solid #ddd3f8;
+    border-radius:12px;
+
+    color:var(--text);
+    text-align:center;
+
+    box-shadow:0 2px 8px rgba(15,23,42,.035);
+}
+
+.support-notice .support-icon{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:var(--purple);
+    color:#fff;
+
+    font-size:16px;
+}
+
+.support-notice p{
+    margin:0;
+    font-size:13px;
+    line-height:1.6;
+    color:#475569;
+}
+
+.support-notice strong{
+    color:var(--text);
+}
+
+.support-notice a{
+    color:var(--purple);
+    font-weight:700;
+    text-decoration:none;
+}
+
+.support-notice a:hover{
+    text-decoration:underline;
+}
+
+/* TABLET */
+@media (max-width:850px){
+    .support-notice{
+        padding:14px 16px;
+    }
+
+    .support-notice p{
+        font-size:12px;
+    }
+}
+
+/* MOBILE */
+@media (max-width:600px){
+    .support-notice{
+        margin-top:12px;
+        padding:13px 12px;
+        align-items:flex-start;
+        text-align:left;
+        gap:10px;
+    }
+
+    .support-notice .support-icon{
+        width:34px;
+        height:34px;
+        flex-basis:34px;
+        font-size:14px;
+    }
+
+    .support-notice p{
+        font-size:11px;
+        line-height:1.55;
+    }
+}
+      
 </style>
 
 </head>
@@ -2100,6 +2197,21 @@ a{
             </div>
 
         </section>
+
+        <div class="support-notice">
+            <div class="support-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+
+            <p>
+                For any error or problem encountered while navigating the system,
+                please contact the <strong>Warranty Team</strong> or email
+                <a href="mailto:warranty@technolux.net">
+                    warranty@technolux.net
+                </a>
+                for assistance.
+            </p>
+        </div>
 
     </section>
 

@@ -1998,7 +1998,7 @@ a{
         line-height:1.55;
     }
 }
-      
+
 </style>
 
 </head>
@@ -2039,48 +2039,96 @@ a{
 
         <nav class="dashboard">
 
-            <a href="warranty-checker.html" class="card checker">
-                <i class="fas fa-magnifying-glass"></i>
-                <div>
-                    <h2>Warranty Checker</h2>
-                    <p>Instantly verify warranty status by entering the equipment serial number.</p>
-                </div>
-            </a>
+    <!-- TECHNICIAN ACCESS -->
+    <a href="warranty-checker.html"
+       class="card checker"
+       data-module="warranty-checker">
 
-            <a href="warranty.html" class="card">
-                <i class="fas fa-file-contract"></i>
-                <div>
-                    <h2>Warranty Requirements</h2>
-                    <p>View warranty submission requirements, supporting documents and process guidelines.</p>
-                </div>
-            </a>
+        <i class="fas fa-magnifying-glass"></i>
 
-            <a href=".html" class="card coverage">
-                <i class="fas fa-shield-alt"></i>
-                <div>
-                    <h2>Warranty Coverage</h2>
-                    <p>Check warranty coverage details per brand, equipment, and applicable warranty terms.</p>
-                </div>
-            </a>
+        <div>
+            <h2>Warranty Checker</h2>
+            <p>
+                Instantly verify warranty status by entering
+                the equipment serial number.
+            </p>
+        </div>
 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform"
-               class="card claim">
-                <i class="fas fa-clipboard-check"></i>
-                <div>
-                    <h2>Warranty SO Registration</h2>
-                    <p>Submit a new warranty claim.</p>
-                </div>
-            </a>
+    </a>
 
-            <a href="claim-tracker.html" class="card tracker">
-                <i class="fas fa-list-check"></i>
-                <div>
-                    <h2>Warranty Claim Tracker</h2>
-                    <p>Monitor and track submitted warranty claims, approval status, and claim progress.</p>
-                </div>
-            </a>
 
-        </nav>
+    <!-- TECHNICIAN ACCESS -->
+    <a href="warranty.html"
+       class="card"
+       data-module="warranty">
+
+        <i class="fas fa-file-contract"></i>
+
+        <div>
+            <h2>Warranty Requirements</h2>
+            <p>
+                View warranty submission requirements,
+                supporting documents and process guidelines.
+            </p>
+        </div>
+
+    </a>
+
+
+    <!-- OTHER POSITIONS -->
+    <a href="entry.html"
+       class="card coverage"
+       data-module="coverage">
+
+        <i class="fas fa-shield-alt"></i>
+
+        <div>
+            <h2>Warranty Coverage</h2>
+            <p>
+                Check warranty coverage details per brand,
+                equipment, and applicable warranty terms.
+            </p>
+        </div>
+
+    </a>
+
+
+    <!-- OTHER POSITIONS -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform"
+       class="card claim"
+       data-module="claim">
+
+        <i class="fas fa-clipboard-check"></i>
+
+        <div>
+            <h2>Warranty SO Registration</h2>
+            <p>
+                Submit a new warranty claim.
+            </p>
+        </div>
+
+    </a>
+
+
+    <!-- OTHER POSITIONS -->
+    <a href="claim-tracker.html"
+       class="card tracker"
+       data-module="claim-tracker">
+
+        <i class="fas fa-list-check"></i>
+
+        <div>
+            <h2>Warranty Claim Tracker</h2>
+            <p>
+                Monitor and track submitted warranty claims,
+                approval status, and claim progress.
+            </p>
+        </div>
+
+    </a>
+
+</nav>
+
     </aside>
 
     <section class="main-content">
@@ -2198,6 +2246,7 @@ a{
 
         </section>
 
+	
         <div class="support-notice">
             <div class="support-icon">
                 <i class="fas fa-headset"></i>
@@ -3479,6 +3528,85 @@ function renderTop3Areas(areaCounts) {
 
 }
 
+/* =========================================================
+   ROLE-BASED DASHBOARD ACCESS
+   ========================================================= */
+
+function applyPositionAccess() {
+
+    const position =
+        (localStorage.getItem("userPosition") || "")
+        .trim()
+        .toLowerCase();
+
+
+    console.log("Logged-in Position:", position);
+
+
+    const dashboardCards =
+        document.querySelectorAll(".dashboard .card");
+
+
+    /* =====================================================
+       TECHNICIAN
+       ONLY:
+       - Warranty Checker
+       - Warranty Requirements
+       ===================================================== */
+
+    if (position === "technician") {
+
+        dashboardCards.forEach(card => {
+
+            const module =
+                card.getAttribute("data-module");
+
+
+            if (
+                module !== "warranty-checker" &&
+                module !== "warranty"
+            ) {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+
+        /* Optional: update dashboard description */
+
+        const pageDescription =
+            document.querySelector(".page-title p");
+
+
+        if (pageDescription) {
+
+            pageDescription.textContent =
+                "Technician Access — Select a module to continue.";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ALL OTHER POSITIONS
+       SHOW ALL MODULES
+       ===================================================== */
+
+    else {
+
+        dashboardCards.forEach(card => {
+
+            card.style.display = "";
+
+        });
+
+    }
+
+}
+
 
 /* =========================================================
    PAGE INITIALIZATION
@@ -3488,22 +3616,32 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-        /* Login Protection */
+        /* =====================================================
+           LOGIN PROTECTION
+           ===================================================== */
 
         if (
             localStorage.getItem("loggedIn") !== "true"
         ) {
 
             window.location.href =
-                "home.html";
-
+                "index.html";
 
             return;
 
         }
 
 
-        /* Display User Email */
+        /* =====================================================
+           APPLY POSITION-BASED ACCESS
+           ===================================================== */
+
+        applyPositionAccess();
+
+
+        /* =====================================================
+           DISPLAY USER EMAIL
+           ===================================================== */
 
         const userEmail =
             document.getElementById("userEmail");
@@ -3519,12 +3657,16 @@ document.addEventListener(
         }
 
 
-        /* Load Claim Summary */
+        /* =====================================================
+           LOAD CLAIM SUMMARY
+           ===================================================== */
 
         loadClaimsSummary();
 
 
-        /* Confidentiality Modal */
+        /* =====================================================
+           CONFIDENTIALITY MODAL
+           ===================================================== */
 
         const modal =
             document.getElementById(

@@ -31,14 +31,14 @@ body{
 
 
 .login-box{
-
-    width:420px;
-    background:white;
+    width:100%;
+    max-width:420px;
+    background:#fff;
     padding:40px;
     border-radius:20px;
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
     text-align:center;
-
+    transition:.3s;
 }
 
 
@@ -109,6 +109,25 @@ button{
     font-weight:bold;
     cursor:pointer;
 
+}
+
+input{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    transition:.3s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2575fc;
+    box-shadow:0 0 0 3px rgba(37,117,252,.15);
+}
+
+button:hover{
+    background:#1d63d8;
 }
 
 
@@ -213,13 +232,85 @@ placeholder="Enter your email">
 
     <i class="fas fa-map-marker-alt"></i>
 
-    <input
+    <select
         id="area"
-        type="text"
-        placeholder="Enter your Area/SP/VisMin/Head Office">
+        style="
+            width:100%;
+            padding:14px 14px 14px 45px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            font-size:16px;
+            background:#fff;
+            color:#555;
+        "
+    >
+        <option value="">Select your Territory</option>
+        <option value="Head Office">Head Office</option>
+        <option value="Area 1">Area 1</option>
+        <option value="Area 2">Area 2</option>
+        <option value="Area 3">Area 3</option>
+        <option value="Area 4">Area 4</option>
+        <option value="Area 5">Area 5</option>
+	<option value="SP-ARCTIC DAISY">SP-ARCTIC DAISY</option>
+	<option value="SP-LBF">SP-LBF</option>
+	<option value="SP-SGD">SP-SGD</option>
+	<option value="SP-TPM">SP-TPM</option>
+	<option value="SP-JMGC">SP-JMGC</option>
+	<option value="SP-JZJZ">SP-JZJZ</option>
+	<option value="SP-KOOLTRONIXS">SP-KOOLTRONIXS</option>
+	<option value="SP-MECHANIKOOL">SP-MECHANIKOOL</option>
+	<option value="SP-IRMS">SP-IRMS</option>
+	<option value="SP-KERTECH">SP-KERTECH</option>
+	<option value="SP-CGS">SP-CGS</option>
+	<option value="SP-SGD NORTH LUZON">SP-SGD NORTH LUZON</option>
+	<option value="SP-LCP">SP-LCP</option>
+	<option value="COFFEE TEAM">COFFEE TEAM</option>
+	<option value="HOTEL TEAM">HOTEL TEAM</option>
+	<option value="LAUNDRY TEAM">LAUNDRY TEAM</option>
+	<option value="IN-HOUSE TEAM">IN-HOUSE TEAM</option>
+	<option value="INSTALLATION TEAM">INSTALLATION TEAM</option>
+	<option value="CEBU-HO">CEBU-HO</option>
+	<option value="CEBU-SP NSJ">CEBU-SP NSJ</option>
+	<option value="CEBU-SP JEP">CEBU-SP JEP</option>
+	<option value="CEBU-SP DCC">CEBU-SP DCC</option>
+	<option value="CEBU-SP CMO">CEBU-SP CMO</option>
+	<option value="CEBU-SP PURITY">CEBU-SP PURITY</option>
+	<option value="DAVAO-HO">DAVAO-HO</option>
+	<option value="DAVAO-SP LEACHIM">DAVAO-SP LEACHIM</option>
+	<option value="DAVAO-SP KYTECH">DAVAO-SP KYTECH</option>
+	<option value="DAVAO-SP JC KITCHEN">DAVAO-SP JC KITCHEN</option>
+
+    </select>
 
 </div>
 
+
+<div class="input-group" style="margin-top:15px;">
+
+    <i class="fas fa-user-tie"></i>
+
+    <select
+        id="position"
+        style="
+            width:100%;
+            padding:14px 14px 14px 45px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            font-size:16px;
+            background:#fff;
+            color:#555;
+        "
+    >
+        <option value="">Select your Position</option>
+        <option value="Technician">Technician</option>
+        <option value="Warranty Team">Warranty Team</option>
+        <option value="Supervisor">Supervisor</option>
+        <option value="Manager">Manager</option>
+        <option value="Coordinator">Coordinator</option>
+	<option value="Service Provider">Service Provider</option>
+    </select>
+
+</div>
 
 
 <button 
@@ -251,227 +342,332 @@ Access is subject to administrator approval.
 
 </div>
 
-<div class="footer">
-
-Version 1.4
 
 </div>
 
 
-</div>
 
 <script>
-
 
 const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
 
+function showMessage(type, text) {
 
+    const msg = document.getElementById("msg");
 
-function showMessage(type,text){
+    msg.className = "message " + type;
 
-    const msg =
-    document.getElementById("msg");
+    msg.style.display = "block";
 
-
-    msg.className =
-    "message " + type;
-
-
-    msg.style.display="block";
-
-
-    msg.innerHTML=text;
+    msg.innerHTML = text;
 
 }
 
 
-// Auto-fill saved information
+// =========================================
+// AUTO-FILL SAVED INFORMATION
+// =========================================
+
 window.onload = function () {
 
-    const savedEmail = localStorage.getItem("userEmail");
-    const savedArea = localStorage.getItem("userArea");
+    const savedEmail =
+        localStorage.getItem("userEmail");
+
+    const savedArea =
+        localStorage.getItem("userArea");
+
+    const savedPosition =
+        localStorage.getItem("userPosition");
+
 
     if (savedEmail) {
         document.getElementById("email").value = savedEmail;
     }
 
+
     if (savedArea) {
         document.getElementById("area").value = savedArea;
     }
 
+
+    if (savedPosition) {
+        document.getElementById("position").value = savedPosition;
+    }
+
+
     // Already logged in
     if (localStorage.getItem("loggedIn") === "true") {
+
         window.location.href = "home.html";
+
     }
 
 };
 
 
-function login(){
+// =========================================
+// LOGIN
+// =========================================
 
-const email =
-document.getElementById("email").value.trim();
+function login() {
 
-const area =
-document.getElementById("area").value.trim();
+    const email =
+        document.getElementById("email").value.trim();
 
-if(email===""){
+
+    const area =
+        document.getElementById("area").value.trim();
+
+
+    const position =
+        document.getElementById("position").value.trim();
+
+
+    // =========================================
+    // VALIDATION
+    // =========================================
+
+    if (email === "") {
+
+        showMessage(
+            "error",
+            "Please enter your email."
+        );
+
+        return;
+    }
+
+
+    if (area === "") {
+
+        showMessage(
+            "error",
+            "Please select your Territory."
+        );
+
+        return;
+    }
+
+
+    if (position === "") {
+
+        showMessage(
+            "error",
+            "Please select your Position."
+        );
+
+        return;
+    }
+
+
+    // =========================================
+    // BUTTON / LOADING
+    // =========================================
+
+    const btn =
+        document.getElementById("loginBtn");
+
+
+    const spinner =
+        document.getElementById("spinner");
+
+
+    btn.disabled = true;
+
+    spinner.style.display = "block";
+
 
     showMessage(
-        "error",
-        "Please enter your email."
+        "pending",
+        "Checking your access..."
     );
 
-    return;
 
-}
+    // =========================================
+    // SEND REQUEST TO GOOGLE APPS SCRIPT
+    // =========================================
 
-if(area===""){
+    const url =
+        WEBAPP_URL +
+        "?email=" + encodeURIComponent(email) +
+        "&area=" + encodeURIComponent(area) +
+        "&position=" + encodeURIComponent(position) +
+        "&t=" + Date.now();
 
-    showMessage(
-        "error",
-        "Please enter your Area/SP."
+
+    fetch(url, {
+        method: "GET",
+        redirect: "follow"
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned " + response.status
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+
+   .then(data => {
+
+    console.log("Server response:", data);
+
+
+    // =========================================
+    // POSITION MISMATCH / BLOCKED
+    // =========================================
+
+    if (data.blocked === true) {
+
+        // Make absolutely sure the user
+        // cannot enter the system.
+        localStorage.removeItem("loggedIn");
+
+
+        showMessage(
+            "error",
+            data.message ||
+            "Access denied. Your selected position does not match your registered position."
+        );
+
+
+        return;
+    }
+
+
+    // =========================================
+    // OTHER SERVER ERROR
+    // =========================================
+
+    if (!data.success) {
+
+        showMessage(
+            "error",
+            data.message ||
+            "Unable to process your request."
+        );
+
+
+        return;
+    }
+
+
+    // =========================================
+    // SAVE USER INFORMATION
+    // =========================================
+
+    localStorage.setItem(
+        "userEmail",
+        data.email
     );
 
-    return;
 
-}
-
-
-const btn =
-document.getElementById("loginBtn");
+    localStorage.setItem(
+        "userArea",
+        data.area || area
+    );
 
 
-btn.disabled=true;
+    localStorage.setItem(
+        "userPosition",
+        data.position || position
+    );
 
 
+    // =========================================
+    // APPROVED
+    // =========================================
 
-document.getElementById("spinner")
-.style.display="block";
+    if (data.approved === true) {
 
-
-
-
-fetch(
-`${WEBAPP_URL}?email=${encodeURIComponent(email)}&area=${encodeURIComponent(area)}&t=${Date.now()}`,
-{
-    method:"GET"
-})
+        localStorage.setItem(
+            "loggedIn",
+            "true"
+        );
 
 
-
-.then(response=>response.json())
-
-
-
-.then(data=>{
+        showMessage(
+            "success",
+            "Access approved. Redirecting..."
+        );
 
 
-console.log(data);
+        setTimeout(() => {
+
+            window.location.href =
+                "home.html";
+
+        }, 1200);
 
 
+    }
 
-if(!data.success){
+    // =========================================
+    // PENDING
+    // =========================================
 
+    else {
 
-showMessage(
-"error",
-data.message
-);
-
-
-return;
-
-}
+        localStorage.removeItem(
+            "loggedIn"
+        );
 
 
+        showMessage(
+            "pending",
+            "Your access request is pending approval."
+        );
 
-
-localStorage.setItem("userEmail", data.email);
-localStorage.setItem("userArea", area);
-
-
-
-if(data.approved){
-
-
-
-localStorage.setItem("loggedIn", "true");
-
-
-
-showMessage(
-"success",
-"Access approved. Redirecting..."
-);
-
-
-
-setTimeout(()=>{
-
-
-window.location.href="home.html";
-
-
-},1200);
-
-
-
-}
-
-else{
-
-
-showMessage(
-"pending",
-"Your access request is pending approval."
-);
-
-
-}
-
-
+    }
 
 })
 
 
+    // =========================================
+    // CONNECTION ERROR
+    // =========================================
 
-.catch(error=>{
+    .catch(error => {
 
-
-console.error(error);
-
-
-showMessage(
-"error",
-"Unable to connect to server. Please try again."
-);
-
-
-})
+        console.error(
+            "Login error:",
+            error
+        );
 
 
+        showMessage(
+            "error",
+            "Unable to connect to server. Please try again."
+        );
 
-.finally(()=>{
-
-
-btn.disabled=false;
-
-
-document.getElementById("spinner")
-.style.display="none";
+    })
 
 
-});
+    // =========================================
+    // FINISH LOADING
+    // =========================================
 
+    .finally(() => {
 
+        btn.disabled = false;
+
+        spinner.style.display = "none";
+
+    });
 
 }
-
 
 </script>
+
 
 </body>
 </html>

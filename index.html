@@ -5,11 +5,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Cache control -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <title>Warranty Management System</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
 <style>
 
@@ -18,7 +22,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     padding:0;
     box-sizing:border-box;
 }
-
 
 body{
     font-family:Arial,sans-serif;
@@ -29,7 +32,6 @@ body{
     background:linear-gradient(135deg,#1e3c72,#2a5298);
 }
 
-
 .login-box{
     width:100%;
     max-width:420px;
@@ -38,66 +40,57 @@ body{
     border-radius:20px;
     box-shadow:0 10px 30px rgba(0,0,0,.18);
     text-align:center;
-    transition:.3s;
 }
 
-
 .logo{
-
     font-size:55px;
     color:#2575fc;
     margin-bottom:15px;
-
 }
-
 
 h2{
-
     color:#222;
     margin-bottom:10px;
-
 }
 
-
 .subtitle{
-
     color:#666;
     font-size:14px;
     margin-bottom:25px;
-
 }
-
 
 .input-group{
-
     position:relative;
-
 }
 
-
 .input-group i{
-
     position:absolute;
     left:15px;
     top:15px;
     color:#777;
-
+    z-index:2;
 }
 
-
-input{
-
+input,
+select{
     width:100%;
     padding:14px 14px 14px 45px;
     border:1px solid #ddd;
     border-radius:10px;
-    font-size:15px;
-
+    font-size:16px;
+    background:#fff;
+    color:#555;
+    transition:.3s;
 }
 
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#2575fc;
+    box-shadow:0 0 0 3px rgba(37,117,252,.15);
+}
 
 button{
-
     width:100%;
     padding:14px;
     margin-top:15px;
@@ -108,114 +101,77 @@ button{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-
-}
-
-input{
-    width:100%;
-    padding:14px 14px 14px 45px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
-    transition:.3s;
-}
-
-input:focus{
-    outline:none;
-    border-color:#2575fc;
-    box-shadow:0 0 0 3px rgba(37,117,252,.15);
 }
 
 button:hover{
     background:#1d63d8;
 }
 
-
 button:disabled{
-
     opacity:.7;
-
+    cursor:not-allowed;
 }
 
-
 .message{
-
     margin-top:15px;
     padding:12px;
     border-radius:8px;
     display:none;
-
 }
-
 
 .success{
-
-background:#d4edda;
-color:#155724;
-
+    background:#d4edda;
+    color:#155724;
 }
-
 
 .pending{
-
-background:#fff3cd;
-color:#856404;
-
+    background:#fff3cd;
+    color:#856404;
 }
-
 
 .error{
-
-background:#f8d7da;
-color:#721c24;
-
+    background:#f8d7da;
+    color:#721c24;
 }
-
 
 .spinner{
-
-display:none;
-margin-top:15px;
-
+    display:none;
+    margin-top:15px;
 }
 
-
 .footer{
+    margin-top:20px;
+    font-size:12px;
+    color:#888;
+}
 
-margin-top:20px;
-font-size:12px;
-color:#888;
-
+.version{
+    margin-top:8px;
+    font-size:10px;
+    color:#aaa;
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="login-box">
 
-
 <div class="logo">
-
 <i class="fas fa-shield-alt"></i>
-
 </div>
-
 
 <h2>
 Warranty Management System
 </h2>
 
-
 <p class="subtitle">
 Enter provided details below to request access.
 </p>
 
-
+<!-- EMAIL -->
 
 <div class="input-group">
 
@@ -224,96 +180,91 @@ Enter provided details below to request access.
 <input
 id="email"
 type="email"
-placeholder="Enter your email">
+placeholder="Enter your email"
+autocomplete="email">
 
 </div>
+
+
+<!-- TERRITORY -->
 
 <div class="input-group" style="margin-top:15px;">
 
-    <i class="fas fa-map-marker-alt"></i>
+<i class="fas fa-map-marker-alt"></i>
 
-    <select
-        id="area"
-        style="
-            width:100%;
-            padding:14px 14px 14px 45px;
-            border:1px solid #ddd;
-            border-radius:10px;
-            font-size:16px;
-            background:#fff;
-            color:#555;
-        "
-    >
-        <option value="">Select your Territory</option>
-        <option value="Head Office">Head Office</option>
-        <option value="Area 1">Area 1</option>
-        <option value="Area 2">Area 2</option>
-        <option value="Area 3">Area 3</option>
-        <option value="Area 4">Area 4</option>
-        <option value="Area 5">Area 5</option>
-	<option value="SP-ARCTIC DAISY">SP-ARCTIC DAISY</option>
-	<option value="SP-LBF">SP-LBF</option>
-	<option value="SP-SGD">SP-SGD</option>
-	<option value="SP-TPM">SP-TPM</option>
-	<option value="SP-JMGC">SP-JMGC</option>
-	<option value="SP-JZJZ">SP-JZJZ</option>
-	<option value="SP-KOOLTRONIXS">SP-KOOLTRONIXS</option>
-	<option value="SP-MECHANIKOOL">SP-MECHANIKOOL</option>
-	<option value="SP-IRMS">SP-IRMS</option>
-	<option value="SP-KERTECH">SP-KERTECH</option>
-	<option value="SP-CGS">SP-CGS</option>
-	<option value="SP-SGD NORTH LUZON">SP-SGD NORTH LUZON</option>
-	<option value="SP-LCP">SP-LCP</option>
-	<option value="COFFEE TEAM">COFFEE TEAM</option>
-	<option value="HOTEL TEAM">HOTEL TEAM</option>
-	<option value="LAUNDRY TEAM">LAUNDRY TEAM</option>
-	<option value="IN-HOUSE TEAM">IN-HOUSE TEAM</option>
-	<option value="INSTALLATION TEAM">INSTALLATION TEAM</option>
-	<option value="CEBU-HO">CEBU-HO</option>
-	<option value="CEBU-SP NSJ">CEBU-SP NSJ</option>
-	<option value="CEBU-SP JEP">CEBU-SP JEP</option>
-	<option value="CEBU-SP DCC">CEBU-SP DCC</option>
-	<option value="CEBU-SP CMO">CEBU-SP CMO</option>
-	<option value="CEBU-SP PURITY">CEBU-SP PURITY</option>
-	<option value="DAVAO-HO">DAVAO-HO</option>
-	<option value="DAVAO-SP LEACHIM">DAVAO-SP LEACHIM</option>
-	<option value="DAVAO-SP KYTECH">DAVAO-SP KYTECH</option>
-	<option value="DAVAO-SP JC KITCHEN">DAVAO-SP JC KITCHEN</option>
+<select id="area">
 
-    </select>
+<option value="">Select your Territory</option>
+
+<option value="Head Office">Head Office</option>
+<option value="Area 1">Area 1</option>
+<option value="Area 2">Area 2</option>
+<option value="Area 3">Area 3</option>
+<option value="Area 4">Area 4</option>
+<option value="Area 5">Area 5</option>
+
+<option value="SP-ARCTIC DAISY">SP-ARCTIC DAISY</option>
+<option value="SP-LBF">SP-LBF</option>
+<option value="SP-SGD">SP-SGD</option>
+<option value="SP-TPM">SP-TPM</option>
+<option value="SP-JMGC">SP-JMGC</option>
+<option value="SP-JZJZ">SP-JZJZ</option>
+<option value="SP-KOOLTRONIXS">SP-KOOLTRONIXS</option>
+<option value="SP-MECHANIKOOL">SP-MECHANIKOOL</option>
+<option value="SP-IRMS">SP-IRMS</option>
+<option value="SP-KERTECH">SP-KERTECH</option>
+<option value="SP-CGS">SP-CGS</option>
+<option value="SP-SGD NORTH LUZON">SP-SGD NORTH LUZON</option>
+<option value="SP-LCP">SP-LCP</option>
+
+<option value="COFFEE TEAM">COFFEE TEAM</option>
+<option value="HOTEL TEAM">HOTEL TEAM</option>
+<option value="LAUNDRY TEAM">LAUNDRY TEAM</option>
+<option value="IN-HOUSE TEAM">IN-HOUSE TEAM</option>
+<option value="INSTALLATION TEAM">INSTALLATION TEAM</option>
+
+<option value="CEBU-HO">CEBU-HO</option>
+<option value="CEBU-SP NSJ">CEBU-SP NSJ</option>
+<option value="CEBU-SP JEP">CEBU-SP JEP</option>
+<option value="CEBU-SP DCC">CEBU-SP DCC</option>
+<option value="CEBU-SP CMO">CEBU-SP CMO</option>
+<option value="CEBU-SP PURITY">CEBU-SP PURITY</option>
+
+<option value="DAVAO-HO">DAVAO-HO</option>
+<option value="DAVAO-SP LEACHIM">DAVAO-SP LEACHIM</option>
+<option value="DAVAO-SP KYTECH">DAVAO-SP KYTECH</option>
+<option value="DAVAO-SP JC KITCHEN">DAVAO-SP JC KITCHEN</option>
+
+</select>
 
 </div>
 
+
+<!-- POSITION -->
 
 <div class="input-group" style="margin-top:15px;">
 
-    <i class="fas fa-user-tie"></i>
+<i class="fas fa-user-tie"></i>
 
-    <select
-        id="position"
-        style="
-            width:100%;
-            padding:14px 14px 14px 45px;
-            border:1px solid #ddd;
-            border-radius:10px;
-            font-size:16px;
-            background:#fff;
-            color:#555;
-        "
-    >
-        <option value="">Select your Position</option>
-        <option value="Technician">Technician</option>
-        <option value="Warranty Team">Warranty Team</option>
-        <option value="Supervisor">Supervisor</option>
-        <option value="Manager">Manager</option>
-        <option value="Coordinator">Coordinator</option>
-	<option value="Service Provider">Service Provider</option>
-    </select>
+<select id="position">
+
+<option value="">Select your Position</option>
+
+<option value="Technician">Technician</option>
+<option value="Warranty Team">Warranty Team</option>
+<option value="Supervisor">Supervisor</option>
+<option value="Manager">Manager</option>
+<option value="Coordinator">Coordinator</option>
+<option value="Service Provider">Service Provider</option>
+
+</select>
 
 </div>
 
 
-<button 
+<!-- LOGIN BUTTON -->
+
+<button
 id="loginBtn"
 onclick="login()">
 
@@ -323,54 +274,149 @@ Login
 </button>
 
 
+<!-- SPINNER -->
 
 <div class="spinner" id="spinner">
 
 <i class="fas fa-spinner fa-spin"></i>
+Checking access...
 
 </div>
 
 
+<!-- MESSAGE -->
 
 <div id="msg" class="message"></div>
-
 
 
 <div class="footer">
 
 Access is subject to administrator approval.
 
+<div class="version">
+System Version: <span id="versionText"></span>
 </div>
 
-
 </div>
 
+</div>
 
 
 <script>
+
+/* =====================================================
+   SYSTEM CONFIGURATION
+===================================================== */
+
+// CHANGE THIS NUMBER EVERY TIME YOU RELEASE
+// A MAJOR LOGIN / ACCESS ENHANCEMENT.
+
+const APP_VERSION = "2026.08.25.02";
+
 
 const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbylT6fyrv0yj6n1HQxgS6v-4nlxg33aRLFc0bx0li5PkSM0c4OB_cxYGFqEGXRXdA/exec";
 
 
-function showMessage(type, text) {
+document.getElementById("versionText").textContent =
+APP_VERSION;
 
-    const msg = document.getElementById("msg");
 
-    msg.className = "message " + type;
+/* =====================================================
+   MESSAGE
+===================================================== */
 
-    msg.style.display = "block";
+function showMessage(type, text){
 
-    msg.innerHTML = text;
+    const msg =
+        document.getElementById("msg");
+
+    msg.className =
+        "message " + type;
+
+    msg.style.display =
+        "block";
+
+    msg.innerHTML =
+        text;
+}
+
+
+/* =====================================================
+   FORCE NEW VERSION
+   CLEAR OLD LOGIN SESSION
+===================================================== */
+
+function checkSystemVersion(){
+
+    const savedVersion =
+        localStorage.getItem("systemVersion");
+
+
+    /*
+       If user has an older version,
+       clear the previous login session.
+    */
+
+    if(savedVersion !== APP_VERSION){
+
+        console.log(
+            "New system version detected."
+        );
+
+
+        localStorage.removeItem("loggedIn");
+
+        localStorage.removeItem("userEmail");
+
+        localStorage.removeItem("userArea");
+
+        localStorage.removeItem("userPosition");
+
+
+        localStorage.setItem(
+            "systemVersion",
+            APP_VERSION
+        );
+
+
+        /*
+           Prevent browser from restoring
+           an old page/session.
+        */
+
+        if(savedVersion !== null){
+
+            console.log(
+                "Previous version cleared: " +
+                savedVersion
+            );
+
+        }
+
+    }
 
 }
 
 
-// =========================================
-// AUTO-FILL SAVED INFORMATION
-// =========================================
+/* =====================================================
+   PAGE LOAD
+===================================================== */
 
-window.onload = function () {
+window.onload = function(){
+
+    /*
+       Check if user has an old version.
+    */
+
+    checkSystemVersion();
+
+
+    /*
+       Load saved information ONLY
+       if the current system version
+       is already established.
+    */
 
     const savedEmail =
         localStorage.getItem("userEmail");
@@ -382,54 +428,78 @@ window.onload = function () {
         localStorage.getItem("userPosition");
 
 
-    if (savedEmail) {
-        document.getElementById("email").value = savedEmail;
+    if(savedEmail){
+
+        document.getElementById("email").value =
+            savedEmail;
+
     }
 
 
-    if (savedArea) {
-        document.getElementById("area").value = savedArea;
+    if(savedArea){
+
+        document.getElementById("area").value =
+            savedArea;
+
     }
 
 
-    if (savedPosition) {
-        document.getElementById("position").value = savedPosition;
+    if(savedPosition){
+
+        document.getElementById("position").value =
+            savedPosition;
+
     }
 
 
-    // Already logged in
-    if (localStorage.getItem("loggedIn") === "true") {
+    /*
+       If still logged in,
+       proceed to home.
+    */
 
-        window.location.href = "home.html";
+    if(
+        localStorage.getItem("loggedIn")
+        === "true"
+    ){
+
+        window.location.replace(
+            "home.html?v=" + APP_VERSION
+        );
 
     }
 
 };
 
 
-// =========================================
-// LOGIN
-// =========================================
+/* =====================================================
+   LOGIN
+===================================================== */
 
-function login() {
+function login(){
 
     const email =
-        document.getElementById("email").value.trim();
+        document.getElementById("email")
+        .value
+        .trim();
 
 
     const area =
-        document.getElementById("area").value.trim();
+        document.getElementById("area")
+        .value
+        .trim();
 
 
     const position =
-        document.getElementById("position").value.trim();
+        document.getElementById("position")
+        .value
+        .trim();
 
 
-    // =========================================
-    // VALIDATION
-    // =========================================
+    /* =================================================
+       VALIDATION
+    ================================================= */
 
-    if (email === "") {
+    if(email === ""){
 
         showMessage(
             "error",
@@ -440,7 +510,7 @@ function login() {
     }
 
 
-    if (area === "") {
+    if(area === ""){
 
         showMessage(
             "error",
@@ -451,7 +521,7 @@ function login() {
     }
 
 
-    if (position === "") {
+    if(position === ""){
 
         showMessage(
             "error",
@@ -462,9 +532,9 @@ function login() {
     }
 
 
-    // =========================================
-    // BUTTON / LOADING
-    // =========================================
+    /* =================================================
+       BUTTON / LOADING
+    ================================================= */
 
     const btn =
         document.getElementById("loginBtn");
@@ -474,9 +544,12 @@ function login() {
         document.getElementById("spinner");
 
 
-    btn.disabled = true;
+    btn.disabled =
+        true;
 
-    spinner.style.display = "block";
+
+    spinner.style.display =
+        "block";
 
 
     showMessage(
@@ -485,29 +558,42 @@ function login() {
     );
 
 
-    // =========================================
-    // SEND REQUEST TO GOOGLE APPS SCRIPT
-    // =========================================
+    /* =================================================
+       GOOGLE APPS SCRIPT REQUEST
+    ================================================= */
 
     const url =
         WEBAPP_URL +
-        "?email=" + encodeURIComponent(email) +
-        "&area=" + encodeURIComponent(area) +
-        "&position=" + encodeURIComponent(position) +
-        "&t=" + Date.now();
+        "?email=" +
+        encodeURIComponent(email) +
+
+        "&area=" +
+        encodeURIComponent(area) +
+
+        "&position=" +
+        encodeURIComponent(position) +
+
+        "&version=" +
+        encodeURIComponent(APP_VERSION) +
+
+        "&t=" +
+        Date.now();
 
 
-    fetch(url, {
-        method: "GET",
-        redirect: "follow"
+    fetch(url,{
+        method:"GET",
+        redirect:"follow",
+        cache:"no-store"
     })
+
 
     .then(response => {
 
-        if (!response.ok) {
+        if(!response.ok){
 
             throw new Error(
-                "Server returned " + response.status
+                "Server returned " +
+                response.status
             );
 
         }
@@ -517,124 +603,164 @@ function login() {
     })
 
 
-   .then(data => {
+    .then(data => {
 
-    console.log("Server response:", data);
-
-
-    // =========================================
-    // POSITION MISMATCH / BLOCKED
-    // =========================================
-
-    if (data.blocked === true) {
-
-        // Make absolutely sure the user
-        // cannot enter the system.
-        localStorage.removeItem("loggedIn");
-
-
-        showMessage(
-            "error",
-            data.message ||
-            "Access denied. Your selected position does not match your registered position."
+        console.log(
+            "Server response:",
+            data
         );
 
 
-        return;
-    }
+        /* =============================================
+           POSITION MISMATCH / BLOCKED
+        ============================================= */
+
+        if(data.blocked === true){
+
+            /*
+               Remove ALL login session information.
+            */
+
+            localStorage.removeItem(
+                "loggedIn"
+            );
 
 
-    // =========================================
-    // OTHER SERVER ERROR
-    // =========================================
-
-    if (!data.success) {
-
-        showMessage(
-            "error",
-            data.message ||
-            "Unable to process your request."
-        );
+            localStorage.removeItem(
+                "userEmail"
+            );
 
 
-        return;
-    }
+            localStorage.removeItem(
+                "userArea"
+            );
 
 
-    // =========================================
-    // SAVE USER INFORMATION
-    // =========================================
-
-    localStorage.setItem(
-        "userEmail",
-        data.email
-    );
+            localStorage.removeItem(
+                "userPosition"
+            );
 
 
-    localStorage.setItem(
-        "userArea",
-        data.area || area
-    );
+            showMessage(
+                "error",
+                data.message ||
+                "ACCESS DENIED. The selected position does not match your registered position."
+            );
 
 
-    localStorage.setItem(
-        "userPosition",
-        data.position || position
-    );
+            return;
+        }
 
 
-    // =========================================
-    // APPROVED
-    // =========================================
+        /* =============================================
+           SERVER ERROR
+        ============================================= */
 
-    if (data.approved === true) {
+        if(!data.success){
+
+            showMessage(
+                "error",
+                data.message ||
+                "Unable to process your request."
+            );
+
+
+            return;
+        }
+
+
+        /* =============================================
+           SAVE SERVER-VALIDATED INFORMATION
+        ============================================= */
 
         localStorage.setItem(
-            "loggedIn",
-            "true"
+            "userEmail",
+            data.email
         );
 
 
-        showMessage(
-            "success",
-            "Access approved. Redirecting..."
+        localStorage.setItem(
+            "userArea",
+            data.area || area
         );
 
 
-        setTimeout(() => {
-
-            window.location.href =
-                "home.html";
-
-        }, 1200);
-
-
-    }
-
-    // =========================================
-    // PENDING
-    // =========================================
-
-    else {
-
-        localStorage.removeItem(
-            "loggedIn"
+        localStorage.setItem(
+            "userPosition",
+            data.position || position
         );
 
 
-        showMessage(
-            "pending",
-            "Your access request is pending approval."
-        );
+        /* =============================================
+           APPROVED
+        ============================================= */
 
-    }
+        if(data.approved === true){
 
-})
+            localStorage.setItem(
+                "loggedIn",
+                "true"
+            );
 
 
-    // =========================================
-    // CONNECTION ERROR
-    // =========================================
+            /*
+               Save current system version.
+            */
+
+            localStorage.setItem(
+                "systemVersion",
+                APP_VERSION
+            );
+
+
+            showMessage(
+                "success",
+                "Access approved. Redirecting..."
+            );
+
+
+            setTimeout(function(){
+
+                /*
+                   Add version to home URL
+                   to prevent stale cached page.
+                */
+
+                window.location.replace(
+                    "home.html?v=" +
+                    APP_VERSION
+                );
+
+            },1200);
+
+
+        }
+
+
+        /* =============================================
+           PENDING
+        ============================================= */
+
+        else{
+
+            localStorage.removeItem(
+                "loggedIn"
+            );
+
+
+            showMessage(
+                "pending",
+                "Your access request is pending approval."
+            );
+
+        }
+
+    })
+
+
+    /* =================================================
+       CONNECTION ERROR
+    ================================================= */
 
     .catch(error => {
 
@@ -652,22 +778,24 @@ function login() {
     })
 
 
-    // =========================================
-    // FINISH LOADING
-    // =========================================
+    /* =================================================
+       FINISH
+    ================================================= */
 
     .finally(() => {
 
-        btn.disabled = false;
+        btn.disabled =
+            false;
 
-        spinner.style.display = "none";
+
+        spinner.style.display =
+            "none";
 
     });
 
 }
 
 </script>
-
 
 </body>
 </html>

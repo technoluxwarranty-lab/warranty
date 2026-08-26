@@ -281,7 +281,8 @@ select,
     .filter-panel,
     .alert-box,
     #printModal,
-    footer{
+    footer,
+    .last-updated{
         display:none !important;
     }
 
@@ -290,7 +291,6 @@ select,
         margin:0;
     }
 
-    /* DON'T force display:block */
     .brand{
         margin:0;
         padding:0;
@@ -313,6 +313,14 @@ select,
     @page{
         margin:12mm;
     }
+}
+
+.last-updated{
+    text-align:center;
+    color:#94a3b8;
+    font-size:11px;
+    margin-top:10px;
+    padding-bottom:15px;
 }
 
   </style>
@@ -2435,8 +2443,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </div>
 </div>
 
+<div class="last-updated">
+    Last Updated: <span id="lastUpdated"></span>
+</div>
 
 <script>
+
+const LAST_UPDATED = "08/26/2026";
+    document.getElementById("lastUpdated").textContent = LAST_UPDATED;
+
   function filterBrand() {
     const selected = document.getElementById('brandFilter').value;
     document.querySelectorAll('.brand').forEach(b => {

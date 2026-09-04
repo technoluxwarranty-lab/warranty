@@ -3,15 +3,20 @@
 
 <head>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Warranty Management System</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 *{
     margin:0;
     padding:0;
@@ -24,9 +29,10 @@ body{
     color:#1e293b;
 }
 
-/* ======================
+
+/* =========================================================
    TOP BAR
-====================== */
+========================================================= */
 
 .topbar{
     background:#0f172a;
@@ -75,9 +81,10 @@ body{
     background:#1d4ed8;
 }
 
-/* ======================
+
+/* =========================================================
    SEARCH CARD
-====================== */
+========================================================= */
 
 .search-card{
     background:#fff;
@@ -116,9 +123,10 @@ body{
     background:#1d4ed8;
 }
 
-/* ======================
+
+/* =========================================================
    RESULT CARD
-====================== */
+========================================================= */
 
 .result-card{
     display:none;
@@ -130,16 +138,17 @@ body{
     box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
-/* ======================
-   HEADER
-====================== */
+
+/* =========================================================
+   RESULT HEADER
+========================================================= */
 
 .result-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding-bottom:20px;
-    margin-bottom:30px;
+    margin-bottom:25px;
     border-bottom:1px solid #e5e7eb;
 }
 
@@ -149,56 +158,105 @@ body{
     color:#0f172a;
 }
 
-/* ======================
-   STATUS
-====================== */
+.header-subtitle{
+    margin-top:6px;
+    font-size:14px;
+    font-weight:400;
+    color:#64748b;
+}
+
+
+/* =========================================================
+   OVERALL STATUS BADGE
+========================================================= */
 
 .status-badge{
-    padding:10px 20px;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 18px;
     border-radius:50px;
-    color:#fff;
     font-size:14px;
-    font-weight:600;
+    font-weight:700;
+    white-space:nowrap;
 }
 
 .status-badge.active{
-    background:#16a34a;
-    animation:pulse 1.5s infinite;
+    background:#dcfce7;
+    color:#15803d;
+    border:1px solid #bbf7d0;
 }
 
 .status-badge.expiring{
-    background:#f59e0b;
+    background:#fef3c7;
+    color:#b45309;
+    border:1px solid #fde68a;
 }
 
 .status-badge.expired{
-    background:#dc2626;
+    background:#fee2e2;
+    color:#b91c1c;
+    border:1px solid #fecaca;
+}
+
+.status-badge.extended-active{
+    background:#dcfce7;
+    color:#15803d;
+    border:1px solid #bbf7d0;
 }
 
 .status-badge.default{
-    background:#64748b;
+    background:#f1f5f9;
+    color:#475569;
+    border:1px solid #e2e8f0;
 }
 
-@keyframes pulse{
 
-    0%{
-        transform:scale(1);
-        box-shadow:0 0 0 0 rgba(22,163,74,.7);
-    }
+/* =========================================================
+   WARRANTY NOTICE
+========================================================= */
 
-    70%{
-        transform:scale(1.05);
-        box-shadow:0 0 0 15px rgba(22,163,74,0);
-    }
-
-    100%{
-        transform:scale(1);
-        box-shadow:0 0 0 0 rgba(22,163,74,0);
-    }
+.warranty-notice{
+    display:none;
+    align-items:flex-start;
+    gap:15px;
+    padding:18px 20px;
+    margin-bottom:30px;
+    border-radius:12px;
+    border:1px solid #bbf7d0;
+    background:#f0fdf4;
 }
 
-/* ======================
+.notice-icon{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#dcfce7;
+    color:#15803d;
+    font-size:18px;
+}
+
+.notice-content strong{
+    display:block;
+    color:#166534;
+    font-size:16px;
+    margin-bottom:4px;
+}
+
+.notice-content p{
+    color:#166534;
+    font-size:14px;
+    line-height:1.5;
+}
+
+
+/* =========================================================
    WARRANTY SECTION
-====================== */
+========================================================= */
 
 .warranty-section{
     padding:10px 0;
@@ -206,13 +264,84 @@ body{
 
 .section-header{
     display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.section-title{
+    display:flex;
     align-items:center;
     gap:10px;
     font-size:22px;
     font-weight:700;
     color:#1e293b;
-    margin-bottom:20px;
 }
+
+.section-title > i{
+    color:#0f172a;
+}
+
+.extended-header{
+    align-items:flex-start;
+}
+
+.extended-header .section-title{
+    align-items:flex-start;
+}
+
+.extended-header small{
+    display:block;
+    font-size:13px;
+    font-weight:400;
+    color:#64748b;
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   SECTION STATUS BADGES
+========================================================= */
+
+.section-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.section-badge.expired-badge{
+    background:#fee2e2;
+    color:#b91c1c;
+    border:1px solid #fecaca;
+}
+
+.section-badge.active-badge{
+    background:#dcfce7;
+    color:#15803d;
+    border:1px solid #bbf7d0;
+}
+
+.section-badge.expiring-badge{
+    background:#fef3c7;
+    color:#b45309;
+    border:1px solid #fde68a;
+}
+
+.section-badge.default-badge{
+    background:#f1f5f9;
+    color:#475569;
+    border:1px solid #e2e8f0;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
 
 .section-divider{
     border:none;
@@ -220,9 +349,10 @@ body{
     margin:35px 0;
 }
 
-/* ======================
+
+/* =========================================================
    INFO GRID
-====================== */
+========================================================= */
 
 .info-grid{
     display:grid;
@@ -257,13 +387,16 @@ body{
     word-break:break-word;
 }
 
-/* ======================
-   TABLE
-====================== */
+
+/* =========================================================
+   EXTENDED WARRANTY TABLE
+========================================================= */
 
 .table-responsive{
     width:100%;
     overflow-x:auto;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
 }
 
 .extended-table{
@@ -287,13 +420,37 @@ body{
     font-size:15px;
 }
 
-.extended-table tbody tr:hover{
+.extended-table tbody tr:last-child td{
+    border-bottom:none;
+}
+
+.extended-table tbody tr:hover td{
     background:#f8fafc;
 }
 
-/* ======================
+
+/* =========================================================
+   PART STATUS
+========================================================= */
+
+.part-status{
+    font-weight:700;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+.part-status.active{
+    color:#15803d;
+}
+
+.part-status.expired{
+    color:#b91c1c;
+}
+
+
+/* =========================================================
    FOOTER
-====================== */
+========================================================= */
 
 footer{
     text-align:center;
@@ -302,291 +459,746 @@ footer{
     font-size:13px;
 }
 
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .logo-section h1{
+        font-size:17px;
+    }
+
+    .logo-section p{
+        font-size:11px;
+    }
+
+    .header-logo{
+        height:35px;
+    }
+
+    .home-btn{
+        padding:9px 12px;
+    }
+
+    .search-card,
+    .result-card{
+        margin-left:15px;
+        margin-right:15px;
+        padding:20px;
+    }
+
+    .search-box{
+        flex-direction:column;
+    }
+
+    .search-box button{
+        height:48px;
+    }
+
+    .result-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .result-header h3{
+        font-size:25px;
+    }
+
+    .section-header{
+        align-items:flex-start;
+    }
+
+    .section-title{
+        font-size:19px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .warranty-notice{
+        padding:15px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
+
+@media(max-width:450px){
+
+    .topbar{
+        height:auto;
+        min-height:75px;
+        padding:12px 15px;
+    }
+
+    .logo-section{
+        gap:8px;
+    }
+
+    .logo-section p{
+        display:none;
+    }
+
+    .home-btn{
+        font-size:0;
+    }
+
+    .home-btn i{
+        font-size:16px;
+    }
+
+    .section-header{
+        flex-direction:column;
+    }
+
+    .section-badge{
+        align-self:flex-start;
+    }
+
+}
+
 </style>
+
 </head>
 
 
 <body>
 
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
 <header class="topbar">
 
     <div class="logo-section">
-        <img src="company-logo.png" alt="Company Logo" class="header-logo">
+
+        <img
+            src="company-logo.png"
+            alt="Company Logo"
+            class="header-logo"
+        >
 
         <div>
+
             <h1>Warranty Management System</h1>
-            <p>Warranty Checker Portal</p>
+
+            <p>
+                Warranty Checker Portal
+            </p>
+
         </div>
+
     </div>
 
-    <button class="home-btn" onclick="goHome()">
+
+    <button
+        class="home-btn"
+        onclick="goHome()"
+    >
+
         <i class="fas fa-home"></i>
-        Home
+        <span>Home</span>
+
     </button>
 
-
 </header>
+
+
+
+<!-- =========================================================
+     SEARCH CARD
+========================================================= -->
 
 <div class="search-card">
 
     <h2>
+
         <i class="fas fa-magnifying-glass"></i>
+
         Warranty Checker
-    </h2>	
-<br>
-	<p>
+
+    </h2>
+
+
+    <br>
+
+
+    <p>
         Search equipment warranty using the serial number.
     </p>
+
 
     <div class="search-box">
 
         <input
             type="text"
             id="serialInput"
-            placeholder="Enter Equipment Serial Number">
+            placeholder="Enter Equipment Serial Number"
+            autocomplete="off"
+        >
 
-        <button id="searchBtn" onclick="searchWarranty()">
-    <i class="fas fa-search"></i> Search
-	</button>
+
+        <button
+            id="searchBtn"
+            onclick="searchWarranty()"
+        >
+
+            <i class="fas fa-search"></i>
+            Search
+
+        </button>
 
     </div>
 
 </div>
 
-<div class="result-card" id="resultCard" style="display:none;">
 
-    <!-- Header -->
+
+<!-- =========================================================
+     RESULT CARD
+========================================================= -->
+
+<div
+    class="result-card"
+    id="resultCard"
+>
+
+
+    <!-- =====================================================
+         RESULT HEADER
+    ====================================================== -->
+
     <div class="result-header">
-        <h3>Warranty Information</h3>
-        <span id="statusBadge" class="status-badge"></span>
+
+        <div>
+
+            <h3>
+                Warranty Information
+            </h3>
+
+            <p class="header-subtitle">
+                Warranty coverage summary for this equipment
+            </p>
+
+        </div>
+
+
+        <div
+            id="statusBadge"
+            class="status-badge default"
+        ></div>
+
     </div>
 
-    <!-- ================= Standard Warranty ================= -->
+
+
+    <!-- =====================================================
+         OVERALL WARRANTY NOTICE
+    ====================================================== -->
+
+    <div
+        id="warrantyNotice"
+        class="warranty-notice"
+    >
+
+        <div class="notice-icon">
+
+            <i class="fas fa-circle-check"></i>
+
+        </div>
+
+
+        <div class="notice-content">
+
+            <strong id="noticeTitle"></strong>
+
+            <p id="noticeMessage"></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         STANDARD PARTS WARRANTY
+    ====================================================== -->
+
     <div class="warranty-section">
 
         <div class="section-header">
-            <i class="fas fa-toolbox"></i>
-            <span>Standard Parts Warranty</span>
+
+            <div class="section-title">
+
+                <i class="fas fa-toolbox"></i>
+
+                <span>
+                    Standard Parts Warranty
+                </span>
+
+            </div>
+
+
+            <span
+                id="standardBadge"
+                class="section-badge default-badge"
+            >
+                Unknown
+            </span>
+
         </div>
+
 
         <div class="info-grid">
 
+
             <div class="info-item">
-                <label>Brand Name</label>
+
+                <label>
+                    Brand Name
+                </label>
+
                 <span id="brand"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Model</label>
+
+                <label>
+                    Model
+                </label>
+
                 <span id="model"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Serial Number</label>
+
+                <label>
+                    Serial Number
+                </label>
+
                 <span id="serial"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Store Name</label>
+
+                <label>
+                    Store Name
+                </label>
+
                 <span id="store"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Warranty Started</label>
+
+                <label>
+                    Warranty Started
+                </label>
+
                 <span id="start"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Warranty End</label>
+
+                <label>
+                    Warranty End
+                </label>
+
                 <span id="end"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Warranty Period (Months)</label>
+
+                <label>
+                    Warranty Period (Months)
+                </label>
+
                 <span id="period"></span>
+
             </div>
 
+
             <div class="info-item">
-                <label>Warranty Status</label>
+
+                <label>
+                    Warranty Status
+                </label>
+
                 <span id="status"></span>
+
             </div>
+
 
         </div>
 
     </div>
 
-    <!-- Divider -->
+
+
+    <!-- =====================================================
+         DIVIDER
+    ====================================================== -->
+
     <hr class="section-divider">
 
-    <!-- ================= Extended Warranty ================= -->
-    <div class="warranty-section" id="extendedCard" style="display:none;">
 
-        <div class="section-header">
-            <i class="fas fa-shield-alt"></i>
-            <span>Extended Parts Warranty</span>
+
+    <!-- =====================================================
+         EXTENDED PARTS WARRANTY
+    ====================================================== -->
+
+    <div
+        class="warranty-section"
+        id="extendedCard"
+        style="display:none;"
+    >
+
+
+        <div class="section-header extended-header">
+
+            <div class="section-title">
+
+                <i class="fas fa-shield-alt"></i>
+
+
+                <div>
+
+                    <span>
+                        Extended Parts Warranty
+                    </span>
+
+                    <small id="extendedSubtitle">
+                        Additional coverage for selected parts
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <span
+                id="extendedBadge"
+                class="section-badge active-badge"
+            >
+                Active
+            </span>
+
         </div>
+
+
 
         <div class="table-responsive">
 
             <table class="extended-table">
 
                 <thead>
+
                     <tr>
-                        <th>Part Name</th>
-                        <th>Warranty Period (Years)</th>
-                        <th>Warranty End</th>
+
+                        <th>
+                            Part Name
+                        </th>
+
+                        <th>
+                            Warranty Period
+                        </th>
+
+                        <th>
+                            Warranty End
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
                     </tr>
+
                 </thead>
 
-                <tbody id="extendedBody">
-                </tbody>
+
+                <tbody id="extendedBody"></tbody>
 
             </table>
 
         </div>
 
+
     </div>
+
 
 </div>
 
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+    © 2026 Warranty Section
+</footer>
+
+
+
 <script>
+
+
+/* =========================================================
+   WEB APP URL
+========================================================= */
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbzYeE9nUk2jD1uwl37gooqN5LIjyBZWl-HCFiojSihvncGNONZi8sh5vG-BRKkVqAid/exec";
 
-// =========================================================
-// GLOBAL SEARCH CONTROL
-// =========================================================
+
+/* =========================================================
+   GLOBAL SEARCH CONTROL
+========================================================= */
 
 let searchController = null;
+
 let lastSerial = "";
+
 let searchInProgress = false;
 
 
-// =========================================================
-// HELPER FUNCTION
-// =========================================================
+/* =========================================================
+   HELPER
+========================================================= */
 
-function setText(id, value) {
+function setText(id, value){
 
-    const el = document.getElementById(id);
+    const element =
+        document.getElementById(id);
 
-    if (!el) {
-        console.warn("Missing HTML element:", id);
+    if(!element){
+        console.warn(
+            "Missing HTML element:",
+            id
+        );
         return;
     }
 
-    el.textContent = value ?? "";
+    element.textContent =
+        value ?? "";
 
 }
 
 
-// =========================================================
-// HIDE RESULTS
-// =========================================================
+/* =========================================================
+   HIDE RESULTS
+========================================================= */
 
-function hideResults() {
+function hideResults(){
 
-    const resultCard = document.getElementById("resultCard");
-    const extendedCard = document.getElementById("extendedCard");
+    const resultCard =
+        document.getElementById("resultCard");
 
-    if (resultCard) {
+    const extendedCard =
+        document.getElementById("extendedCard");
+
+
+    if(resultCard){
         resultCard.style.display = "none";
     }
 
-    if (extendedCard) {
+
+    if(extendedCard){
         extendedCard.style.display = "none";
     }
 
 }
 
 
-// =========================================================
-// SERIAL INPUT
-// =========================================================
+/* =========================================================
+   RESET EXTENDED WARRANTY
+========================================================= */
 
-const serialInput = document.getElementById("serialInput");
+function resetExtendedWarranty(){
 
-if (serialInput) {
+    const extendedBody =
+        document.getElementById("extendedBody");
 
-    serialInput.addEventListener("keydown", function(e) {
+    const extendedCard =
+        document.getElementById("extendedCard");
 
-        if (e.key === "Enter") {
+    const extendedBadge =
+        document.getElementById("extendedBadge");
 
-            e.preventDefault();
 
-            searchWarranty();
+    if(extendedBody){
+        extendedBody.replaceChildren();
+    }
 
-        }
 
-    });
+    if(extendedCard){
+        extendedCard.style.display = "none";
+    }
+
+
+    if(extendedBadge){
+
+        extendedBadge.textContent =
+            "Active";
+
+        extendedBadge.className =
+            "section-badge active-badge";
+
+    }
 
 }
 
 
-// =========================================================
-// MAIN SEARCH
-// =========================================================
+/* =========================================================
+   SERIAL INPUT
+========================================================= */
 
-async function searchWarranty() {
+const serialInput =
+    document.getElementById("serialInput");
 
-    const btn = document.getElementById("searchBtn");
-    const input = document.getElementById("serialInput");
 
-    if (!input) {
-        console.error("serialInput not found.");
+if(serialInput){
+
+    serialInput.addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                event.preventDefault();
+
+                searchWarranty();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MAIN SEARCH
+========================================================= */
+
+async function searchWarranty(){
+
+    const btn =
+        document.getElementById("searchBtn");
+
+    const input =
+        document.getElementById("serialInput");
+
+
+    if(!input){
+
+        console.error(
+            "serialInput not found."
+        );
+
         return;
+
     }
 
-    // Normalize serial
-    const serial = input.value
-        .trim()
-        .replace(/\s+/g, "")
-        .toUpperCase();
 
-    // Empty serial
-    if (!serial) {
+    /* =====================================================
+       NORMALIZE SERIAL
+    ====================================================== */
 
-        alert("Please enter a Serial Number.");
+    const serial =
+        input.value
+            .trim()
+            .replace(/\s+/g,"")
+            .toUpperCase();
+
+
+    /* =====================================================
+       EMPTY SERIAL
+    ====================================================== */
+
+    if(!serial){
+
+        alert(
+            "Please enter a Serial Number."
+        );
 
         input.focus();
 
         return;
+
     }
 
 
-    // Prevent duplicate search
-    if (searchInProgress) {
+    /* =====================================================
+       PREVENT DUPLICATE REQUEST
+    ====================================================== */
+
+    if(searchInProgress){
+
         return;
+
     }
 
 
-    // Prevent searching the exact same serial again
-    if (serial === lastSerial) {
+    /* =====================================================
+       PREVENT SAME SEARCH
+    ====================================================== */
 
-        console.log("Same serial already searched.");
+    if(serial === lastSerial){
 
         return;
+
     }
 
 
     searchInProgress = true;
+
     lastSerial = serial;
 
 
-    // Cancel previous request if still running
-    if (searchController) {
+    /* =====================================================
+       CANCEL PREVIOUS REQUEST
+    ====================================================== */
+
+    if(searchController){
+
         searchController.abort();
+
     }
 
-    searchController = new AbortController();
+
+    searchController =
+        new AbortController();
 
 
-    // =====================================================
-    // BUTTON LOADING STATE
-    // =====================================================
+    /* =====================================================
+       LOADING STATE
+    ====================================================== */
 
-    if (btn) {
+    if(btn){
 
         btn.disabled = true;
 
@@ -596,11 +1208,32 @@ async function searchWarranty() {
     }
 
 
-    try {
+    try{
 
-        // =================================================
-        // FAST REQUEST
-        // =================================================
+
+        /* =================================================
+           RESET OLD RESULT
+        ================================================= */
+
+        resetExtendedWarranty();
+
+
+        const warrantyNotice =
+            document.getElementById(
+                "warrantyNotice"
+            );
+
+        if(warrantyNotice){
+
+            warrantyNotice.style.display =
+                "none";
+
+        }
+
+
+        /* =================================================
+           REQUEST
+        ================================================= */
 
         const url =
             WEB_APP_URL +
@@ -610,18 +1243,18 @@ async function searchWarranty() {
             Date.now();
 
 
-        const response = await fetch(url, {
+        const response =
+            await fetch(
+                url,
+                {
+                    method:"GET",
+                    cache:"no-store",
+                    signal:searchController.signal
+                }
+            );
 
-            method: "GET",
 
-            cache: "no-store",
-
-            signal: searchController.signal
-
-        });
-
-
-        if (!response.ok) {
+        if(!response.ok){
 
             throw new Error(
                 "Unable to connect to the server."
@@ -630,135 +1263,98 @@ async function searchWarranty() {
         }
 
 
-        // =================================================
-        // READ JSON
-        // =================================================
+        /* =================================================
+           JSON
+        ================================================= */
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
-        console.log("Warranty Search:", data);
+
+        console.log(
+            "Warranty Search:",
+            data
+        );
 
 
-        // =================================================
-        // NOT FOUND
-        // =================================================
+        /* =================================================
+           NOT FOUND
+        ================================================= */
 
-        if (!data.found) {
+        if(!data.found){
 
             hideResults();
 
-            alert("Serial Number not found. Please contact Warranty Team.");
+            alert(
+                "Serial Number not found. Please contact Warranty Team."
+            );
 
             return;
 
         }
 
 
-        // =================================================
-        // SHOW RESULT CARD
-        // =================================================
+        /* =================================================
+           SHOW RESULT
+        ================================================= */
 
         const resultCard =
-            document.getElementById("resultCard");
-
-        if (resultCard) {
-
-            resultCard.style.display = "block";
-
-        }
+            document.getElementById(
+                "resultCard"
+            );
 
 
-        // =================================================
-        // EQUIPMENT INFORMATION
-        // =================================================
+        if(resultCard){
 
-        setText("brand", data.brand);
-        setText("model", data.model);
-        setText("serial", data.serial);
-        setText("store", data.store);
-        setText("start", data.start);
-        setText("end", data.end);
-        setText("period", data.period);
-
-
-        // =================================================
-        // WARRANTY STATUS
-        // =================================================
-
-        const statusText =
-            data.status === "Expired"
-                ? "Out of Warranty"
-                : "Under Warranty";
-
-        setText("status", statusText);
-
-
-        // =================================================
-        // STATUS BADGE
-        // =================================================
-
-        const badge =
-            document.getElementById("statusBadge");
-
-        if (badge) {
-
-            badge.textContent =
-                data.status || "Unknown";
-
-            badge.className = "status-badge";
-
-
-            switch (data.status) {
-
-                case "Active":
-
-                    badge.classList.add("active");
-
-                    break;
-
-
-                case "Expiring Soon":
-
-                    badge.classList.add("expiring");
-
-                    break;
-
-
-                case "Expired":
-
-                    badge.classList.add("expired");
-
-                    break;
-
-
-                default:
-
-                    badge.classList.add("default");
-
-            }
+            resultCard.style.display =
+                "block";
 
         }
 
 
-        // =================================================
-        // EXTENDED WARRANTY
-        // =================================================
+        /* =================================================
+           EQUIPMENT INFORMATION
+        ================================================= */
 
-        const extendedCard =
-            document.getElementById("extendedCard");
+        setText(
+            "brand",
+            data.brand
+        );
 
-        const extendedBody =
-            document.getElementById("extendedBody");
+        setText(
+            "model",
+            data.model
+        );
+
+        setText(
+            "serial",
+            data.serial
+        );
+
+        setText(
+            "store",
+            data.store
+        );
+
+        setText(
+            "start",
+            data.start
+        );
+
+        setText(
+            "end",
+            data.end
+        );
+
+        setText(
+            "period",
+            data.period
+        );
 
 
-        if (!extendedBody) {
-            return;
-        }
-
-
-        // Clear previous results
-        extendedBody.replaceChildren();
-
+        /* =================================================
+           EXTENDED WARRANTY EXISTENCE
+        ================================================= */
 
         const hasExtendedWarranty =
             data.extendWarranty === "Yes" &&
@@ -766,10 +1362,356 @@ async function searchWarranty() {
             data.extendedParts.length > 0;
 
 
-        if (!hasExtendedWarranty) {
+        /* =================================================
+           CHECK EXTENDED WARRANTY STATUS
+        ================================================= */
 
-            if (extendedCard) {
-                extendedCard.style.display = "none";
+        let extendedWarrantyActive = false;
+
+
+        if(hasExtendedWarranty){
+
+            extendedWarrantyActive =
+                data.extendedParts.some(
+                    item => {
+
+                        if(!item.end){
+                            return false;
+                        }
+
+
+                        const endDate =
+                            new Date(item.end);
+
+
+                        if(
+                            isNaN(
+                                endDate.getTime()
+                            )
+                        ){
+
+                            return false;
+
+                        }
+
+
+                        endDate.setHours(
+                            23,
+                            59,
+                            59,
+                            999
+                        );
+
+
+                        return (
+                            endDate >= new Date()
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* =================================================
+           STANDARD STATUS
+        ================================================= */
+
+        const standardExpired =
+            data.status === "Expired";
+
+
+        const standardActive =
+            data.status === "Active";
+
+
+        const standardExpiring =
+            data.status === "Expiring Soon";
+
+
+        /* =================================================
+           OVERALL STATUS
+        ================================================= */
+
+        let overallStatus =
+            "Warranty Status Unknown";
+
+
+        let overallClass =
+            "default";
+
+
+        if(extendedWarrantyActive){
+
+            overallStatus =
+                "Extended Warranty Active";
+
+            overallClass =
+                "extended-active";
+
+        }
+
+        else if(standardActive){
+
+            overallStatus =
+                "Under Warranty";
+
+            overallClass =
+                "active";
+
+        }
+
+        else if(standardExpiring){
+
+            overallStatus =
+                "Expiring Soon";
+
+            overallClass =
+                "expiring";
+
+        }
+
+        else if(standardExpired){
+
+            overallStatus =
+                "Out of Warranty";
+
+            overallClass =
+                "expired";
+
+        }
+
+
+        /* =================================================
+           OVERALL STATUS BADGE
+        ================================================= */
+
+        const badge =
+            document.getElementById(
+                "statusBadge"
+            );
+
+
+        if(badge){
+
+            badge.className =
+                "status-badge " +
+                overallClass;
+
+
+            badge.innerHTML =
+                '<i class="fas fa-shield-alt"></i> ' +
+                overallStatus;
+
+        }
+
+
+        /* =================================================
+           STANDARD WARRANTY STATUS
+        ================================================= */
+
+        let standardStatusText =
+            "Unknown";
+
+
+        if(standardActive){
+
+            standardStatusText =
+                "Active";
+
+        }
+
+        else if(standardExpiring){
+
+            standardStatusText =
+                "Expiring Soon";
+
+        }
+
+        else if(standardExpired){
+
+            standardStatusText =
+                "Expired";
+
+        }
+
+
+        setText(
+            "status",
+            standardStatusText
+        );
+
+
+        /* =================================================
+           STANDARD BADGE
+        ================================================= */
+
+        const standardBadge =
+            document.getElementById(
+                "standardBadge"
+            );
+
+
+        if(standardBadge){
+
+            if(standardActive){
+
+                standardBadge.textContent =
+                    "Active";
+
+                standardBadge.className =
+                    "section-badge active-badge";
+
+            }
+
+            else if(standardExpiring){
+
+                standardBadge.textContent =
+                    "Expiring Soon";
+
+                standardBadge.className =
+                    "section-badge expiring-badge";
+
+            }
+
+            else if(standardExpired){
+
+                standardBadge.textContent =
+                    "Expired";
+
+                standardBadge.className =
+                    "section-badge expired-badge";
+
+            }
+
+            else{
+
+                standardBadge.textContent =
+                    "Unknown";
+
+                standardBadge.className =
+                    "section-badge default-badge";
+
+            }
+
+        }
+
+
+        /* =================================================
+           WARRANTY NOTICE
+        ================================================= */
+
+        const notice =
+            document.getElementById(
+                "warrantyNotice"
+            );
+
+        const noticeTitle =
+            document.getElementById(
+                "noticeTitle"
+            );
+
+        const noticeMessage =
+            document.getElementById(
+                "noticeMessage"
+            );
+
+
+        if(
+            notice &&
+            extendedWarrantyActive &&
+            standardExpired
+        ){
+
+            notice.style.display =
+                "flex";
+
+
+            if(noticeTitle){
+
+                noticeTitle.textContent =
+                    "Standard Warranty Expired — Extended Warranty Still Active";
+
+            }
+
+
+            if(noticeMessage){
+
+                noticeMessage.textContent =
+                    "The standard parts warranty expired on " +
+                    (data.end || "the stated warranty end date") +
+                    ". Selected parts remain covered under the Extended Parts Warranty.";
+
+            }
+
+        }
+
+        else if(
+            notice &&
+            extendedWarrantyActive
+        ){
+
+            notice.style.display =
+                "flex";
+
+
+            if(noticeTitle){
+
+                noticeTitle.textContent =
+                    "Extended Warranty Active";
+
+            }
+
+
+            if(noticeMessage){
+
+                noticeMessage.textContent =
+                    "Selected parts are currently covered under the Extended Parts Warranty.";
+
+            }
+
+        }
+
+        else if(notice){
+
+            notice.style.display =
+                "none";
+
+        }
+
+
+        /* =================================================
+           EXTENDED WARRANTY
+        ================================================= */
+
+        const extendedCard =
+            document.getElementById(
+                "extendedCard"
+            );
+
+
+        const extendedBody =
+            document.getElementById(
+                "extendedBody"
+            );
+
+
+        const extendedBadge =
+            document.getElementById(
+                "extendedBadge"
+            );
+
+
+        if(
+            !hasExtendedWarranty ||
+            !extendedBody
+        ){
+
+            if(extendedCard){
+
+                extendedCard.style.display =
+                    "none";
+
             }
 
             return;
@@ -777,68 +1719,206 @@ async function searchWarranty() {
         }
 
 
-        // =================================================
-        // BUILD EXTENDED WARRANTY ROWS
-        // =================================================
+        /* =================================================
+           BUILD TABLE
+        ================================================= */
+
+        extendedBody.replaceChildren();
+
 
         const fragment =
             document.createDocumentFragment();
 
 
-        data.extendedParts.forEach(item => {
-
-            const row =
-                document.createElement("tr");
+        data.extendedParts.forEach(
+            item => {
 
 
-            const partCell =
-                document.createElement("td");
-
-            partCell.textContent =
-                item.part || "";
+                const row =
+                    document.createElement("tr");
 
 
-            const periodCell =
-                document.createElement("td");
+                /* =========================================
+                   PART NAME
+                ========================================== */
 
-            periodCell.textContent =
-                item.period || "";
-
-
-            const endCell =
-                document.createElement("td");
-
-            endCell.textContent =
-                item.end || "";
+                const partCell =
+                    document.createElement("td");
 
 
-            row.appendChild(partCell);
-            row.appendChild(periodCell);
-            row.appendChild(endCell);
+                partCell.textContent =
+                    item.part || "—";
 
 
-            fragment.appendChild(row);
+                /* =========================================
+                   PERIOD
+                ========================================== */
 
-        });
+                const periodCell =
+                    document.createElement("td");
 
 
-        extendedBody.appendChild(fragment);
+                periodCell.textContent =
+                    item.period || "—";
 
 
-        if (extendedCard) {
+                /* =========================================
+                   END DATE
+                ========================================== */
 
-            extendedCard.style.display = "block";
+                const endCell =
+                    document.createElement("td");
+
+
+                endCell.textContent =
+                    item.end || "—";
+
+
+                /* =========================================
+                   PART STATUS
+                ========================================== */
+
+                const statusCell =
+                    document.createElement("td");
+
+
+                let partActive =
+                    false;
+
+
+                if(item.end){
+
+                    const endDate =
+                        new Date(item.end);
+
+
+                    if(
+                        !isNaN(
+                            endDate.getTime()
+                        )
+                    ){
+
+                        endDate.setHours(
+                            23,
+                            59,
+                            59,
+                            999
+                        );
+
+
+                        partActive =
+                            endDate >= new Date();
+
+                    }
+
+                }
+
+
+                statusCell.textContent =
+                    partActive
+                        ? "Active"
+                        : "Expired";
+
+
+                statusCell.className =
+                    partActive
+                        ? "part-status active"
+                        : "part-status expired";
+
+
+                /* =========================================
+                   APPEND CELLS
+                ========================================== */
+
+                row.appendChild(
+                    partCell
+                );
+
+                row.appendChild(
+                    periodCell
+                );
+
+                row.appendChild(
+                    endCell
+                );
+
+                row.appendChild(
+                    statusCell
+                );
+
+
+                fragment.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        extendedBody.appendChild(
+            fragment
+        );
+
+
+        /* =================================================
+           EXTENDED BADGE
+        ================================================= */
+
+        if(extendedBadge){
+
+            if(extendedWarrantyActive){
+
+                extendedBadge.textContent =
+                    "Active";
+
+                extendedBadge.className =
+                    "section-badge active-badge";
+
+            }
+
+            else{
+
+                extendedBadge.textContent =
+                    "Expired";
+
+                extendedBadge.className =
+                    "section-badge expired-badge";
+
+            }
+
+        }
+
+
+        /* =================================================
+           SHOW EXTENDED CARD
+        ================================================= */
+
+        if(extendedCard){
+
+            extendedCard.style.display =
+                "block";
 
         }
 
 
     }
-    catch (error) {
 
-        // Ignore cancelled requests
-        if (error.name === "AbortError") {
 
-            console.log("Previous search cancelled.");
+    catch(error){
+
+
+        /* =================================================
+           IGNORE ABORTED REQUEST
+        ================================================= */
+
+        if(
+            error.name ===
+            "AbortError"
+        ){
+
+            console.log(
+                "Previous search cancelled."
+            );
 
             return;
 
@@ -856,19 +1936,23 @@ async function searchWarranty() {
         );
 
 
-        // Allow retry
         lastSerial = "";
 
-
     }
-    finally {
-
-        searchInProgress = false;
 
 
-        if (btn) {
+    finally{
 
-            btn.disabled = false;
+
+        searchInProgress =
+            false;
+
+
+        if(btn){
+
+            btn.disabled =
+                false;
+
 
             btn.innerHTML =
                 '<i class="fas fa-search"></i> Search';
@@ -880,16 +1964,19 @@ async function searchWarranty() {
 }
 
 
-// =========================================================
-// CLEAR SEARCH
-// =========================================================
+/* =========================================================
+   CLEAR SEARCH
+========================================================= */
 
-function clearSearch() {
+function clearSearch(){
 
     const input =
-        document.getElementById("serialInput");
+        document.getElementById(
+            "serialInput"
+        );
 
-    if (input) {
+
+    if(input){
 
         input.value = "";
 
@@ -900,24 +1987,42 @@ function clearSearch() {
 
     lastSerial = "";
 
+
+    resetExtendedWarranty();
+
+
+    const warrantyNotice =
+        document.getElementById(
+            "warrantyNotice"
+        );
+
+
+    if(warrantyNotice){
+
+        warrantyNotice.style.display =
+            "none";
+
+    }
+
+
     hideResults();
 
 }
 
 
-// =========================================================
-// HOME
-// =========================================================
+/* =========================================================
+   HOME
+========================================================= */
 
-function goHome() {
+function goHome(){
 
-    window.location.href = "home.html";
+    window.location.href =
+        "home.html";
 
 }
 
 </script>
 
-<footer>© 2026 Warranty Section</footer>
 
 </body>
 

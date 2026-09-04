@@ -961,10 +961,7 @@ footer{
     © 2026 Warranty Section
 </footer>
 
-
-
 <script>
-
 
 /* =========================================================
    WEB APP URL
@@ -975,13 +972,11 @@ const WEB_APP_URL =
 
 
 /* =========================================================
-   GLOBAL SEARCH CONTROL
+   SEARCH STATE
 ========================================================= */
 
 let searchController = null;
-
 let lastSerial = "";
-
 let searchInProgress = false;
 
 
@@ -991,43 +986,10 @@ let searchInProgress = false;
 
 function setText(id, value){
 
-    const element =
-        document.getElementById(id);
+    const el = document.getElementById(id);
 
-    if(!element){
-        console.warn(
-            "Missing HTML element:",
-            id
-        );
-        return;
-    }
-
-    element.textContent =
-        value ?? "";
-
-}
-
-
-/* =========================================================
-   HIDE RESULTS
-========================================================= */
-
-function hideResults(){
-
-    const resultCard =
-        document.getElementById("resultCard");
-
-    const extendedCard =
-        document.getElementById("extendedCard");
-
-
-    if(resultCard){
-        resultCard.style.display = "none";
-    }
-
-
-    if(extendedCard){
-        extendedCard.style.display = "none";
+    if(el){
+        el.textContent = value ?? "";
     }
 
 }
@@ -1039,33 +1001,85 @@ function hideResults(){
 
 function resetExtendedWarranty(){
 
-    const extendedBody =
-        document.getElementById("extendedBody");
+    const body = document.getElementById("extendedBody");
+    const card = document.getElementById("extendedCard");
+    const badge = document.getElementById("extendedBadge");
 
-    const extendedCard =
-        document.getElementById("extendedCard");
-
-    const extendedBadge =
-        document.getElementById("extendedBadge");
-
-
-    if(extendedBody){
-        extendedBody.replaceChildren();
+    if(body){
+        body.replaceChildren();
     }
 
-
-    if(extendedCard){
-        extendedCard.style.display = "none";
+    if(card){
+        card.style.display = "none";
     }
 
+    if(badge){
 
-    if(extendedBadge){
+        badge.textContent = "Active";
+        badge.className = "section-badge active-badge";
 
-        extendedBadge.textContent =
-            "Active";
+    }
 
-        extendedBadge.className =
-            "section-badge active-badge";
+}
+
+
+/* =========================================================
+   HIDE RESULTS
+========================================================= */
+
+function hideResults(){
+
+    const card = document.getElementById("resultCard");
+
+    if(card){
+        card.style.display = "none";
+    }
+
+    resetExtendedWarranty();
+
+}
+
+
+/* =========================================================
+   LOADING STATE
+========================================================= */
+
+function setLoading(loading){
+
+    const btn = document.getElementById("searchBtn");
+    const input = document.getElementById("serialInput");
+
+    if(loading){
+
+        if(btn){
+
+            btn.disabled = true;
+
+            btn.innerHTML =
+                '<i class="fas fa-spinner fa-spin"></i> Searching...';
+
+        }
+
+        if(input){
+            input.disabled = true;
+        }
+
+    }
+
+    else{
+
+        if(btn){
+
+            btn.disabled = false;
+
+            btn.innerHTML =
+                '<i class="fas fa-search"></i> Search';
+
+        }
+
+        if(input){
+            input.disabled = false;
+        }
 
     }
 
@@ -1084,7 +1098,7 @@ if(serialInput){
 
     serialInput.addEventListener(
         "keydown",
-        function(event){
+        event => {
 
             if(event.key === "Enter"){
 
@@ -1106,21 +1120,11 @@ if(serialInput){
 
 async function searchWarranty(){
 
-    const btn =
-        document.getElementById("searchBtn");
-
     const input =
         document.getElementById("serialInput");
 
-
     if(!input){
-
-        console.error(
-            "serialInput not found."
-        );
-
         return;
-
     }
 
 
@@ -1136,14 +1140,12 @@ async function searchWarranty(){
 
 
     /* =====================================================
-       EMPTY SERIAL
+       EMPTY
     ====================================================== */
 
     if(!serial){
 
-        alert(
-            "Please enter a Serial Number."
-        );
+        alert("Please enter a Serial Number.");
 
         input.focus();
 
@@ -1157,79 +1159,65 @@ async function searchWarranty(){
     ====================================================== */
 
     if(searchInProgress){
-
         return;
-
     }
 
 
     /* =====================================================
-       PREVENT SAME SEARCH
+       SAME SERIAL
     ====================================================== */
 
     if(serial === lastSerial){
-
         return;
-
     }
 
 
     searchInProgress = true;
-
     lastSerial = serial;
 
 
     /* =====================================================
-       CANCEL PREVIOUS REQUEST
+       CANCEL OLD REQUEST
     ====================================================== */
 
     if(searchController){
-
         searchController.abort();
-
     }
-
 
     searchController =
         new AbortController();
 
 
     /* =====================================================
-       LOADING STATE
+       LOADING
     ====================================================== */
 
-    if(btn){
+    setLoading(true);
 
-        btn.disabled = true;
+    resetExtendedWarranty();
 
-        btn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Searching...';
 
+    const notice =
+        document.getElementById("warrantyNotice");
+
+    if(notice){
+        notice.style.display = "none";
+    }
+
+
+    /* =====================================================
+       SHOW RESULT CARD IMMEDIATELY
+    ====================================================== */
+
+    const resultCard =
+        document.getElementById("resultCard");
+
+    if(resultCard){
+        resultCard.style.display = "block";
     }
 
 
     try{
-
-
-        /* =================================================
-           RESET OLD RESULT
-        ================================================= */
-
-        resetExtendedWarranty();
-
-
-        const warrantyNotice =
-            document.getElementById(
-                "warrantyNotice"
-            );
-
-        if(warrantyNotice){
-
-            warrantyNotice.style.display =
-                "none";
-
-        }
-
 
         /* =================================================
            REQUEST
@@ -1238,18 +1226,16 @@ async function searchWarranty(){
         const url =
             WEB_APP_URL +
             "?serial=" +
-            encodeURIComponent(serial) +
-            "&t=" +
-            Date.now();
+            encodeURIComponent(serial);
 
 
         const response =
             await fetch(
                 url,
                 {
-                    method:"GET",
-                    cache:"no-store",
-                    signal:searchController.signal
+                    method: "GET",
+                    cache: "no-store",
+                    signal: searchController.signal
                 }
             );
 
@@ -1257,24 +1243,22 @@ async function searchWarranty(){
         if(!response.ok){
 
             throw new Error(
-                "Unable to connect to the server."
+                "Server returned " +
+                response.status
             );
 
         }
 
 
         /* =================================================
-           JSON
+           PARSE JSON
         ================================================= */
 
         const data =
             await response.json();
 
 
-        console.log(
-            "Warranty Search:",
-            data
-        );
+        console.log("Warranty Search:", data);
 
 
         /* =================================================
@@ -1289,25 +1273,9 @@ async function searchWarranty(){
                 "Serial Number not found. Please contact Warranty Team."
             );
 
+            lastSerial = "";
+
             return;
-
-        }
-
-
-        /* =================================================
-           SHOW RESULT
-        ================================================= */
-
-        const resultCard =
-            document.getElementById(
-                "resultCard"
-            );
-
-
-        if(resultCard){
-
-            resultCard.style.display =
-                "block";
 
         }
 
@@ -1316,117 +1284,98 @@ async function searchWarranty(){
            EQUIPMENT INFORMATION
         ================================================= */
 
-        setText(
-            "brand",
-            data.brand
-        );
-
-        setText(
-            "model",
-            data.model
-        );
-
-        setText(
-            "serial",
-            data.serial
-        );
-
-        setText(
-            "store",
-            data.store
-        );
-
-        setText(
-            "start",
-            data.start
-        );
-
-        setText(
-            "end",
-            data.end
-        );
-
-        setText(
-            "period",
-            data.period
-        );
-
-
-        /* =================================================
-           EXTENDED WARRANTY EXISTENCE
-        ================================================= */
-
-        const hasExtendedWarranty =
-            data.extendWarranty === "Yes" &&
-            Array.isArray(data.extendedParts) &&
-            data.extendedParts.length > 0;
-
-
-        /* =================================================
-           CHECK EXTENDED WARRANTY STATUS
-        ================================================= */
-
-        let extendedWarrantyActive = false;
-
-
-        if(hasExtendedWarranty){
-
-            extendedWarrantyActive =
-                data.extendedParts.some(
-                    item => {
-
-                        if(!item.end){
-                            return false;
-                        }
-
-
-                        const endDate =
-                            new Date(item.end);
-
-
-                        if(
-                            isNaN(
-                                endDate.getTime()
-                            )
-                        ){
-
-                            return false;
-
-                        }
-
-
-                        endDate.setHours(
-                            23,
-                            59,
-                            59,
-                            999
-                        );
-
-
-                        return (
-                            endDate >= new Date()
-                        );
-
-                    }
-                );
-
-        }
+        setText("brand", data.brand);
+        setText("model", data.model);
+        setText("serial", data.serial);
+        setText("store", data.store);
+        setText("start", data.start);
+        setText("end", data.end);
+        setText("period", data.period);
 
 
         /* =================================================
            STANDARD STATUS
         ================================================= */
 
-        const standardExpired =
-            data.status === "Expired";
+        const standardStatus =
+            data.status || "";
 
 
         const standardActive =
-            data.status === "Active";
+            standardStatus === "Active";
 
 
         const standardExpiring =
-            data.status === "Expiring Soon";
+            standardStatus === "Expiring Soon";
+
+
+        const standardExpired =
+            standardStatus === "Expired";
+
+
+        /* =================================================
+           EXTENDED WARRANTY
+        ================================================= */
+
+        const extendedParts =
+            Array.isArray(data.extendedParts)
+                ? data.extendedParts
+                : [];
+
+
+        const hasExtendedWarranty =
+            data.extendWarranty === "Yes" &&
+            extendedParts.length > 0;
+
+
+        /* =================================================
+           SINGLE CURRENT TIME
+        ================================================= */
+
+        const now =
+            new Date();
+
+
+        /* =================================================
+           CHECK EXTENDED WARRANTY
+        ================================================= */
+
+        let extendedWarrantyActive =
+            false;
+
+
+        if(hasExtendedWarranty){
+
+            extendedWarrantyActive =
+                extendedParts.some(item => {
+
+                    if(!item.end){
+                        return false;
+                    }
+
+                    const endDate =
+                        new Date(item.end);
+
+                    if(
+                        Number.isNaN(
+                            endDate.getTime()
+                        )
+                    ){
+                        return false;
+                    }
+
+                    endDate.setHours(
+                        23,
+                        59,
+                        59,
+                        999
+                    );
+
+                    return endDate >= now;
+
+                });
+
+        }
 
 
         /* =================================================
@@ -1435,7 +1384,6 @@ async function searchWarranty(){
 
         let overallStatus =
             "Warranty Status Unknown";
-
 
         let overallClass =
             "default";
@@ -1483,13 +1431,11 @@ async function searchWarranty(){
 
 
         /* =================================================
-           OVERALL STATUS BADGE
+           OVERALL BADGE
         ================================================= */
 
         const badge =
-            document.getElementById(
-                "statusBadge"
-            );
+            document.getElementById("statusBadge");
 
 
         if(badge){
@@ -1507,7 +1453,7 @@ async function searchWarranty(){
 
 
         /* =================================================
-           STANDARD WARRANTY STATUS
+           STANDARD STATUS TEXT
         ================================================= */
 
         let standardStatusText =
@@ -1601,11 +1547,6 @@ async function searchWarranty(){
            WARRANTY NOTICE
         ================================================= */
 
-        const notice =
-            document.getElementById(
-                "warrantyNotice"
-            );
-
         const noticeTitle =
             document.getElementById(
                 "noticeTitle"
@@ -1623,8 +1564,7 @@ async function searchWarranty(){
             standardExpired
         ){
 
-            notice.style.display =
-                "flex";
+            notice.style.display = "flex";
 
 
             if(noticeTitle){
@@ -1651,8 +1591,7 @@ async function searchWarranty(){
             extendedWarrantyActive
         ){
 
-            notice.style.display =
-                "flex";
+            notice.style.display = "flex";
 
 
             if(noticeTitle){
@@ -1674,14 +1613,13 @@ async function searchWarranty(){
 
         else if(notice){
 
-            notice.style.display =
-                "none";
+            notice.style.display = "none";
 
         }
 
 
         /* =================================================
-           EXTENDED WARRANTY
+           EXTENDED WARRANTY TABLE
         ================================================= */
 
         const extendedCard =
@@ -1708,10 +1646,7 @@ async function searchWarranty(){
         ){
 
             if(extendedCard){
-
-                extendedCard.style.display =
-                    "none";
-
+                extendedCard.style.display = "none";
             }
 
             return;
@@ -1720,142 +1655,102 @@ async function searchWarranty(){
 
 
         /* =================================================
-           BUILD TABLE
+           BUILD TABLE USING FRAGMENT
         ================================================= */
-
-        extendedBody.replaceChildren();
-
 
         const fragment =
             document.createDocumentFragment();
 
 
-        data.extendedParts.forEach(
-            item => {
+        extendedParts.forEach(item => {
+
+            const row =
+                document.createElement("tr");
 
 
-                const row =
-                    document.createElement("tr");
+            const partCell =
+                document.createElement("td");
+
+            partCell.textContent =
+                item.part || "—";
 
 
-                /* =========================================
-                   PART NAME
-                ========================================== */
+            const periodCell =
+                document.createElement("td");
 
-                const partCell =
-                    document.createElement("td");
-
-
-                partCell.textContent =
-                    item.part || "—";
+            periodCell.textContent =
+                item.period || "—";
 
 
-                /* =========================================
-                   PERIOD
-                ========================================== */
+            const endCell =
+                document.createElement("td");
 
-                const periodCell =
-                    document.createElement("td");
-
-
-                periodCell.textContent =
-                    item.period || "—";
+            endCell.textContent =
+                item.end || "—";
 
 
-                /* =========================================
-                   END DATE
-                ========================================== */
-
-                const endCell =
-                    document.createElement("td");
+            const statusCell =
+                document.createElement("td");
 
 
-                endCell.textContent =
-                    item.end || "—";
+            let partActive =
+                false;
 
 
-                /* =========================================
-                   PART STATUS
-                ========================================== */
+            if(item.end){
 
-                const statusCell =
-                    document.createElement("td");
+                const endDate =
+                    new Date(item.end);
 
 
-                let partActive =
-                    false;
+                if(
+                    !Number.isNaN(
+                        endDate.getTime()
+                    )
+                ){
+
+                    endDate.setHours(
+                        23,
+                        59,
+                        59,
+                        999
+                    );
 
 
-                if(item.end){
-
-                    const endDate =
-                        new Date(item.end);
-
-
-                    if(
-                        !isNaN(
-                            endDate.getTime()
-                        )
-                    ){
-
-                        endDate.setHours(
-                            23,
-                            59,
-                            59,
-                            999
-                        );
-
-
-                        partActive =
-                            endDate >= new Date();
-
-                    }
+                    partActive =
+                        endDate >= now;
 
                 }
 
-
-                statusCell.textContent =
-                    partActive
-                        ? "Active"
-                        : "Expired";
-
-
-                statusCell.className =
-                    partActive
-                        ? "part-status active"
-                        : "part-status expired";
-
-
-                /* =========================================
-                   APPEND CELLS
-                ========================================== */
-
-                row.appendChild(
-                    partCell
-                );
-
-                row.appendChild(
-                    periodCell
-                );
-
-                row.appendChild(
-                    endCell
-                );
-
-                row.appendChild(
-                    statusCell
-                );
-
-
-                fragment.appendChild(
-                    row
-                );
-
             }
-        );
 
 
-        extendedBody.appendChild(
+            statusCell.textContent =
+                partActive
+                    ? "Active"
+                    : "Expired";
+
+
+            statusCell.className =
+                partActive
+                    ? "part-status active"
+                    : "part-status expired";
+
+
+            row.append(
+                partCell,
+                periodCell,
+                endCell,
+                statusCell
+            );
+
+
+            fragment.appendChild(row);
+
+        });
+
+
+        extendedBody.replaceChildren(
             fragment
         );
 
@@ -1866,25 +1761,16 @@ async function searchWarranty(){
 
         if(extendedBadge){
 
-            if(extendedWarrantyActive){
+            extendedBadge.textContent =
+                extendedWarrantyActive
+                    ? "Active"
+                    : "Expired";
 
-                extendedBadge.textContent =
-                    "Active";
 
-                extendedBadge.className =
-                    "section-badge active-badge";
-
-            }
-
-            else{
-
-                extendedBadge.textContent =
-                    "Expired";
-
-                extendedBadge.className =
-                    "section-badge expired-badge";
-
-            }
+            extendedBadge.className =
+                extendedWarrantyActive
+                    ? "section-badge active-badge"
+                    : "section-badge expired-badge";
 
         }
 
@@ -1900,25 +1786,15 @@ async function searchWarranty(){
 
         }
 
-
     }
 
 
     catch(error){
 
-
-        /* =================================================
-           IGNORE ABORTED REQUEST
-        ================================================= */
-
         if(
             error.name ===
             "AbortError"
         ){
-
-            console.log(
-                "Previous search cancelled."
-            );
 
             return;
 
@@ -1929,6 +1805,9 @@ async function searchWarranty(){
             "Warranty search error:",
             error
         );
+
+
+        hideResults();
 
 
         alert(
@@ -1943,21 +1822,10 @@ async function searchWarranty(){
 
     finally{
 
-
         searchInProgress =
             false;
 
-
-        if(btn){
-
-            btn.disabled =
-                false;
-
-
-            btn.innerHTML =
-                '<i class="fas fa-search"></i> Search';
-
-        }
+        setLoading(false);
 
     }
 
@@ -1987,21 +1855,17 @@ function clearSearch(){
 
     lastSerial = "";
 
-
     resetExtendedWarranty();
 
 
-    const warrantyNotice =
+    const notice =
         document.getElementById(
             "warrantyNotice"
         );
 
 
-    if(warrantyNotice){
-
-        warrantyNotice.style.display =
-            "none";
-
+    if(notice){
+        notice.style.display = "none";
     }
 
 

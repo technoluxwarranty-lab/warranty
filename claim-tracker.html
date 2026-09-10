@@ -8,878 +8,2316 @@
 
 <title>Warranty Claim Tracker</title>
 
-
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
 <style>
 
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 *{
     box-sizing:border-box;
 }
 
-
 body{
-
     font-family:Arial,sans-serif;
     background:#f4f7fb;
     margin:0;
-
+    color:#1f2937;
 }
 
 
-
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .topbar{
-
     background:#0f172a;
-
-    height:75px;
-
+    min-height:75px;
     padding:0 30px;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     box-shadow:0 2px 10px rgba(0,0,0,.08);
-
 }
-
-
 
 .logo-section{
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
-
 }
-
-
 
 .header-logo{
-
     height:42px;
-
+    width:auto;
 }
-
-
 
 .logo-section h1{
-
     color:white;
-
     margin:0;
-
     font-size:22px;
-
 }
-
-
 
 .logo-section p{
-
     color:#cbd5e1;
-
     font-size:13px;
-
     margin:3px 0;
-
 }
-
-
-
 
 .home-btn{
-
-
     background:#2563eb;
-
     color:white;
-
     border:none;
-
     padding:10px 18px;
-
     border-radius:8px;
-
     cursor:pointer;
-
     font-weight:600;
-
 }
-
-
 
 .home-btn:hover{
-
     background:#1d4ed8;
-
 }
 
 
-
-
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container{
-
     padding:30px;
-
 }
 
 
-
+/* =========================================================
+   SUMMARY
+========================================================= */
 
 .summary{
-
-
     background:white;
-
     padding:20px;
-
     border-radius:12px;
-
     margin-bottom:20px;
-
     box-shadow:0 3px 12px rgba(0,0,0,.08);
-
 }
-
-
 
 .summary h2{
-
     color:#1e3a8a;
-
     margin-top:0;
+    margin-bottom:10px;
+}
 
+.summary p{
+    margin:5px 0;
 }
 
 
-
-
-/* SEARCH */
-
+/* =========================================================
+   SEARCH / FILTERS
+========================================================= */
 
 .search-box{
-
-
     background:white;
-
     padding:15px;
-
     border-radius:12px;
-
     margin-bottom:20px;
-
     display:flex;
-
     gap:10px;
-
     box-shadow:0 3px 12px rgba(0,0,0,.08);
-
+    flex-wrap:wrap;
 }
-
-
 
 .search-box input{
-
-
     flex:1;
-
+    min-width:180px;
     padding:12px 15px;
-
     border:1px solid #d1d5db;
-
     border-radius:8px;
-
+    outline:none;
 }
 
-
-
-.search-box button{
-
-
-    background:#2563eb;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 22px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
+.search-box input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 2px rgba(37,99,235,.12);
 }
-
-
-
-
-.search-box button:hover{
-
-    background:#1d4ed8;
-
-}
-
 
 .search-box select{
     padding:12px 15px;
     border:1px solid #d1d5db;
     border-radius:8px;
     background:white;
+    min-width:220px;
+    cursor:pointer;
+    outline:none;
+}
+
+.search-box select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 2px rgba(37,99,235,.12);
+}
+
+.search-box button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.search-box button:hover{
+    background:#1d4ed8;
 }
 
 
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    border-radius:12px;
+}
 
 
-/* TABLE */
-
+/* =========================================================
+   TABLE
+========================================================= */
 
 table{
-
-
     width:100%;
-
+    min-width:1200px;
     table-layout:fixed;
-
     border-collapse:collapse;
-
     background:white;
-
     border-radius:12px;
-
     overflow:hidden;
-
     box-shadow:0 3px 12px rgba(0,0,0,.08);
-
 }
 
 
-
-
-/* COLUMN WIDTH */
+/* COLUMN WIDTHS */
 
 th:nth-child(1),
-td:nth-child(1){width:11%;}
+td:nth-child(1){
+    width:10%;
+}
 
 th:nth-child(2),
-td:nth-child(2){width:10%;}
+td:nth-child(2){
+    width:9%;
+}
 
 th:nth-child(3),
-td:nth-child(3){width:12%;}
+td:nth-child(3){
+    width:10%;
+}
 
 th:nth-child(4),
-td:nth-child(4){width:20%;}
+td:nth-child(4){
+    width:14%;
+}
 
 th:nth-child(5),
-td:nth-child(5){width:13%;}
+td:nth-child(5){
+    width:10%;
+}
 
 th:nth-child(6),
-td:nth-child(6){width:16%;}
+td:nth-child(6){
+    width:15%;
+}
 
 th:nth-child(7),
-td:nth-child(7){width:16%;}
+td:nth-child(7){
+    width:12%;
+}
 
 th:nth-child(8),
-td:nth-child(8){width:18%;}
+td:nth-child(8){
+    width:13%;
+}
 
 th:nth-child(9),
-td:nth-child(9){width:16%;}
+td:nth-child(9){
+    width:9%;
+}
 
+th:nth-child(10),
+td:nth-child(10){
+    width:8%;
+}
+
+
+/* HEADER */
 
 th{
-
-
     background:#2563eb;
-
     color:white;
-
     padding:14px;
-
     text-align:left;
-
     font-size:14px;
-
 }
 
 
+/* BODY */
 
 td{
-
-
     padding:12px;
-
     border-bottom:1px solid #e5e7eb;
-
     vertical-align:top;
-
     word-wrap:break-word;
-
+    overflow-wrap:break-word;
     font-size:14px;
-
 }
 
 
+/* =========================================================
+   TABLE MESSAGES
+========================================================= */
+
+.loading,
+.error,
+.no-records{
+    text-align:center;
+    padding:25px !important;
+}
+
+.loading{
+    color:#64748b;
+}
+
+.error{
+    color:#b91c1c;
+    background:#fff7f7;
+}
+
+.error small{
+    display:block;
+    margin-top:8px;
+    color:#991b1b;
+    font-weight:normal;
+}
 
 
-/* STATUS */
-
+/* =========================================================
+   STATUS
+========================================================= */
 
 .status{
-
-
     padding:6px 12px;
-
     border-radius:20px;
-
     font-size:12px;
-
     font-weight:bold;
-
     display:inline-block;
-
+    line-height:1.3;
 }
-
-
-
 
 .approved{
-
     background:#dcfce7;
-
     color:#166534;
-
 }
-
-
 
 .rejected{
-
     background:#fee2e2;
-
     color:#b91c1c;
-
 }
 
-
+.cancelled{
+    background:#e5e7eb;
+    color:#374151;
+}
 
 .pending{
-
     background:#fef3c7;
-
     color:#92400e;
-
 }
 
+.additional-details{
+    background:#fce7f3;
+    color:#9d174d;
+}
 
-
-.for-approval{
-
+.principal-approval{
     background:#dbeafe;
-
     color:#1e40af;
+}
 
+.sales-advise{
+    background:#ede9fe;
+    color:#5b21b6;
 }
 
 
+/* =========================================================
+   IF NUMBER
+========================================================= */
+
+.no-if{
+    color:#64748b;
+    font-style:italic;
+    font-weight:600;
+}
+
+.if-number{
+    color:#166534;
+    font-weight:600;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+    .topbar{
+        padding:15px;
+        gap:15px;
+    }
+
+    .logo-section h1{
+        font-size:17px;
+    }
+
+    .logo-section p{
+        font-size:11px;
+    }
+
+    .header-logo{
+        height:35px;
+    }
+
+    .home-btn{
+        padding:9px 12px;
+    }
+
+    .container{
+        padding:15px;
+    }
+
+    .search-box{
+        flex-direction:column;
+    }
+
+    .search-box input,
+    .search-box select,
+    .search-box button{
+        width:100%;
+    }
+
+}
 
 </style>
 
-
 </head>
-
-
 
 
 <body>
 
 
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header class="topbar">
 
+    <div class="logo-section">
 
-<div class="logo-section">
+        <img
+            src="company-logo.png"
+            class="header-logo"
+            alt="Company Logo"
+        >
+
+        <div>
+
+            <h1>
+                Warranty Management System
+            </h1>
+
+            <p>
+                Warranty Tracker Portal
+            </p>
+
+        </div>
+
+    </div>
 
 
-<img src="company-logo.png"
-class="header-logo">
+    <button
+        class="home-btn"
+        id="homeButton"
+        type="button"
+    >
 
+        <i class="fas fa-home"></i>
+        Home
 
-<div>
-
-<h1>Warranty Management System</h1>
-
-<p>Warranty Tracker Portal</p>
-
-</div>
-
-
-</div>
-
-
-
-<button class="home-btn" onclick="goHome()">
-
-<i class="fas fa-home"></i>
-
-Home
-
-</button>
-
+    </button>
 
 </header>
 
 
 
-
-
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <div class="container">
 
 
+    <!-- SUMMARY -->
 
-<div class="summary">
+    <div class="summary">
+
+        <h2>
+            Warranty Claim Monitoring Dashboard
+        </h2>
+
+        <p>
+            Monitor warranty claim SO approval status.
+        </p>
+
+        <p
+            id="lastUpdated"
+            style="
+                margin-top:10px;
+                font-size:13px;
+                color:#64748b;
+                font-weight:600;
+            "
+        >
+            Last Updated: --
+
+        </p>
+
+    </div>
 
 
-<h2>Warranty Claim Monitoring Dashboard</h2>
+
+    <!-- =====================================================
+         SEARCH / FILTER
+    ====================================================== -->
+
+    <div class="search-box">
 
 
-<p>
+        <!-- SO SEARCH -->
 
-Monitor warranty claim SO approval status.
+        <input
+            type="text"
+            id="soSearch"
+            placeholder="Search SO No..."
+            autocomplete="off"
+        >
 
-</p>
 
-<p id="lastUpdated"
-style="
-margin-top:10px;
-font-size:13px;
-color:#64748b;
-font-weight:600;
-">
-Last Updated: --
-</p>
+
+        <!-- AREA / SP -->
+
+        <select id="areaFilter">
+
+            <option value="">
+                All Area / SP
+            </option>
+
+        </select>
+
+
+
+        <!-- WARRANTY STATUS -->
+
+        <select id="statusFilter">
+
+            <option value="">
+                All Warranty Claim Status
+            </option>
+
+            <option value="pending">
+                Pending
+            </option>
+
+            <option value="approved">
+                Approved
+            </option>
+
+            <option value="rejected">
+                Rejected
+            </option>
+
+            <option value="cancelled">
+                Cancelled
+            </option>
+
+            <option value="requested additional details">
+                Requested Additional Details
+            </option>
+
+            <option value="awaiting for principal approval">
+                Awaiting for Principal Approval
+            </option>
+
+            <option value="awaiting for sales advise">
+                Awaiting for Sales Advise
+            </option>
+
+        </select>
+
+
+
+        <!-- CLEAR -->
+
+        <button
+            id="clearFilters"
+            type="button"
+        >
+            Clear
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TABLE
+    ====================================================== -->
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date Submitted
+                    </th>
+
+                    <th>
+                        SO No.
+                    </th>
+
+                    <th>
+                        Area/SP
+                    </th>
+
+                    <th>
+                        Customer Name
+                    </th>
+
+                    <th>
+                        Brand Name
+                    </th>
+
+                    <th>
+                        Warranty Claim Status
+                    </th>
+
+                    <th>
+                        Warranty Approval Date
+                    </th>
+
+                    <th>
+                        Warranty Approval by COO
+                    </th>
+
+                    <th>
+                        COO Approval Date
+                    </th>
+
+                    <th>
+                        IF Number
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="claimTableBody">
+
+                <tr>
+
+                    <td
+                        colspan="10"
+                        class="loading"
+                    >
+                        Loading warranty claim data...
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
 
-
-<div class="search-box">
-
-    <input
-        type="text"
-        id="soSearch"
-        placeholder="Search SO No..."
-        onkeyup="applyCurrentFilter()">
-
-    <select id="statusFilter" onchange="applyCurrentFilter()">
-    <option value="all">All</option>
-    <option value="pending">Pending</option>
-    <option value="on-process so approval">On-Process SO Approval</option>
-    <option value="approved">Approved</option>
-    <option value="rejected">Rejected</option>
-	</select>
-
-    <button onclick="clearSearch()">
-        Clear
-    </button>
-
-</div>
-
-
-<table>
-
-
-<thead>
-
-
-<tr>
-
-<th>Date Submitted</th>
-
-<th>SO No.</th>
-
-<th>Area/SP</th>
-
-<th>Customer Name</th>
-
-<th>Brand Name</th>
-
-<th>Warranty Claim Status</th>
-
-<th>Warranty Approval Date</th>
-
-<th>Warranty SO Approval by COO</th>
-
-<th>COO Approval Date</th>
-
-</tr>
-
-
-</thead>
-
-
-
-<tbody id="approvalTable">
-
-
-<tr>
-
-<td colspan="9" align="center">
-
-Loading approval records...
-
-</td>
-
-</tr>
-
-
-</tbody>
-
-
-</table>
-
-
-
-</div>
 
 <script>
 
-const SHEET_ID = "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
-const SHEET_NAME = "Form Responses 1";
+/* =========================================================
+   CONFIGURATION
+========================================================= */
 
-let approvalData = [];
-let lastDataHash = "";
+const SHEET_ID =
+    "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
 
-/* ==========================
-   FETCH GOOGLE SHEET
-========================== */
+const SHEET_NAME =
+    "Form Responses 1";
 
-async function fetchSheetData() {
 
-    const url =
-        `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
+const API_URL =
+    "https://opensheet.elk.sh/" +
+    SHEET_ID +
+    "/" +
+    encodeURIComponent(SHEET_NAME);
 
-    console.log("Fetching:", url);
 
-    const response = await fetch(url, {
-        cache: "no-store"
-    });
 
-    const text = await response.text();
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
-    console.log("Response Status:", response.status);
-    console.log("Response Body:", text);
+let allData = [];
 
-    if (!response.ok) {
-        throw new Error(
-            `HTTP ${response.status} - ${text}`
-        );
-    }
+let currentSearch = "";
 
-    let data;
+let currentArea = "";
 
-    try {
-        data = JSON.parse(text);
-    } catch (err) {
-        throw new Error("Invalid JSON response");
-    }
+let currentStatus = "";
 
-    if (!Array.isArray(data)) {
-        throw new Error("Invalid sheet response");
-    }
+let isLoading = false;
 
-    console.log("Records Found:", data.length);
 
-    data.sort((a, b) => {
-        return (
-            new Date(b["Timestamp"] || 0) -
-            new Date(a["Timestamp"] || 0)
-        );
-    });
 
-    return data;
-}
+/* =========================================================
+   HOME BUTTON
+========================================================= */
 
-/* ==========================
-   LOAD DATA
-========================== */
+function goHome(){
 
-async function loadApproval() {
-
-    try {
-
-        const newData = await fetchSheetData();
-
-        const newHash = JSON.stringify(newData);
-
-        if (newHash !== lastDataHash) {
-
-            approvalData = newData;
-            lastDataHash = newHash;
-
-            applyCurrentFilter();
-
-            console.log("Sheet Updated");
-        }
-
-        updateLastRefresh();
-
-    } catch (error) {
-
-        console.error("LOAD ERROR:", error);
-
-        document.getElementById("approvalTable").innerHTML = `
-        <tr>
-            <td colspan="6" style="padding:20px;text-align:center;color:red;">
-                Failed to load records.<br>
-                ${error.message}
-            </td>
-        </tr>`;
-
-        updateLastRefresh();
-    }
-}
-
-/* ==========================
-   DISPLAY TABLE
-========================== */
-
-function displayApproval(data) {
-
-    let html = "";
-
-    if (!data || data.length === 0) {
-
-        html = `
-        <tr>
-            <td colspan="6" style="text-align:center;padding:20px;">
-                No records found.
-            </td>
-        </tr>`;
-
-        document.getElementById("approvalTable").innerHTML = html;
-        return;
-    }
-
-    data.forEach(row => {
-
-        const claimStatus =
-            row["Warranty SO Claim Status"] ||
-            row["Warranty Claim Status"] ||
-            "Pending";
-
-        const cooStatus =
-            row["Warranty SO Approval by Ms. Carina"] ||
-            row["Warranty SO Approval by COO"] ||
-            "Pending";
-
-        let claimCss = "pending";
-
-        switch (claimStatus.toLowerCase()) {
-
-            case "approved":
-                claimCss = "approved";
-                break;
-
-            case "rejected":
-                claimCss = "rejected";
-                break;
-
-            case "under evaluation":
-                claimCss = "for-approval";
-                break;
-        }
-
-        let cooCss = "pending";
-
-        switch (cooStatus.toLowerCase()) {
-
-            case "approved":
-                cooCss = "approved";
-                break;
-
-            case "rejected":
-                cooCss = "rejected";
-                break;
-
-            case "for approval":
-            case "awaiting approval":
-                cooCss = "for-approval";
-                break;
-        }
-
-html += `
-<tr>
-
-    <td>${row["Timestamp"] || "-"}</td>
-
-    <td>${row["SO No"] || row["SO No."] || "-"}</td>
-
-    <td>${row["Area/SP"] || row["Area / SP"] || "-"}</td>
-
-    <td>${row["Customer Name"] || "-"}</td>
-
-    <td>${row["Brand Name"] || row["Brand Name:"] || "-"}</td>
-
-    <td>
-        <span class="status ${claimCss}">
-            ${claimStatus}
-        </span>
-    </td>
-
-    <td>
-        ${row["Warranty Approval Date"] || "-"}
-    </td>
-
-    <td>
-        <span class="status ${cooCss}">
-            ${cooStatus}
-        </span>
-    </td>
-
-    <td>
-    ${row["Mam Carina Approval Date"] || "-"}
-</td>
-
-</tr>
-`;
-
-    });
-
-    document.getElementById("approvalTable").innerHTML = html;
-}
-
-/* ==========================
-   SEARCH
-========================== */
-
-function applyCurrentFilter() {
-
-    const search = document.getElementById("soSearch")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const status = document.getElementById("statusFilter")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const filtered = approvalData.filter(row => {
-
-        const soNumber = (
-            row["SO No"] ||
-            row["SO No."] ||
-            row["SO Number"] ||
-            ""
-        ).toString().toLowerCase();
-
-        const claimStatus = (
-            row["Warranty SO Claim Status"] ||
-            row["Warranty Claim Status"] ||
-            "Pending"
-        ).trim().toLowerCase();
-
-        const cooStatus = (
-            row["Warranty SO Approval by COO"] ||
-            row["Warranty SO Approval by Ms. Carina"] ||
-            "On-Process SO Approval"
-        ).trim().toLowerCase();
-
-        const matchSearch = soNumber.includes(search);
-
-        let matchStatus = true;
-
-        switch (status) {
-
-            case "pending":
-                matchStatus =
-                    claimStatus === "pending" ||
-                    cooStatus === "on-process so approval";
-                break;
-
-            case "on-process so approval":
-                matchStatus =
-                    cooStatus === "on-process so approval";
-                break;
-
-            case "approved":
-                matchStatus =
-                    claimStatus === "approved" ||
-                    cooStatus === "approved";
-                break;
-
-            case "rejected":
-                matchStatus =
-                    claimStatus === "rejected" ||
-                    cooStatus === "rejected";
-                break;
-
-            case "":
-            case "all":
-            default:
-                matchStatus = true;
-        }
-
-        return matchSearch && matchStatus;
-
-    });
-
-    displayApproval(filtered);
-}
-
-
-/* ==========================
-   LAST UPDATED
-========================== */
-
-function updateLastRefresh() {
-
-    const el =
-        document.getElementById("lastUpdated");
-
-    if (!el) return;
-
-    el.innerHTML =
-        "Last Updated: " +
-        new Date().toLocaleString();
-}
-
-/* ==========================
-   HOME
-========================== */
-
-function goHome() {
     window.location.href = "home.html";
+
 }
 
-/* ==========================
-   INITIAL LOAD
-========================== */
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    loadApproval();
+/* =========================================================
+   GET VALUE
+========================================================= */
 
-    // Auto refresh every 10 seconds
-    setInterval(loadApproval, 10000);
+function getValue(row, keys){
 
-});
+    if(!row){
+        return "";
+    }
+
+
+    for(const key of keys){
+
+        if(
+            Object.prototype.hasOwnProperty.call(row,key) &&
+            row[key] !== undefined &&
+            row[key] !== null &&
+            String(row[key]).trim() !== ""
+        ){
+
+            return String(row[key]).trim();
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+
+/* =========================================================
+   SO NUMBER
+========================================================= */
+
+function getSO(row){
+
+    return getValue(row,[
+
+        "SO No",
+        "SO No.",
+        "SO Number",
+        "SO Number.",
+        "SO"
+
+    ]);
+
+}
+
+
+
+/* =========================================================
+   AREA / SP
+========================================================= */
+
+function getAreaSP(row){
+
+    return getValue(row,[
+
+        "Area/SP",
+        "Area / SP",
+        "Area /SP",
+        "Area/SP Name",
+        "Area SP",
+        "Territory"
+
+    ]);
+
+}
+
+
+
+/* =========================================================
+   CUSTOMER
+========================================================= */
+
+function getCustomerName(row){
+
+    return getValue(row,[
+
+        "Customer Name",
+        "Customer",
+        "Customer name"
+
+    ]);
+
+}
+
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+function getBrandName(row){
+
+    return getValue(row,[
+
+        "Brand Name",
+        "Brand Name:",
+        "Brand",
+        "Brand name"
+
+    ]);
+
+}
+
+
+
+/* =========================================================
+   WARRANTY CLAIM STATUS
+========================================================= */
+
+function getWarrantyStatus(row){
+
+    const status =
+        getValue(row,[
+
+            "Warranty SO Claim Status",
+            "Warranty Claim Status",
+            "Warranty Claim Status.",
+            "Warranty SO Status"
+
+        ]);
+
+
+    /*
+     * IMPORTANT:
+     *
+     * Blank Warranty Claim Status
+     * = Pending
+     */
+
+    if(!status){
+
+        return "Pending";
+
+    }
+
+
+    return status;
+
+}
+
+
+
+/* =========================================================
+   WARRANTY APPROVAL DATE
+========================================================= */
+
+function getWarrantyApprovalDate(row){
+
+    return getValue(row,[
+
+        "Warranty Approval Date",
+        "Warranty Claim Approval Date",
+        "Warranty SO Approval Date"
+
+    ]);
+
+}
+
+
+
+/* =========================================================
+   COO APPROVAL
+========================================================= */
+
+function getCOOApproval(row){
+
+    const approval =
+        getValue(row,[
+
+            "Warranty SO Approval by COO",
+            "Warranty SO Approval by Ms. Carina",
+            "Warranty SO Approval by COO.",
+            "COO Approval"
+
+        ]);
+
+
+    if(!approval){
+
+        return "Pending";
+
+    }
+
+
+    return approval;
+
+}
+
+
+
+/* =========================================================
+   COO APPROVAL DATE
+========================================================= */
+
+function getCOOApprovalDate(row){
+
+    return getValue(row,[
+
+        "Mam Carina Approval Date",
+        "COO Approval Date",
+        "COO Approval Date.",
+        "Warranty COO Approval Date"
+
+    ]);
+
+}
+
+
+
+/* =========================================================
+   IF NUMBER
+========================================================= */
+
+function getIFNumber(row) {
+    return getValue(row, [
+        "IF No.",
+        "IF No",
+        "IF Number",
+        "IF Number.",
+        "IF NO.",
+        "IF NO",
+        "IF",
+        "IF No. "
+    ]);
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+
+/* =========================================================
+   NORMALIZE TEXT
+========================================================= */
+
+function normalizeText(value){
+
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g," ");
+
+}
+
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(isNaN(date.getTime())){
+
+        return escapeHTML(value);
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            year:"numeric",
+            month:"short",
+            day:"2-digit"
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   TIMESTAMP
+========================================================= */
+
+function getTimestamp(row){
+
+    const timestamp =
+        getValue(row,[
+
+            "Timestamp",
+            "Date Submitted"
+
+        ]);
+
+
+    if(!timestamp){
+
+        return 0;
+
+    }
+
+
+    const date =
+        new Date(timestamp);
+
+
+    if(isNaN(date.getTime())){
+
+        return 0;
+
+    }
+
+
+    return date.getTime();
+
+}
+
+
+
+/* =========================================================
+   CHECK IF ROW CONTAINS CLAIM DATA
+========================================================= */
+
+function hasClaimDetails(row){
+
+    return Boolean(
+
+        getSO(row) ||
+        getAreaSP(row) ||
+        getCustomerName(row) ||
+        getBrandName(row) ||
+        getWarrantyStatus(row) !== "Pending" ||
+        getWarrantyApprovalDate(row) ||
+        getCOOApproval(row) !== "Pending" ||
+        getCOOApprovalDate(row) ||
+        getIFNumber(row)
+
+    );
+
+}
+
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function getStatusClass(status){
+
+    const normalized =
+        normalizeText(status);
+
+
+    if(normalized === "approved"){
+
+        return "approved";
+
+    }
+
+
+    if(normalized === "rejected"){
+
+        return "rejected";
+
+    }
+
+
+    if(normalized === "cancelled"){
+
+        return "cancelled";
+
+    }
+
+
+    if(
+        normalized ===
+            "requested additional details" ||
+
+        normalized ===
+            "request additional details"
+    ){
+
+        return "additional-details";
+
+    }
+
+
+    if(
+        normalized ===
+            "awaiting for principal approval" ||
+
+        normalized ===
+            "awaiting principal approval"
+    ){
+
+        return "principal-approval";
+
+    }
+
+
+    if(
+        normalized ===
+            "awaiting for sales advise" ||
+
+        normalized ===
+            "awaiting sales advise"
+    ){
+
+        return "sales-advise";
+
+    }
+
+
+    /*
+     * Everything else becomes Pending.
+     */
+
+    return "pending";
+
+}
+
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+async function loadData(){
+
+    const tbody =
+        document.getElementById(
+            "claimTableBody"
+        );
+
+
+    if(!tbody){
+
+        console.error(
+            "claimTableBody element not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Prevent multiple simultaneous requests.
+     */
+
+    if(isLoading){
+
+        return;
+
+    }
+
+
+    isLoading = true;
+
+
+    try{
+
+
+        /*
+         * Keep existing filter selections.
+         */
+
+        saveCurrentFilters();
+
+
+
+        /*
+         * First load message.
+         */
+
+        if(allData.length === 0){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="10"
+                        class="loading"
+                    >
+                        Loading warranty claim data...
+                    </td>
+                </tr>
+            `;
+
+        }
+
+
+
+        console.log(
+            "Loading Warranty Claim Tracker..."
+        );
+
+        console.log(
+            "API URL:",
+            API_URL
+        );
+
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Do NOT append "?t=" to the URL.
+         */
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method:"GET",
+                    cache:"no-store",
+                    headers:{
+                        "Accept":"application/json"
+                    }
+                }
+            );
+
+
+
+        console.log(
+            "HTTP Status:",
+            response.status
+        );
+
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "OpenSheet returned HTTP " +
+                response.status +
+                " " +
+                response.statusText
+            );
+
+        }
+
+
+
+        /*
+         * Read response as text first.
+         *
+         * This allows us to show the actual
+         * response if OpenSheet returns an error.
+         */
+
+        const text =
+            await response.text();
+
+
+
+        if(!text){
+
+            throw new Error(
+                "OpenSheet returned an empty response."
+            );
+
+        }
+
+
+
+        let data;
+
+
+        try{
+
+            data =
+                JSON.parse(text);
+
+        }catch(jsonError){
+
+            console.error(
+                "Invalid JSON response:",
+                text
+            );
+
+            throw new Error(
+                "OpenSheet did not return valid JSON."
+            );
+
+        }
+
+
+
+        /*
+         * OpenSheet may return an object containing
+         * an error instead of an array.
+         */
+
+        if(
+            data &&
+            !Array.isArray(data) &&
+            typeof data === "object"
+        ){
+
+            if(data.error){
+
+                throw new Error(
+                    String(data.error)
+                );
+
+            }
+
+        }
+
+
+
+        if(!Array.isArray(data)){
+
+            throw new Error(
+                "Google Sheet data is not in the expected format."
+            );
+
+        }
+
+
+
+        console.log(
+            "Total rows received:",
+            data.length
+        );
+
+
+
+        /*
+         * Store valid rows.
+         *
+         * Do NOT remove rows merely because
+         * Warranty Claim Status is blank.
+         *
+         * Blank status must appear as Pending.
+         */
+
+        allData =
+            data
+                .filter(row => {
+
+                    if(!row ||
+                       typeof row !== "object"){
+
+                        return false;
+
+                    }
+
+
+                    return hasClaimDetails(row);
+
+                })
+                .sort(
+                    (a,b) =>
+                        getTimestamp(b) -
+                        getTimestamp(a)
+                );
+
+
+
+        console.log(
+            "Warranty claim records:",
+            allData.length
+        );
+
+
+
+        /*
+         * Show actual column names in console.
+         *
+         * Useful for checking Google Sheet headers.
+         */
+
+        if(data.length > 0){
+
+            console.log(
+                "Google Sheet columns:",
+                Object.keys(data[0])
+            );
+
+        }
+
+
+
+        populateAreaFilter();
+
+        restoreCurrentFilters();
+
+        applyCurrentFilter();
+
+        updateLastUpdated();
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "WARRANTY TRACKER ERROR:",
+            error
+        );
+
+
+        /*
+         * Show detailed error on screen.
+         */
+
+        tbody.innerHTML = `
+            <tr>
+
+                <td
+                    colspan="10"
+                    class="error"
+                >
+
+                    <strong>
+                        Unable to load warranty claim data.
+                    </strong>
+
+                    <small>
+                        ${escapeHTML(
+                            error.message ||
+                            "Unknown error"
+                        )}
+                    </small>
+
+                    <small>
+                        Please check the Google Sheet /
+                        OpenSheet connection.
+                    </small>
+
+                </td>
+
+            </tr>
+        `;
+
+
+    }
+    finally{
+
+        isLoading = false;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SAVE CURRENT FILTERS
+========================================================= */
+
+function saveCurrentFilters(){
+
+    const searchInput =
+        document.getElementById(
+            "soSearch"
+        );
+
+
+    const areaFilter =
+        document.getElementById(
+            "areaFilter"
+        );
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
+
+
+    if(searchInput){
+
+        currentSearch =
+            normalizeText(
+                searchInput.value
+            );
+
+    }
+
+
+    if(areaFilter){
+
+        currentArea =
+            areaFilter.value;
+
+    }
+
+
+    if(statusFilter){
+
+        currentStatus =
+            statusFilter.value;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RESTORE FILTERS
+========================================================= */
+
+function restoreCurrentFilters(){
+
+    const searchInput =
+        document.getElementById(
+            "soSearch"
+        );
+
+
+    const areaFilter =
+        document.getElementById(
+            "areaFilter"
+        );
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
+
+
+    if(searchInput){
+
+        searchInput.value =
+            currentSearch;
+
+    }
+
+
+    if(areaFilter){
+
+        areaFilter.value =
+            currentArea;
+
+    }
+
+
+    if(statusFilter){
+
+        statusFilter.value =
+            currentStatus;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   AREA / SP FILTER
+========================================================= */
+
+function populateAreaFilter(){
+
+    const select =
+        document.getElementById(
+            "areaFilter"
+        );
+
+
+    if(!select){
+
+        return;
+
+    }
+
+
+    const previousValue =
+        currentArea ||
+        select.value ||
+        "";
+
+
+
+    const areas = [
+
+        ...new Set(
+
+            allData
+                .map(row =>
+                    getAreaSP(row)
+                )
+                .filter(value =>
+                    value
+                )
+
+        )
+
+    ].sort(
+        (a,b) =>
+            a.localeCompare(
+                b,
+                undefined,
+                {
+                    sensitivity:"base"
+                }
+            )
+    );
+
+
+
+    select.innerHTML = `
+
+        <option value="">
+            All Area / SP
+        </option>
+
+    `;
+
+
+
+    areas.forEach(area => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            area;
+
+
+        option.textContent =
+            area;
+
+
+        select.appendChild(
+            option
+        );
+
+    });
+
+
+
+    if(
+        previousValue &&
+        areas.includes(previousValue)
+    ){
+
+        select.value =
+            previousValue;
+
+        currentArea =
+            previousValue;
+
+    }else{
+
+        select.value =
+            "";
+
+        currentArea =
+            "";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   APPLY FILTER
+========================================================= */
+
+function applyCurrentFilter(){
+
+    const searchInput =
+        document.getElementById(
+            "soSearch"
+        );
+
+
+    const areaFilter =
+        document.getElementById(
+            "areaFilter"
+        );
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
+
+
+
+    currentSearch =
+        searchInput
+            ? normalizeText(
+                searchInput.value
+              )
+            : "";
+
+
+
+    currentArea =
+        areaFilter
+            ? areaFilter.value
+            : "";
+
+
+
+    currentStatus =
+        statusFilter
+            ? statusFilter.value
+            : "";
+
+
+
+    const filteredData =
+        allData.filter(row => {
+
+
+            const so =
+                normalizeText(
+                    getSO(row)
+                );
+
+
+            const area =
+                getAreaSP(row);
+
+
+            const status =
+                normalizeText(
+                    getWarrantyStatus(row)
+                );
+
+
+
+            /*
+             * SO SEARCH
+             */
+
+            const matchesSearch =
+                !currentSearch ||
+                so.includes(
+                    currentSearch
+                );
+
+
+
+            /*
+             * AREA / SP
+             */
+
+            const matchesArea =
+                !currentArea ||
+                area === currentArea;
+
+
+
+            /*
+             * WARRANTY STATUS
+             */
+
+            const matchesStatus =
+                !currentStatus ||
+                status ===
+                normalizeText(
+                    currentStatus
+                );
+
+
+
+            return (
+                matchesSearch &&
+                matchesArea &&
+                matchesStatus
+            );
+
+        });
+
+
+
+    renderTable(
+        filteredData
+    );
+
+}
+
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderTable(data){
+
+    const tbody =
+        document.getElementById(
+            "claimTableBody"
+        );
+
+
+    if(!tbody){
+
+        return;
+
+    }
+
+
+
+    /*
+     * No results.
+     */
+
+    if(!data.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="10"
+                    class="no-records"
+                >
+
+                    No warranty claim records found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    tbody.innerHTML =
+
+        data.map(row => {
+
+
+            /* =========================
+               DATE SUBMITTED
+            ========================= */
+
+            const dateSubmitted =
+                formatDate(
+                    getValue(row,[
+
+                        "Timestamp",
+                        "Date Submitted"
+
+                    ])
+                );
+
+
+
+            /* =========================
+               SO
+            ========================= */
+
+            const so =
+                escapeHTML(
+                    getSO(row)
+                );
+
+
+
+            /* =========================
+               AREA / SP
+            ========================= */
+
+            const area =
+                escapeHTML(
+                    getAreaSP(row)
+                );
+
+
+
+            /* =========================
+               CUSTOMER
+            ========================= */
+
+            const customer =
+                escapeHTML(
+                    getCustomerName(row)
+                );
+
+
+
+            /* =========================
+               BRAND
+            ========================= */
+
+            const brand =
+                escapeHTML(
+                    getBrandName(row)
+                );
+
+
+
+            /* =========================
+               WARRANTY STATUS
+            ========================= */
+
+            const status =
+                getWarrantyStatus(row);
+
+
+            const statusClass =
+                getStatusClass(
+                    status
+                );
+
+
+
+            /* =========================
+               WARRANTY APPROVAL DATE
+            ========================= */
+
+            const approvalDate =
+                formatDate(
+                    getWarrantyApprovalDate(row)
+                );
+
+
+
+            /* =========================
+               COO APPROVAL
+            ========================= */
+
+            const cooApproval =
+                getCOOApproval(row);
+
+
+            const cooApprovalClass =
+                getStatusClass(
+                    cooApproval
+                );
+
+
+
+            /* =========================
+               COO DATE
+            ========================= */
+
+            const cooApprovalDate =
+                formatDate(
+                    getCOOApprovalDate(row)
+                );
+
+
+
+            /* =========================
+               IF NUMBER
+            ========================= */
+
+const ifNumber = getIFNumber(row);
+
+const ifDisplay = ifNumber
+    ? `<span class="if-number">${escapeHTML(ifNumber)}</span>`
+    : `<span class="no-if">No IF Yet</span>`;
+
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${dateSubmitted || "-"}
+                    </td>
+
+
+                    <td>
+                        ${so || "-"}
+                    </td>
+
+
+                    <td>
+                        ${area || "-"}
+                    </td>
+
+
+                    <td>
+                        ${customer || "-"}
+                    </td>
+
+
+                    <td>
+                        ${brand || "-"}
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="status ${statusClass}"
+                        >
+                            ${escapeHTML(status)}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${approvalDate || "-"}
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="status ${cooApprovalClass}"
+                        >
+                            ${escapeHTML(
+                                cooApproval
+                            )}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${cooApprovalDate || "-"}
+                    </td>
+
+
+                    <td>
+                        ${ifDisplay}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+
+/* =========================================================
+   CLEAR FILTERS
+========================================================= */
+
+function clearFilters(){
+
+    const searchInput =
+        document.getElementById(
+            "soSearch"
+        );
+
+
+    const areaFilter =
+        document.getElementById(
+            "areaFilter"
+        );
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
+
+
+    if(searchInput){
+
+        searchInput.value =
+            "";
+
+    }
+
+
+    if(areaFilter){
+
+        areaFilter.value =
+            "";
+
+    }
+
+
+    if(statusFilter){
+
+        statusFilter.value =
+            "";
+
+    }
+
+
+    currentSearch =
+        "";
+
+    currentArea =
+        "";
+
+    currentStatus =
+        "";
+
+
+    applyCurrentFilter();
+
+}
+
+
+
+/* =========================================================
+   LAST UPDATED
+========================================================= */
+
+function updateLastUpdated(){
+
+    const element =
+        document.getElementById(
+            "lastUpdated"
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    element.textContent =
+        "Last updated: " +
+        now.toLocaleString(
+            "en-US",
+            {
+                month:"short",
+                day:"2-digit",
+                year:"numeric",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit"
+            }
+        );
+
+}
+
+
+
+/* =========================================================
+   EVENT LISTENERS
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+
+        /* =========================
+           HOME
+        ========================= */
+
+        const homeButton =
+            document.getElementById(
+                "homeButton"
+            );
+
+
+        if(homeButton){
+
+            homeButton.addEventListener(
+                "click",
+                goHome
+            );
+
+        }
+
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        const searchInput =
+            document.getElementById(
+                "soSearch"
+            );
+
+
+        if(searchInput){
+
+            searchInput.addEventListener(
+                "input",
+                applyCurrentFilter
+            );
+
+        }
+
+
+
+        /* =========================
+           AREA / SP
+        ========================= */
+
+        const areaFilter =
+            document.getElementById(
+                "areaFilter"
+            );
+
+
+        if(areaFilter){
+
+            areaFilter.addEventListener(
+                "change",
+                applyCurrentFilter
+            );
+
+        }
+
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        const statusFilter =
+            document.getElementById(
+                "statusFilter"
+            );
+
+
+        if(statusFilter){
+
+            statusFilter.addEventListener(
+                "change",
+                applyCurrentFilter
+            );
+
+        }
+
+
+
+        /* =========================
+           CLEAR
+        ========================= */
+
+        const clearButton =
+            document.getElementById(
+                "clearFilters"
+            );
+
+
+        if(clearButton){
+
+            clearButton.addEventListener(
+                "click",
+                clearFilters
+            );
+
+        }
+
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================= */
+
+        loadData();
+
+
+
+        /* =========================
+           AUTO REFRESH
+        =========================
+           
+           Refresh every 10 seconds.
+        */
+
+        setInterval(
+            loadData,
+            10000
+        );
+
+    }
+);
 
 </script>
+
 
 </body>
 

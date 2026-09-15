@@ -567,6 +567,24 @@ td{
 
         </select>
 
+        <!-- IF STATUS -->
+
+        <select id="ifStatusFilter">
+
+            <option value="">
+                All IF Status
+            </option>
+
+            <option value="IF">
+                IF
+            </option>
+
+            <option value="NO IF YET">
+                No IF Yet
+            </option>
+
+        </select>
+
 
 
         <!-- CLEAR -->
@@ -694,6 +712,8 @@ let currentSearch = "";
 let currentArea = "";
 
 let currentStatus = "";
+
+let currentIfStatus = "";
 
 let isLoading = false;
 
@@ -839,13 +859,6 @@ function getWarrantyStatus(row){
         ]);
 
 
-    /*
-     * IMPORTANT:
-     *
-     * Blank Warranty Claim Status
-     * = Pending
-     */
-
     if(!status){
 
         return "Pending";
@@ -939,6 +952,7 @@ function getIFNumber(row) {
         "IF NO.",
         "IF NO",
         "IF",
+        "IF Status",
         "IF No. "
     ]);
 }
@@ -1146,10 +1160,6 @@ function getStatusClass(status){
     }
 
 
-    /*
-     * Everything else becomes Pending.
-     */
-
     return "pending";
 
 }
@@ -1179,10 +1189,6 @@ async function loadData(){
     }
 
 
-    /*
-     * Prevent multiple simultaneous requests.
-     */
-
     if(isLoading){
 
         return;
@@ -1196,17 +1202,8 @@ async function loadData(){
     try{
 
 
-        /*
-         * Keep existing filter selections.
-         */
-
         saveCurrentFilters();
 
-
-
-        /*
-         * First load message.
-         */
 
         if(allData.length === 0){
 
@@ -1224,24 +1221,6 @@ async function loadData(){
         }
 
 
-
-        console.log(
-            "Loading Warranty Claim Tracker..."
-        );
-
-        console.log(
-            "API URL:",
-            API_URL
-        );
-
-
-
-        /*
-         * IMPORTANT:
-         *
-         * Do NOT append "?t=" to the URL.
-         */
-
         const response =
             await fetch(
                 API_URL,
@@ -1253,14 +1232,6 @@ async function loadData(){
                     }
                 }
             );
-
-
-
-        console.log(
-            "HTTP Status:",
-            response.status
-        );
-
 
 
         if(!response.ok){
@@ -1275,17 +1246,8 @@ async function loadData(){
         }
 
 
-
-        /*
-         * Read response as text first.
-         *
-         * This allows us to show the actual
-         * response if OpenSheet returns an error.
-         */
-
         const text =
             await response.text();
-
 
 
         if(!text){
@@ -1295,7 +1257,6 @@ async function loadData(){
             );
 
         }
-
 
 
         let data;
@@ -1308,23 +1269,12 @@ async function loadData(){
 
         }catch(jsonError){
 
-            console.error(
-                "Invalid JSON response:",
-                text
-            );
-
             throw new Error(
                 "OpenSheet did not return valid JSON."
             );
 
         }
 
-
-
-        /*
-         * OpenSheet may return an object containing
-         * an error instead of an array.
-         */
 
         if(
             data &&
@@ -1343,7 +1293,6 @@ async function loadData(){
         }
 
 
-
         if(!Array.isArray(data)){
 
             throw new Error(
@@ -1352,23 +1301,6 @@ async function loadData(){
 
         }
 
-
-
-        console.log(
-            "Total rows received:",
-            data.length
-        );
-
-
-
-        /*
-         * Store valid rows.
-         *
-         * Do NOT remove rows merely because
-         * Warranty Claim Status is blank.
-         *
-         * Blank status must appear as Pending.
-         */
 
         allData =
             data
@@ -1392,31 +1324,6 @@ async function loadData(){
                 );
 
 
-
-        console.log(
-            "Warranty claim records:",
-            allData.length
-        );
-
-
-
-        /*
-         * Show actual column names in console.
-         *
-         * Useful for checking Google Sheet headers.
-         */
-
-        if(data.length > 0){
-
-            console.log(
-                "Google Sheet columns:",
-                Object.keys(data[0])
-            );
-
-        }
-
-
-
         populateAreaFilter();
 
         restoreCurrentFilters();
@@ -1428,17 +1335,6 @@ async function loadData(){
 
     }
     catch(error){
-
-
-        console.error(
-            "WARRANTY TRACKER ERROR:",
-            error
-        );
-
-
-        /*
-         * Show detailed error on screen.
-         */
 
         tbody.innerHTML = `
             <tr>
@@ -1457,11 +1353,6 @@ async function loadData(){
                             error.message ||
                             "Unknown error"
                         )}
-                    </small>
-
-                    <small>
-                        Please check the Google Sheet /
-                        OpenSheet connection.
                     </small>
 
                 </td>
@@ -1504,6 +1395,11 @@ function saveCurrentFilters(){
             "statusFilter"
         );
 
+    const ifStatusFilter =
+        document.getElementById(
+            "ifStatusFilter"
+        );
+
 
     if(searchInput){
 
@@ -1527,6 +1423,13 @@ function saveCurrentFilters(){
 
         currentStatus =
             statusFilter.value;
+
+    }
+
+    if(ifStatusFilter){
+
+        currentIfStatus =
+            ifStatusFilter.value;
 
     }
 
@@ -1557,6 +1460,11 @@ function restoreCurrentFilters(){
             "statusFilter"
         );
 
+    const ifStatusFilter =
+        document.getElementById(
+            "ifStatusFilter"
+        );
+
 
     if(searchInput){
 
@@ -1578,6 +1486,13 @@ function restoreCurrentFilters(){
 
         statusFilter.value =
             currentStatus;
+
+    }
+
+    if(ifStatusFilter){
+
+        ifStatusFilter.value =
+            currentIfStatus;
 
     }
 
@@ -1720,6 +1635,11 @@ function applyCurrentFilter(){
             "statusFilter"
         );
 
+    const ifStatusFilter =
+        document.getElementById(
+            "ifStatusFilter"
+        );
+
 
 
     currentSearch =
@@ -1743,6 +1663,11 @@ function applyCurrentFilter(){
             ? statusFilter.value
             : "";
 
+    currentIfStatus =
+        ifStatusFilter
+            ? ifStatusFilter.value
+            : "";
+
 
 
     const filteredData =
@@ -1763,6 +1688,9 @@ function applyCurrentFilter(){
                 normalizeText(
                     getWarrantyStatus(row)
                 );
+
+            const ifNumber =
+                getIFNumber(row);
 
 
 
@@ -1801,10 +1729,37 @@ function applyCurrentFilter(){
 
 
 
+            /*
+             * IF STATUS
+             */
+
+            let matchesIfStatus = true;
+
+            if (currentIfStatus) {
+                const filterVal = normalizeText(currentIfStatus);
+                const rawIf = normalizeText(ifNumber);
+
+                const hasValidIf = Boolean(
+                    rawIf &&
+                    rawIf !== "no if yet" &&
+                    rawIf !== "-" &&
+                    rawIf !== "none"
+                );
+
+                if (filterVal === "if") {
+                    matchesIfStatus = hasValidIf;
+                } else if (filterVal === "no if yet") {
+                    matchesIfStatus = !hasValidIf;
+                }
+            }
+
+
+
             return (
                 matchesSearch &&
                 matchesArea &&
-                matchesStatus
+                matchesStatus &&
+                matchesIfStatus
             );
 
         });
@@ -1839,10 +1794,6 @@ function renderTable(data){
 
 
 
-    /*
-     * No results.
-     */
-
     if(!data.length){
 
         tbody.innerHTML = `
@@ -1873,10 +1824,6 @@ function renderTable(data){
         data.map(row => {
 
 
-            /* =========================
-               DATE SUBMITTED
-            ========================= */
-
             const dateSubmitted =
                 formatDate(
                     getValue(row,[
@@ -1889,20 +1836,12 @@ function renderTable(data){
 
 
 
-            /* =========================
-               SO
-            ========================= */
-
             const so =
                 escapeHTML(
                     getSO(row)
                 );
 
 
-
-            /* =========================
-               AREA / SP
-            ========================= */
 
             const area =
                 escapeHTML(
@@ -1911,10 +1850,6 @@ function renderTable(data){
 
 
 
-            /* =========================
-               CUSTOMER
-            ========================= */
-
             const customer =
                 escapeHTML(
                     getCustomerName(row)
@@ -1922,20 +1857,12 @@ function renderTable(data){
 
 
 
-            /* =========================
-               BRAND
-            ========================= */
-
             const brand =
                 escapeHTML(
                     getBrandName(row)
                 );
 
 
-
-            /* =========================
-               WARRANTY STATUS
-            ========================= */
 
             const status =
                 getWarrantyStatus(row);
@@ -1948,20 +1875,12 @@ function renderTable(data){
 
 
 
-            /* =========================
-               WARRANTY APPROVAL DATE
-            ========================= */
-
             const approvalDate =
                 formatDate(
                     getWarrantyApprovalDate(row)
                 );
 
 
-
-            /* =========================
-               COO APPROVAL
-            ========================= */
 
             const cooApproval =
                 getCOOApproval(row);
@@ -1974,10 +1893,6 @@ function renderTable(data){
 
 
 
-            /* =========================
-               COO DATE
-            ========================= */
-
             const cooApprovalDate =
                 formatDate(
                     getCOOApprovalDate(row)
@@ -1985,15 +1900,19 @@ function renderTable(data){
 
 
 
-            /* =========================
-               IF NUMBER
-            ========================= */
+            const ifNumber = getIFNumber(row);
 
-const ifNumber = getIFNumber(row);
+            const rawIf = normalizeText(ifNumber);
+            const hasValidIf = Boolean(
+                rawIf &&
+                rawIf !== "no if yet" &&
+                rawIf !== "-" &&
+                rawIf !== "none"
+            );
 
-const ifDisplay = ifNumber
-    ? `<span class="if-number">${escapeHTML(ifNumber)}</span>`
-    : `<span class="no-if">No IF Yet</span>`;
+            const ifDisplay = hasValidIf
+                ? `<span class="if-number">${escapeHTML(ifNumber)}</span>`
+                : `<span class="no-if">No IF Yet</span>`;
 
 
 
@@ -2097,6 +2016,11 @@ function clearFilters(){
             "statusFilter"
         );
 
+    const ifStatusFilter =
+        document.getElementById(
+            "ifStatusFilter"
+        );
+
 
     if(searchInput){
 
@@ -2121,6 +2045,13 @@ function clearFilters(){
 
     }
 
+    if(ifStatusFilter){
+
+        ifStatusFilter.value =
+            "";
+
+    }
+
 
     currentSearch =
         "";
@@ -2129,6 +2060,9 @@ function clearFilters(){
         "";
 
     currentStatus =
+        "";
+
+    currentIfStatus =
         "";
 
 
@@ -2188,10 +2122,6 @@ document.addEventListener(
     function(){
 
 
-        /* =========================
-           HOME
-        ========================= */
-
         const homeButton =
             document.getElementById(
                 "homeButton"
@@ -2208,10 +2138,6 @@ document.addEventListener(
         }
 
 
-
-        /* =========================
-           SEARCH
-        ========================= */
 
         const searchInput =
             document.getElementById(
@@ -2230,10 +2156,6 @@ document.addEventListener(
 
 
 
-        /* =========================
-           AREA / SP
-        ========================= */
-
         const areaFilter =
             document.getElementById(
                 "areaFilter"
@@ -2250,10 +2172,6 @@ document.addEventListener(
         }
 
 
-
-        /* =========================
-           STATUS
-        ========================= */
 
         const statusFilter =
             document.getElementById(
@@ -2272,9 +2190,22 @@ document.addEventListener(
 
 
 
-        /* =========================
-           CLEAR
-        ========================= */
+        const ifStatusFilter =
+            document.getElementById(
+                "ifStatusFilter"
+            );
+
+
+        if(ifStatusFilter){
+
+            ifStatusFilter.addEventListener(
+                "change",
+                applyCurrentFilter
+            );
+
+        }
+
+
 
         const clearButton =
             document.getElementById(
@@ -2293,20 +2224,9 @@ document.addEventListener(
 
 
 
-        /* =========================
-           INITIAL LOAD
-        ========================= */
-
         loadData();
 
 
-
-        /* =========================
-           AUTO REFRESH
-        =========================
-           
-           Refresh every 10 seconds.
-        */
 
         setInterval(
             loadData,

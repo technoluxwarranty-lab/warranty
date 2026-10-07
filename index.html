@@ -117,6 +117,7 @@ button:disabled{
     padding:12px;
     border-radius:8px;
     display:none;
+    font-size:14px;
 }
 
 .success{
@@ -137,6 +138,7 @@ button:disabled{
 .spinner{
     display:none;
     margin-top:15px;
+    color:#555;
 }
 
 .footer{
@@ -159,142 +161,148 @@ button:disabled{
 
 <div class="login-box">
 
-<div class="logo">
-<i class="fas fa-shield-alt"></i>
-</div>
+    <div class="logo">
+        <i class="fas fa-shield-alt"></i>
+    </div>
 
-<h2>
-Warranty Management System
-</h2>
+    <h2>
+        Warranty Management System
+    </h2>
 
-<p class="subtitle">
-Enter provided details below to request access.
-</p>
-
-<!-- EMAIL -->
-
-<div class="input-group">
-
-<i class="fas fa-envelope"></i>
-
-<input
-id="email"
-type="email"
-placeholder="Enter your email"
-autocomplete="email">
-
-</div>
+    <p class="subtitle">
+        Enter provided details below to request access.
+    </p>
 
 
-<!-- TERRITORY -->
+    <!-- EMAIL -->
 
-<div class="input-group" style="margin-top:15px;">
+    <div class="input-group">
 
-<i class="fas fa-map-marker-alt"></i>
+        <i class="fas fa-envelope"></i>
 
-<select id="area">
+        <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="email">
 
-<option value="">Select your Territory</option>
-
-<option value="Head Office">Head Office</option>
-<option value="Area 1">Area 1</option>
-<option value="Area 2">Area 2</option>
-<option value="Area 3">Area 3</option>
-<option value="Area 4">Area 4</option>
-<option value="Area 5">Area 5</option>
-<option value="SP-ARCTIC DAISY">SP-ARCTIC DAISY</option>
-<option value="SP-LBF">SP-LBF</option>
-<option value="SP-SGD">SP-SGD</option>
-<option value="SP-SGD NORTH LUZON">SP-SGD NORTH</option>
-<option value="SP-TPM">SP-TPM</option>
-<option value="SP-JMGC">SP-JMGC</option>
-<option value="SP-JZJZ">SP-JZJZ</option>
-<option value="SP-KOOLTRONIXS">SP-KOOLTRONIXS</option>
-<option value="SP-MECHANIKOOL">SP-MECHANIKOOL</option>
-<option value="SP-IRMS">SP-IRMS</option>
-<option value="SP-KERTECH">SP-KERTECH</option>
-<option value="SP-CGS">SP-CGS</option>
-<option value="SP-LCP">SP-LCP</option>
-<option value="COFFEE TEAM">COFFEE TEAM</option>
-<option value="HOTEL TEAM">HOTEL TEAM</option>
-<option value="LAUNDRY TEAM">LAUNDRY TEAM</option>
-<option value="IN-HOUSE TEAM">IN-HOUSE TEAM</option>
-<option value="INSTALLATION TEAM">INSTALLATION TEAM</option>
-<option value="CEBU-HO">CEBU-HO</option>
-<option value="CEBU-SP NSJ">CEBU-SP NSJ</option>
-<option value="CEBU-SP JEP">CEBU-SP JEP</option>
-<option value="CEBU-SP DCC">CEBU-SP DCC</option>
-<option value="CEBU-SP CMO">CEBU-SP CMO</option>
-<option value="CEBU-SP PURITY">CEBU-SP PURITY</option>
-<option value="DAVAO-HO">DAVAO-HO</option>
-<option value="DAVAO-SP LEACHIM">DAVAO-SP LEACHIM</option>
-<option value="DAVAO-SP KYTECH">DAVAO-SP KYTECH</option>
-<option value="DAVAO-SP JC KITCHEN">DAVAO-SP JC KITCHEN</option>
-
-</select>
-
-</div>
+    </div>
 
 
-<!-- POSITION -->
+    <!-- TERRITORY -->
 
-<div class="input-group" style="margin-top:15px;">
+    <div class="input-group" style="margin-top:15px;">
 
-<i class="fas fa-user-tie"></i>
+        <i class="fas fa-map-marker-alt"></i>
 
-<select id="position">
+        <select id="area">
 
-<option value="">Select your Position</option>
+            <option value="">Select your Territory</option>
 
-<option value="Technician">Technician</option>
-<option value="Warranty">Warranty</option>
-<option value="Supervisor">Supervisor</option>
-<option value="Manager">Manager</option>
-<option value="Coordinator">Coordinator</option>
-<option value="Coordinator">Clerk</option>
-<option value="Service Provider">Service Provider</option>
+            <option value="Head Office">Head Office</option>
 
-</select>
+            <option value="Area 1">Area 1</option>
+            <option value="Area 2">Area 2</option>
+            <option value="Area 3">Area 3</option>
+            <option value="Area 4">Area 4</option>
+            <option value="Area 5">Area 5</option>
 
-</div>
+            <option value="SP-ARCTIC DAISY">SP-Arctic Daisy</option>
+            <option value="SP-LBF">SP-LBF</option>
+            <option value="SP-SGD">SP-SGD</option>
+            <option value="SP-TPM">SP-TPM</option>
+            <option value="SP-JMGC">SP-JMGC</option>
+            <option value="SP-JZJZ">SP-JZJZ</option>
+            <option value="SP-KOOLTRONIXS">SP-Kooltronixs</option>
+            <option value="SP-MECHANIKOOL">SP-Mechnai</option>
+            <option value="SP-IRMS">SP-IRMS</option>
+            <option value="SP-KERTECH">SP-KERTECH</option>
+            <option value="SP-CGS">SP-CGS</option>
+            <option value="SP-SGD NORTH LUZON">SP-SGD NORTH LUZON</option>
+            <option value="SP-LCP">SP-LCP</option>
+
+            <option value="COFFEE TEAM">COFFEE TEAM</option>
+            <option value="HOTEL TEAM">HOTEL TEAM</option>
+            <option value="LAUNDRY TEAM">LAUNDRY TEAM</option>
+            <option value="IN-HOUSE TEAM">IN-HOUSE TEAM</option>
+            <option value="INSTALLATION TEAM">INSTALLATION TEAM</option>
+
+            <option value="CEBU-HO">CEBU-HO</option>
+            <option value="CEBU-SP NSJ">CEBU-SP NSJ</option>
+            <option value="CEBU-SP JEP">CEBU-SP JEP</option>
+            <option value="CEBU-SP DCC">CEBU-SP DCC</option>
+            <option value="CEBU-SP CMO">CEBU-SP CMO</option>
+            <option value="CEBU-SP PURITY">CEBU-SP PURITY</option>
+
+            <option value="DAVAO-HO">DAVAO-HO</option>
+            <option value="DAVAO-SP LEACHIM">DAVAO-SP LEACHIM</option>
+            <option value="DAVAO-SP KYTECH">DAVAO-SP KYTECH</option>
+            <option value="DAVAO-SP JC KITCHEN">DAVAO-SP JC KITCHEN</option>
+
+        </select>
+
+    </div>
 
 
-<!-- LOGIN BUTTON -->
+    <!-- POSITION -->
 
-<button
-id="loginBtn"
-onclick="login()">
+    <div class="input-group" style="margin-top:15px;">
 
-<i class="fas fa-sign-in-alt"></i>
-Login
+        <i class="fas fa-user-tie"></i>
 
-</button>
+        <select id="position">
 
+            <option value="">Select your Position</option>
 
-<!-- SPINNER -->
+            <option value="Technician">Technician</option>
+            <option value="Warranty">Warranty</option>
+            <option value="Supervisor">Supervisor</option>
+            <option value="Manager">Manager</option>
+            <option value="Coordinator">Coordinator</option>
+            <option value="Service Provider">Service Provider</option>
 
-<div class="spinner" id="spinner">
+        </select>
 
-<i class="fas fa-spinner fa-spin"></i>
-Checking access...
-
-</div>
-
-
-<!-- MESSAGE -->
-
-<div id="msg" class="message"></div>
+    </div>
 
 
-<div class="footer">
+    <!-- LOGIN BUTTON -->
 
-Access is subject to administrator approval.
+    <button
+        id="loginBtn"
+        onclick="login()">
 
-<div class="version">
-System Version: <span id="versionText"></span>
-</div>
+        <i class="fas fa-sign-in-alt"></i>
+        Login
 
-</div>
+    </button>
+
+
+    <!-- SPINNER -->
+
+    <div class="spinner" id="spinner">
+
+        <i class="fas fa-spinner fa-spin"></i>
+        Checking access...
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div id="msg" class="message"></div>
+
+
+    <div class="footer">
+
+        Access is subject to administrator approval.
+
+        <div class="version">
+            System Version:
+            <span id="versionText"></span>
+        </div>
+
+    </div>
 
 </div>
 
@@ -305,10 +313,12 @@ System Version: <span id="versionText"></span>
    SYSTEM CONFIGURATION
 ===================================================== */
 
-// CHANGE THIS NUMBER EVERY TIME YOU RELEASE
-// A MAJOR LOGIN / ACCESS ENHANCEMENT.
+/*
+   CHANGE THIS VERSION EVERY TIME THERE IS A
+   MAJOR LOGIN / ACCESS / ROLE CHANGE.
+*/
 
-const APP_VERSION = "2026.08.25.02";
+const APP_VERSION = "2026.10.07.01";
 
 
 const WEBAPP_URL =
@@ -320,10 +330,36 @@ APP_VERSION;
 
 
 /* =====================================================
+   NORMALIZE POSITION
+===================================================== */
+
+function normalizePosition(position){
+
+    return String(position || "")
+        .trim()
+        .toLowerCase();
+
+}
+
+
+/* =====================================================
+   NORMALIZE EMAIL
+===================================================== */
+
+function normalizeEmail(email){
+
+    return String(email || "")
+        .trim()
+        .toLowerCase();
+
+}
+
+
+/* =====================================================
    MESSAGE
 ===================================================== */
 
-function showMessage(type, text){
+function showMessage(type,text){
 
     const msg =
         document.getElementById("msg");
@@ -336,12 +372,29 @@ function showMessage(type, text){
 
     msg.innerHTML =
         text;
+
+}
+
+
+/* =====================================================
+   CLEAR LOGIN SESSION
+===================================================== */
+
+function clearLoginSession(){
+
+    localStorage.removeItem("loggedIn");
+
+    localStorage.removeItem("userEmail");
+
+    localStorage.removeItem("userArea");
+
+    localStorage.removeItem("userPosition");
+
 }
 
 
 /* =====================================================
    FORCE NEW VERSION
-   CLEAR OLD LOGIN SESSION
 ===================================================== */
 
 function checkSystemVersion(){
@@ -351,24 +404,20 @@ function checkSystemVersion(){
 
 
     /*
-       If user has an older version,
-       clear the previous login session.
+       If the saved version does not match
+       the current version, completely reset
+       the previous login session.
     */
 
     if(savedVersion !== APP_VERSION){
 
         console.log(
-            "New system version detected."
+            "New system version detected:",
+            APP_VERSION
         );
 
 
-        localStorage.removeItem("loggedIn");
-
-        localStorage.removeItem("userEmail");
-
-        localStorage.removeItem("userArea");
-
-        localStorage.removeItem("userPosition");
+        clearLoginSession();
 
 
         localStorage.setItem(
@@ -377,15 +426,10 @@ function checkSystemVersion(){
         );
 
 
-        /*
-           Prevent browser from restoring
-           an old page/session.
-        */
-
         if(savedVersion !== null){
 
             console.log(
-                "Previous version cleared: " +
+                "Previous version cleared:",
                 savedVersion
             );
 
@@ -402,28 +446,24 @@ function checkSystemVersion(){
 
 window.onload = function(){
 
-    /*
-       Check if user has an old version.
-    */
-
     checkSystemVersion();
 
-
-    /*
-       Load saved information ONLY
-       if the current system version
-       is already established.
-    */
 
     const savedEmail =
         localStorage.getItem("userEmail");
 
+
     const savedArea =
         localStorage.getItem("userArea");
+
 
     const savedPosition =
         localStorage.getItem("userPosition");
 
+
+    /*
+       Restore saved email.
+    */
 
     if(savedEmail){
 
@@ -433,6 +473,10 @@ window.onload = function(){
     }
 
 
+    /*
+       Restore saved territory.
+    */
+
     if(savedArea){
 
         document.getElementById("area").value =
@@ -440,6 +484,10 @@ window.onload = function(){
 
     }
 
+
+    /*
+       Restore saved position.
+    */
 
     if(savedPosition){
 
@@ -450,8 +498,8 @@ window.onload = function(){
 
 
     /*
-       If still logged in,
-       proceed to home.
+       If already logged in,
+       proceed to Home.
     */
 
     if(
@@ -504,6 +552,7 @@ function login(){
         );
 
         return;
+
     }
 
 
@@ -515,6 +564,7 @@ function login(){
         );
 
         return;
+
     }
 
 
@@ -526,6 +576,27 @@ function login(){
         );
 
         return;
+
+    }
+
+
+    /*
+       Basic email validation.
+    */
+
+    const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if(!emailPattern.test(email)){
+
+        showMessage(
+            "error",
+            "Please enter a valid email address."
+        );
+
+        return;
+
     }
 
 
@@ -562,7 +633,9 @@ function login(){
     const url =
         WEBAPP_URL +
         "?email=" +
-        encodeURIComponent(email) +
+        encodeURIComponent(
+            normalizeEmail(email)
+        ) +
 
         "&area=" +
         encodeURIComponent(area) +
@@ -595,6 +668,7 @@ function login(){
 
         }
 
+
         return response.json();
 
     })
@@ -614,59 +688,19 @@ function login(){
 
         if(data.blocked === true){
 
-            /*
-               Remove ALL login session information.
-            */
-
-            localStorage.removeItem(
-                "loggedIn"
-            );
-
-
-            localStorage.removeItem(
-                "userEmail"
-            );
-
-
-            localStorage.removeItem(
-                "userArea"
-            );
-
-
-            localStorage.removeItem(
-                "userPosition"
-            );
+            clearLoginSession();
 
 
             showMessage(
                 "error",
                 data.message ||
-                "ACCESS DENIED. The selected position does not match your registered position."
+                "ACCESS DENIED. Your email is permanently registered to a different position. Please contact the warranty team."
             );
 
 
             return;
+
         }
-
-        /*
-       Basic email validation.
-    */
-
-    const emailPattern =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-    if(!emailPattern.test(email)){
-
-        showMessage(
-            "error",
-            "Please enter a valid email address."
-        );
-
-        return;
-
-    }
-
 
 
         /* =============================================
@@ -683,28 +717,69 @@ function login(){
 
 
             return;
+
         }
 
 
         /* =============================================
-           SAVE SERVER-VALIDATED INFORMATION
+           SERVER-VALIDATED INFORMATION
         ============================================= */
+
+        const serverEmail =
+            normalizeEmail(
+                data.email || email
+            );
+
+
+        const serverArea =
+            String(
+                data.area || area
+            ).trim();
+
+
+        const serverPosition =
+            String(
+                data.position || position
+            ).trim();
+
+
+        /*
+           IMPORTANT:
+           Save the SERVER-VALIDATED position.
+
+           Example:
+           Technician
+           Warranty
+           Supervisor
+           Manager
+           Coordinator
+           Service Provider
+
+           The Home page can then use:
+           localStorage.getItem("userPosition")
+        */
 
         localStorage.setItem(
             "userEmail",
-            data.email
+            serverEmail
         );
 
 
         localStorage.setItem(
             "userArea",
-            data.area || area
+            serverArea
         );
 
 
         localStorage.setItem(
             "userPosition",
-            data.position || position
+            serverPosition
+        );
+
+
+        console.log(
+            "Validated user role:",
+            serverPosition
         );
 
 
@@ -720,10 +795,6 @@ function login(){
             );
 
 
-            /*
-               Save current system version.
-            */
-
             localStorage.setItem(
                 "systemVersion",
                 APP_VERSION
@@ -738,11 +809,6 @@ function login(){
 
             setTimeout(function(){
 
-                /*
-                   Add version to home URL
-                   to prevent stale cached page.
-                */
-
                 window.location.replace(
                     "home.html?v=" +
                     APP_VERSION
@@ -751,6 +817,8 @@ function login(){
             },1200);
 
 
+            return;
+
         }
 
 
@@ -758,19 +826,15 @@ function login(){
            PENDING
         ============================================= */
 
-        else{
-
-            localStorage.removeItem(
-                "loggedIn"
-            );
+        localStorage.removeItem(
+            "loggedIn"
+        );
 
 
-            showMessage(
-                "pending",
-                "Your access request is pending approval."
-            );
-
-        }
+        showMessage(
+            "pending",
+            "Your access request is pending approval."
+        );
 
     })
 

@@ -1,114 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warranty Management System</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Warranty Management System</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* =========================================================
-   WARRANTY MANAGEMENT SYSTEM
-   FULL RESPONSIVE CSS
-   PC • LAPTOP • TABLET • MOBILE
-========================================================= */
-
-*,
-*::before,
-*::after{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 :root{
     --navy:#0f172a;
     --text:#17213a;
     --muted:#64748b;
     --border:#e8eaf2;
-
     --purple:#6d3fe5;
     --purple-dark:#5b2fd0;
     --purple-soft:#f4f0ff;
-
     --green:#16a66a;
     --green-soft:#e8f8f0;
-
     --orange:#f28a35;
     --orange-soft:#fff3e8;
-
     --blue-soft:#eef1ff;
-
     --red:#dc3545;
     --red-soft:#fdecef;
-
     --gray-soft:#eef0f3;
-
     --bg:#f7f8fb;
-
-    --sidebar-width:clamp(260px, 22vw, 350px);
-    --content-padding:clamp(16px, 2.2vw, 32px);
+    --sidebar-width:clamp(260px,22vw,350px);
+    --content-padding:clamp(16px,2.2vw,32px);
 }
 
-/* =========================================================
-   GLOBAL
-========================================================= */
+*,*::before,*::after{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-html{
+html,body{
     width:100%;
     min-height:100%;
     overflow-x:hidden;
 }
 
 body{
-    width:100%;
     min-height:100vh;
     font-family:'Segoe UI',Tahoma,Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
-    overflow-x:hidden;
 }
 
-img{
-    max-width:100%;
-    height:auto;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+img{max-width:100%;height:auto}
 
-button,
-input,
-select,
-textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    color:inherit;
-}
-
-
-/* =========================================================
-   TOP BAR
-========================================================= */
+/* =========================
+   TOP HEADER
+========================= */
 
 .topbar{
     width:100%;
     min-height:75px;
     padding:12px clamp(16px,2.5vw,32px);
-
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:20px;
-
     background:var(--navy);
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-
+    box-shadow:0 2px 10px #0001;
     position:relative;
     z-index:100;
 }
@@ -121,16 +79,13 @@ a{
 }
 
 .header-logo{
-    width:auto;
     height:42px;
     max-width:180px;
     object-fit:contain;
     flex-shrink:0;
 }
 
-.logo-section > div{
-    min-width:0;
-}
+.logo-section>div{min-width:0}
 
 .logo-section h1{
     color:#fff;
@@ -155,11 +110,6 @@ a{
     flex-shrink:0;
 }
 
-.user-info{
-    display:flex;
-    align-items:center;
-}
-
 .welcome-text{
     display:flex;
     flex-direction:column;
@@ -167,32 +117,18 @@ a{
     white-space:nowrap;
 }
 
-.welcome-text span{
-    color:#fff;
-    font-size:14px;
-}
-
-.welcome-text small{
-    color:#94a3b8;
-    font-size:12px;
-    margin-top:2px;
-}
+.welcome-text span{color:#fff;font-size:14px}
+.welcome-text small{color:#94a3b8;font-size:12px;margin-top:2px}
 
 .logout-btn{
     border:0;
     border-radius:8px;
-
     background:#ef2635;
     color:#fff;
-
     padding:10px 18px;
-
     font-weight:600;
     white-space:nowrap;
-
-    transition:
-        background .2s ease,
-        transform .2s ease;
+    transition:.2s;
 }
 
 .logout-btn:hover{
@@ -200,47 +136,29 @@ a{
     transform:translateY(-1px);
 }
 
-
-/* =========================================================
-   MAIN PAGE LAYOUT
-========================================================= */
+/* =========================
+   PAGE LAYOUT
+========================= */
 
 .page-layout{
     width:100%;
     min-height:calc(100vh - 75px);
-
     display:grid;
     grid-template-columns:var(--sidebar-width) minmax(0,1fr);
-
     align-items:stretch;
 }
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
 
 .sidebar{
     min-width:0;
     background:#fff;
-
     border-right:1px solid var(--border);
-
-    padding:
-        clamp(20px,2vw,30px)
-        clamp(16px,2vw,24px)
-        30px
-        clamp(20px,2.5vw,36px);
-
+    padding:clamp(20px,2vw,30px) clamp(16px,2vw,24px) 30px clamp(20px,2.5vw,36px);
     overflow:hidden;
 }
 
-.page-title{
-    margin-bottom:24px;
-}
+.page-title{margin-bottom:24px}
 
 .page-title h2{
-    color:var(--text);
     font-size:clamp(22px,2vw,28px);
     line-height:1.15;
 }
@@ -252,6 +170,10 @@ a{
     line-height:1.5;
 }
 
+/* =========================
+   DASHBOARD MODULES
+========================= */
+
 .dashboard{
     width:100%;
     display:flex;
@@ -261,309 +183,182 @@ a{
 
 .card{
     position:relative;
-
     width:100%;
     min-width:0;
-
     display:grid;
     grid-template-columns:48px minmax(0,1fr);
     column-gap:14px;
-
     align-items:start;
-
     min-height:105px;
-
     padding:17px;
-
     background:#fff;
-
     border:1px solid var(--border);
     border-left:3px solid var(--purple);
     border-radius:12px;
-
     text-decoration:none;
     color:var(--text);
-
-    box-shadow:0 2px 8px rgba(15,23,42,.04);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+    box-shadow:0 2px 8px #0f172a0a;
+    transition:transform .2s,box-shadow .2s;
 }
 
 .card:hover{
     transform:translateY(-2px);
-    box-shadow:0 7px 20px rgba(15,23,42,.09);
+    box-shadow:0 7px 20px #0f172a17;
 }
 
 .card i{
-    grid-row:1 / span 2;
-
+    grid-row:1/span 2;
     font-size:28px;
     color:var(--purple);
-
     padding-top:2px;
 }
 
 .card h2{
     min-width:0;
-
     font-size:16px;
     margin:0 0 7px;
-
     line-height:1.25;
-
     overflow-wrap:anywhere;
 }
 
 .card p{
     color:var(--muted);
-
     font-size:13px;
     line-height:1.5;
-
     overflow-wrap:anywhere;
 }
 
-.card.coverage,
-.card.claim,
-.card.tracker,
-.card.checker{
-    border-left-color:var(--purple);
-}
-
-.card.coverage i,
-.card.claim i,
-.card.tracker i,
-.card.checker i{
-    color:var(--purple);
-}
-
-.card.tracker{
-    background:#fff;
-    border-color:var(--border);
-    border-left:3px solid var(--purple);
-}
-
-
-/* =========================================================
+/* =========================
    MAIN CONTENT
-========================================================= */
+========================= */
 
 .main-content{
     width:100%;
     min-width:0;
-
-    padding:
-        clamp(18px,2vw,28px)
-        var(--content-padding)
-        clamp(24px,2.5vw,35px);
-
+    padding:clamp(18px,2vw,28px) var(--content-padding) clamp(24px,2.5vw,35px);
     overflow:visible;
 }
 
 .section-title{
     margin:0 0 16px;
-
     font-size:18px;
     line-height:1.3;
     font-weight:700;
 }
 
-
-/* =========================================================
+/* =========================
    SUMMARY CARDS
-========================================================= */
+========================= */
 
 .summary-grid{
     width:100%;
-
     display:grid;
-
-    grid-template-columns:
-        repeat(5,minmax(0,1fr));
-
+    grid-template-columns:repeat(5,minmax(0,1fr));
     gap:12px;
-
     margin-bottom:20px;
 }
 
 .summary-card{
     min-width:0;
     min-height:105px;
-
     background:#fff;
-
     border:1px solid var(--border);
     border-radius:14px;
-
     padding:16px;
-
     display:flex;
     align-items:center;
-
     gap:13px;
-
-    box-shadow:0 2px 10px rgba(15,23,42,.035);
-
+    box-shadow:0 2px 10px #0f172a09;
     overflow:hidden;
 }
 
 .summary-icon{
     width:54px;
     height:54px;
-
     flex:0 0 54px;
-
     border-radius:11px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:23px;
 }
 
-.summary-icon.purple{
-    color:var(--purple);
-    background:var(--purple-soft);
-}
+.summary-icon.purple{color:var(--purple);background:var(--purple-soft)}
+.summary-icon.blue{color:#5867df;background:var(--blue-soft)}
+.summary-icon.green{color:var(--green);background:var(--green-soft)}
+.summary-icon.orange{color:var(--orange);background:var(--orange-soft)}
+.summary-icon.red{color:var(--red);background:var(--red-soft)}
+.summary-icon.gray{color:#64748b;background:var(--gray-soft)}
 
-.summary-icon.blue{
-    color:#5867df;
-    background:var(--blue-soft);
-}
-
-.summary-icon.green{
-    color:var(--green);
-    background:var(--green-soft);
-}
-
-.summary-icon.orange{
-    color:var(--orange);
-    background:var(--orange-soft);
-}
-
-.summary-icon.red{
-    color:var(--red);
-    background:var(--red-soft);
-}
-
-.summary-icon.gray{
-    color:#64748b;
-    background:var(--gray-soft);
-}
-
-.summary-info{
-    min-width:0;
-    flex:1;
-}
+.summary-info{min-width:0;flex:1}
 
 .summary-number{
     font-size:clamp(22px,2vw,28px);
     font-weight:700;
-
     line-height:1;
-
     margin-bottom:7px;
-
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
 .summary-label{
     color:var(--muted);
-
     font-size:12px;
     line-height:1.35;
-
     overflow-wrap:anywhere;
 }
 
 .summary-line{
     width:32px;
     height:3px;
-
     border-radius:5px;
-
     margin-top:9px;
-
     background:var(--purple);
 }
 
-.summary-card:nth-child(2) .summary-line{
-    background:var(--green);
-}
+.summary-card:nth-child(2) .summary-line{background:var(--green)}
+.summary-card:nth-child(4) .summary-line{background:var(--red)}
+.summary-card:nth-child(5) .summary-line{background:#64748b}
 
-.summary-card:nth-child(4) .summary-line{
-    background:var(--red);
-}
-
-.summary-card:nth-child(5) .summary-line{
-    background:#64748b;
-}
-
-
-/* =========================================================
-   CHART CARD
-========================================================= */
+/* =========================
+   CHARTS
+========================= */
 
 .chart-card{
     width:100%;
     min-width:0;
-
     background:#fff;
-
     border:1px solid var(--border);
     border-radius:14px;
-
-    padding:
-        clamp(14px,1.5vw,20px)
-        clamp(14px,1.8vw,22px)
-        18px;
-
-    box-shadow:0 2px 10px rgba(15,23,42,.035);
-
+    padding:clamp(14px,1.5vw,20px) clamp(14px,1.8vw,22px) 18px;
+    box-shadow:0 2px 10px #0f172a09;
     overflow:hidden;
 }
 
 .chart-heading-row{
     width:100%;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     gap:12px;
-
     margin-bottom:16px;
 }
 
 .chart-title{
     min-width:0;
-
     font-size:17px;
     font-weight:700;
-
     overflow-wrap:anywhere;
 }
 
 .summary-status{
     flex-shrink:0;
-
     font-size:11px;
-
     color:#64748b;
-
     background:#f8fafc;
-
     border:1px solid #e2e8f0;
-
     border-radius:999px;
-
     padding:5px 9px;
-
     white-space:nowrap;
 }
 
@@ -579,180 +374,110 @@ a{
     border-color:#f3c5c2;
 }
 
-
-/* =========================================================
-   MAIN CHART
-========================================================= */
-
 .chart{
     position:relative;
-
     width:100%;
-
     height:clamp(210px,28vh,275px);
-
-    padding:
-        0
-        10px
-        48px
-        42px;
-
+    padding:0 10px 48px 42px;
     overflow:visible;
 }
 
 .chart-grid{
     position:absolute;
-
     left:42px;
     right:10px;
-
     top:4px;
     bottom:48px;
-
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-
     pointer-events:none;
 }
 
-.grid-line{
-    width:100%;
-    border-top:1px dashed #dfe3ec;
-}
+.grid-line{width:100%;border-top:1px dashed #dfe3ec}
 
 .y-labels{
     position:absolute;
-
     left:0;
-
     top:0;
     bottom:48px;
-
     width:34px;
-
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     align-items:flex-end;
-
     padding-right:7px;
-
     color:#64748b;
-
     font-size:11px;
 }
 
 .bars{
     position:absolute;
-
     left:42px;
     right:10px;
-
     top:4px;
     bottom:48px;
-
     display:flex;
     align-items:flex-end;
     justify-content:space-between;
-
     gap:clamp(4px,1vw,16px);
-
     overflow:visible;
 }
 
 .bar-group{
     height:100%;
-
     min-width:0;
-
     flex:1 1 0;
-
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
     align-items:center;
-
     position:relative;
 }
 
 .bar-value{
     position:absolute;
-
     bottom:calc(var(--height) + 7px);
-
     font-size:11px;
-
     color:#344054;
-
     font-weight:600;
-
     white-space:nowrap;
-
     line-height:1;
 }
 
 .bar{
     width:min(46px,70%);
-
     height:var(--height);
-
     min-height:3px;
-
-    background:linear-gradient(
-        180deg,
-        #7650e8 0%,
-        #6739db 100%
-    );
-
+    background:linear-gradient(180deg,#7650e8,#6739db);
     border-radius:4px 4px 0 0;
-
-    box-shadow:0 2px 7px rgba(109,63,229,.15);
-
-    transition:
-        height .3s ease,
-        width .2s ease;
+    box-shadow:0 2px 7px #6d3fe526;
+    transition:height .3s,width .2s;
 }
 
 .x-label{
     position:absolute;
-
     bottom:-42px;
-
     width:100%;
-
     padding:0 2px;
-
     font-size:11px;
     font-weight:600;
-
     color:#475569;
-
     text-align:center;
-
     line-height:1.2;
-
-    white-space:normal;
-
     overflow:hidden;
-    text-overflow:ellipsis;
-
     display:-webkit-box;
     -webkit-line-clamp:2;
     -webkit-box-orient:vertical;
-
     word-break:break-word;
 }
 
 .chart-legend{
     margin-top:8px;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     gap:8px;
-
     font-size:12px;
     color:#475569;
 }
@@ -760,1187 +485,221 @@ a{
 .legend-dot{
     width:10px;
     height:10px;
-
     flex:0 0 10px;
-
     background:var(--purple);
-
     border-radius:2px;
 }
 
+/* =========================
+   CLAIMS PER BRAND
+========================= */
 
-/* =========================================================
-   TOP 3 AREA
-========================================================= */
+.brand-chart-card{margin-top:18px}
+
+.brand-chart{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:17px;
+    padding:8px 0;
+}
+
+.brand-chart-row{
+    display:grid;
+    grid-template-columns:minmax(100px,180px) minmax(0,1fr) 55px;
+    align-items:center;
+    gap:12px;
+}
+
+.brand-chart-name{
+    min-width:0;
+    color:var(--text);
+    font-size:13px;
+    font-weight:600;
+    overflow-wrap:anywhere;
+}
+
+.brand-chart-track{
+    width:100%;
+    height:22px;
+    background:#f1edfc;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.brand-chart-bar{
+    height:100%;
+    background:linear-gradient(90deg,#8b6bed,#6739db);
+    border-radius:5px;
+    transition:width .3s ease;
+}
+
+.brand-chart-count{
+    text-align:right;
+    font-size:13px;
+    font-weight:700;
+    color:var(--purple);
+    font-variant-numeric:tabular-nums;
+}
+
+.brand-chart-empty{
+    width:100%;
+    min-height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* =========================
+   TOP 3 SECTION
+========================= */
 
 .top3-section{
     width:100%;
     min-width:0;
-
     margin-top:18px;
-
     background:#fff;
-
     border:1px solid var(--border);
     border-radius:14px;
-
-    padding:
-        clamp(16px,1.8vw,22px)
-        clamp(14px,2vw,24px)
-        22px;
-
-    box-shadow:0 2px 10px rgba(15,23,42,.035);
-
+    padding:clamp(16px,1.8vw,22px) clamp(14px,2vw,24px) 22px;
+    box-shadow:0 2px 10px #0f172a09;
     overflow:hidden;
 }
 
 .top3-title{
     text-align:center;
-
     color:var(--purple);
-
     font-size:20px;
     font-weight:700;
-
     margin-bottom:18px;
 }
 
 .top3-grid{
     width:100%;
-
     display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:16px;
 }
 
 .top3-card{
     position:relative;
-
     min-width:0;
-
     min-height:155px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fbf9ff 0%,
-            #f8f5ff 100%
-        );
-
+    background:linear-gradient(135deg,#fbf9ff,#f8f5ff);
     border:1px solid #ddd3f8;
     border-radius:14px;
-
     padding:22px 18px;
-
     display:grid;
-
-    grid-template-columns:
-        64px
-        minmax(0,1fr)
-        85px;
-
+    grid-template-columns:64px minmax(0,1fr) 85px;
     align-items:center;
-
     gap:14px;
-
     overflow:hidden;
 }
 
 .top3-rank{
     width:56px;
     height:56px;
-
     border-radius:50%;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:24px;
     font-weight:800;
-
     color:#fff;
-
     position:relative;
-
-    box-shadow:0 5px 12px rgba(15,23,42,.16);
+    box-shadow:0 5px 12px #0f172a29;
 }
 
-.top3-rank::after{
-    content:"";
+.top3-rank.rank-1{background:linear-gradient(145deg,#f9b928,#e89400)}
+.top3-rank.rank-2{background:linear-gradient(145deg,#cbd1d6,#8f989f)}
+.top3-rank.rank-3{background:linear-gradient(145deg,#e9a04a,#cf6715)}
 
-    position:absolute;
-
-    bottom:-14px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:0;
-    height:0;
-
-    border-left:9px solid transparent;
-    border-right:9px solid transparent;
-    border-top:16px solid currentColor;
-
-    filter:brightness(.9);
-}
-
-.top3-rank.rank-1{
-    background:linear-gradient(145deg,#f9b928,#e89400);
-    color:#e89400;
-}
-
-.top3-rank.rank-1 span{
-    color:#fff;
-}
-
-.top3-rank.rank-2{
-    background:linear-gradient(145deg,#cbd1d6,#8f989f);
-    color:#8f989f;
-}
-
-.top3-rank.rank-2 span{
-    color:#fff;
-}
-
-.top3-rank.rank-3{
-    background:linear-gradient(145deg,#e9a04a,#cf6715);
-    color:#cf6715;
-}
-
-.top3-rank.rank-3 span{
-    color:#fff;
-}
-
-.top3-info{
-    min-width:0;
-}
+.top3-info{min-width:0}
 
 .top3-area{
     min-width:0;
-
     font-size:clamp(15px,1.5vw,21px);
     font-weight:700;
-
     line-height:1.2;
-
     color:var(--text);
-
     margin-bottom:9px;
-
-    word-break:break-word;
+    overflow-wrap:anywhere;
 }
 
 .top3-count{
     font-size:clamp(27px,3vw,39px);
-
     line-height:1;
-
     font-weight:800;
-
     color:var(--purple);
-
     margin-bottom:6px;
 }
 
-.top3-label{
-    font-size:13px;
-    color:#334155;
-}
+.top3-label{font-size:13px;color:#334155}
 
 .top3-mini-chart{
     width:100%;
     height:125px;
-
     display:flex;
     align-items:flex-end;
     justify-content:center;
-
     padding:0 8px;
-
     border-bottom:1px solid #e6e0f5;
 }
 
 .top3-mini-bar{
     width:min(45px,70%);
-
     max-height:120px;
-
     min-height:5px;
-
     height:var(--mini-height);
-
-    background:
-        linear-gradient(
-            180deg,
-            #7650e8 0%,
-            #6739db 100%
-        );
-
+    background:linear-gradient(180deg,#7650e8,#6739db);
     border-radius:4px 4px 0 0;
-
-    box-shadow:0 3px 10px rgba(109,63,229,.18);
-
-    transition:height .35s ease;
+    box-shadow:0 3px 10px #6d3fe52e;
+    transition:height .35s;
 }
 
 .top3-empty{
-    grid-column:1 / -1;
-
+    grid-column:1/-1;
     min-height:120px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     color:var(--muted);
-
     font-size:14px;
 }
 
-
-/* =========================================================
-   LARGE DESKTOP
-   1600px+
-========================================================= */
-
-@media (min-width:1500px){
-
-    :root{
-        --sidebar-width:350px;
-    }
-
-    .main-content{
-        padding-left:32px;
-        padding-right:32px;
-    }
-
-    .summary-grid{
-        gap:14px;
-    }
-
-    .summary-card{
-        min-height:112px;
-    }
-
-    .chart{
-        height:285px;
-    }
-
-    .top3-grid{
-        gap:20px;
-    }
-}
-
-
-/* =========================================================
-   NORMAL LAPTOP
-   1200px – 1499px
-========================================================= */
-
-@media (max-width:1499px) and (min-width:1001px){
-
-    :root{
-        --sidebar-width:300px;
-    }
-
-    .summary-grid{
-        gap:10px;
-    }
-
-    .summary-card{
-        padding:14px 12px;
-        gap:10px;
-    }
-
-    .summary-icon{
-        width:48px;
-        height:48px;
-        flex-basis:48px;
-        font-size:21px;
-    }
-
-    .summary-number{
-        font-size:24px;
-    }
-
-    .summary-label{
-        font-size:11px;
-    }
-
-    .top3-card{
-        grid-template-columns:
-            55px
-            minmax(0,1fr)
-            70px;
-
-        gap:10px;
-
-        padding:18px 14px;
-    }
-
-    .top3-rank{
-        width:48px;
-        height:48px;
-        font-size:20px;
-    }
-
-    .top3-mini-chart{
-        height:110px;
-    }
-
-    .top3-mini-bar{
-        max-height:105px;
-        width:35px;
-    }
-}
-
-
-/* =========================================================
-   SMALL LAPTOP / LARGE TABLET
-   851px – 1000px
-========================================================= */
-
-@media (max-width:1000px) and (min-width:851px){
-
-    :root{
-        --sidebar-width:255px;
-    }
-
-    .topbar{
-        min-height:68px;
-    }
-
-    .header-logo{
-        height:36px;
-    }
-
-    .logo-section h1{
-        font-size:18px;
-    }
-
-    .logo-section p{
-        font-size:10px;
-    }
-
-    .sidebar{
-        padding-left:18px;
-        padding-right:14px;
-    }
-
-    .card{
-        grid-template-columns:38px minmax(0,1fr);
-        gap:10px;
-        padding:13px;
-    }
-
-    .card i{
-        font-size:23px;
-    }
-
-    .card h2{
-        font-size:14px;
-    }
-
-    .card p{
-        font-size:11px;
-    }
-
-    .summary-grid{
-        grid-template-columns:
-            repeat(3,minmax(0,1fr));
-
-        gap:9px;
-    }
-
-    .summary-card{
-        min-height:95px;
-    }
-
-    .summary-grid .summary-card:nth-child(4),
-    .summary-grid .summary-card:nth-child(5){
-        min-height:90px;
-    }
-
-    .top3-grid{
-        grid-template-columns:
-            repeat(3,minmax(0,1fr));
-
-        gap:10px;
-    }
-
-    .top3-card{
-        grid-template-columns:
-            45px
-            minmax(0,1fr);
-
-        gap:8px;
-
-        padding:15px;
-    }
-
-    .top3-mini-chart{
-        display:none;
-    }
-
-    .top3-rank{
-        width:42px;
-        height:42px;
-        font-size:18px;
-    }
-
-    .top3-area{
-        font-size:14px;
-    }
-
-    .top3-count{
-        font-size:25px;
-    }
-
-    .top3-label{
-        font-size:10px;
-    }
-}
-
-
-/* =========================================================
-   TABLET
-   601px – 850px
-========================================================= */
-
-@media (max-width:850px){
-
-    .topbar{
-        min-height:68px;
-
-        padding:
-            10px
-            16px;
-    }
-
-    .header-logo{
-        height:35px;
-        max-width:150px;
-    }
-
-    .logo-section{
-        gap:10px;
-    }
-
-    .logo-section h1{
-        font-size:17px;
-    }
-
-    .logo-section p{
-        font-size:10px;
-    }
-
-    .welcome-text{
-        display:none;
-    }
-
-    .header-right{
-        gap:8px;
-    }
-
-    .logout-btn{
-        padding:9px 12px;
-        font-size:12px;
-    }
-
-    /* Change sidebar to horizontal/top section */
-
-    .page-layout{
-        display:block;
-        min-height:calc(100vh - 68px);
-    }
-
-    .sidebar{
-        width:100%;
-
-        border-right:0;
-        border-bottom:1px solid var(--border);
-
-        padding:
-            18px
-            16px
-            15px;
-
-        overflow:visible;
-    }
-
-    .page-title{
-        margin-bottom:14px;
-    }
-
-    .page-title h2{
-        font-size:22px;
-    }
-
-    .page-title p{
-        font-size:13px;
-    }
-
-    .dashboard{
-        display:grid;
-
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-
-        gap:8px;
-    }
-
-    .card{
-        min-height:90px;
-        padding:13px;
-
-        grid-template-columns:
-            40px
-            minmax(0,1fr);
-
-        gap:10px;
-    }
-
-    .card i{
-        font-size:23px;
-    }
-
-    .card h2{
-        font-size:14px;
-    }
-
-    .card p{
-        font-size:11px;
-    }
-
-    .main-content{
-        padding:
-            20px
-            16px
-            30px;
-    }
-
-    .summary-grid{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-
-        gap:10px;
-    }
-
-    .summary-card{
-        min-height:95px;
-    }
-
-    .top3-grid{
-        grid-template-columns:
-            1fr;
-
-        gap:12px;
-    }
-
-    .top3-card{
-        grid-template-columns:
-            60px
-            minmax(0,1fr)
-            80px;
-
-        min-height:140px;
-    }
-
-    .top3-mini-chart{
-        height:105px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   600px AND BELOW
-========================================================= */
-
-@media (max-width:600px){
-
-    .topbar{
-        min-height:62px;
-        padding:8px 12px;
-    }
-
-    .header-logo{
-        height:30px;
-        max-width:120px;
-    }
-
-    .logo-section{
-        gap:8px;
-    }
-
-    .logo-section h1{
-        font-size:14px;
-    }
-
-    .logo-section p{
-        display:none;
-    }
-
-    .logout-btn{
-        padding:8px 10px;
-        font-size:11px;
-        border-radius:7px;
-    }
-
-    .sidebar{
-        padding:
-            16px
-            12px
-            12px;
-    }
-
-    .page-title{
-        margin-bottom:12px;
-    }
-
-    .page-title h2{
-        font-size:20px;
-    }
-
-    .page-title p{
-        font-size:12px;
-    }
-
-    .dashboard{
-        grid-template-columns:1fr;
-        gap:6px;
-    }
-
-    .card{
-        min-height:72px;
-
-        padding:11px;
-
-        grid-template-columns:
-            36px
-            minmax(0,1fr);
-
-        gap:9px;
-    }
-
-    .card i{
-        font-size:21px;
-    }
-
-    .card h2{
-        font-size:13px;
-        margin-bottom:4px;
-    }
-
-    .card p{
-        font-size:11px;
-        line-height:1.4;
-    }
-
-    .main-content{
-        padding:
-            18px
-            12px
-            25px;
-    }
-
-    .section-title{
-        font-size:16px;
-        margin-bottom:12px;
-    }
-
-    .summary-grid{
-        grid-template-columns:1fr;
-        gap:8px;
-        margin-bottom:14px;
-    }
-
-    .summary-card{
-        min-height:82px;
-        padding:13px;
-    }
-
-    .summary-icon{
-        width:46px;
-        height:46px;
-        flex-basis:46px;
-        font-size:20px;
-    }
-
-    .summary-number{
-        font-size:23px;
-    }
-
-    .summary-label{
-        font-size:11px;
-    }
-
-    .chart-card{
-        padding:
-            14px
-            10px
-            18px;
-    }
-
-    .chart-heading-row{
-        align-items:flex-start;
-        flex-direction:column;
-        margin-bottom:12px;
-    }
-
-    .chart-title{
-        font-size:15px;
-    }
-
-    .summary-status{
-        font-size:10px;
-    }
-
-    .chart{
-        height:275px;
-
-        padding:
-            0
-            5px
-            48px
-            40px;
-    }
-
-    .chart-grid,
-    .bars{
-        left:40px;
-    }
-
-    .chart-grid{
-        right:5px;
-    }
-
-    .bars{
-        right:5px;
-        gap:5px;
-    }
-
-    .y-labels{
-        width:34px;
-        font-size:9px;
-    }
-
-    .bar{
-        width:min(32px,70%);
-    }
-
-    .bar-value{
-        font-size:9px;
-    }
-
-    .x-label{
-        font-size:9px;
-        bottom:-42px;
-    }
-
-    .chart-legend{
-        font-size:10px;
-    }
-
-    .top3-section{
-        margin-top:12px;
-        padding:
-            16px
-            10px
-            18px;
-    }
-
-    .top3-title{
-        font-size:17px;
-        margin-bottom:12px;
-    }
-
-    .top3-card{
-        min-height:135px;
-
-        grid-template-columns:
-            52px
-            minmax(0,1fr)
-            62px;
-
-        padding:
-            14px
-            10px;
-
-        gap:8px;
-    }
-
-    .top3-rank{
-        width:44px;
-        height:44px;
-        font-size:19px;
-    }
-
-    .top3-rank::after{
-        bottom:-10px;
-
-        border-left-width:7px;
-        border-right-width:7px;
-        border-top-width:12px;
-    }
-
-    .top3-area{
-        font-size:15px;
-        margin-bottom:6px;
-    }
-
-    .top3-count{
-        font-size:27px;
-    }
-
-    .top3-label{
-        font-size:10px;
-    }
-
-    .top3-mini-chart{
-        height:95px;
-        padding:0 3px;
-    }
-
-    .top3-mini-bar{
-        width:28px;
-        max-height:90px;
-    }
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-   400px AND BELOW
-========================================================= */
-
-@media (max-width:400px){
-
-    .topbar{
-        padding:8px 10px;
-    }
-
-    .header-logo{
-        height:27px;
-        max-width:95px;
-    }
-
-    .logo-section h1{
-        font-size:12px;
-    }
-
-    .logout-btn{
-        padding:7px 8px;
-        font-size:10px;
-    }
-
-    .main-content{
-        padding-left:9px;
-        padding-right:9px;
-    }
-
-    .chart-card{
-        padding-left:7px;
-        padding-right:7px;
-    }
-
-    .chart{
-        padding-left:36px;
-        padding-right:3px;
-    }
-
-    .chart-grid,
-    .bars{
-        left:36px;
-    }
-
-    .y-labels{
-        width:30px;
-        padding-right:5px;
-        font-size:8px;
-    }
-
-    .bar{
-        width:25px;
-    }
-
-    .top3-card{
-        grid-template-columns:
-            46px
-            minmax(0,1fr)
-            52px;
-
-        gap:6px;
-    }
-
-    .top3-rank{
-        width:40px;
-        height:40px;
-        font-size:17px;
-    }
-
-    .top3-area{
-        font-size:13px;
-    }
-
-    .top3-count{
-        font-size:24px;
-    }
-
-    .top3-mini-bar{
-        width:23px;
-    }
-}
-
-
-/* =========================================================
-   CONFIDENTIAL MODAL
-========================================================= */
-
-.modal-overlay{
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(15,23,42,.65);
-
-    display:none;
-
-    justify-content:center;
-    align-items:center;
-
-    padding:20px;
-
-    z-index:9999;
-
-    animation:fadeIn .25s ease;
-}
-
-.modal-box{
-    width:min(520px,100%);
-
-    max-height:
-        calc(100vh - 40px);
-
-    overflow:auto;
-
-    background:#fff;
-
-    border-radius:16px;
-
-    padding:clamp(22px,4vw,35px);
-
-    text-align:center;
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.25);
-
-    animation:popup .25s ease;
-}
-
-.modal-icon{
-    width:70px;
-    height:70px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    background:#fef2f2;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-}
-
-.modal-icon i{
-    font-size:34px;
-    color:#dc2626;
-}
-
-.modal-box h2{
-    margin-top:20px;
-    color:#0f172a;
-
-    font-size:clamp(20px,4vw,25px);
-}
-
-.modal-box p{
-    margin:18px 0;
-
-    color:#475569;
-
-    line-height:1.7;
-
-    font-size:14px;
-}
-
-.modal-box ul{
-    text-align:left;
-
-    margin:20px 0;
-
-    color:#475569;
-
-    line-height:1.8;
-
-    padding-left:20px;
-
-    font-size:14px;
-}
-
-.modal-box button{
-    width:100%;
-
-    padding:14px;
-
-    border:0;
-
-    border-radius:10px;
-
-    background:#2563eb;
-
-    color:#fff;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    transition:
-        background .2s ease,
-        transform .2s ease;
-}
-
-.modal-box button:hover{
-    background:#1d4ed8;
-    transform:translateY(-1px);
-}
-
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes fadeIn{
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-}
-
-@keyframes popup{
-    from{
-        transform:scale(.9);
-        opacity:0;
-    }
-
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-
-/* =========================================================
-   ACCESSIBILITY / SAFE SIZING
-========================================================= */
-
-@media (prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        scroll-behavior:auto !important;
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        transition-duration:.01ms !important;
-    }
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print{
-
-    .topbar{
-        box-shadow:none;
-    }
-
-    .logout-btn{
-        display:none;
-    }
-
-    .page-layout{
-        display:block;
-    }
-
-    .sidebar{
-        display:none;
-    }
-
-    .main-content{
-        padding:0;
-    }
-
-    .chart-card,
-    .top3-section,
-    .summary-card{
-        box-shadow:none;
-    }
-}
-
-/* =========================================================
-   WARRANTY TEAM SUPPORT NOTICE
-========================================================= */
+/* =========================
+   SUPPORT NOTICE
+========================= */
 
 .support-notice{
     width:100%;
     margin-top:18px;
     padding:16px 20px;
-
     display:flex;
     align-items:center;
     justify-content:center;
     gap:12px;
-
     background:var(--purple-soft);
     border:1px solid #ddd3f8;
     border-radius:12px;
-
     color:var(--text);
     text-align:center;
-
-    box-shadow:0 2px 8px rgba(15,23,42,.035);
+    box-shadow:0 2px 8px #0f172a09;
 }
 
-.support-notice .support-icon{
+.support-icon{
     width:38px;
     height:38px;
     flex:0 0 38px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:50%;
-
     background:var(--purple);
     color:#fff;
-
     font-size:16px;
 }
 
@@ -1951,9 +710,7 @@ a{
     color:#475569;
 }
 
-.support-notice strong{
-    color:var(--text);
-}
+.support-notice strong{color:var(--text)}
 
 .support-notice a{
     color:var(--purple);
@@ -1961,23 +718,371 @@ a{
     text-decoration:none;
 }
 
-.support-notice a:hover{
-    text-decoration:underline;
+.support-notice a:hover{text-decoration:underline}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:#0f172aa6;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:9999;
+    animation:fadeIn .25s;
 }
 
-/* TABLET */
-@media (max-width:850px){
-    .support-notice{
-        padding:14px 16px;
-    }
-
-    .support-notice p{
-        font-size:12px;
-    }
+.modal-box{
+    width:min(520px,100%);
+    max-height:calc(100vh - 40px);
+    overflow:auto;
+    background:#fff;
+    border-radius:16px;
+    padding:clamp(22px,4vw,35px);
+    text-align:center;
+    box-shadow:0 20px 45px #0004;
+    animation:popup .25s;
 }
 
-/* MOBILE */
-@media (max-width:600px){
+.modal-icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:50%;
+    background:#fef2f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-icon i{font-size:34px;color:#dc2626}
+
+.modal-box h2{
+    margin-top:20px;
+    color:#0f172a;
+    font-size:clamp(20px,4vw,25px);
+}
+
+.modal-box p{
+    margin:18px 0;
+    color:#475569;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.modal-box ul{
+    text-align:left;
+    margin:20px 0;
+    color:#475569;
+    line-height:1.8;
+    padding-left:20px;
+    font-size:14px;
+}
+
+.modal-box button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.modal-box button:hover{
+    background:#1d4ed8;
+    transform:translateY(-1px);
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+@keyframes popup{
+    from{transform:scale(.9);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+/* =========================================================
+   ACCESS RESTRICTION - UPDATED
+   Keep restricted modules visually identical to normal modules.
+========================================================= */
+
+/* Restricted modules retain the original card appearance */
+.card.is-locked{
+    opacity:1 !important;
+    filter:none !important;
+    background:#fff !important;
+    border:1px solid var(--border) !important;
+    border-left:3px solid var(--purple) !important;
+    color:var(--text) !important;
+    box-shadow:0 2px 8px #0f172a0a !important;
+    cursor:not-allowed;
+    pointer-events:none;
+}
+
+/* Keep the same hover appearance */
+.card.is-locked:hover{
+    opacity:1 !important;
+    filter:none !important;
+    background:#fff !important;
+    border-left-color:var(--purple) !important;
+    transform:none;
+    box-shadow:0 2px 8px #0f172a0a !important;
+}
+
+/* Preserve original heading color */
+.card.is-locked h2{
+    color:var(--text) !important;
+    padding-right:22px;
+}
+
+/* Preserve original description color */
+.card.is-locked p{
+    color:var(--muted) !important;
+}
+
+/* Preserve original icon color */
+.card.is-locked i:not(.module-lock){
+    color:var(--purple) !important;
+}
+
+/* Lock icon only - neutral indicator */
+.card .module-lock{
+    position:absolute;
+    top:10px;
+    right:10px;
+    color:#64748b;
+    font-size:16px;
+    padding:0;
+    background:transparent;
+    z-index:2;
+}
+
+/* Access label - does not affect module theme */
+.card .access-label{
+    display:inline-block;
+    margin-top:7px;
+    padding:3px 7px;
+    border-radius:6px;
+    font-size:10px;
+    font-weight:700;
+    color:#64748b;
+    background:#e2e8f0;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media(min-width:1500px){
+    :root{--sidebar-width:350px}
+    .main-content{padding-left:32px;padding-right:32px}
+    .summary-grid{gap:14px}
+    .summary-card{min-height:112px}
+    .chart{height:285px}
+    .top3-grid{gap:20px}
+}
+
+@media(max-width:1499px) and (min-width:1001px){
+    :root{--sidebar-width:300px}
+    .summary-grid{gap:10px}
+    .summary-card{padding:14px 12px;gap:10px}
+    .summary-icon{width:48px;height:48px;flex-basis:48px;font-size:21px}
+    .summary-number{font-size:24px}
+    .summary-label{font-size:11px}
+    .top3-card{
+        grid-template-columns:55px minmax(0,1fr) 70px;
+        gap:10px;
+        padding:18px 14px;
+    }
+    .top3-rank{width:48px;height:48px;font-size:20px}
+    .top3-mini-chart{height:110px}
+    .top3-mini-bar{max-height:105px;width:35px}
+}
+
+@media(max-width:1000px) and (min-width:851px){
+    :root{--sidebar-width:255px}
+    .topbar{min-height:68px}
+    .header-logo{height:36px}
+    .logo-section h1{font-size:18px}
+    .logo-section p{font-size:10px}
+    .sidebar{padding-left:18px;padding-right:14px}
+    .card{
+        grid-template-columns:38px minmax(0,1fr);
+        gap:10px;
+        padding:13px;
+    }
+    .card i{font-size:23px}
+    .card h2{font-size:14px}
+    .card p{font-size:11px}
+    .summary-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+    .summary-card{min-height:95px}
+    .top3-grid{gap:10px}
+    .top3-card{
+        grid-template-columns:45px minmax(0,1fr);
+        gap:8px;
+        padding:15px;
+    }
+    .top3-mini-chart{display:none}
+    .top3-rank{width:42px;height:42px;font-size:18px}
+    .top3-area{font-size:14px}
+    .top3-count{font-size:25px}
+    .top3-label{font-size:10px}
+}
+
+@media(max-width:850px){
+    .topbar{min-height:68px;padding:10px 16px}
+    .header-logo{height:35px;max-width:150px}
+    .logo-section{gap:10px}
+    .logo-section h1{font-size:17px}
+    .logo-section p{font-size:10px}
+    .welcome-text{display:none}
+    .header-right{gap:8px}
+    .logout-btn{padding:9px 12px;font-size:12px}
+
+    .page-layout{
+        display:block;
+        min-height:calc(100vh - 68px);
+    }
+
+    .sidebar{
+        width:100%;
+        border-right:0;
+        border-bottom:1px solid var(--border);
+        padding:18px 16px 15px;
+        overflow:visible;
+    }
+
+    .page-title{margin-bottom:14px}
+    .page-title h2{font-size:22px}
+    .page-title p{font-size:13px}
+
+    .dashboard{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+    }
+
+    .card{
+        min-height:90px;
+        padding:13px;
+        grid-template-columns:40px minmax(0,1fr);
+        gap:10px;
+    }
+
+    .card i{font-size:23px}
+    .card h2{font-size:14px}
+    .card p{font-size:11px}
+
+    .main-content{padding:20px 16px 30px}
+    .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .summary-card{min-height:95px}
+    .top3-grid{grid-template-columns:1fr;gap:12px}
+
+    .top3-card{
+        grid-template-columns:60px minmax(0,1fr) 80px;
+        min-height:140px;
+    }
+
+    .top3-mini-chart{height:105px}
+    .support-notice{padding:14px 16px}
+    .support-notice p{font-size:12px}
+}
+
+@media(max-width:600px){
+    .topbar{min-height:62px;padding:8px 12px}
+    .header-logo{height:30px;max-width:120px}
+    .logo-section{gap:8px}
+    .logo-section h1{font-size:14px}
+    .logo-section p{display:none}
+    .logout-btn{padding:8px 10px;font-size:11px;border-radius:7px}
+
+    .sidebar{padding:16px 12px 12px}
+    .page-title{margin-bottom:12px}
+    .page-title h2{font-size:20px}
+    .page-title p{font-size:12px}
+
+    .dashboard{
+        grid-template-columns:1fr;
+        gap:6px;
+    }
+
+    .card{
+        min-height:72px;
+        padding:11px;
+        grid-template-columns:36px minmax(0,1fr);
+        gap:9px;
+    }
+
+    .card i{font-size:21px}
+    .card h2{font-size:13px;margin-bottom:4px}
+    .card p{font-size:11px;line-height:1.4}
+
+    .main-content{padding:18px 12px 25px}
+    .section-title{font-size:16px;margin-bottom:12px}
+    .summary-grid{grid-template-columns:1fr;gap:8px;margin-bottom:14px}
+    .summary-card{min-height:82px;padding:13px}
+    .summary-icon{width:46px;height:46px;flex-basis:46px;font-size:20px}
+    .summary-number{font-size:23px}
+    .summary-label{font-size:11px}
+
+    .chart-card{padding:14px 10px 18px}
+
+    .chart-heading-row{
+        align-items:flex-start;
+        flex-direction:column;
+        margin-bottom:12px;
+    }
+
+    .chart-title{font-size:15px}
+    .summary-status{font-size:10px;white-space:normal}
+    .chart{height:275px;padding:0 5px 48px 40px}
+    .chart-grid,.bars{left:40px}
+    .chart-grid{right:5px}
+    .bars{right:5px;gap:5px}
+    .y-labels{width:34px;font-size:9px}
+    .bar{width:min(32px,70%)}
+    .bar-value{font-size:9px}
+    .x-label{font-size:9px;bottom:-42px}
+    .chart-legend{font-size:10px}
+    .brand-chart-card{margin-top:12px}
+    .brand-chart{gap:15px}
+
+    .brand-chart-row{
+        grid-template-columns:minmax(75px,100px) minmax(0,1fr) 38px;
+        gap:7px;
+    }
+
+    .brand-chart-name,.brand-chart-count{font-size:11px}
+    .brand-chart-track{height:18px}
+
+    .top3-section{margin-top:12px;padding:16px 10px 18px}
+    .top3-title{font-size:17px;margin-bottom:12px}
+
+    .top3-card{
+        min-height:135px;
+        grid-template-columns:52px minmax(0,1fr) 62px;
+        padding:14px 10px;
+        gap:8px;
+    }
+
+    .top3-rank{width:44px;height:44px;font-size:19px}
+    .top3-area{font-size:15px;margin-bottom:6px}
+    .top3-count{font-size:27px}
+    .top3-label{font-size:10px}
+    .top3-mini-chart{height:95px;padding:0 3px}
+    .top3-mini-bar{width:28px;max-height:90px}
+
     .support-notice{
         margin-top:12px;
         padding:13px 12px;
@@ -1986,1830 +1091,1510 @@ a{
         gap:10px;
     }
 
-    .support-notice .support-icon{
-        width:34px;
-        height:34px;
-        flex-basis:34px;
-        font-size:14px;
+    .support-icon{width:34px;height:34px;flex-basis:34px;font-size:14px}
+    .support-notice p{font-size:11px;line-height:1.55}
+}
+
+@media(max-width:400px){
+    .topbar{padding:8px 10px}
+    .header-logo{height:27px;max-width:95px}
+    .logo-section h1{font-size:12px}
+    .logout-btn{padding:7px 8px;font-size:10px}
+    .main-content{padding-left:9px;padding-right:9px}
+    .chart-card{padding-left:7px;padding-right:7px}
+    .chart{padding-left:36px;padding-right:3px}
+    .chart-grid,.bars{left:36px}
+    .y-labels{width:30px;padding-right:5px;font-size:8px}
+    .bar{width:25px}
+
+    .top3-card{
+        grid-template-columns:46px minmax(0,1fr) 52px;
+        gap:6px;
     }
 
-    .support-notice p{
-        font-size:11px;
-        line-height:1.55;
+    .top3-rank{width:40px;height:40px;font-size:17px}
+    .top3-area{font-size:13px}
+    .top3-count{font-size:24px}
+    .top3-mini-bar{width:23px}
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        scroll-behavior:auto!important;
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
     }
 }
 
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+    .topbar{box-shadow:none}
+    .logout-btn{display:none}
+    .page-layout{display:block}
+    .sidebar{display:none}
+    .main-content{padding:0}
+    .chart-card,.top3-section,.summary-card{box-shadow:none}
+}
+
+
+.user-position {
+    color: #cbd5e1 !important;
+    font-size: 12px !important;
+    margin-top: 4px !important;
+}
+
+.user-position strong {
+    color: #ffffff;
+    font-weight: 700;
+}
 </style>
 
-</head>
-
-<body>
-
-<header class="topbar">
-    <div class="logo-section">
-        <img src="company-logo.png" class="header-logo" alt="Technolux">
-        <div>
-            <h1>Warranty Management System</h1>
-            <p>Centralized Warranty Claims, Coverage &amp; Tracking Portal</p>
-        </div>
-    </div>
-
-    <div class="header-right">
-        <div class="user-info">
-            <div class="welcome-text">
-                <span>👋 Hi, Welcome</span>
-                <small id="userEmail"></small>
-            </div>
-        </div>
-
-        <button class="logout-btn" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
-        </button>
-    </div>
-</header>
-
-<main class="page-layout">
-
-    <aside class="sidebar">
-        <div class="page-title">
-            <h2>Dashboard</h2>
-            <p>Select a module to continue.</p>
-        </div>
-
-        <nav class="dashboard">
-
-    <!-- TECHNICIAN ACCESS -->
-    <a href="warranty-checker.html"
-       class="card checker"
-       data-module="warranty-checker">
-
-        <i class="fas fa-magnifying-glass"></i>
-
-        <div>
-            <h2>Warranty Checker</h2>
-            <p>
-                Instantly verify warranty status by entering
-                the equipment serial number.
-            </p>
-        </div>
-
-    </a>
+        
 
 
-    <!-- TECHNICIAN ACCESS -->
-    <a href="warranty.html"
-       class="card"
-       data-module="warranty">
-
-        <i class="fas fa-file-contract"></i>
-
-        <div>
-            <h2>Warranty Requirements</h2>
-            <p>
-                View warranty submission requirements,
-                supporting documents and process guidelines.
-            </p>
-        </div>
-
-    </a>
-
-
-    <!-- OTHER POSITIONS -->
-    <a href="entry.html"
-       class="card coverage"
-       data-module="coverage">
-
-        <i class="fas fa-shield-alt"></i>
-
-        <div>
-            <h2>Warranty Coverage</h2>
-            <p>
-                Check warranty coverage details per brand,
-                equipment, and applicable warranty terms.
-            </p>
-        </div>
-
-    </a>
-
-
-    <!-- OTHER POSITIONS -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform"
-       class="card claim"
-       data-module="claim">
-
-        <i class="fas fa-clipboard-check"></i>
-
-        <div>
-            <h2>Warranty SO Registration</h2>
-            <p>
-                Submit a new warranty claim.
-            </p>
-        </div>
-
-    </a>
-
-
-    <!-- OTHER POSITIONS -->
-    <a href="claim-tracker.html"
-       class="card tracker"
-       data-module="claim-tracker">
-
-        <i class="fas fa-list-check"></i>
-
-        <div>
-            <h2>Warranty Claim Tracker</h2>
-            <p>
-                Monitor and track submitted warranty claims,
-                approval status, and claim progress.
-            </p>
-        </div>
-
-    </a>
-
-
-    
-<!-- CEBU WARRANTY DEFECTIVE PARTS -->
-<a href="https://docs.google.com/spreadsheets/d/1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw/edit#gid=1806435211"
-   class="card tracker"
-   data-module="cebu-warranty-defective-parts"
-   target="_blank"
-   rel="noopener noreferrer">
-
-    <i class="fas fa-box-open"></i>
-
-    <div>
-        <h2>Cebu Warranty Defective Parts</h2>
-        <p>
-            Access and manage defective warranty parts
-            records for Cebu.
-        </p>
-    </div>
-
-</a>
-
-
-    <!-- DAVAO WARRANTY DEFECTIVE PARTS -->
-<a href="https://docs.google.com/spreadsheets/d/1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw/edit#gid=1936075041"
-   class="card tracker"
-   data-module="davao-warranty-defective-parts"
-   target="_blank"
-   rel="noopener noreferrer">
-
-    <i class="fas fa-box-open"></i>
-
-    <div>
-        <h2>Davao Warranty Defective Parts</h2>
-        <p>
-            Access and manage defective warranty parts
-            records for Davao.
-        </p>
-    </div>
-
-</a>
-
-</nav>
-
-    </aside>
-
-    <section class="main-content">
-
-        <h2 class="section-title">Warranty Claims Summary</h2>
-
-        <div class="summary-grid">
-
-            <div class="summary-card">
-                <div class="summary-icon purple">
-                    <i class="far fa-file-lines"></i>
-                </div>
-                <div class="summary-info">
-                    <div class="summary-number" id="totalClaims">0</div>
-                    <div class="summary-label">Total Claims</div>
-                    <div class="summary-line"></div>
+    </head>
+    <body>
+        <header class="topbar">
+            <div class="logo-section">
+                <img
+                    src="company-logo.png"
+                    class="header-logo"
+                    alt="Technolux"
+                />
+                <div>
+                    <h1>Warranty Management System</h1>
+                    <p>
+                        Centralized Warranty Claims, Coverage &amp; Tracking
+                        Portal
+                    </p>
                 </div>
             </div>
-
-            <div class="summary-card">
-                <div class="summary-icon green">
-                    <i class="fas fa-check"></i>
+            <div class="header-right">
+                <div class="welcome-text">
+                    <span>👋 Hi, Welcome</span>
+        <small id="userEmail"></small>
+  
                 </div>
-                <div class="summary-info">
-                    <div class="summary-number" id="approvedClaims">0</div>
-                    <div class="summary-label">Approved Claims</div>
-                    <div class="summary-line"></div>
-                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
-
-            <div class="summary-card">
-                <div class="summary-icon orange">
-                    <i class="far fa-clock"></i>
+        </header>
+        <main class="page-layout">
+            <aside class="sidebar">
+                <div class="page-title">
+                    <h2>Dashboard</h2>
+                    <p>Select a module to continue.</p>
                 </div>
-                <div class="summary-info">
-                    <div class="summary-number" id="pendingClaims">0</div>
-                    <div class="summary-label">Pending Claims</div>
-                    <div class="summary-line"></div>
+                <nav class="dashboard">
+                    <a
+                        href="warranty-checker.html"
+                        class="card checker"
+                        data-module="warranty-checker"
+                        ><i class="fas fa-magnifying-glass"></i>
+                        <div>
+                            <h2>Warranty Checker</h2>
+                            <p>
+                                Instantly verify warranty status by entering the
+                                equipment serial number.
+                            </p>
+                        </div></a
+                    >
+                    <a href="warranty.html" class="card" data-module="warranty"
+                        ><i class="fas fa-file-contract"></i>
+                        <div>
+                            <h2>Warranty Requirements</h2>
+                            <p>
+                                View warranty submission requirements,
+                                supporting documents and process guidelines.
+                            </p>
+                        </div></a
+                    >
+                    <a
+                        href="entry.html"
+                        class="card coverage"
+                        data-module="coverage"
+                        ><i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h2>Warranty Coverage</h2>
+                            <p>
+                                Check warranty coverage details per brand,
+                                equipment, and applicable warranty terms.
+                            </p>
+                        </div></a
+                    >
+                    <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSdNgDZyztOvgYueVM3GAC6G08IjRd5cce6tHnVRxitxvjZHsg/viewform"
+                        class="card claim"
+                        data-module="claim"
+                        ><i class="fas fa-clipboard-check"></i>
+                        <div>
+                            <h2>Warranty SO Registration</h2>
+                            <p>Submit a new warranty claim.</p>
+                        </div></a
+                    >
+                    <a
+                        href="claim-tracker.html"
+                        class="card tracker"
+                        data-module="claim-tracker"
+                        ><i class="fas fa-list-check"></i>
+                        <div>
+                            <h2>Warranty Claim Tracker</h2>
+                            <p>
+                                Monitor and track submitted warranty claims,
+                                approval status, and claim progress.
+                            </p>
+                        </div></a
+                    >
+                    <a
+                        href="https://docs.google.com/spreadsheets/d/1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw/edit#gid=1806435211"
+                        class="card tracker"
+                        data-module="cebu-warranty-defective-parts"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><i class="fas fa-box-open"></i>
+                        <div>
+                            <h2>Cebu Warranty Defective Parts</h2>
+                            <p>
+                                Access and manage defective warranty parts
+                                records for Cebu.
+                            </p>
+                        </div></a
+                    >
+                    <a
+                        href="https://docs.google.com/spreadsheets/d/1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw/edit#gid=1936075041"
+                        class="card tracker"
+                        data-module="davao-warranty-defective-parts"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><i class="fas fa-box-open"></i>
+                        <div>
+                            <h2>Davao Warranty Defective Parts</h2>
+                            <p>
+                                Access and manage defective warranty parts
+                                records for Davao.
+                            </p>
+                        </div></a
+                    >
+                </nav>
+            </aside>
+            <section class="main-content">
+                <h2 class="section-title">Warranty Claims Summary</h2>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="summary-icon purple">
+                            <i class="far fa-file-lines"></i>
+                        </div>
+                        <div class="summary-info">
+                            <div class="summary-number" id="totalClaims">0</div>
+                            <div class="summary-label">Total Claims</div>
+                            <div class="summary-line"></div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon green">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="summary-info">
+                            <div class="summary-number" id="approvedClaims">
+                                0
+                            </div>
+                            <div class="summary-label">Approved Claims</div>
+                            <div class="summary-line"></div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon orange">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="summary-info">
+                            <div class="summary-number" id="pendingClaims">
+                                0
+                            </div>
+                            <div class="summary-label">Pending Claims</div>
+                            <div class="summary-line"></div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon red">
+                            <i class="fas fa-xmark"></i>
+                        </div>
+                        <div class="summary-info">
+                            <div class="summary-number" id="rejectedClaims">
+                                0
+                            </div>
+                            <div class="summary-label">Rejected Claims</div>
+                            <div class="summary-line"></div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon gray">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div class="summary-info">
+                            <div class="summary-number" id="cancelledClaims">
+                                0
+                            </div>
+                            <div class="summary-label">Cancelled Claims</div>
+                            <div class="summary-line"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="summary-card">
-                <div class="summary-icon red">
-                    <i class="fas fa-xmark"></i>
-                </div>
-                <div class="summary-info">
-                    <div class="summary-number" id="rejectedClaims">0</div>
-                    <div class="summary-label">Rejected Claims</div>
-                    <div class="summary-line"></div>
-                </div>
-            </div>
-
-            <div class="summary-card">
-                <div class="summary-icon gray">
-                    <i class="fas fa-ban"></i>
-                </div>
-                <div class="summary-info">
-                    <div class="summary-number" id="cancelledClaims">0</div>
-                    <div class="summary-label">Cancelled Claims</div>
-                    <div class="summary-line"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- CLAIMS PER AREA -->
-        <div class="chart-card">
-
-            <div class="chart-heading-row">
-                <h2 class="chart-title">Claims per Area / Service Provider Territory</h2>
-                <span id="summaryStatus" class="summary-status">
-                    Loading...
-                </span>
-            </div>
-
-            <div class="chart">
-
-                <div class="chart-grid" id="chartGrid">
-                    <div class="grid-line"></div>
-                    <div class="grid-line"></div>
-                    <div class="grid-line"></div>
-                    <div class="grid-line"></div>
-                    <div class="grid-line"></div>
-                    <div class="grid-line"></div>
+                <div class="chart-card">
+                    <div class="chart-heading-row">
+                        <h2 class="chart-title">
+                            Claims per Area / Service Provider Territory
+                        </h2>
+                        <span id="summaryStatus" class="summary-status"
+                            >Loading...</span
+                        >
+                    </div>
+                    <div class="chart">
+                        <div class="chart-grid" id="chartGrid">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
+                        <div class="y-labels" id="yLabels">
+                            <span>0</span><span>0</span><span>0</span
+                            ><span>0</span><span>0</span><span>0</span>
+                        </div>
+                        <div class="bars" id="areaBars"></div>
+                    </div>
+                    <div class="chart-legend">
+                        <span class="legend-dot"></span
+                        ><span>Total Claims</span>
+                    </div>
                 </div>
 
-                <div class="y-labels" id="yLabels">
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
+                <!-- NEW: CLAIMS PER BRAND -->
+                <div class="chart-card brand-chart-card">
+                    <div class="chart-heading-row">
+                        <h2 class="chart-title">Top 5 Claims per Brand</h2>
+                        <span class="summary-status">Sales Order Count</span>
+                    </div>
+                    <div id="brandChart" class="brand-chart">
+                        <div class="brand-chart-empty">
+                            Loading brand claims...
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <span class="legend-dot"></span
+                        ><span>Totai Claims per Brand</span>
+                    </div>
                 </div>
+                
 
-                <div class="bars" id="areaBars"></div>
-
-            </div>
-
-            <div class="chart-legend">
-                <span class="legend-dot"></span>
-                <span>Total Claims</span>
-            </div>
-
-        </div>
-
-        <!-- TOP 3 MOST CLAIM AREA / SP -->
-        <section class="top3-section">
-
-            <h2 class="top3-title">Top 3 Most Claim Area / Service Provider Territory</h2>
-
-            <div class="top3-grid" id="top3Grid">
-                <div class="top3-empty">Loading...</div>
-            </div>
-
-        </section>
-
+                <div class="support-notice">
+                    <div class="support-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <p>
+                        For any error or problem encountered while navigating
+                        the system, please contact the
+                        <strong>Warranty Team</strong> or email
+                        <a href="mailto:warranty@technolux.net"
+                            >warranty@technolux.net</a
+                        >
+                        for assistance.
+                    </p>
+                </div>
+            </section>
+        </main>
+  
 	
-        <div class="support-notice">
-            <div class="support-icon">
-                <i class="fas fa-headset"></i>
-            </div>
-
-            <p>
-                For any error or problem encountered while navigating the system,
-                please contact the <strong>Warranty Team</strong> or email
-                <a href="mailto:warranty@technolux.net">
-                    warranty@technolux.net
-                </a>
-                for assistance.
-            </p>
-        </div>
-
-    </section>
-
-</main>
-
-
 <script>
-/* =========================================================
-   WARRANTY MANAGEMENT SYSTEM
-   CLAIM SUMMARY - UNIQUE SO NUMBER
-   ========================================================= */
-
-const SHEET_ID = "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
-const SHEET_NAME = "Form Responses 1";
+    // =========================================================
+    // GOOGLE SHEETS CONFIGURATION
+    // =========================================================
+    const SHEET_ID = "1x5XTCLu9A2OtbAm8X-3x8rsZgzublUPo-W6tJKezAMw";
+    const SHEET_NAME = "Form Responses 1";
 
 
-/* =========================================================
-   HELPER FUNCTIONS
-   ========================================================= */
+    // =========================================================
+    // TEXT NORMALIZATION
+    // =========================================================
+    function normalizeText(value) {
+        return String(value ?? "")
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, " ")
+            .replace(/[=:]+/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+    }
 
-/* Normalize general text */
-function normalizeText(value) {
-    return String(value ?? "")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, " ")
-        .replace(/[=:]+/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-}
+    function normalizeHeader(value) {
+        return String(value ?? "")
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, " ");
+    }
 
+    function normalizeSO(value) {
+        return String(value ?? "")
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, " ");
+    }
 
-/* Normalize column/header name */
-function normalizeHeader(value) {
-    return String(value ?? "")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, " ");
-}
-
-
-/* Normalize SO Number
-   This prevents duplicate SO values caused by
-   uppercase/lowercase or extra spaces.
-*/
-function normalizeSO(value) {
-    return String(value ?? "")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, " ");
-}
-
-
-/* =========================================================
-   GET SO NUMBER
-   ========================================================= */
-
-function getSONumber(row) {
-
-    const possibleKeys = [
-        "SO No.",
-        "SO No",
-        "SO Number",
-        "SO No. ",
-        "SO No "
-    ];
-
-    for (const key of possibleKeys) {
-
-        if (
-            row[key] !== undefined &&
-            row[key] !== null &&
-            String(row[key]).trim() !== ""
-        ) {
-            return String(row[key]).trim();
-        }
+    function normalizeBrand(value) {
+        return String(value ?? "")
+            .trim()
+            .replace(/\s+/g, " ");
     }
 
 
-    /* Robust fallback */
-    const foundKey = Object.keys(row).find(key => {
+    // =========================================================
+    // GOOGLE SHEETS HEADER LOOKUP
+    // =========================================================
+    function getValueByHeaders(row, headers) {
 
-        const normalized = normalizeHeader(key);
+        for (const key of headers) {
+            if (
+                row[key] !== undefined &&
+                row[key] !== null &&
+                String(row[key]).trim() !== ""
+            ) {
+                return row[key];
+            }
+        }
 
-        return (
-            normalized === "so no." ||
-            normalized === "so no" ||
-            normalized === "so number"
+        const wanted = headers.map(normalizeHeader);
+
+        const found = Object.keys(row).find(key =>
+            wanted.includes(normalizeHeader(key))
         );
 
-    });
-
-
-    if (foundKey) {
-        return String(row[foundKey] ?? "").trim();
+        return found ? row[found] : "";
     }
 
 
-    return "";
-}
+    // =========================================================
+    // CLAIM INFORMATION
+    // =========================================================
+    function getSONumber(row) {
+        return String(
+            getValueByHeaders(row, [
+                "SO No.",
+                "SO No",
+                "SO Number",
+                "SO No. ",
+                "SO No "
+            ]) ?? ""
+        ).trim();
+    }
 
+    function getClaimStatus(row) {
+        return normalizeText(
+            getValueByHeaders(row, [
+                "Warranty SO Claim Status",
+                "Warranty SO Claim Status ",
+                "Warranty SO Claim Status.",
+                "Warranty Claim SO Status",
+                "Warranty Claim SO Status ",
+                "SO Status",
+                "Status"
+            ])
+        );
+    }
 
-/* =========================================================
-   GET CLAIM STATUS
-   ========================================================= */
+    function getClaimArea(row) {
+        return String(
+            getValueByHeaders(row, [
+                "Area / SP",
+                "Area/SP",
+                "Area / SP ",
+                "Area",
+                "Service Provider Territory",
+                "Service Provider",
+                "Territory"
+            ]) ?? ""
+        ).trim();
+    }
 
-function getClaimStatus(row) {
-
-    const possibleKeys = [
-        "Warranty SO Claim Status",
-        "Warranty SO Claim Status ",
-        "Warranty SO Claim Status.",
-        "Warranty Claim SO Status",
-        "Warranty Claim SO Status ",
-        "SO Status",
-        "Status"
-    ];
-
-
-    for (const key of possibleKeys) {
-
-        if (
-            row[key] !== undefined &&
-            row[key] !== null &&
-            String(row[key]).trim() !== ""
-        ) {
-
-            return normalizeText(row[key]);
-
-        }
+    // IMPORTANT:
+    // Exact Google Sheets header: Brand Name:
+    function getClaimBrand(row) {
+        return normalizeBrand(
+            getValueByHeaders(row, [
+                "Brand Name:",
+                "Brand Name",
+                "Brand",
+                "Equipment Brand",
+                "Product Brand",
+                "Principal",
+                "Brand / Principal"
+            ])
+        );
     }
 
 
-    /* Robust fallback */
+    // =========================================================
+    // CLAIM STATUS CLASSIFICATION
+    // =========================================================
+    function isApprovedStatus(status) {
+        return normalizeText(status) === "approved";
+    }
 
-    const foundKey = Object.keys(row).find(key => {
+    function isRejectedStatus(status) {
+        return normalizeText(status) === "rejected";
+    }
 
-        const normalized = normalizeHeader(key);
+    function isCancelledStatus(status) {
+        const s = normalizeText(status);
+
+        return s === "cancelled" || s === "canceled";
+    }
+
+    function isPendingStatus(status) {
+        const s = normalizeText(status);
 
         return (
-            normalized === "warranty so claim status" ||
-            normalized === "warranty claim so status" ||
-            normalized === "so status" ||
-            normalized === "status"
+            s === "requested additional details" ||
+            s === "awaiting for principal approval" ||
+            s === "awaiting for sales advise"
         );
-
-    });
-
-
-    if (foundKey) {
-        return normalizeText(row[foundKey]);
     }
 
 
-    return "";
-}
+    // =========================================================
+    // BUILD UNIQUE CLAIMS
+    // ONE SO NUMBER = ONE CLAIM
+    // =========================================================
+    function buildUniqueClaims(data) {
 
+        const map = new Map();
 
-/* =========================================================
-   GET AREA / SERVICE PROVIDER
-   ========================================================= */
+        data.forEach(row => {
 
-function getClaimArea(row) {
+            const so = getSONumber(row);
 
-    const possibleKeys = [
-        "Area / SP",
-        "Area/SP",
-        "Area / SP ",
-        "Area",
-        "Service Provider Territory",
-        "Service Provider",
-        "Territory"
-    ];
+            if (!so) return;
 
+            const key = normalizeSO(so);
 
-    for (const key of possibleKeys) {
-
-        if (
-            row[key] !== undefined &&
-            row[key] !== null &&
-            String(row[key]).trim() !== ""
-        ) {
-
-            return String(row[key]).trim();
-
-        }
-    }
-
-
-    /* Robust fallback */
-
-    const foundKey = Object.keys(row).find(key => {
-
-        const normalized = normalizeHeader(key);
-
-        return (
-            normalized === "area / sp" ||
-            normalized === "area/sp" ||
-            normalized === "area" ||
-            normalized === "service provider territory" ||
-            normalized === "service provider" ||
-            normalized === "territory"
-        );
-
-    });
-
-
-    if (foundKey) {
-        return String(row[foundKey] ?? "").trim();
-    }
-
-
-    return "";
-}
-
-
-/* =========================================================
-   STATUS CLASSIFICATION
-   ========================================================= */
-
-function isApprovedStatus(status) {
-
-    return normalizeText(status) === "approved";
-
-}
-
-
-function isRejectedStatus(status) {
-
-    return normalizeText(status) === "rejected";
-
-}
-
-
-function isCancelledStatus(status) {
-
-    const s = normalizeText(status);
-
-    return (
-        s === "cancelled" ||
-        s === "canceled"
-    );
-
-}
-
-
-function isPendingStatus(status) {
-
-    const s = normalizeText(status);
-
-    return (
-        s === "requested additional details" ||
-        s === "awaiting for principal approval" ||
-        s === "awaiting for sales advise"
-    );
-
-}
-
-
-/* =========================================================
-   BUILD UNIQUE CLAIMS
-   IMPORTANT:
-   ONE SO NUMBER = ONE CLAIM
-   ========================================================= */
-
-function buildUniqueClaims(data) {
-
-    const uniqueClaimsMap = new Map();
-
-
-    data.forEach(row => {
-
-        const soNumber = getSONumber(row);
-
-        if (!soNumber) {
-            return;
-        }
-
-
-        const normalizedSO = normalizeSO(soNumber);
-
-        if (!normalizedSO) {
-            return;
-        }
-
-
-        /*
-         * IMPORTANT:
-         * If duplicate SO No. exists,
-         * the latest/last row in Google Sheet
-         * becomes the active record.
-         *
-         * This prevents duplicate line items
-         * from being counted as separate claims.
-         */
-        uniqueClaimsMap.set(normalizedSO, {
-
-            soNumber: soNumber,
-
-            status: getClaimStatus(row),
-
-            area: getClaimArea(row),
-
-            originalRow: row
+            map.set(key, {
+                soNumber: so,
+                status: getClaimStatus(row),
+                area: getClaimArea(row),
+                brand: getClaimBrand(row),
+                originalRow: row
+            });
 
         });
 
-    });
+        return Array.from(map.values());
+    }
 
 
-    return Array.from(uniqueClaimsMap.values());
+    // =========================================================
+    // LOAD CLAIMS SUMMARY
+    // =========================================================
+    async function loadClaimsSummary() {
 
-}
+        const statusEl = document.getElementById("summaryStatus");
 
+        try {
 
-/* =========================================================
-   LOAD CLAIM SUMMARY
-   ========================================================= */
+            if (statusEl) {
+                statusEl.textContent = "Loading...";
+                statusEl.className = "summary-status";
+            }
 
-async function loadClaimsSummary() {
+            const url =
+                `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
 
-    const statusEl =
-        document.getElementById("summaryStatus");
+            console.log("Loading Google Sheet:", url);
 
+            const response = await fetch(url, {
+                method: "GET",
+                cache: "no-store"
+            });
 
-    try {
+            if (!response.ok) {
+                throw new Error(
+                    `Google Sheet request failed (${response.status}).`
+                );
+            }
 
-        statusEl.textContent = "Loading...";
-        statusEl.className = "summary-status";
+            const data = await response.json();
 
+            if (!Array.isArray(data)) {
+                throw new Error("Invalid Google Sheet data format.");
+            }
 
-        /* =====================================================
-           GOOGLE SHEETS URL
-           ===================================================== */
+            console.log("Google Sheet Records:", data.length);
 
-        const url =
-            `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
+            if (data.length) {
+                console.log(
+                    "Google Sheet Column Names:",
+                    Object.keys(data[0])
+                );
 
+                console.log(
+                    "Brand Name Header Found:",
+                    Object.keys(data[0]).some(
+                        key => normalizeHeader(key) === "brand name:"
+                    )
+                );
+            }
 
-        console.log(
-            "Loading Google Sheet:",
-            url
-        );
+            // Build unique claims
+            const uniqueClaims = buildUniqueClaims(data);
 
-
-        const response = await fetch(url, {
-
-            method: "GET",
-
-            cache: "no-store"
-
-        });
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                `Google Sheet request failed (${response.status}).`
-            );
-
-        }
-
-
-        const data = await response.json();
-
-
-        if (!Array.isArray(data)) {
-
-            throw new Error(
-                "Invalid Google Sheet data format."
-            );
-
-        }
+            console.log("Unique SO Claims:", uniqueClaims.length);
 
 
-        console.log(
-            "Google Sheet Records:",
-            data.length
-        );
+            // =================================================
+            // CLAIM COUNTERS
+            // =================================================
+            let approvedClaims = 0;
+            let pendingClaims = 0;
+            let rejectedClaims = 0;
+            let cancelledClaims = 0;
+
+            const areaCounts = {};
+            const brandCounts = {};
 
 
-        if (data.length > 0) {
+            // =================================================
+            // COUNT CLAIMS BY STATUS, AREA, AND BRAND
+            // =================================================
+            uniqueClaims.forEach(claim => {
+
+                const status = claim.status;
+
+                // STATUS COUNTS
+                if (isApprovedStatus(status)) {
+                    approvedClaims++;
+
+                } else if (isRejectedStatus(status)) {
+                    rejectedClaims++;
+
+                } else if (isCancelledStatus(status)) {
+                    cancelledClaims++;
+
+                } else if (isPendingStatus(status)) {
+                    pendingClaims++;
+                }
+
+
+                // AREA COUNTS
+                const area = String(claim.area || "").trim();
+
+                if (area) {
+                    areaCounts[area] =
+                        (areaCounts[area] || 0) + 1;
+                }
+
+
+                // BRAND COUNTS
+                // Case-insensitive grouping:
+                // CONVOTHERM = Convotherm = convotherm
+                const brand = normalizeBrand(claim.brand);
+
+                if (brand) {
+
+                    const brandKey = brand.toLowerCase();
+
+                    if (!brandCounts[brandKey]) {
+
+                        brandCounts[brandKey] = {
+                            name: brand,
+                            count: 0
+                        };
+
+                    }
+
+                    brandCounts[brandKey].count++;
+
+                }
+
+
+                console.log(
+                    "Unique SO:", claim.soNumber,
+                    "| Status:", status,
+                    "| Area:", area,
+                    "| Brand:", brand
+                );
+
+            });
+
+
+            // =================================================
+            // UPDATE DASHBOARD SUMMARY CARDS
+            // =================================================
+            const counts = {
+
+                totalClaims: uniqueClaims.length,
+
+                approvedClaims: approvedClaims,
+
+                pendingClaims: pendingClaims,
+
+                rejectedClaims: rejectedClaims,
+
+                cancelledClaims: cancelledClaims
+
+            };
+
+            Object.entries(counts).forEach(([id, value]) => {
+
+                const el = document.getElementById(id);
+
+                if (el) {
+                    el.textContent = value.toLocaleString();
+                }
+
+            });
+
+
+            // =================================================
+            // RENDER DASHBOARD CHARTS
+            // =================================================
+            renderAreaChart(areaCounts);
+
+            renderTop3Areas(areaCounts);
+
+            renderBrandChart(brandCounts);
+
+
+            // =================================================
+            // LAST UPDATED DATE AND TIME
+            // =================================================
+            function updateStatusDateTime() {
+
+                if (!statusEl) return;
+
+                const now = new Date();
+
+                statusEl.textContent =
+                    `Last Updated: ${now.toLocaleString("en-PH", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true
+                    })}`;
+
+                statusEl.className = "summary-status success";
+
+            }
+
+            updateStatusDateTime();
+
+            if (window.claimDateTimeInterval) {
+                clearInterval(window.claimDateTimeInterval);
+            }
+
+            window.claimDateTimeInterval =
+                setInterval(updateStatusDateTime, 1000);
+
+
+            // =================================================
+            // CONSOLE DEBUGGING
+            // =================================================
+            console.log("Claims Summary:", counts);
+
+            console.log("Claims Per Area:", areaCounts);
+
+            console.log("Claims Per Brand:", brandCounts);
 
             console.log(
-                "Google Sheet Column Names:",
-                Object.keys(data[0])
+                "Brand Chart Entries:",
+                Object.values(brandCounts)
             );
 
-        }
+        } catch (error) {
 
+            console.error("Claim Summary Error:", error);
 
-        /* =====================================================
-           BUILD UNIQUE CLAIM LIST
-           ===================================================== */
+            [
+                "totalClaims",
+                "approvedClaims",
+                "pendingClaims",
+                "rejectedClaims",
+                "cancelledClaims"
+            ].forEach(id => {
 
-        const uniqueClaims =
-            buildUniqueClaims(data);
+                const el = document.getElementById(id);
 
+                if (el) el.textContent = "—";
 
-        console.log(
-            "Unique SO Claims:",
-            uniqueClaims.length
-        );
+            });
 
-
-        console.log(
-            "Unique Claims Data:",
-            uniqueClaims
-        );
-
-
-        /* =====================================================
-           TOTAL CLAIMS
-           ===================================================== */
-
-        const totalClaims =
-            uniqueClaims.length;
-
-
-        /* =====================================================
-           STATUS COUNTS
-           UNIQUE SO ONLY
-           ===================================================== */
-
-        let approvedClaims = 0;
-        let pendingClaims = 0;
-        let rejectedClaims = 0;
-        let cancelledClaims = 0;
-
-
-        uniqueClaims.forEach(claim => {
-
-            const status =
-                claim.status;
-
-
-            console.log(
-                "Unique SO:",
-                claim.soNumber,
-                "| Status:",
-                status,
-                "| Area:",
-                claim.area
-            );
-
-
-            /* APPROVED */
-
-            if (isApprovedStatus(status)) {
-
-                approvedClaims++;
-
+            if (statusEl) {
+                statusEl.textContent = "Unable to load";
+                statusEl.className = "summary-status error";
             }
 
-
-            /* REJECTED */
-
-            else if (isRejectedStatus(status)) {
-
-                rejectedClaims++;
-
-            }
-
-
-            /* CANCELLED */
-
-            else if (isCancelledStatus(status)) {
-
-                cancelledClaims++;
-
-            }
-
-
-            /* PENDING */
-
-            else if (isPendingStatus(status)) {
-
-                pendingClaims++;
-
-            }
-
-        });
-
-
-        /* =====================================================
-           CLAIMS PER AREA / SP
-           UNIQUE SO ONLY
-           ===================================================== */
-
-        const areaCounts = {};
-
-
-        uniqueClaims.forEach(claim => {
-
-            const area =
-                String(claim.area || "").trim();
-
-
-            if (!area) {
-                return;
-            }
-
-
-            areaCounts[area] =
-                (areaCounts[area] || 0) + 1;
-
-        });
-
-
-        /* =====================================================
-           UPDATE DASHBOARD CARDS
-           ===================================================== */
-
-        const totalEl =
-            document.getElementById("totalClaims");
-
-        const approvedEl =
-            document.getElementById("approvedClaims");
-
-        const pendingEl =
-            document.getElementById("pendingClaims");
-
-        const rejectedEl =
-            document.getElementById("rejectedClaims");
-
-        const cancelledEl =
-            document.getElementById("cancelledClaims");
-
-
-        if (totalEl) {
-
-            totalEl.textContent =
-                totalClaims.toLocaleString();
+            renderAreaChart({});
+            renderTop3Areas({});
+            renderBrandChart({});
 
         }
-
-
-        if (approvedEl) {
-
-            approvedEl.textContent =
-                approvedClaims.toLocaleString();
-
-        }
-
-
-        if (pendingEl) {
-
-            pendingEl.textContent =
-                pendingClaims.toLocaleString();
-
-        }
-
-
-        if (rejectedEl) {
-
-            rejectedEl.textContent =
-                rejectedClaims.toLocaleString();
-
-        }
-
-
-        if (cancelledEl) {
-
-            cancelledEl.textContent =
-                cancelledClaims.toLocaleString();
-
-        }
-
-
-        /* =====================================================
-           UPDATE AREA CHART
-           ===================================================== */
-
-        renderAreaChart(areaCounts);
-
-
-        /* =====================================================
-           UPDATE TOP 3
-           ===================================================== */
-
-        renderTop3Areas(areaCounts);
-
-
-        /* =====================================================
-           LAST UPDATED DATE / TIME
-           ===================================================== */
-
-        function updateStatusDateTime() {
-
-            const now = new Date();
-
-
-            const formattedDateTime =
-                now.toLocaleString("en-PH", {
-
-                    year: "numeric",
-
-                    month: "long",
-
-                    day: "numeric",
-
-                    hour: "2-digit",
-
-                    minute: "2-digit",
-
-                    second: "2-digit",
-
-                    hour12: true
-
-                });
-
-
-            statusEl.textContent =
-                `Last Updated: ${formattedDateTime}`;
-
-
-            statusEl.className =
-                "summary-status success";
-
-        }
-
-
-        updateStatusDateTime();
-
-
-        /* =====================================================
-           CLEAR PREVIOUS TIMER BEFORE CREATING NEW ONE
-           ===================================================== */
-
-        if (window.claimDateTimeInterval) {
-
-            clearInterval(
-                window.claimDateTimeInterval
-            );
-
-        }
-
-
-        window.claimDateTimeInterval =
-            setInterval(
-                updateStatusDateTime,
-                1000
-            );
-
-
-        /* =====================================================
-           CONSOLE SUMMARY
-           ===================================================== */
-
-        console.log(
-            "======================================"
-        );
-
-
-        console.log(
-            "UNIQUE CLAIM SUMMARY"
-        );
-
-
-        console.log(
-            "Raw Google Sheet Rows:",
-            data.length
-        );
-
-
-        console.log(
-            "Unique SO Claims:",
-            totalClaims
-        );
-
-
-        console.log(
-            "Approved:",
-            approvedClaims
-        );
-
-
-        console.log(
-            "Pending:",
-            pendingClaims
-        );
-
-
-        console.log(
-            "Rejected:",
-            rejectedClaims
-        );
-
-
-        console.log(
-            "Cancelled:",
-            cancelledClaims
-        );
-
-
-        console.log(
-            "Claims Per Area:",
-            areaCounts
-        );
-
-
-        console.log(
-            "======================================"
-        );
 
     }
 
 
-    catch (error) {
+    // =========================================================
+    // CLAIMS PER AREA BAR CHART
+    // =========================================================
+    function renderAreaChart(areaCounts) {
 
-        console.error(
-            "Claim Summary Error:",
-            error
-        );
+        const bars = document.getElementById("areaBars");
 
+        const yLabels = document.getElementById("yLabels");
 
-        [
-            "totalClaims",
-            "approvedClaims",
-            "pendingClaims",
-            "rejectedClaims",
-            "cancelledClaims"
+        if (!bars || !yLabels) return;
 
-        ].forEach(id => {
+        bars.innerHTML = "";
+        yLabels.innerHTML = "";
 
-            const el =
-                document.getElementById(id);
+        const entries = Object.entries(areaCounts)
 
-
-            if (el) {
-
-                el.textContent = "—";
-
-            }
-
-        });
-
-
-        statusEl.textContent =
-            "Unable to load";
-
-
-        statusEl.className =
-            "summary-status error";
-
-
-        renderAreaChart({});
-
-
-        renderTop3Areas({});
-
-    }
-
-}
-
-
-/* =========================================================
-   CLAIMS PER AREA / SP BAR CHART
-   UNIQUE SO COUNTS
-   ========================================================= */
-
-function renderAreaChart(areaCounts) {
-
-    const bars =
-        document.getElementById("areaBars");
-
-    const yLabels =
-        document.getElementById("yLabels");
-
-
-    if (!bars || !yLabels) {
-        return;
-    }
-
-
-    bars.innerHTML = "";
-    yLabels.innerHTML = "";
-
-
-    const entries =
-        Object.entries(areaCounts)
-
-            .filter(([area, value]) =>
-
-                String(area).trim() !== "" &&
-
+            .filter(([name, value]) =>
+                String(name).trim() !== "" &&
                 Number(value) > 0
-
             )
 
-            .sort(
-                (a, b) =>
-                    Number(b[1]) - Number(a[1])
+            .sort((a, b) =>
+                Number(b[1]) - Number(a[1]) ||
+                a[0].localeCompare(b[0])
             );
 
 
-    if (!entries.length) {
+        if (!entries.length) {
 
-        bars.innerHTML = `
-            <div style="
-                width:100%;
-                height:100%;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                color:#64748b;
-                font-size:13px;
-            ">
-                No claim data available
-            </div>
-        `;
+            bars.innerHTML =
+                '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:13px">No claim data available</div>';
 
+            for (let i = 0; i < 6; i++) {
 
-        for (let i = 0; i < 6; i++) {
+                const label = document.createElement("span");
 
-            const label =
-                document.createElement("span");
+                label.textContent = "0";
+
+                yLabels.appendChild(label);
+
+            }
+
+            return;
+
+        }
 
 
-            label.textContent = "0";
+        const maxValue = Math.max(
+            ...entries.map(e => Number(e[1])),
+            1
+        );
 
+
+        function getChartMax(value) {
+
+            if (value <= 10) return 10;
+            if (value <= 20) return 20;
+            if (value <= 30) return 30;
+            if (value <= 40) return 40;
+            if (value <= 50) return 50;
+            if (value <= 75) return 75;
+            if (value <= 100) return 100;
+
+            const magnitude =
+                Math.pow(10, Math.floor(Math.log10(value)));
+
+            return Math.ceil(value / magnitude) * magnitude;
+
+        }
+
+
+        const chartMax = getChartMax(maxValue);
+
+
+        for (let i = 5; i >= 0; i--) {
+
+            const label = document.createElement("span");
+
+            label.textContent =
+                Math.round(chartMax / 5 * i).toLocaleString();
 
             yLabels.appendChild(label);
 
         }
 
 
-        return;
-    }
+        entries.forEach(([area, value]) => {
+
+            const n = Number(value);
+
+            const height = Math.max(n / chartMax * 100, 2);
+
+            const group = document.createElement("div");
+
+            group.className = "bar-group";
 
 
-    const maxValue =
-        Math.max(
+            const valueLabel = document.createElement("span");
 
-            ...entries.map(
-                entry => Number(entry[1])
-            ),
-
-            1
-
-        );
-
-
-    function getChartMax(value) {
-
-        if (value <= 10) return 10;
-
-        if (value <= 20) return 20;
-
-        if (value <= 30) return 30;
-
-        if (value <= 40) return 40;
-
-        if (value <= 50) return 50;
-
-        if (value <= 75) return 75;
-
-        if (value <= 100) return 100;
-
-
-        const magnitude =
-            Math.pow(
-                10,
-                Math.floor(
-                    Math.log10(value)
-                )
-            );
-
-
-        return Math.ceil(
-            value / magnitude
-        ) * magnitude;
-
-    }
-
-
-    const chartMax =
-        getChartMax(maxValue);
-
-
-    /* =====================================================
-       Y AXIS
-       ===================================================== */
-
-    const steps = 5;
-
-
-    for (
-        let i = steps;
-        i >= 0;
-        i--
-    ) {
-
-        const value =
-            Math.round(
-                (chartMax / steps) * i
-            );
-
-
-        const label =
-            document.createElement("span");
-
-
-        label.textContent =
-            value.toLocaleString();
-
-
-        yLabels.appendChild(label);
-
-    }
-
-
-    /* =====================================================
-       BARS
-       ===================================================== */
-
-    entries.forEach(
-        ([area, value]) => {
-
-            const numericValue =
-                Number(value);
-
-
-            const height =
-                Math.max(
-
-                    (numericValue / chartMax) * 100,
-
-                    2
-
-                );
-
-
-            const group =
-                document.createElement("div");
-
-
-            group.className =
-                "bar-group";
-
-
-            /* CLAIM COUNT */
-
-            const valueLabel =
-                document.createElement("span");
-
-
-            valueLabel.className =
-                "bar-value";
-
+            valueLabel.className = "bar-value";
 
             valueLabel.style.setProperty(
                 "--height",
                 height + "%"
             );
 
-
-            valueLabel.textContent =
-                numericValue.toLocaleString();
+            valueLabel.textContent = n.toLocaleString();
 
 
-            /* BAR */
+            const bar = document.createElement("div");
 
-            const bar =
-                document.createElement("div");
-
-
-            bar.className =
-                "bar";
-
+            bar.className = "bar";
 
             bar.style.setProperty(
                 "--height",
                 height + "%"
             );
 
-
-            bar.title =
-                `${area}: ${numericValue} Claims`;
+            bar.title = `${area}: ${n} Claims`;
 
 
-            /* AREA / SP */
+            const xLabel = document.createElement("span");
 
-            const xLabel =
-                document.createElement("span");
+            xLabel.className = "x-label";
 
+            xLabel.textContent = area;
 
-            xLabel.className =
-                "x-label";
-
-
-            xLabel.textContent =
-                area;
+            xLabel.title = `${area} - ${n} Unique Claims`;
 
 
-            xLabel.title =
-                `${area} - ${numericValue} Unique Claims`;
+            group.append(valueLabel, bar, xLabel);
+
+            bars.appendChild(group);
+
+        });
 
 
-            group.appendChild(
-                valueLabel
-            );
+        console.log("Unique Claims per Area:", entries);
 
-
-            group.appendChild(
-                bar
-            );
-
-
-            group.appendChild(
-                xLabel
-            );
-
-
-            bars.appendChild(
-                group
-            );
-
-        }
-    );
-
-
-    console.log(
-        "Unique Claims per Area:",
-        {
-            entries,
-            maxValue,
-            chartMax
-        }
-    );
-
-}
-
-
-/* =========================================================
-   TOP 3 MOST CLAIM AREA / SP
-   UNIQUE SO COUNTS
-   ========================================================= */
-
-function renderTop3Areas(areaCounts) {
-
-    const container =
-        document.getElementById("top3Grid");
-
-
-    if (!container) {
-        return;
     }
 
 
-    container.innerHTML = "";
+    // =========================================================
+    // TOP 3 CLAIM AREAS
+    // =========================================================
+    function renderTop3Areas(areaCounts) {
+
+        const container = document.getElementById("top3Grid");
+
+        if (!container) return;
+
+        container.innerHTML = "";
 
 
-    const entries =
-        Object.entries(areaCounts)
+        const entries = Object.entries(areaCounts)
 
-            .filter(([area, value]) =>
-
-                String(area).trim() !== "" &&
-
+            .filter(([name, value]) =>
+                String(name).trim() !== "" &&
                 Number(value) > 0
-
             )
 
-            .sort(
-                (a, b) =>
-                    Number(b[1]) - Number(a[1])
+            .sort((a, b) =>
+                Number(b[1]) - Number(a[1]) ||
+                a[0].localeCompare(b[0])
             )
 
             .slice(0, 3);
 
 
-    if (!entries.length) {
+        if (!entries.length) {
 
-        container.innerHTML = `
-            <div class="top3-empty">
-                No claim data available
-            </div>
-        `;
-
-
-        return;
-    }
-
-
-    const highestValue =
-        Number(entries[0][1]) || 1;
-
-
-    entries.forEach(
-        ([area, value], index) => {
-
-            const numericValue =
-                Number(value);
-
-
-            const rank =
-                index + 1;
-
-
-            const miniHeight =
-                Math.max(
-
-                    (numericValue / highestValue) * 100,
-
-                    5
-
-                );
-
-
-            const card =
-                document.createElement("div");
-
-
-            card.className =
-                "top3-card";
-
-
-            /* RANK */
-
-            const rankBadge =
-                document.createElement("div");
-
-
-            rankBadge.className =
-                `top3-rank rank-${rank}`;
-
-
-            const rankNumber =
-                document.createElement("span");
-
-
-            rankNumber.textContent =
-                rank;
-
-
-            rankBadge.appendChild(
-                rankNumber
-            );
-
-
-            /* INFO */
-
-            const info =
-                document.createElement("div");
-
-
-            info.className =
-                "top3-info";
-
-
-            const areaName =
-                document.createElement("div");
-
-
-            areaName.className =
-                "top3-area";
-
-
-            areaName.textContent =
-                area;
-
-
-            const count =
-                document.createElement("div");
-
-
-            count.className =
-                "top3-count";
-
-
-            count.textContent =
-                numericValue.toLocaleString();
-
-
-            const label =
-                document.createElement("div");
-
-
-            label.className =
-                "top3-label";
-
-
-            label.textContent =
-                "Claims";
-
-
-            info.appendChild(
-                areaName
-            );
-
-
-            info.appendChild(
-                count
-            );
-
-
-            info.appendChild(
-                label
-            );
-
-
-            /* MINI CHART */
-
-            const miniChart =
-                document.createElement("div");
-
-
-            miniChart.className =
-                "top3-mini-chart";
-
-
-            const miniBar =
-                document.createElement("div");
-
-
-            miniBar.className =
-                "top3-mini-bar";
-
-
-            miniBar.style.setProperty(
-                "--mini-height",
-                miniHeight + "%"
-            );
-
-
-            miniBar.title =
-                `${area}: ${numericValue} Claims`;
-
-
-            miniChart.appendChild(
-                miniBar
-            );
-
-
-            /* BUILD CARD */
-
-            card.appendChild(
-                rankBadge
-            );
-
-
-            card.appendChild(
-                info
-            );
-
-
-            card.appendChild(
-                miniChart
-            );
-
-
-            container.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    console.log(
-        "Top 3 Unique Claim Areas:",
-        entries
-    );
-
-}
-
-/* =========================================================
-   ROLE-BASED DASHBOARD ACCESS
-   ========================================================= */
-
-function applyPositionAccess() {
-
-    const position =
-        (localStorage.getItem("userPosition") || "")
-        .trim()
-        .toLowerCase();
-
-
-    console.log("Logged-in Position:", position);
-
-
-    const dashboardCards =
-        document.querySelectorAll(".dashboard .card");
-
-
-    /* =====================================================
-       TECHNICIAN
-       ONLY:
-       - Warranty Checker
-       - Warranty Requirements
-       ===================================================== */
-
-    if (position === "technician") {
-
-        dashboardCards.forEach(card => {
-
-            const module =
-                card.getAttribute("data-module");
-
-
-            if (
-                module !== "warranty-checker" &&
-                module !== "warranty"
-            ) {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-
-        /* Optional: update dashboard description */
-
-        const pageDescription =
-            document.querySelector(".page-title p");
-
-
-        if (pageDescription) {
-
-            pageDescription.textContent =
-                "Technician Access — Select a module to continue.";
-
-        }
-
-    }
-
-
-    /* =====================================================
-       ALL OTHER POSITIONS
-       SHOW ALL MODULES
-       ===================================================== */
-
-    else {
-
-        dashboardCards.forEach(card => {
-
-            card.style.display = "";
-
-        });
-
-    }
-
-}
-
-
-/* =========================================================
-   PAGE INITIALIZATION
-   ========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        /* =====================================================
-           LOGIN PROTECTION
-           ===================================================== */
-
-        if (
-            localStorage.getItem("loggedIn") !== "true"
-        ) {
-
-            window.location.href =
-                "index.html";
+            container.innerHTML =
+                '<div class="top3-empty">No claim data available</div>';
 
             return;
 
         }
 
 
-        /* =====================================================
-           APPLY POSITION-BASED ACCESS
-           ===================================================== */
+        const highest = Number(entries[0][1]) || 1;
 
+
+        entries.forEach(([area, value], index) => {
+
+            const n = Number(value);
+
+            const rank = index + 1;
+
+            const card = document.createElement("div");
+
+            card.className = "top3-card";
+
+
+            const badge = document.createElement("div");
+
+            badge.className = `top3-rank rank-${rank}`;
+
+            badge.textContent = rank;
+
+
+            const info = document.createElement("div");
+
+            info.className = "top3-info";
+
+
+            const name = document.createElement("div");
+
+            name.className = "top3-area";
+
+            name.textContent = area;
+
+
+            const count = document.createElement("div");
+
+            count.className = "top3-count";
+
+            count.textContent = n.toLocaleString();
+
+
+            const label = document.createElement("div");
+
+            label.className = "top3-label";
+
+            label.textContent = "Claims";
+
+
+            info.append(name, count, label);
+
+
+            const mini = document.createElement("div");
+
+            mini.className = "top3-mini-chart";
+
+
+            const miniBar = document.createElement("div");
+
+            miniBar.className = "top3-mini-bar";
+
+            miniBar.style.setProperty(
+                "--mini-height",
+                Math.max(n / highest * 100, 5) + "%"
+            );
+
+            miniBar.title = `${area}: ${n} Claims`;
+
+
+            mini.appendChild(miniBar);
+
+            card.append(badge, info, mini);
+
+            container.appendChild(card);
+
+        });
+
+
+        console.log("Top 3 Unique Claim Areas:", entries);
+
+    }
+
+
+    // =========================================================
+    // CLAIMS PER BRAND CHART
+    // =========================================================
+    
+function renderBrandChart(brandCounts) {
+
+    const container = document.getElementById("brandChart");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    // SORT BRANDS BY CLAIM COUNT AND DISPLAY TOP 5 ONLY
+    const entries = Object.values(brandCounts)
+
+        .filter(item =>
+            item.name.trim() !== "" &&
+            Number(item.count) > 0
+        )
+
+        .sort((a, b) =>
+            Number(b.count) - Number(a.count) ||
+            a.name.localeCompare(b.name)
+        )
+
+        .slice(0, 5);
+
+
+    if (!entries.length) {
+
+        container.innerHTML =
+            '<div class="brand-chart-empty">No brand claim data available. Please verify the Brand Name: column in Google Sheets.</div>';
+
+        return;
+
+    }
+
+    const maxValue = Math.max(
+        ...entries.map(item => Number(item.count)),
+        1
+    );
+
+
+    // RENDER TOP 5 BRANDS
+    entries.forEach((item, index) => {
+
+        const n = Number(item.count);
+
+        const brand = item.name;
+
+        const row = document.createElement("div");
+
+        row.className = "brand-chart-row";
+
+
+        // BRAND NAME
+        const name = document.createElement("div");
+
+        name.className = "brand-chart-name";
+
+        name.textContent = brand;
+
+        name.title = brand;
+
+
+        // CHART TRACK
+        const track = document.createElement("div");
+
+        track.className = "brand-chart-track";
+
+
+        // BRAND BAR
+        const bar = document.createElement("div");
+
+        bar.className = "brand-chart-bar";
+
+        bar.style.width =
+            Math.max(n / maxValue * 100, 0) + "%";
+
+        bar.title = `${brand}: ${n} unique claims`;
+
+
+        // CLAIM COUNT
+        const countLabel = document.createElement("div");
+
+        countLabel.className = "brand-chart-count";
+
+        countLabel.textContent = n.toLocaleString();
+
+
+        track.appendChild(bar);
+
+        row.append(name, track, countLabel);
+
+        container.appendChild(row);
+
+    });
+
+
+    console.log("Top 5 Brands by Unique Claims:", entries);
+
+}
+
+
+    // =========================================================
+    // USER ACCESS CONTROL
+    // =========================================================
+    function normalizeAccessText(value) {
+
+        return String(value || "")
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, " ");
+
+    }
+
+
+    function getAssignedAreaGroup(value) {
+
+        const a = normalizeAccessText(value);
+
+        if (a === "cebu" || a.includes("cebu")) {
+            return "cebu";
+        }
+
+        if (a === "davao" || a.includes("davao")) {
+            return "davao";
+        }
+
+        if (
+            a.includes("head office") ||
+            a === "ho"
+        ) {
+            return "head";
+        }
+
+        return "other";
+
+    }
+
+
+    function isWarrantyTeam(position) {
+
+        const p = normalizeAccessText(position);
+
+        return (
+            p === "warranty team" ||
+            p === "warranty"
+        );
+
+    }
+
+
+    // =========================================================
+    // MODULE ACCESS PER POSITION AND AREA
+    // =========================================================
+    function moduleAllowed(moduleName, areaGroup, position) {
+
+        const p = normalizeAccessText(position);
+
+        const tech = p === "technician";
+
+        const team = isWarrantyTeam(position);
+
+
+        // WARRANTY TEAM: FULL MODULE ACCESS
+        if (team) return true;
+
+
+        // TECHNICIANS: NO DEFECTIVE PARTS MODULE ACCESS
+        if (
+            tech &&
+            (
+                moduleName === "cebu-warranty-defective-parts" ||
+                moduleName === "davao-warranty-defective-parts"
+            )
+        ) {
+            return false;
+        }
+
+
+        // CEBU ACCESS
+        if (moduleName === "cebu-warranty-defective-parts") {
+            return areaGroup === "cebu";
+        }
+
+
+        // DAVAO ACCESS
+        if (moduleName === "davao-warranty-defective-parts") {
+            return areaGroup === "davao";
+        }
+
+
+        // TECHNICIAN ACCESS
+        if (tech) {
+
+            return (
+                moduleName === "warranty-checker" ||
+                moduleName === "warranty"
+            );
+
+        }
+
+
+        // OTHER POSITIONS
+        return true;
+
+    }
+
+
+    // =========================================================
+    // PREVENT LOCKED MODULE NAVIGATION
+    // =========================================================
+    function preventLockedNavigation(event) {
+
+        const card = event.currentTarget;
+
+        if (card.classList.contains("is-locked")) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            alert(
+                "Access restricted. This module is not available for your assigned area and position."
+            );
+
+        }
+
+    }
+
+
+    // =========================================================
+    // APPLY POSITION-BASED ACCESS RESTRICTIONS
+    // =========================================================
+    function applyPositionAccess() {
+
+        const area =
+            localStorage.getItem("userArea") || "";
+
+        const position =
+            localStorage.getItem("userPosition") || "";
+
+        const group = getAssignedAreaGroup(area);
+
+
+        document.querySelectorAll(".dashboard .card").forEach(card => {
+
+            const name =
+                card.getAttribute("data-module") || "";
+
+            const allowed =
+                moduleAllowed(name, group, position);
+
+
+            card.style.display = "";
+
+            card.classList.toggle("is-locked", !allowed);
+
+            card.setAttribute(
+                "aria-disabled",
+                String(!allowed)
+            );
+
+
+            // REMOVE PREVIOUS LOCK ICON
+            const old = card.querySelector(".module-lock");
+
+            if (old) old.remove();
+
+
+            // REMOVE PREVIOUS ACCESS LABEL
+            const oldLabel = card.querySelector(".access-label");
+
+            if (oldLabel) oldLabel.remove();
+
+
+            card.removeEventListener(
+                "click",
+                preventLockedNavigation
+            );
+
+            card.removeEventListener(
+                "keydown",
+                preventLockedNavigation
+            );
+
+
+            if (!allowed) {
+
+                const lock = document.createElement("i");
+
+                lock.className = "fas fa-lock module-lock";
+
+                lock.setAttribute("aria-hidden", "true");
+
+                card.appendChild(lock);
+
+
+                const label = document.createElement("span");
+
+                label.className = "access-label";
+
+                label.textContent = "ACCESS RESTRICTED";
+
+
+                const content = card.querySelector("div");
+
+                if (content) {
+                    content.appendChild(label);
+                }
+
+
+                card.addEventListener(
+                    "click",
+                    preventLockedNavigation
+                );
+
+                card.addEventListener(
+                    "keydown",
+                    preventLockedNavigation
+                );
+
+            }
+
+        });
+
+
+        const description =
+            document.querySelector(".page-title p");
+
+        if (description) {
+
+            description.textContent =
+                "Select your module. Locked modules are restricted by your assigned area and position.";
+
+        }
+
+    }
+
+
+    // =========================================================
+    // GLOBAL ACCESS PROTECTION
+    // =========================================================
+    document.addEventListener("click", function(event) {
+
+        const card = event.target.closest(
+            ".dashboard .card"
+        );
+
+        if (!card) return;
+
+
+        const group = getAssignedAreaGroup(
+            localStorage.getItem("userArea") || ""
+        );
+
+        const position =
+            localStorage.getItem("userPosition") || "";
+
+
+        if (
+            !moduleAllowed(
+                card.getAttribute("data-module") || "",
+                group,
+                position
+            )
+        ) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            alert(
+                "Access restricted. This module is not available for your assigned area and position."
+            );
+
+        }
+
+    }, true);
+
+
+    // =========================================================
+    // PAGE INITIALIZATION
+    // =========================================================
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // LOGIN VERIFICATION
+        if (localStorage.getItem("loggedIn") !== "true") {
+
+            window.location.href = "index.html";
+
+            return;
+
+        }
+
+
+        // APPLY ACCESS RESTRICTIONS
         applyPositionAccess();
 
 
-        /* =====================================================
-           DISPLAY USER EMAIL
-           ===================================================== */
-
+        // DISPLAY LOGGED-IN USER EMAIL
         const userEmail =
             document.getElementById("userEmail");
-
 
         if (userEmail) {
 
             userEmail.textContent =
-                localStorage.getItem(
-                    "userEmail"
-                ) || "";
+                localStorage.getItem("userEmail") || "";
 
         }
 
 
-        /* =====================================================
-           LOAD CLAIM SUMMARY
-           ===================================================== */
-
+        // LOAD CLAIMS SUMMARY
         loadClaimsSummary();
 
 
-        /* =====================================================
-           CONFIDENTIALITY MODAL
-           ===================================================== */
-
+        // CONFIDENTIALITY MODAL
         const modal =
-            document.getElementById(
-                "confidentialModal"
-            );
-
+            document.getElementById("confidentialModal");
 
         const agreeBtn =
-            document.getElementById(
-                "agreeBtn"
-            );
+            document.getElementById("agreeBtn");
 
 
         if (modal && agreeBtn) {
 
-            modal.style.display =
-                "flex";
+            modal.style.display = "flex";
+
+            document.body.style.overflow = "hidden";
 
 
-            document.body.style.overflow =
-                "hidden";
+            agreeBtn.addEventListener("click", function() {
 
+                modal.style.display = "none";
 
-            agreeBtn.addEventListener(
-                "click",
-                function () {
+                document.body.style.overflow = "auto";
 
-                    modal.style.display =
-                        "none";
-
-
-                    document.body.style.overflow =
-                        "auto";
-
-                }
-            );
+            });
 
         }
 
-    }
-);
+    });
 
 
-/* =========================================================
-   LOGOUT
-   ========================================================= */
+    // =========================================================
+    // LOGOUT
+    // =========================================================
+    function logout() {
 
-function logout() {
+        if (!confirm("Are you sure you want to log out?")) {
+            return;
+        }
 
-    const confirmLogout =
-        confirm(
-            "Are you sure you want to log out?"
-        );
+        localStorage.removeItem("loggedIn");
 
+        window.location.href = "index.html";
 
-    if (!confirmLogout) {
-        return;
     }
 
-
-    localStorage.removeItem(
-        "loggedIn"
-    );
-
-
-    window.location.href =
-        "index.html";
-
-}
 </script>
 
 
-<!-- CONFIDENTIALITY MODAL -->
-<div id="confidentialModal" class="modal-overlay">
-
-    <div class="modal-box">
-
-        <div class="modal-icon">
-            <i class="fas fa-lock"></i>
+        <div id="confidentialModal" class="modal-overlay">
+            <div class="modal-box">
+                <div class="modal-icon"><i class="fas fa-lock"></i></div>
+                <h2>Confidentiality Notice</h2>
+                <p>
+                    This <strong>Warranty Management System</strong> contains
+                    confidential and proprietary information of
+                    <strong>Technolux Equipment and Supply Corp.</strong>
+                </p>
+                <ul>
+                    <li>Authorized employees only.</li>
+                    <li>Do not share this website or login credentials.</li>
+                    <li>
+                        Do not send screenshots or warranty information to
+                        customers or external parties.
+                    </li>
+                    <li>
+                        Unauthorized disclosure may result in disciplinary
+                        action.
+                    </li>
+                </ul>
+                <button id="agreeBtn">
+                    <i class="fas fa-check-circle"></i> I Understand
+                </button>
+            </div>
         </div>
-
-        <h2>Confidentiality Notice</h2>
-
-        <p>
-            This <strong>Warranty Management System</strong> contains confidential and
-            proprietary information of <strong>Technolux Equipment and Supply Corp.</strong>
-        </p>
-
-        <ul>
-            <li>Authorized employees only.</li>
-            <li>Do not share this website or login credentials.</li>
-            <li>Do not send screenshots or warranty information to customers or external parties.</li>
-            <li>Unauthorized disclosure may result in disciplinary action.</li>
-        </ul>
-
-        <button id="agreeBtn">
-            <i class="fas fa-check-circle"></i>
-            I Understand
-        </button>
-
-    </div>
-</div>
-
-</body>
+    </body>
 </html>
